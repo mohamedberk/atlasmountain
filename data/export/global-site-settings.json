@@ -1,0 +1,29 @@
+{
+  "contact": {
+    "phone": {
+      "countryCode": "+212",
+      "number": "661108803",
+      "display": "+212 661-108803"
+    },
+    "address": {
+      "line1": "Marrakech",
+      "line2": "Morocco",
+      "full": "Marrakech, Morocco"
+    },
+    "email": "contact@greenatlastravel.com",
+    "availability": "24/7"
+  },
+  "social": {
+    "whatsapp": {
+      "countryCode": "212",
+      "number": "661108803"
+    },
+    "facebook": "https://facebook.com/greenatlastravel",
+    "instagram": "https://instagram.com/greenatlastravel"
+  },
+  "company": {
+    "name": "Green Atlas Travel",
+    "shortName": "Green Atlas Travel",
+    "tagline": "Marrakech Adventures"
+  }
+}

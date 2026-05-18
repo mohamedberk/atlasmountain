@@ -1,0 +1,56 @@
+{
+  "createdAt": "2026-01-02T23:29:30.249Z",
+  "updatedAt": "2026-01-05T13:13:47.640Z",
+  "globalType": "home-page",
+  "hero": {
+    "backgroundImage": "695bb71b8328f1d53a45bbca",
+    "title": {
+      "en": "Discover the Real",
+      "fr": "Discover the Real",
+      "de": "Discover the Real"
+    },
+    "titleHighlight": {
+      "en": "Morocco",
+      "fr": "Morocco",
+      "de": "Morocco"
+    },
+    "description": {
+      "en": "Handcrafted adventures by local experts with 20+ years of experience",
+      "fr": "Handcrafted adventures by local experts with 20+ years of experience",
+      "de": "Handcrafted adventures by local experts with 20+ years of experience"
+    },
+    "ctaButtonText": {
+      "en": "Explore Experiences",
+      "fr": "Explore Experiences",
+      "de": "Explore Experiences"
+    },
+    "credibility": {
+      "travelersCount": "5K+",
+      "travelersLabel": {
+        "en": "Happy travelers",
+        "fr": "Happy travelers",
+        "de": "Happy travelers"
+      },
+      "rating": "4.9",
+      "ratingLabel": {
+        "en": "Google rating",
+        "fr": "Google rating",
+        "de": "Google rating"
+      }
+    }
+  },
+  "featuredSection": {
+    "title": {
+      "en": "Featured Experiences",
+      "fr": "Featured Experiences",
+      "de": "Featured Experiences"
+    },
+    "viewAllText": {
+      "en": "View all",
+      "fr": "View all",
+      "de": "View all"
+    }
+  },
+  "seo": {},
+  "id": "695854da135e1eccaddcf2ad"
+}

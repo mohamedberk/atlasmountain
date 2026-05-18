@@ -1,0 +1,53 @@
+[
+  {
+    "createdAt": "2026-01-07T23:56:22.508Z",
+    "updatedAt": "2026-01-07T23:56:22.508Z",
+    "bookingReference": "GAT-MK4OG2TZ-GT5C",
+    "status": "pending",
+    "bookingType": "activities",
+    "bookingDate": "2025-01-15T00:00:00.000Z",
+    "tourType": "group",
+    "guestName": "John Doe",
+    "guestEmail": "test@example.com",
+    "guestPhone": "+1234567890",
+    "guestCountry": "",
+    "guests": {
+      "adults": 2,
+      "children": 0
+    },
+    "specialRequests": "",
+    "activities": [
+      {
+        "activityTitle": "Test Activity",
+        "date": "2025-01-15T00:00:00.000Z",
+        "adults": 2,
+        "children": 0,
+        "quantity": 2,
+        "selectedVariant": {},
+        "pricePerAdult": 50,
+        "pricePerChild": 0,
+        "subtotal": 100,
+        "id": "695ef2a6b10a4e2b3a47c91d"
+      }
+    ],
+    "customPickupAddress": "",
+    "flightDetails": {},
+    "pricing": {
+      "subtotal": 100,
+      "totalAmount": 100,
+      "discountAmount": 0,
+      "pickupFee": 0,
+      "currency": "EUR"
+    },
+    "payment": {
+      "status": "pending",
+      "method": "cash"
+    },
+    "totalAmount": 100,
+    "source": "website",
+    "language": "en",
+    "id": "695ef2a672327c073bcd9c8e",
+    "packs": [],
+    "communicationLog": []
+  }
+]

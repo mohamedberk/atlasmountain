@@ -1,0 +1,29 @@
+{
+  "hero": {
+    "badge": "Since 2004"
+  },
+  "stats": [],
+  "story": {
+    "paragraphs": [],
+    "highlights": [],
+    "title": "Our Story",
+    "badgeValue": "20+",
+    "badgeLabel": "Years of creating unforgettable memories"
+  },
+  "valuesSection": {
+    "values": [],
+    "title": "What Drives Us"
+  },
+  "teamSection": {
+    "members": [],
+    "title": "Meet Our Team"
+  },
+  "cta": {
+    "title": "Ready to Explore Morocco?",
+    "primaryButtonText": "Browse Activities",
+    "primaryButtonLink": "/activities",
+    "secondaryButtonText": "Contact Us",
+    "secondaryButtonLink": "/contact"
+  },
+  "seo": {}
+}

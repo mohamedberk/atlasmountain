@@ -1,0 +1,1478 @@
+[
+  {
+    "createdAt": "2026-01-03T00:35:53.981Z",
+    "updatedAt": "2026-01-04T14:38:55.225Z",
+    "title": {
+      "en": "Casablanca Day Trip"
+    },
+    "slug": "casablanca-day-trip",
+    "description": {
+      "en": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "type": "text",
+                  "format": 0,
+                  "style": "",
+                  "mode": "normal",
+                  "text": "Experience the best of Morocco’s modern and cultural capital on this full-day trip from Marrakech to Casablanca. Travel through stunning landscapes before arriving in this dynamic city, where the blend of Moorish, Art Deco, and contemporary architecture tells a story of Morocco’s past and present. Explore the majestic Hassan II Mosque, wander along the Corniche, admire the Cathedral of the Sacred Heart, and discover the city’s vibrant streets and coastal charm. Whether you’re fascinated by history, architecture, or the cosmopolitan energy of Casablanca, this day trip promises an enriching experience.",
+                  "detail": 0,
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr"
+        }
+      }
+    },
+    "shortDescription": {
+      "en": ""
+    },
+    "category": "695911f65ae3f4c5726c48a8",
+    "coordinates": {},
+    "duration": {
+      "en": "1 Day"
+    },
+    "languages": [
+      {
+        "language": "English",
+        "id": "69586469e3f07b5fec13a280"
+      }
+    ],
+    "pricingType": "per_person",
+    "groupPricing": {
+      "adultPrice": 0,
+      "childPrice": 0,
+      "childAgeLimit": 12,
+      "minGroupSize": 1,
+      "maxGroupSize": 15
+    },
+    "privatePricing": {
+      "minGuests": 1,
+      "additionalGuestPrice": 0
+    },
+    "featuredImage": "695a7b780ffae9450c97faab",
+    "gallery": [],
+    "highlights": {
+      "en": [
+        {
+          "highlight": "Marvel at the Hassan II Mosque, Morocco’s most iconic religious landmark, with its breathtaking oceanfront setting.",
+          "id": "69586469e3f07b5fec13a28a"
+        },
+        {
+          "highlight": "Enjoy a scenic drive along Casablanca’s Corniche, a lively promenade overlooking the Atlantic.",
+          "id": "69586469e3f07b5fec13a28b"
+        },
+        {
+          "highlight": "Visit the Cathedral of the Sacred Heart, a striking remnant of Casablanca’s colonial past.",
+          "id": "69586469e3f07b5fec13a28c"
+        },
+        {
+          "highlight": "Discover the Art Deco district, where French architectural influences blend with Moroccan charm.",
+          "id": "69586469e3f07b5fec13a28d"
+        },
+        {
+          "highlight": "Option to dine at Rick’s Café, inspired by the classic Hollywood film Casablanca.",
+          "id": "69586469e3f07b5fec13a28e"
+        }
+      ]
+    },
+    "included": {
+      "en": [
+        {
+          "item": "Comfortable air-conditioned vehicle with a driver.",
+          "id": "69586469e3f07b5fec13a28f"
+        },
+        {
+          "item": "Licensed local guide in Casablanca.",
+          "id": "69586469e3f07b5fec13a290"
+        },
+        {
+          "item": "Entrance fees to Hassan II Mosque.",
+          "id": "69586469e3f07b5fec13a291"
+        },
+        {
+          "item": "Highway toll fees for a smooth journey.",
+          "id": "69586469e3f07b5fec13a292"
+        },
+        {
+          "item": "Hotel/riad pickup and drop-off in Marrakech.",
+          "id": "69586469e3f07b5fec13a293"
+        }
+      ]
+    },
+    "notIncluded": {
+      "en": [
+        {
+          "item": "Lunch and beverages (optional, at your own expense).",
+          "id": "69586469e3f07b5fec13a294"
+        },
+        {
+          "item": "Personal expenses, including souvenirs and additional activities.",
+          "id": "69586469e3f07b5fec13a295"
+        }
+      ]
+    },
+    "recommendations": {
+      "en": null
+    },
+    "itinerary": {
+      "en": [
+        {
+          "activity": "Marrakech → Casablanca",
+          "description": "Your journey begins with an early morning 7:00 AM pickup from your hotel or riad in Marrakech. Relax in a comfortable, air-conditioned vehicle as you travel through the lush plains on a three-hour drive to Casablanca. A short break along the way allows you to stretch and refresh before arriving in Morocco’s economic hub.Upon arrival, your first stop is the Hassan II Mosque, an architectural masterpiece standing on the edge of the Atlantic Ocean. With its 210-meter-tall minaret, it is the tallest religious monument in the world, and one of the few mosques in Morocco open to non-Muslim visitors. Explore its breathtaking interiors adorned with intricate zellige tilework, carved cedarwood, and marble columns.Next, take a leisurely stroll along Ain Diab’s Corniche, a lively coastal promenade lined with cafés, restaurants, and beautiful ocean views. Here, you can soak in the fresh sea breeze and vibrant atmosphere of Casablanca’s beachfront district. The tour continues with a visit to the Cathedral of the Sacred Heart, an architectural landmark showcasing French colonial Gothic revival design. Though no longer an active church, the cathedral now hosts cultural exhibitions and remains a significant part of Casablanca’s history.From there, explore the Art Deco district, where elegant 20th-century buildings reflect Casablanca’s unique blend of European and Moroccan influences. A stop at the Arab League Square, a lush park surrounded by historic architecture, offers a chance to experience the city’s daily life.After lunch, enjoy a panoramic drive through Casablanca’s modern districts, getting a glimpse of the city’s contemporary side before starting the return journey to Marrakech. You’ll arrive back in the evening, with drop-off at your hotel or riad, concluding an unforgettable day in Morocco’s most cosmopolitan city.",
+          "id": "69586469e3f07b5fec13a296"
+        }
+      ]
+    },
+    "isActive": true,
+    "isFeatured": false,
+    "displayOrder": 0,
+    "seo": {},
+    "groupPrice": 0,
+    "id": "69586469135e1eccaddcffbc"
+  },
+  {
+    "createdAt": "2026-01-03T00:35:20.207Z",
+    "updatedAt": "2026-01-05T13:00:53.714Z",
+    "title": {
+      "en": "Agadir Day Trip"
+    },
+    "slug": "agadir-day-trip",
+    "description": {
+      "en": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "type": "text",
+                  "format": 0,
+                  "style": "",
+                  "mode": "normal",
+                  "text": "Set off on a scenic journey from Marrakech to the Atlantic coast with this full-day excursion to Agadir. Known for its golden beaches, breathtaking coastal views, and relaxed atmosphere, Agadir offers a perfect mix of culture, adventure, and leisure. Enjoy a panoramic cable car ride to the historic Kasbah Oufella, stroll along the lively marina, explore the bustling Souk El Had, and visit Crocopark, home to hundreds of Nile crocodiles in a lush botanical garden. Whether you’re drawn to the sea breeze, local markets, or nature, this trip promises a refreshing change of scenery and unforgettable experiences.",
+                  "detail": 0,
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr"
+        }
+      }
+    },
+    "shortDescription": {
+      "en": ""
+    },
+    "category": "695911f65ae3f4c5726c48a8",
+    "coordinates": {},
+    "duration": {
+      "en": "1 Day"
+    },
+    "languages": [
+      {
+        "language": "English",
+        "id": "69586448e3f07b5fec13a268"
+      }
+    ],
+    "pricingType": "per_person",
+    "groupPricing": {
+      "adultPrice": 0,
+      "childPrice": 0,
+      "childAgeLimit": 12,
+      "minGroupSize": 1,
+      "maxGroupSize": 15
+    },
+    "privatePricing": {
+      "minGuests": 1,
+      "additionalGuestPrice": 0
+    },
+    "featuredImage": "695bb5cb161320a92b2cbdd2",
+    "gallery": [
+      {
+        "media": "695bb6006207b2d04abaaeeb",
+        "type": "image",
+        "id": "695bb5d2163da944e2daf565"
+      }
+    ],
+    "highlights": {
+      "en": [
+        {
+          "highlight": "Ascend to Kasbah Oufella via cable car and admire stunning panoramic views of Agadir and the Atlantic.",
+          "id": "69586448e3f07b5fec13a272"
+        },
+        {
+          "highlight": "Stroll along Agadir’s pristine beaches and soak up the relaxed coastal atmosphere.",
+          "id": "69586448e3f07b5fec13a273"
+        },
+        {
+          "highlight": "Visit the lively Souk El Had, one of Morocco’s largest markets, brimming with local crafts and fresh produce.",
+          "id": "69586448e3f07b5fec13a274"
+        },
+        {
+          "highlight": "Discover Crocopark, home to hundreds of Nile crocodiles set in a lush botanical garden.",
+          "id": "69586448e3f07b5fec13a275"
+        },
+        {
+          "highlight": "Enjoy a scenic drive through the argan tree region",
+          "id": "69586448e3f07b5fec13a276"
+        }
+      ]
+    },
+    "included": {
+      "en": [
+        {
+          "item": "Professional driver",
+          "id": "69586448e3f07b5fec13a277"
+        },
+        {
+          "item": "Round-trip transportation in a comfortable, air-conditioned vehicle",
+          "id": "69586448e3f07b5fec13a278"
+        },
+        {
+          "item": "Pick-up and drop-off at your Marrakech hotel/riad",
+          "id": "69586448e3f07b5fec13a279"
+        },
+        {
+          "item": "Cable car tickets to Kasbah Oufella",
+          "id": "69586448e3f07b5fec13a27a"
+        },
+        {
+          "item": "Entrance fee to Crocopark",
+          "id": "69586448e3f07b5fec13a27b"
+        }
+      ]
+    },
+    "notIncluded": {
+      "en": [
+        {
+          "item": "Lunch and beverages",
+          "id": "69586448e3f07b5fec13a27c"
+        },
+        {
+          "item": "Personal expenses",
+          "id": "69586448e3f07b5fec13a27d"
+        },
+        {
+          "item": "Gratuities for the driver/guide (optional)",
+          "id": "69586448e3f07b5fec13a27e"
+        }
+      ]
+    },
+    "recommendations": {
+      "en": null
+    },
+    "itinerary": {
+      "en": [
+        {
+          "activity": "Marrakech → Agadir",
+          "description": "Your journey begins with an early morning departure from Marrakech, heading southwest through the picturesque Moroccan countryside. As you pass through rolling hills and argan tree groves, keep an eye out for the famous tree-climbing goats—a unique sight along the route.Upon arrival in Agadir, your adventure starts with a ride on the city’s modern cable car to Kasbah Oufella, perched on a hilltop overlooking the Atlantic. As you ascend, take in breathtaking aerial views of Agadir’s coastline. Once at the summit, explore the ruins of this 16th-century fortress and capture stunning photos of the panoramic landscape.For a more leisurely experience, head to Agadir’s beachfront promenade. Take a relaxing walk by the shore, unwind at a seaside café, or dip your toes in the Atlantic waters. If you prefer, you can explore the modern marina, home to stylish restaurants and boutiques.Next, immerse yourself in the vibrant atmosphere of Souk El Had, a sprawling market where locals shop for everything from spices and textiles to handmade crafts. Wander through the colorful stalls and experience the essence of Agadir’s daily life.In the afternoon, venture to Crocopark, a fascinating attraction where you can observe over 300 Nile crocodiles in a beautifully landscaped botanical garden. As you explore, learn about the conservation efforts dedicated to these ancient reptiles and admire the lush greenery that makes this park a hidden oasis in Agadir.As the sun begins to set, bid farewell to Agadir and embark on your return journey to Marrakech, bringing back unforgettable memories of Morocco’s coastal charm.",
+          "id": "69586448e3f07b5fec13a27f"
+        }
+      ]
+    },
+    "isActive": true,
+    "isFeatured": false,
+    "displayOrder": 0,
+    "seo": {},
+    "groupPrice": 0,
+    "id": "69586448135e1eccaddcff5d"
+  },
+  {
+    "createdAt": "2026-01-03T00:34:46.528Z",
+    "updatedAt": "2026-01-05T13:02:26.536Z",
+    "title": {
+      "en": "Essaouira Day Trip"
+    },
+    "slug": "essaouira-day-trip",
+    "description": {
+      "en": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "type": "text",
+                  "format": 0,
+                  "style": "",
+                  "mode": "normal",
+                  "text": "Continuing the journey, you’ll pass through vast Argan tree forests, home to the fascinating sight of goats skillfully climbing the trees to feed on the nuts. This rare and amusing scene is a must-see and offers a great photo opportunity.",
+                  "detail": 0,
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr"
+        }
+      }
+    },
+    "shortDescription": {
+      "en": ""
+    },
+    "category": "695911f65ae3f4c5726c48a8",
+    "coordinates": {},
+    "duration": {
+      "en": "1 Day"
+    },
+    "languages": [
+      {
+        "language": "English",
+        "id": "69586426e3f07b5fec13a24e"
+      }
+    ],
+    "pricingType": "per_person",
+    "groupPricing": {
+      "adultPrice": 0,
+      "childPrice": 0,
+      "childAgeLimit": 12,
+      "minGroupSize": 1,
+      "maxGroupSize": 15
+    },
+    "privatePricing": {
+      "minGuests": 1,
+      "additionalGuestPrice": 0
+    },
+    "featuredImage": "695bb649161320a92b2cbe00",
+    "gallery": [
+      {
+        "media": "695bb65e27a141acee97c822",
+        "type": "image",
+        "id": "695bb64c163da944e2daf566"
+      }
+    ],
+    "highlights": {
+      "en": [
+        {
+          "highlight": "Discover the enchanting coastal town of Essaouira.",
+          "id": "69586426e3f07b5fec13a258"
+        },
+        {
+          "highlight": "Witness the unique sight of goats climbing Argan trees.",
+          "id": "69586426e3f07b5fec13a259"
+        },
+        {
+          "highlight": "Learn about Argan oil production at a local women’s cooperative.",
+          "id": "69586426e3f07b5fec13a25a"
+        },
+        {
+          "highlight": "Explore Essaouira’s historic Medina, a UNESCO World Heritage site.",
+          "id": "69586426e3f07b5fec13a25b"
+        },
+        {
+          "highlight": "Visit the vibrant fishing port and enjoy a fresh seafood lunch.",
+          "id": "69586426e3f07b5fec13a25c"
+        },
+        {
+          "highlight": "Stroll along Essaouira’s sandy beach and soak in the relaxed atmosphere.",
+          "id": "69586426e3f07b5fec13a25d"
+        }
+      ]
+    },
+    "included": {
+      "en": [
+        {
+          "item": "comfortable air-conditioned transportation",
+          "id": "69586426e3f07b5fec13a25e"
+        },
+        {
+          "item": "Professional driver",
+          "id": "69586426e3f07b5fec13a25f"
+        },
+        {
+          "item": "Local English-speaking guide in Essaouira",
+          "id": "69586426e3f07b5fec13a260"
+        },
+        {
+          "item": "Pick-up and drop-off at your preferred location in Marrakech",
+          "id": "69586426e3f07b5fec13a261"
+        }
+      ]
+    },
+    "notIncluded": {
+      "en": [
+        {
+          "item": "Lunch and beverages",
+          "id": "69586426e3f07b5fec13a262"
+        },
+        {
+          "item": "Personal expenses",
+          "id": "69586426e3f07b5fec13a263"
+        }
+      ]
+    },
+    "recommendations": {
+      "en": null
+    },
+    "itinerary": {
+      "en": [
+        {
+          "activity": "Marrakech → Essaouira",
+          "description": "Your day trip begins with an 8:00 AM departure from Marrakech. As you leave the vibrant city behind, enjoy a scenic drive across the Haouz Plains toward Sidi Lmokhtar, a traditional village west of Marrakech. A short coffee break along the way allows you to stretch and take in the tranquil surroundings.Continuing the journey, you’ll pass through vast Argan tree forests, home to the fascinating sight of goats skillfully climbing the trees to feed on the nuts. This rare and amusing scene is a must-see and offers a great photo opportunity.For those interested in Moroccan culture and artisanal traditions, a stop at a local women’s cooperative provides insight into the production of Argan oil. Learn about the traditional methods used to extract this prized oil, known for its culinary and cosmetic benefits. Optional: If you’re a wine enthusiast, you may also visit Val d’Argan, a vineyard founded by a French winemaker, where you can enjoy a glass of locally-produced wine before continuing to Essaouira.",
+          "id": "69586426e3f07b5fec13a264"
+        },
+        {
+          "activity": "Exploring Essaouira",
+          "description": "Upon arrival, a local guide will take you on a fascinating walking tour of Essaouira’s historic Medina. This UNESCO-listed old town is a maze of narrow streets, bustling souks, and artisan workshops, perfect for discovering traditional craftsmanship and unique souvenirs.Explore the Mellah, the historic Jewish quarter, and visit the Kasbah, a former military stronghold offering panoramic views of the Atlantic Ocean. Wander through the lively fishing port, where traditional blue boats line the shore, and fishermen bring in the catch of the day.",
+          "id": "69586426e3f07b5fec13a265"
+        },
+        {
+          "time": "Lunch",
+          "activity": "& Leisure Time",
+          "description": "Enjoy a delicious lunch at a seaside restaurant, where fresh seafood is the specialty. Alternatively, opt for other Moroccan dishes while taking in the ocean breeze.After lunch, you’ll have free time to experience Essaouira’s relaxing atmosphere. Stroll along the golden sandy beach, watch the waves crash against the shore, or unwind at Place Moulay El Hassan, where you can sip traditional mint tea while listening to the hypnotic rhythms of Gnawa music.",
+          "id": "69586426e3f07b5fec13a266"
+        },
+        {
+          "activity": "Return to Marrakech",
+          "description": "As the day draws to a close, your driver will take you back to Marrakech, with an estimated arrival around 6:00 PM. This private Essaouira day trip offers the perfect mix of history, culture, and relaxation, making it an ideal escape from the hustle and bustle of Marrakech.",
+          "id": "69586426e3f07b5fec13a267"
+        }
+      ]
+    },
+    "isActive": true,
+    "isFeatured": false,
+    "displayOrder": 0,
+    "seo": {},
+    "groupPrice": 0,
+    "id": "69586426135e1eccaddcff04"
+  },
+  {
+    "createdAt": "2026-01-03T00:34:22.939Z",
+    "updatedAt": "2026-01-05T13:04:03.290Z",
+    "title": {
+      "en": "Ait Benhaddou and Ouarzazate Day Trip"
+    },
+    "slug": "ait-benhaddou-and-ouarzazate-day-trip",
+    "description": {
+      "en": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "type": "text",
+                  "format": 0,
+                  "style": "",
+                  "mode": "normal",
+                  "text": "Embark on an unforgettable journey through the breathtaking High Atlas Mountains, where dramatic landscapes and traditional Berber villages line the route to two of Morocco’s most iconic sites Kasbah Ait Ben Haddou and Ouarzazate.",
+                  "detail": 0,
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr"
+        }
+      }
+    },
+    "shortDescription": {
+      "en": ""
+    },
+    "category": "695911f65ae3f4c5726c48a8",
+    "coordinates": {},
+    "duration": {
+      "en": "Full Day"
+    },
+    "languages": [
+      {
+        "language": "English",
+        "id": "6958640ee3f07b5fec13a235"
+      }
+    ],
+    "pricingType": "per_person",
+    "groupPricing": {
+      "adultPrice": 0,
+      "childPrice": 0,
+      "childAgeLimit": 12,
+      "minGroupSize": 1,
+      "maxGroupSize": 15
+    },
+    "privatePricing": {
+      "minGuests": 1,
+      "additionalGuestPrice": 0
+    },
+    "featuredImage": "695bb6af27a141acee97c849",
+    "gallery": [
+      {
+        "media": "695bb6bf27a141acee97c855",
+        "type": "image",
+        "id": "695bb6b2163da944e2daf567"
+      }
+    ],
+    "highlights": {
+      "en": [
+        {
+          "highlight": "Traverse the spectacular High Atlas Mountains and cross the Tizi n’Tichka Pass.",
+          "id": "6958640ee3f07b5fec13a23f"
+        },
+        {
+          "highlight": "Cross the Mountain Berber villages and enjoy the beautiful nature.",
+          "id": "6958640ee3f07b5fec13a240"
+        },
+        {
+          "highlight": "Explore on a guided tour the UNESCO-listed Kasbah Ait Ben Haddou, a masterpiece of Berber architecture and a famous film location.",
+          "id": "6958640ee3f07b5fec13a241"
+        },
+        {
+          "highlight": "Visit Ouarzazate, home to the historic Taourirt Kasbah and Atlas Film Studios.",
+          "id": "6958640ee3f07b5fec13a242"
+        },
+        {
+          "highlight": "Admire traditional Berber villages and capture stunning landscapes along the ancient caravan routes.",
+          "id": "6958640ee3f07b5fec13a243"
+        }
+      ]
+    },
+    "included": {
+      "en": [
+        {
+          "item": "Round-trip transportation – Experienced driver.",
+          "id": "6958640ee3f07b5fec13a244"
+        },
+        {
+          "item": "Experienced English/French-speaking driver for an immersive journey.",
+          "id": "6958640ee3f07b5fec13a245"
+        },
+        {
+          "item": "Guided tour of Kasbah Ait Ben Haddou.",
+          "id": "6958640ee3f07b5fec13a246"
+        },
+        {
+          "item": "Pick-up and drop-off at your accommodation in Marrakech.",
+          "id": "6958640ee3f07b5fec13a247"
+        }
+      ]
+    },
+    "notIncluded": {
+      "en": [
+        {
+          "item": "Lunch and beverages",
+          "id": "6958640ee3f07b5fec13a248"
+        },
+        {
+          "item": "Entrance fees to Atlas Film Studios and Taourirt Kasbah (optional).",
+          "id": "6958640ee3f07b5fec13a249"
+        },
+        {
+          "item": "Personal expenses.",
+          "id": "6958640ee3f07b5fec13a24a"
+        }
+      ]
+    },
+    "recommendations": {
+      "en": null
+    },
+    "itinerary": {
+      "en": [
+        {
+          "activity": "Marrakech → Kasbah Ait Ben Haddou → Ouarzazate",
+          "description": "07H00 – 19H00Your adventure begins with an early morning departure from your accommodation in Marrakech. As you leave the city behind, you’ll journey through the scenic High Atlas Mountains, where winding roads offer spectacular views of rugged landscapes and remote Berber villages perched on hillsides.Tizi n’Tichka PassAt an altitude of 2,260 meters, the Tizi n’Tichka Pass is the highest mountain pass in Morocco, offering breathtaking panoramic views. You’ll have opportunities to stop for photos and enjoy the fresh mountain air.",
+          "id": "6958640ee3f07b5fec13a24b"
+        },
+        {
+          "activity": "Kasbah Ait Ben Haddou – A Step Back in Time",
+          "description": "Arriving at Kasbah Ait Ben Haddou, a UNESCO World Heritage Site, you’ll step into one of Morocco’s most well-preserved fortified villages. This ancient ksar, built of red clay and mud bricks, has been an important trading post for centuries and remains one of the most iconic symbols of Moroccan heritage.A guided tour will take you through its labyrinthine passageways, marketplaces, and fortified homes, offering a glimpse into Berber traditions and architecture. The kasbah’s unique beauty has also made it a favorite Hollywood filming location, featuring in movies such as Gladiator, Game of Thrones, and Lawrence of Arabia.",
+          "id": "6958640ee3f07b5fec13a24c"
+        },
+        {
+          "activity": "Ouarzazate – Africa’s Hollywood",
+          "description": "Continuing to Ouarzazate, the gateway to the Sahara, you’ll explore the city’s film industry landmarks. Visit the Taourirt Kasbah, a grand palace that once belonged to the powerful Glaoui family. This beautifully restored fortress showcases intricate mud-brick architecture and ornate interiors, reflecting Morocco’s royal heritage.You’ll also have the option to visit Atlas Film Studios, where famous blockbusters like The Mummy, Kingdom of Heaven, and Prince of Persia were filmed. Walking through the studio sets, you’ll gain fascinating insights into the world of cinema.After exploring Ouarzazate, we’ll begin the return journey to Marrakech, enjoying the stunning sunset over the mountains. You’ll be dropped off at your accommodation, bringing your memorable day trip to a close.",
+          "id": "6958640ee3f07b5fec13a24d"
+        }
+      ]
+    },
+    "isActive": true,
+    "isFeatured": false,
+    "displayOrder": 0,
+    "seo": {},
+    "groupPrice": 0,
+    "id": "6958640e135e1eccaddcfeb8"
+  },
+  {
+    "createdAt": "2026-01-03T00:33:53.687Z",
+    "updatedAt": "2026-01-05T13:05:43.588Z",
+    "title": {
+      "en": "Ouzoud Waterfalls Excursion"
+    },
+    "slug": "ouzoud-waterfalls-excursion",
+    "description": {
+      "en": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "type": "text",
+                  "format": 0,
+                  "style": "",
+                  "mode": "normal",
+                  "text": "Escape the city and embark on a breathtaking journey to Ouzoud Waterfalls, one of Morocco’s most captivating natural wonders. Nestled in the heart of the Atlas Mountains, these spectacular cascades towering at 110 meters offer a serene retreat filled with stunning landscapes, lush olive groves, and the playful presence of Barbary apes. This full-day tour from Marrakech promises a perfect blend of adventure, relaxation, and cultural discovery.",
+                  "detail": 0,
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr"
+        }
+      }
+    },
+    "shortDescription": {
+      "en": ""
+    },
+    "category": "695911f65ae3f4c5726c48a8",
+    "coordinates": {},
+    "duration": {
+      "en": "08:00 – 18:30"
+    },
+    "languages": [
+      {
+        "language": "English",
+        "id": "695863f1e3f07b5fec13a21c"
+      }
+    ],
+    "pricingType": "per_person",
+    "groupPricing": {
+      "adultPrice": 0,
+      "childPrice": 0,
+      "childAgeLimit": 12,
+      "minGroupSize": 1,
+      "maxGroupSize": 15
+    },
+    "privatePricing": {
+      "minGuests": 1,
+      "additionalGuestPrice": 0
+    },
+    "featuredImage": "695bb71b8328f1d53a45bbca",
+    "gallery": [],
+    "highlights": {
+      "en": [
+        {
+          "highlight": "Scenic drive through the Tadla plains, passing endless olive groves.",
+          "id": "695863f1e3f07b5fec13a226"
+        },
+        {
+          "highlight": "Admire the majestic Ouzoud Falls, the highest in North Africa.",
+          "id": "695863f1e3f07b5fec13a227"
+        },
+        {
+          "highlight": "Stroll along scenic trails leading to the base of the cascades.",
+          "id": "695863f1e3f07b5fec13a228"
+        },
+        {
+          "highlight": "Capture stunning photos of Barbary macaques in their natural habitat.",
+          "id": "695863f1e3f07b5fec13a229"
+        },
+        {
+          "highlight": "Enjoy a refreshing swim in the natural pools beneath the falls.",
+          "id": "695863f1e3f07b5fec13a22a"
+        },
+        {
+          "highlight": "Savor a traditional Berber Tagine with a panoramic view of the waterfalls.",
+          "id": "695863f1e3f07b5fec13a22b"
+        }
+      ]
+    },
+    "included": {
+      "en": [
+        {
+          "item": "Comfortable - air conditioned transportation",
+          "id": "695863f1e3f07b5fec13a22c"
+        },
+        {
+          "item": "Professional driver",
+          "id": "695863f1e3f07b5fec13a22d"
+        },
+        {
+          "item": "Pick-up and drop-off at your Marrakech hotel/riad",
+          "id": "695863f1e3f07b5fec13a22e"
+        },
+        {
+          "item": "Local guide at Ouzoud Waterfalls",
+          "id": "695863f1e3f07b5fec13a22f"
+        }
+      ]
+    },
+    "notIncluded": {
+      "en": [
+        {
+          "item": "Lunch and beverages",
+          "id": "695863f1e3f07b5fec13a230"
+        },
+        {
+          "item": "Personal expenses",
+          "id": "695863f1e3f07b5fec13a231"
+        }
+      ]
+    },
+    "recommendations": {
+      "en": null
+    },
+    "itinerary": {
+      "en": [
+        {
+          "activity": "Marrakech → Ouzoud Waterfalls",
+          "description": "Your day trip begins with an early morning departure from Marrakech, embarking on a three-hour drive through the mesmerizing Atlas Mountain landscapes. As you journey north, you’ll pass through endless olive groves and traditional Berber villages, offering glimpses of rural Moroccan life.As you approach Ouzoud, the sight of the cascades tumbling down rugged cliffs is simply spectacular. Upon arrival, your guide will lead you on a scenic walk along the pathways surrounding the falls. Enjoy panoramic viewpoints, discover charming footbridges, and follow the winding trails down to the riverbed, where you’ll feel the mist from the falls refreshing the air.For those seeking adventure, take a swim in the natural pools at the base of the cascades or—if you’re feeling daring—join the locals in jumping from the cliffs into the crystal-clear waters. As you explore, keep an eye out for the playful Barbary macaques that inhabit the area, always ready for an entertaining photo opportunity.",
+          "id": "695863f1e3f07b5fec13a232"
+        },
+        {
+          "time": "Lunch",
+          "activity": "with a View",
+          "description": "After a morning of exploration, relax with a traditional Moroccan lunch at a local café or restaurant, perfectly positioned to offer stunning views of the falls. Savor an authentic Berber Tagine while soaking in the serene ambiance of this natural wonder.",
+          "id": "695863f1e3f07b5fec13a233"
+        },
+        {
+          "activity": "Return to Marrakech",
+          "description": "In the afternoon, enjoy a leisurely drive back to Marrakech, where your driver will drop you off at your hotel or riad. Arriving in the early evening, you’ll conclude your Ouzoud Falls adventure, taking home unforgettable memories of Morocco’s most beautiful waterfalls.",
+          "id": "695863f1e3f07b5fec13a234"
+        }
+      ]
+    },
+    "isActive": true,
+    "isFeatured": false,
+    "displayOrder": 0,
+    "seo": {},
+    "groupPrice": 0,
+    "id": "695863f1135e1eccaddcfe68"
+  },
+  {
+    "createdAt": "2026-01-03T00:33:26.058Z",
+    "updatedAt": "2026-01-05T13:06:54.004Z",
+    "title": {
+      "en": "Imlil & High Atlas Discovery"
+    },
+    "slug": "imlil-high-atlas-discovery",
+    "description": {
+      "en": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "type": "text",
+                  "format": 0,
+                  "style": "",
+                  "mode": "normal",
+                  "text": "Escape the city and experience the breathtaking beauty of the High Atlas Mountains on this unforgettable day trip to Imlil. Just 64 km south of Marrakech, Imlil serves as the gateway to Toubkal National Park, offering a glimpse into traditional Berber culture and stunning mountain landscapes. Pass through the Agafay Desert, visit the serene Lalla Takerkouste Lake, and explore authentic Berber villages, where you’ll be welcomed with traditional mint tea. Take a guided hike or a mule ride through scenic trails, and enjoy a delicious lunch with panoramic views of Mount Toubkal before returning to Marrakech.",
+                  "detail": 0,
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr"
+        }
+      }
+    },
+    "shortDescription": {
+      "en": ""
+    },
+    "category": "695911f65ae3f4c5726c48a8",
+    "coordinates": {},
+    "duration": {
+      "en": "1 Day"
+    },
+    "languages": [
+      {
+        "language": "English",
+        "id": "695863d6e3f07b5fec13a1fe"
+      }
+    ],
+    "pricingType": "per_person",
+    "groupPricing": {
+      "adultPrice": 0,
+      "childPrice": 0,
+      "childAgeLimit": 12,
+      "minGroupSize": 1,
+      "maxGroupSize": 15
+    },
+    "privatePricing": {
+      "minGuests": 1,
+      "additionalGuestPrice": 0
+    },
+    "featuredImage": "695bb769161320a92b2cbe4c",
+    "gallery": [],
+    "highlights": {
+      "en": [
+        {
+          "highlight": "Discover Imlil, the heart of the High Atlas and gateway to Toubkal National Park.",
+          "id": "695863d6e3f07b5fec13a208"
+        },
+        {
+          "highlight": "Experience the Agafay Desert’s unique rocky landscapes.",
+          "id": "695863d6e3f07b5fec13a209"
+        },
+        {
+          "highlight": "Visit the picturesque Lalla Takerkouste Lake for stunning photo opportunities.",
+          "id": "695863d6e3f07b5fec13a20a"
+        },
+        {
+          "highlight": "Enjoy traditional Moroccan tea at a Berber home.",
+          "id": "695863d6e3f07b5fec13a20b"
+        },
+        {
+          "highlight": "Hike or ride a mule through the charming mountain village of Aremd.",
+          "id": "695863d6e3f07b5fec13a20c"
+        },
+        {
+          "highlight": "Indulge in a hearty Berber lunch with breathtaking views.",
+          "id": "695863d6e3f07b5fec13a20d"
+        }
+      ]
+    },
+    "included": {
+      "en": [
+        {
+          "item": "Hotel/riad pickup & drop-off",
+          "id": "695863d6e3f07b5fec13a20e"
+        },
+        {
+          "item": "Comfortable transportation",
+          "id": "695863d6e3f07b5fec13a20f"
+        },
+        {
+          "item": "Professional driver & local Berber guide",
+          "id": "695863d6e3f07b5fec13a210"
+        },
+        {
+          "item": "Trekking or mule ride in Imlil",
+          "id": "695863d6e3f07b5fec13a211"
+        },
+        {
+          "item": "Traditional Berber lunch",
+          "id": "695863d6e3f07b5fec13a212"
+        },
+        {
+          "item": "Tea ceremony in a Berber home",
+          "id": "695863d6e3f07b5fec13a213"
+        }
+      ]
+    },
+    "notIncluded": {
+      "en": [
+        {
+          "item": "Additional drinks or snacks",
+          "id": "695863d6e3f07b5fec13a214"
+        },
+        {
+          "item": "Personal expenses & tips",
+          "id": "695863d6e3f07b5fec13a215"
+        }
+      ]
+    },
+    "recommendations": {
+      "en": null
+    },
+    "itinerary": {
+      "en": [
+        {
+          "activity": "1. Morning Departure from Marrakech",
+          "description": "Your driver will pick you up from your hotel or riad at 9:00 AM. As you leave the city behind, you’ll journey through the stunning Moroccan countryside, passing through the Agafay Desert, a dramatic, rocky landscape often compared to the moon’s surface. Stop for photos and take in the peaceful atmosphere of this untouched terrain.",
+          "id": "695863d6e3f07b5fec13a216"
+        },
+        {
+          "activity": "2. Lalla Takerkouste Lake – A Scenic Oasis",
+          "description": "Your next stop is Lalla Takerkouste Lake, a tranquil retreat nestled at the foot of the High Atlas Mountains. Enjoy the contrast between the lake’s blue waters and the rugged surroundings, making it a perfect spot for photography. If you’d like, you can also experience a camel ride here, offering a traditional touch to your adventure.",
+          "id": "695863d6e3f07b5fec13a217"
+        },
+        {
+          "activity": "3. Exploring the Berber Countryside",
+          "description": "Continuing your journey, you’ll drive through lush valleys and traditional Berber villages, where life has remained unchanged for centuries. If your trip falls on a Saturday, you’ll have the chance to visit the Asni Berber Market, a lively gathering where locals sell fresh produce, handcrafted goods, and spices.",
+          "id": "695863d6e3f07b5fec13a218"
+        },
+        {
+          "activity": "4. Arrival in Imlil  Gateway to the High Atlas",
+          "description": "By midday, you’ll reach Imlil, a charming mountain village at the base of Mount Toubkal. Here, you’ll meet your local Berber guide and muleteer, who will accompany you on a scenic hike or mule ride through the Aremd Valley. The village of Aremd is famous for its traditional stone houses, terraced fields, and stunning mountain views.Fun fact: Part of the movie Seven Years in Tibet was filmed in this village!",
+          "id": "695863d6e3f07b5fec13a219"
+        },
+        {
+          "activity": "5. Traditional Lunch",
+          "description": "After exploring the valley, you’ll stop at a local Berber home for a freshly prepared traditional lunch. Enjoy dishes made from locally sourced ingredients, all while taking in the panoramic views of Mount Toubkal.",
+          "id": "695863d6e3f07b5fec13a21a"
+        },
+        {
+          "activity": "6. Return to Marrakech",
+          "description": "After lunch, enjoy some free time to soak in the peaceful mountain atmosphere before beginning your drive back to Marrakech. You’ll arrive back at your accommodation in the early evening, carrying memories of breathtaking landscapes and Berber hospitality.",
+          "id": "695863d6e3f07b5fec13a21b"
+        }
+      ]
+    },
+    "isActive": true,
+    "isFeatured": false,
+    "displayOrder": 0,
+    "seo": {},
+    "groupPrice": 0,
+    "id": "695863d6135e1eccaddcfe1e"
+  },
+  {
+    "createdAt": "2026-01-03T00:32:56.941Z",
+    "updatedAt": "2026-01-05T13:07:55.792Z",
+    "title": {
+      "en": "Ourika Valley Day Trip"
+    },
+    "slug": "ourika-valley-day-trip",
+    "description": {
+      "en": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "type": "text",
+                  "format": 0,
+                  "style": "",
+                  "mode": "normal",
+                  "text": "Escape the hustle and bustle of Marrakech and journey into the serene heart of the High Atlas Mountains on our Ourika Valley Day Tour. Discover lush valleys, vibrant local culture, and breathtaking scenery as you explore ancient Berber traditions. This immersive experience offers both adventure and relaxation, highlighted by a traditional Berber house visit, a guided waterfall hike, and the signature taste of Moroccan mint tea.",
+                  "detail": 0,
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr"
+        }
+      }
+    },
+    "shortDescription": {
+      "en": ""
+    },
+    "category": "695911f65ae3f4c5726c48a8",
+    "coordinates": {},
+    "duration": {
+      "en": "1 Day"
+    },
+    "languages": [
+      {
+        "language": "English",
+        "id": "695863b8e3f07b5fec13a1e5"
+      }
+    ],
+    "pricingType": "per_person",
+    "groupPricing": {
+      "adultPrice": 0,
+      "childPrice": 0,
+      "childAgeLimit": 12,
+      "minGroupSize": 1,
+      "maxGroupSize": 15
+    },
+    "privatePricing": {
+      "minGuests": 1,
+      "additionalGuestPrice": 0
+    },
+    "featuredImage": "695bb7a827a141acee97c895",
+    "gallery": [],
+    "highlights": {
+      "en": [
+        {
+          "highlight": "Scenic Drive: Enjoy panoramic views of verdant valleys and mountain streams along your journey.",
+          "id": "695863b8e3f07b5fec13a1ef"
+        },
+        {
+          "highlight": "Authentic Experience: Explore a traditional Berber home, complete with a complimentary serving of mint tea, fresh bread, and olive oil.",
+          "id": "695863b8e3f07b5fec13a1f0"
+        },
+        {
+          "highlight": "Adventure: Embark on a guided one-hour hike to admire the captivating Setti Fatma waterfalls.",
+          "id": "695863b8e3f07b5fec13a1f1"
+        },
+        {
+          "highlight": "Culinary Delight: Savor a delicious Berber Tagine by the Ourika River, with the Atlas Mountains as your backdrop.",
+          "id": "695863b8e3f07b5fec13a1f2"
+        }
+      ]
+    },
+    "included": {
+      "en": [
+        {
+          "item": "Transportation",
+          "id": "695863b8e3f07b5fec13a1f3"
+        },
+        {
+          "item": "Guided Experience: Expert English/French-speaking local guide during your visit to Setti Fatma.",
+          "id": "695863b8e3f07b5fec13a1f4"
+        },
+        {
+          "item": "Cultural Encounter: Authentic visit to a Berber house with mint tea, bread, and olive oil.",
+          "id": "695863b8e3f07b5fec13a1f5"
+        },
+        {
+          "item": "Adventure: A guided one-hour hike to the Ourika waterfalls.",
+          "id": "695863b8e3f07b5fec13a1f6"
+        }
+      ]
+    },
+    "notIncluded": {
+      "en": [
+        {
+          "item": "Convenience: Pick-up and drop-off at your Marrakech hotel or riad.",
+          "id": "695863b8e3f07b5fec13a1f7"
+        },
+        {
+          "item": "Lunch and beverages",
+          "id": "695863b8e3f07b5fec13a1f8"
+        }
+      ]
+    },
+    "recommendations": {
+      "en": null
+    },
+    "itinerary": {
+      "en": [
+        {
+          "time": "9:00 AM",
+          "activity": "Departure from Marrakech",
+          "description": "Begin your day with a comfortable pick-up from your hotel or riad in Marrakech. The journey takes you to the foothills of the Atlas Mountains, where the landscape transforms into a tapestry of green valleys and scenic streams.On the Way Stop off at some of these typical Berber villages to allow you to soak in what everyday life is all about for these local people.",
+          "id": "695863b8e3f07b5fec13a1f9"
+        },
+        {
+          "time": "Mid-Morning",
+          "activity": "Traditional Berber Home Visit",
+          "description": "Arrive at a charming Berber family home nestled in the valley. Here, enjoy a light local breakfast featuring freshly baked bread, olive oil, and a soothing cup of mint tea, setting the tone for a culturally enriching day.",
+          "id": "695863b8e3f07b5fec13a1fa"
+        },
+        {
+          "time": "Late Morning",
+          "activity": "Setti Fatma and Waterfall Hike",
+          "description": "Travel onward to Setti Fatma, a beloved retreat renowned for its lush landscapes, clear streams, and cascading waterfalls. Under the guidance of your expert local guide, take a one-hour hike to the first waterfall an unforgettable experience amid nature’s splendor.",
+          "id": "695863b8e3f07b5fec13a1fb"
+        },
+        {
+          "time": "Lunch",
+          "activity": "Scenic Riverside Dining",
+          "description": "Break for lunch at a local café by the stream, where you can enjoy a hearty Berber Tagine while soaking in the spectacular views of the valley and distant Atlas peaks.Note: To fully capture the beauty and authenticity of this experience, please bring your camera. The picturesque landscapes, bustling local markets, and intimate moments in traditional Berber settings are simply too memorable not to be recorded.",
+          "id": "695863b8e3f07b5fec13a1fc"
+        },
+        {
+          "time": "4:00 PM",
+          "activity": "Return to Marrakech",
+          "description": "Conclude your enriching day as you journey back to Marrakech. Your driver will ensure a comfortable drop-off at your hotel or riad, leaving you with lasting memories of the Ourika Valley.",
+          "id": "695863b8e3f07b5fec13a1fd"
+        }
+      ]
+    },
+    "isActive": true,
+    "isFeatured": false,
+    "displayOrder": 0,
+    "seo": {},
+    "groupPrice": 0,
+    "id": "695863b8135e1eccaddcfdd8"
+  },
+  {
+    "createdAt": "2026-01-03T00:32:28.533Z",
+    "updatedAt": "2026-01-05T13:10:39.287Z",
+    "title": {
+      "en": "Marrakech Half-Day Guided City Tour"
+    },
+    "slug": "marrakech-half-day-guided-city-tour",
+    "description": {
+      "en": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "type": "text",
+                  "format": 0,
+                  "style": "",
+                  "mode": "normal",
+                  "text": "Immerse yourself in the rich history and vibrant culture of Marrakech with a guided half-day walking tour. Explore its most iconic landmarks, from stunning palaces to bustling souks, and experience the city’s unique blend of tradition and modernity.",
+                  "detail": 0,
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr"
+        }
+      }
+    },
+    "shortDescription": {
+      "en": ""
+    },
+    "category": "695911f65ae3f4c5726c48a8",
+    "coordinates": {},
+    "duration": {
+      "en": "Half-day (4 hours)"
+    },
+    "languages": [
+      {
+        "language": "English",
+        "id": "6958639ce3f07b5fec13a1cd"
+      }
+    ],
+    "pricingType": "per_person",
+    "groupPricing": {
+      "adultPrice": 0,
+      "childPrice": 0,
+      "childAgeLimit": 12,
+      "minGroupSize": 1,
+      "maxGroupSize": 15
+    },
+    "privatePricing": {
+      "minGuests": 1,
+      "additionalGuestPrice": 0
+    },
+    "featuredImage": "695bb8228328f1d53a45bc2f",
+    "gallery": [
+      {
+        "media": "695bb83a161320a92b2cbecc",
+        "type": "image",
+        "id": "695bb825163da944e2daf568"
+      },
+      {
+        "media": "695bb84a8328f1d53a45bc3a",
+        "type": "image",
+        "id": "695bb829163da944e2daf569"
+      }
+    ],
+    "highlights": {
+      "en": [
+        {
+          "highlight": "Visit the Koutoubia Mosque, the largest mosque in Marrakech, known for its stunning minaret.",
+          "id": "6958639ce3f07b5fec13a1d7"
+        },
+        {
+          "highlight": "Discover the Bahia Palace, a masterpiece of Moroccan architecture.",
+          "id": "6958639ce3f07b5fec13a1d8"
+        },
+        {
+          "highlight": "Step inside the Madrasa Ben Youssef, a former Islamic school adorned with intricate tilework and wood carvings.",
+          "id": "6958639ce3f07b5fec13a1d9"
+        },
+        {
+          "highlight": "Experience the lively atmosphere of Jemaa el-Fna Square, home to storytellers, musicians, and street performers.",
+          "id": "6958639ce3f07b5fec13a1da"
+        },
+        {
+          "highlight": "Wander through the souks, where artisans craft leather goods, spices, and traditional Moroccan items.",
+          "id": "6958639ce3f07b5fec13a1db"
+        }
+      ]
+    },
+    "included": {
+      "en": [
+        {
+          "item": "Expert local guide",
+          "id": "6958639ce3f07b5fec13a1dc"
+        },
+        {
+          "item": "Hotel/riad pick-up and drop-off",
+          "id": "6958639ce3f07b5fec13a1dd"
+        },
+        {
+          "item": "Entrance fees for monuments",
+          "id": "6958639ce3f07b5fec13a1de"
+        }
+      ]
+    },
+    "notIncluded": {
+      "en": [
+        {
+          "item": "Personal purchases in the souks",
+          "id": "6958639ce3f07b5fec13a1df"
+        },
+        {
+          "item": "Tips and gratuities (optional)",
+          "id": "6958639ce3f07b5fec13a1e0"
+        }
+      ]
+    },
+    "recommendations": {
+      "en": null
+    },
+    "itinerary": {
+      "en": [
+        {
+          "activity": "Availability",
+          "id": "6958639ce3f07b5fec13a1e1"
+        },
+        {
+          "activity": "Departure Times",
+          "description": "9:00 AM or 2:00 PM",
+          "id": "6958639ce3f07b5fec13a1e2"
+        },
+        {
+          "activity": "Tour Type",
+          "description": "Private or small-group",
+          "id": "6958639ce3f07b5fec13a1e3"
+        },
+        {
+          "activity": "Meeting Point",
+          "description": "Pick-up from your hotel/riad or a designated location in the Medina.",
+          "id": "6958639ce3f07b5fec13a1e4"
+        }
+      ]
+    },
+    "isActive": true,
+    "isFeatured": false,
+    "displayOrder": 0,
+    "seo": {},
+    "groupPrice": 0,
+    "id": "6958639c135e1eccaddcfd75"
+  },
+  {
+    "createdAt": "2026-01-03T00:31:52.283Z",
+    "updatedAt": "2026-01-05T13:11:25.210Z",
+    "title": {
+      "en": "Marrakech Full-Day Guided City Tour"
+    },
+    "slug": "marrakech-full-day-guided-city-tour",
+    "description": {
+      "en": {
+        "root": {
+          "type": "root",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {
+              "type": "paragraph",
+              "format": "",
+              "indent": 0,
+              "version": 1,
+              "children": [
+                {
+                  "type": "text",
+                  "format": 0,
+                  "style": "",
+                  "mode": "normal",
+                  "text": "Step into the heart of Marrakech on this immersive walking tour, where history, culture, and tradition come to life. Wander through the narrow alleyways of the ancient Medina, explore stunning architectural landmarks, and experience the city’s rich heritage with a knowledgeable local guide. From majestic palaces to the vibrant souks, this tour offers a deep dive into the essence of Marrakech.",
+                  "detail": 0,
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "textFormat": 0,
+              "textStyle": ""
+            }
+          ],
+          "direction": "ltr"
+        }
+      }
+    },
+    "shortDescription": {
+      "en": ""
+    },
+    "category": "695911f65ae3f4c5726c48a8",
+    "coordinates": {},
+    "duration": {
+      "en": "9:00 AM – 17H00 PM"
+    },
+    "languages": [
+      {
+        "language": "English",
+        "id": "69586378e3f07b5fec13a1b2"
+      }
+    ],
+    "pricingType": "per_person",
+    "groupPricing": {
+      "adultPrice": 0,
+      "childPrice": 0,
+      "childAgeLimit": 12,
+      "minGroupSize": 1,
+      "maxGroupSize": 15
+    },
+    "privatePricing": {
+      "minGuests": 1,
+      "additionalGuestPrice": 0
+    },
+    "featuredImage": "695bb83a161320a92b2cbecc",
+    "gallery": [
+      {
+        "media": "695bb8228328f1d53a45bc2f",
+        "type": "image",
+        "id": "695bb86d163da944e2daf56a"
+      }
+    ],
+    "highlights": {
+      "en": [
+        {
+          "highlight": "Wander through the hidden alleys of the Medina, where history unfolds in every corner.",
+          "id": "69586378e3f07b5fec13a1bc"
+        },
+        {
+          "highlight": "Visit the Koutoubia Mosque, an iconic landmark with its impressive minaret.",
+          "id": "69586378e3f07b5fec13a1bd"
+        },
+        {
+          "highlight": "Admire the intricate architecture of Bahia Palace, once home to grand viziers.",
+          "id": "69586378e3f07b5fec13a1be"
+        },
+        {
+          "highlight": "Explore the Madrasa Ben Youssef, a stunning Islamic school adorned with exquisite tilework.",
+          "id": "69586378e3f07b5fec13a1bf"
+        },
+        {
+          "highlight": "Experience the lively energy of Jemaa el-Fna Square, where performers, merchants, and storytellers bring the city to life.",
+          "id": "69586378e3f07b5fec13a1c0"
+        },
+        {
+          "highlight": "Stroll through the bustling souks, discovering handcrafted goods and authentic Moroccan artistry.",
+          "id": "69586378e3f07b5fec13a1c1"
+        }
+      ]
+    },
+    "included": {
+      "en": [
+        {
+          "item": "Private guided tour with an expert local guide",
+          "id": "69586378e3f07b5fec13a1c2"
+        },
+        {
+          "item": "Entry fees to all historical sites listed in the itinerary",
+          "id": "69586378e3f07b5fec13a1c3"
+        },
+        {
+          "item": "Hotel/riad pick-up and drop-off",
+          "id": "69586378e3f07b5fec13a1c4"
+        }
+      ]
+    },
+    "notIncluded": {
+      "en": [
+        {
+          "item": "Personal purchases",
+          "id": "69586378e3f07b5fec13a1c5"
+        },
+        {
+          "item": "Food and drinks",
+          "id": "69586378e3f07b5fec13a1c6"
+        },
+        {
+          "item": "Tips for your guide (optional)",
+          "id": "69586378e3f07b5fec13a1c7"
+        }
+      ]
+    },
+    "recommendations": {
+      "en": null
+    },
+    "itinerary": {
+      "en": [
+        {
+          "activity": "Exploring Iconic Landmarks",
+          "description": "Begin at the Koutoubia Mosque, Marrakech’s most famous mosque, known for its impressive 12th-century minaret.Step inside the Bahia Palace, a masterpiece of Moroccan architecture featuring intricate tilework and serene gardens.Visit the Madrasa Ben Youssef, a former Islamic school showcasing stunning Moorish design and detailed craftsmanship.After exploring the architectural beauty of the Madrassa Ben Youssef, take a well-deserved break to enjoy a traditional Moroccan lunch at a local restaurant Upon request, we can arrange a reservation at a carefully selected traditional restaurant to enhance your experience.",
+          "id": "69586378e3f07b5fec13a1c8"
+        },
+        {
+          "activity": "The Soul of the Medina & Souks",
+          "description": "Dive into the heart of the Medina, where hidden alleyways reveal centuries-old traditions.Wander through the vibrant souks, filled with colorful textiles, handcrafted pottery, traditional lamps, and aromatic spices.Watch skilled artisans at work and experience the authentic atmosphere of Marrakech’s markets.",
+          "id": "69586378e3f07b5fec13a1c9"
+        },
+        {
+          "activity": "Jemaa el-Fna & Cultural Encounters",
+          "description": "Arrive at the legendary Jemaa el-Fna Square, where street performers, musicians, and storytellers bring Marrakech to life.Take time to soak in the dynamic atmosphere, capturing the essence of the city.",
+          "id": "69586378e3f07b5fec13a1ca"
+        },
+        {
+          "time": "5:00 PM",
+          "activity": "End of Tour",
+          "description": "After a full day of discovery, your guide will ensure a smooth drop-off at your hotel or riad, leaving you with unforgettable memories of Marrakech.",
+          "id": "69586378e3f07b5fec13a1cb"
+        },
+        {
+          "activity": "Tailor Your Experience",
+          "description": "Want to customize your journey? Choose a focus that suits your interests:Architecture & History: A deep dive into Marrakech’s most impressive historical sites.Artisan & Shopping Tour: A guided exploration of the souks, perfect for those seeking authentic Moroccan craftsmanship.",
+          "id": "69586378e3f07b5fec13a1cc"
+        }
+      ]
+    },
+    "isActive": true,
+    "isFeatured": false,
+    "displayOrder": 0,
+    "seo": {},
+    "groupPrice": 0,
+    "id": "69586378135e1eccaddcfd31"
+  }
+]

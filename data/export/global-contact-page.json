@@ -1,0 +1,34 @@
+{
+  "header": {},
+  "contactInfo": {
+    "address": {
+      "line1": "Marrakech, Morocco",
+      "line2": "Near Jemaa el-Fnaa Square"
+    },
+    "phone": {
+      "number": "+212 600 000 000"
+    },
+    "email": {
+      "address": "info@greenatlastravel.com",
+      "responseTime": "We reply within 2 hours"
+    },
+    "whatsapp": {
+      "number": "+212 600 000 000"
+    }
+  },
+  "formSettings": {
+    "subjects": [],
+    "title": "Send Us a Message",
+    "submitButtonText": "Send Message",
+    "successMessage": "Thank you for reaching out. We'll get back to you within 2 hours."
+  },
+  "faq": {
+    "questions": [],
+    "title": "Frequently Asked Questions"
+  },
+  "map": {
+    "title": "Find Us in Marrakech",
+    "subtitle": "Located in the heart of the Red City, we're easy to find."
+  },
+  "seo": {}
+}

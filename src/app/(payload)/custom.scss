@@ -1,0 +1,752 @@
+/* Custom white theme for Green Atlas Travel Admin */
+
+:root {
+  /* Force light theme colors */
+  --theme-elevation-0: #ffffff;
+  --theme-elevation-50: #f9fafb;
+  --theme-elevation-100: #f3f4f6;
+  --theme-elevation-150: #e5e7eb;
+  --theme-elevation-200: #d1d5db;
+  --theme-elevation-250: #9ca3af;
+  --theme-elevation-300: #6b7280;
+  --theme-elevation-350: #4b5563;
+  --theme-elevation-400: #374151;
+  --theme-elevation-450: #1f2937;
+  --theme-elevation-500: #111827;
+  --theme-elevation-550: #0f172a;
+  --theme-elevation-600: #0a0f1a;
+  --theme-elevation-650: #060912;
+  --theme-elevation-700: #030509;
+  --theme-elevation-750: #020305;
+  --theme-elevation-800: #010203;
+  --theme-elevation-850: #010102;
+  --theme-elevation-900: #000000;
+  --theme-elevation-950: #000000;
+  --theme-elevation-1000: #000000;
+
+  /* Green Atlas brand colors */
+  --theme-success-500: #22c55e;
+  --theme-success-400: #4ade80;
+  --brand-green: #22c55e;
+  --brand-green-dark: #16a34a;
+  --brand-green-light: #dcfce7;
+}
+
+/* Logo styling */
+.admin-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.admin-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Login page specific styling */
+.login {
+  background: #ffffff !important;
+}
+
+.login__brand {
+  margin-bottom: 2rem;
+}
+
+/* Green submit buttons */
+.login .form-submit,
+.btn--style-primary {
+  background: var(--brand-green) !important;
+  border-color: var(--brand-green) !important;
+}
+
+.login .form-submit:hover,
+.btn--style-primary:hover {
+  background: var(--brand-green-dark) !important;
+  border-color: var(--brand-green-dark) !important;
+}
+
+/* ===========================================
+   ALL ADMIN PAGES - CONSISTENT STYLING
+   =========================================== */
+
+/* Tab styling - cleaner look */
+.tabs-field__tabs {
+  gap: 0.25rem;
+}
+
+.tabs-field__tab-button {
+  border-radius: 8px 8px 0 0;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tabs-field__tab-button--active {
+  background: var(--theme-elevation-0);
+  border-bottom-color: var(--theme-elevation-0);
+}
+
+/* Collapsible sections - modern look */
+.collapsible__toggle {
+  background: var(--theme-elevation-50);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.collapsible__toggle:hover {
+  background: var(--theme-elevation-100);
+}
+
+.collapsible--is-open .collapsible__toggle {
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 0;
+  background: var(--brand-green-light);
+  border-left: 3px solid var(--brand-green);
+}
+
+.collapsible__content {
+  background: var(--theme-elevation-50);
+  border-radius: 0 0 8px 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Field descriptions - more readable */
+.field-description {
+  color: var(--theme-elevation-300);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* Row fields - better spacing */
+.field-type.row {
+  gap: 1rem;
+}
+
+/* Upload fields - cleaner preview */
+.upload__thumbnail {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Relationship fields - better selection */
+.relationship--has-many .relationship-add {
+  background: var(--brand-green-light);
+  border-color: var(--brand-green);
+  color: var(--brand-green-dark);
+  border-radius: 6px;
+}
+
+.relationship--has-many .relationship-add:hover {
+  background: var(--brand-green);
+  color: white;
+}
+
+/* Array fields - card style */
+.array-field__draggable-rows {
+  gap: 0.75rem;
+}
+
+.array-field__row {
+  background: var(--theme-elevation-0);
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.array-field__row:hover {
+  border-color: var(--brand-green);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.1);
+}
+
+/* Global document header */
+.doc-header__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Save button - green brand color */
+.doc-controls__save {
+  background: var(--brand-green) !important;
+  border-color: var(--brand-green) !important;
+}
+
+.doc-controls__save:hover {
+  background: var(--brand-green-dark) !important;
+  border-color: var(--brand-green-dark) !important;
+}
+
+/* Textarea fields - better readability */
+textarea {
+  line-height: 1.6;
+}
+
+/* Labels - cleaner typography */
+.field-label {
+  font-weight: 500;
+  color: var(--theme-elevation-450);
+}
+
+/* Required indicator */
+.field-label__required {
+  color: #ef4444;
+}
+
+/* Locale selector - more visible */
+.locale-selector__popup {
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Group fields - cleaner borders */
+.group-field {
+  border: none;
+  padding: 0;
+}
+
+.group-field__wrap {
+  border: none;
+}
+
+/* Tab content padding - align with tab labels */
+.tabs-field__content-wrap {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/* Fix content being cut off on the left */
+.render-fields {
+  padding-left: 40px;
+}
+
+/* Global edit view - add left margin to content */
+.global-edit .document-fields {
+  padding-left: 40px;
+}
+
+/* Ensure tab panel content has proper padding */
+.tabs-field [role="tabpanel"] {
+  padding-left: 40px;
+}
+
+/* ===========================================
+   COLLECTION & DOCUMENT PAGES
+   =========================================== */
+
+/* Collection list view */
+.collection-list {
+  padding: 0 40px;
+}
+
+/* Document edit view padding */
+.collection-edit,
+.global-edit {
+  padding: 0 20px;
+}
+
+/* Sidebar navigation - clean look */
+.nav-group__toggle {
+  font-weight: 600;
+  color: var(--theme-elevation-450);
+}
+
+.nav-group__content .nav__link {
+  padding-left: 1rem;
+  border-radius: 6px;
+  margin: 2px 8px;
+  transition: all 0.15s ease;
+}
+
+.nav-group__content .nav__link:hover {
+  background: var(--brand-green-light);
+  color: var(--brand-green-dark);
+}
+
+.nav-group__content .nav__link.active {
+  background: var(--brand-green);
+  color: white;
+}
+
+/* Dashboard cards */
+.dashboard__card {
+  border-radius: 12px;
+  border: 1px solid var(--theme-elevation-150);
+  transition: all 0.2s ease;
+}
+
+.dashboard__card:hover {
+  border-color: var(--brand-green);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1);
+}
+
+/* Table styling */
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table .row-1:hover {
+  background: var(--brand-green-light);
+}
+
+/* Pagination */
+.paginator__page--is-current {
+  background: var(--brand-green) !important;
+  border-color: var(--brand-green) !important;
+}
+
+/* Search input */
+.search-filter__input {
+  border-radius: 8px;
+}
+
+.search-filter__input:focus {
+  border-color: var(--brand-green);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+/* Filter buttons */
+.where-builder__add-first-filter {
+  color: var(--brand-green);
+  border-color: var(--brand-green);
+}
+
+.where-builder__add-first-filter:hover {
+  background: var(--brand-green-light);
+}
+
+/* Modal styling */
+.payload-modal {
+  border-radius: 12px;
+}
+
+.payload-modal__wrapper {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Drawer styling */
+.drawer__content {
+  padding: 40px;
+}
+
+/* Header actions */
+.list-controls {
+  padding: 0 40px;
+}
+
+/* ===========================================
+   CUSTOM DASHBOARD STYLING
+   =========================================== */
+
+.custom-dashboard {
+  padding: 24px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Override Payload's gutter padding for dashboard */
+.dashboard__wrap {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+.dashboard-header {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--theme-elevation-500);
+  margin: 0 0 0.5rem 0;
+}
+
+.dashboard-subtitle {
+  color: var(--theme-elevation-300);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 1400px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--brand-green);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon.warning {
+  background: #fef3c7;
+  color: #f59e0b;
+}
+
+.stat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--theme-elevation-300);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--theme-elevation-500);
+  line-height: 1.2;
+}
+
+.stat-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.stat-secondary {
+  font-size: 0.8rem;
+  color: var(--theme-elevation-300);
+}
+
+.stat-growth {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+}
+
+.stat-growth.positive {
+  background: var(--brand-green-light);
+  color: var(--brand-green-dark);
+}
+
+.stat-growth.negative {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.stat-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* Secondary Stats */
+.secondary-stats {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mini-stat {
+  background: var(--theme-elevation-50);
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 90px;
+}
+
+.mini-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--theme-elevation-500);
+}
+
+.mini-stat-label {
+  font-size: 0.75rem;
+  color: var(--theme-elevation-300);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+  background: white;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--theme-elevation-500);
+  margin: 0;
+}
+
+.view-all-link {
+  font-size: 0.875rem;
+  color: var(--brand-green);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.view-all-link:hover {
+  color: var(--brand-green-dark);
+  text-decoration: underline;
+}
+
+/* Status Bars */
+.status-bars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 992px) {
+  .status-bars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .status-bars {
+    grid-template-columns: 1fr;
+  }
+}
+
+.status-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.status-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-name {
+  font-size: 0.875rem;
+  color: var(--theme-elevation-400);
+}
+
+.status-count {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--theme-elevation-500);
+}
+
+.status-bar-track {
+  height: 8px;
+  background: var(--theme-elevation-100);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.status-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Recent Bookings Table */
+.recent-bookings-table {
+  overflow-x: auto;
+}
+
+.recent-bookings-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recent-bookings-table th {
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--theme-elevation-300);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--theme-elevation-150);
+}
+
+.recent-bookings-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--theme-elevation-100);
+  font-size: 0.9rem;
+  color: var(--theme-elevation-450);
+}
+
+.recent-bookings-table tr:last-child td {
+  border-bottom: none;
+}
+
+.recent-bookings-table tr:hover td {
+  background: var(--theme-elevation-50);
+}
+
+.booking-ref {
+  color: var(--brand-green);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.booking-ref:hover {
+  color: var(--brand-green-dark);
+  text-decoration: underline;
+}
+
+.recent-bookings-table .amount {
+  font-weight: 600;
+  color: var(--theme-elevation-500);
+}
+
+.recent-bookings-table .date {
+  color: var(--theme-elevation-300);
+  font-size: 0.85rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+}
+
+.no-data {
+  text-align: center;
+  color: var(--theme-elevation-300);
+  padding: 2rem;
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.quick-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--theme-elevation-50);
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 8px;
+  color: var(--theme-elevation-450);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.quick-action-btn:hover {
+  background: var(--brand-green-light);
+  border-color: var(--brand-green);
+  color: var(--brand-green-dark);
+}
+
+.quick-action-btn svg {
+  flex-shrink: 0;
+}
+
+/* Loading & Error States */
+.dashboard-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: var(--theme-elevation-300);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--theme-elevation-150);
+  border-top-color: var(--brand-green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dashboard-error {
+  text-align: center;
+  padding: 3rem;
+  color: var(--theme-elevation-400);
+}
+
+.error-detail {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* Hide default Payload dashboard cards when custom dashboard is present */
+.custom-dashboard ~ .dashboard__group {
+  display: none !important;
+}

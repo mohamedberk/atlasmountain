@@ -1,0 +1,55 @@
+[
+  {
+    "createdAt": "2026-01-03T13:02:45.952Z",
+    "updatedAt": "2026-01-05T13:13:05.752Z",
+    "name": {
+      "en": "Trekking and hiking"
+    },
+    "slug": "Trekking-and-hiking",
+    "type": "activity",
+    "durationType": "multi-day",
+    "image": "695a84dd896781e503077ebb",
+    "displayOrder": 0,
+    "id": "695913755ae3f4c5726c4ae9"
+  },
+  {
+    "createdAt": "2026-01-03T13:00:19.482Z",
+    "updatedAt": "2026-01-04T15:21:06.131Z",
+    "name": {
+      "en": "Morocco Discovery Tours"
+    },
+    "slug": "Morocco-Discovery-tours",
+    "type": "activity",
+    "durationType": "multi-day",
+    "image": "695a8554896781e503077f0d",
+    "displayOrder": 3,
+    "id": "695912e35ae3f4c5726c49d3"
+  },
+  {
+    "createdAt": "2026-01-03T12:59:28.953Z",
+    "updatedAt": "2026-01-04T15:23:48.461Z",
+    "name": {
+      "en": "Desert Tours (Multi-Day)"
+    },
+    "slug": "Desert-Tours-Multi-Day",
+    "type": "activity",
+    "durationType": "multi-day",
+    "image": "695a82b5896781e503077dde",
+    "displayOrder": 1,
+    "id": "695912b05ae3f4c5726c4988"
+  },
+  {
+    "createdAt": "2026-01-03T12:56:22.268Z",
+    "updatedAt": "2026-01-05T13:12:54.472Z",
+    "name": {
+      "en": "Day Trips from Marrakesh"
+    },
+    "slug": "Day-trips-from-marrakesh",
+    "type": "activity",
+    "durationType": "multi-day",
+    "icon": "",
+    "image": "695a83bc896781e503077e64",
+    "displayOrder": 4,
+    "id": "695911f65ae3f4c5726c48a8"
+  }
+]

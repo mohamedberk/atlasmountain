@@ -1,0 +1,15 @@
+[
+  {
+    "createdAt": "2026-01-01T17:23:00.586Z",
+    "updatedAt": "2026-01-01T17:23:00.587Z",
+    "email": "mohamedelberkaoui200@gmail.com",
+    "sessions": [
+      {
+        "id": "b42a4395-ad69-4a98-9d0a-942f47df45e4",
+        "createdAt": "2026-01-07T10:21:17.730Z",
+        "expiresAt": "2026-01-07T12:21:17.730Z"
+      }
+    ],
+    "id": "6956ad741bfe6b5e03478e41"
+  }
+]
