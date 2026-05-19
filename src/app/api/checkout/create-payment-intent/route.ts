@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
           }
         }
         return {
-          activity: typeof item.id === 'string' ? parseInt(item.id, 10) : item.id,
+          activity: item.id,
           activityTitle: item.title,
           date: date,
           adults,
