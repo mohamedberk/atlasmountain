@@ -87,7 +87,7 @@ function getImageUrl(image: string | number | Media | null | undefined): string 
   if (!image) return '/placeholder-activity.jpg'
   if (typeof image === 'string') return image
   if (typeof image === 'number') return '/placeholder-activity.jpg'
-  return image.url || '/placeholder-activity.jpg'
+  return image.externalUrl || image.url || '/placeholder-activity.jpg'
 }
 
 // Helper function to get duration display text

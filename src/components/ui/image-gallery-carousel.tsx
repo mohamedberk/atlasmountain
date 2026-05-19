@@ -12,7 +12,7 @@ function getImageUrl(image: string | number | Media | null | undefined): string 
   if (typeof image === 'string') return image
   if (typeof image === 'number') return '/placeholder-activity.jpg'
   if (typeof image === 'number') return null
-  return image.url || null
+  return image.externalUrl || image.url || null
 }
 
 interface ImageGalleryCarouselProps {

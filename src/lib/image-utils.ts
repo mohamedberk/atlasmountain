@@ -72,7 +72,7 @@ export function getOptimizedImageUrl(
   }
 
   // Fallback to original URL
-  return image.url || fallback
+  return image.externalUrl || image.url || fallback
 }
 
 /**

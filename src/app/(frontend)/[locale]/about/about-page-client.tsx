@@ -113,7 +113,7 @@ const defaultStoryParagraphs = [
 function getImageUrl(image: Media | string | null | undefined, fallback: string): string {
   if (!image) return fallback
   if (typeof image === 'string') return image
-  return image.url || fallback
+  return image.externalUrl || image.url || fallback
 }
 
 export function AboutPageClient({ content, cmsData }: Props) {

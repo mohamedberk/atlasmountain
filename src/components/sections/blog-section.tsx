@@ -15,7 +15,7 @@ function getImageUrl(image: string | number | Media | null | undefined): string 
   if (!image) return '/images/placeholder-blog.jpg'
   if (typeof image === 'string') return image
   if (typeof image === 'number') return '/images/placeholder-blog.jpg'
-  return image.url || '/images/placeholder-blog.jpg'
+  return image.externalUrl || image.url || '/images/placeholder-blog.jpg'
 }
 
 // Format date based on locale

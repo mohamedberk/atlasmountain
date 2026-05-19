@@ -8,6 +8,7 @@ const nextConfig = {
   output: 'standalone',
   // Image optimization
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
