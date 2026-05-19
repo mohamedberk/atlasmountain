@@ -6,13 +6,13 @@ import { Star, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import AutoScroll from 'embla-carousel-auto-scroll'
-import { useGoogleReviews } from '@/hooks/useGoogleReviews'
+import { useGoogleReviews, type GoogleReview } from '@/hooks/useGoogleReviews'
 
 const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Attraction_Review-g293734-d25345173-Reviews-Green_Atlas_Travel-Marrakech_Marrakech_Safi.html'
 
 const ACCENT_GREEN = '#ff2828'
 
-const FALLBACK_REVIEWS = [
+const FALLBACK_REVIEWS: GoogleReview[] = [
   {
     id: 'fb-1',
     name: 'Sarah M.',

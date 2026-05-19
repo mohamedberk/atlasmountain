@@ -142,7 +142,7 @@ export async function POST(request: NextRequest) {
         activities: items
           .filter((item) => item.type === 'activity')
           .map((item) => ({
-            activity: typeof item.id === 'string' ? parseInt(item.id, 10) : item.id,
+            activity: item.id,
             activityTitle: item.title || '',
             date: item.date || undefined,
             quantity: 1,
