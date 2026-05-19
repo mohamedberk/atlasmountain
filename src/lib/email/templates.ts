@@ -116,12 +116,12 @@ export const generateCustomerEmailHtml = (data: BookingEmailData, siteSettings: 
                     <p style="margin: 0; font-size: 14px; color: #c2410c;">Payment due on arrival</p>
                   </td>
                   ` : `
-                  <td style="background-color: #f0fdf4; border-radius: 12px; padding: 20px; text-align: center;">
-                    <div style="display: inline-block; width: 48px; height: 48px; background-color: #22c55e; border-radius: 50%; line-height: 48px; margin-bottom: 12px;">
+                  <td style="background-color: #ffe5e5; border-radius: 12px; padding: 20px; text-align: center;">
+                    <div style="display: inline-block; width: 48px; height: 48px; background-color: #ff2828; border-radius: 50%; line-height: 48px; margin-bottom: 12px;">
                       <span style="color: #ffffff; font-size: 24px;">✓</span>
                     </div>
-                    <h2 style="margin: 0 0 4px 0; font-size: 20px; font-weight: 600; color: #166534;">Booking Confirmed</h2>
-                    <p style="margin: 0; font-size: 14px; color: #15803d;">Your Moroccan adventure awaits!</p>
+                    <h2 style="margin: 0 0 4px 0; font-size: 20px; font-weight: 600; color: #b91c1c;">Booking Confirmed</h2>
+                    <p style="margin: 0; font-size: 14px; color: #dc2626;">Your Moroccan adventure awaits!</p>
                   </td>
                   `}
                 </tr>
@@ -210,7 +210,7 @@ export const generateCustomerEmailHtml = (data: BookingEmailData, siteSettings: 
                     </div>
                     ` : `
                     <div style="margin-top: 4px;">
-                      <span style="font-size: 12px; color: #22c55e; background-color: rgba(34,197,94,0.2); padding: 2px 8px; border-radius: 4px;">Paid</span>
+                      <span style="font-size: 12px; color: #ff2828; background-color: rgba(255,40,40,0.15); padding: 2px 8px; border-radius: 4px;">Paid</span>
                     </div>
                     `}
                   </td>
@@ -340,7 +340,7 @@ export const generateAdminEmailHtml = (data: BookingEmailData, siteSettings: Ema
             <td style="padding: 40px 40px 0;">
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="background-color: #f0f9ff; border-radius: 12px; padding: 20px; text-align: center;">
+                  <td style="background-color: #fafafa; border-radius: 12px; padding: 20px; text-align: center;">
                     <div style="display: inline-block; width: 48px; height: 48px; background-color: #1a1a1a; border-radius: 50%; line-height: 48px; margin-bottom: 12px;">
                       <span style="color: #ffffff; font-size: 20px;">+</span>
                     </div>
@@ -426,7 +426,7 @@ export const generateAdminEmailHtml = (data: BookingEmailData, siteSettings: Ema
                     ${data.paymentMethod === 'cash' ? `
                     <span style="background-color: #fff7ed; color: #c2410c; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 500; text-transform: uppercase; margin-left: 8px;">PAY ON ARRIVAL</span>
                     ` : `
-                    <span style="background-color: #f0fdf4; color: #166534; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 500; text-transform: uppercase; margin-left: 8px;">PAID (${data.paymentMethod || 'card'})</span>
+                    <span style="background-color: #ffe5e5; color: #b91c1c; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 500; text-transform: uppercase; margin-left: 8px;">PAID (${data.paymentMethod || 'card'})</span>
                     `}
                   </td>
                 </tr>
@@ -462,7 +462,7 @@ export const generateAdminEmailHtml = (data: BookingEmailData, siteSettings: Ema
           <!-- Action Button -->
           <tr>
             <td style="padding: 0 40px 40px;">
-              <a href="${process.env.NEXT_PUBLIC_SERVER_URL || 'https://greenatlastravel.com'}/admin/collections/bookings" style="display: block; background-color: #1a1a1a; color: #ffffff; text-align: center; padding: 16px 24px; border-radius: 12px; text-decoration: none; font-weight: 500; font-size: 14px;">View in Admin Panel</a>
+              <a href="${process.env.NEXT_PUBLIC_SERVER_URL || 'https://atlasmountainsvisit.com'}/admin/collections/bookings" style="display: block; background-color: #1a1a1a; color: #ffffff; text-align: center; padding: 16px 24px; border-radius: 12px; text-decoration: none; font-weight: 500; font-size: 14px;">View in Admin Panel</a>
             </td>
           </tr>
 

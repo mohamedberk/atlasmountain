@@ -130,15 +130,15 @@ export const Sidebar = memo(function Sidebar({
       {/* Trust Badges */}
       <div className="mt-6 pt-6 border-t border-neutral-200 space-y-2">
         <div className="flex items-center gap-2 text-sm text-neutral-600">
-          <Shield className="w-4 h-4 text-green-600" />
+          <Shield className="w-4 h-4 text-red-600" />
           <span>{tSidebar('secureCheckout')}</span>
         </div>
         <div className="flex items-center gap-2 text-sm text-neutral-600">
-          <Check className="w-4 h-4 text-green-600" />
+          <Check className="w-4 h-4 text-red-600" />
           <span>{tSidebar('instantConfirmation')}</span>
         </div>
         <div className="flex items-center gap-2 text-sm text-neutral-600">
-          <Clock className="w-4 h-4 text-green-600" />
+          <Clock className="w-4 h-4 text-red-600" />
           <span>{tSidebar('freeCancellation')}</span>
         </div>
       </div>

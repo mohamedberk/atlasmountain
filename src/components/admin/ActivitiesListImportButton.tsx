@@ -299,7 +299,7 @@ export const ActivitiesListImportButton: React.FC = () => {
                   Import Activities
                 </h2>
                 <p style={{ color: 'var(--theme-elevation-500)', fontSize: '13px', margin: '4px 0 0' }}>
-                  Paste URLs from greenatlastravel.com to import activities with images
+                  Paste URLs from atlasmountainsvisit.com to import activities with images
                 </p>
               </div>
               <button
@@ -338,8 +338,8 @@ export const ActivitiesListImportButton: React.FC = () => {
                     }}
                     placeholder={`Paste activity URLs here, one per line...
 
-https://greenatlastravel.com/marrakech-full-day-guided-city-tour/
-https://greenatlastravel.com/3-day-2-night-desert-tour-from-marrakech-to-merzouga-and-back/`}
+https://atlasmountainsvisit.com/marrakech-full-day-guided-city-tour/
+https://atlasmountainsvisit.com/3-day-2-night-desert-tour-from-marrakech-to-merzouga-and-back/`}
                     value={urls}
                     onChange={(e) => setUrls(e.target.value)}
                   />

@@ -6,43 +6,43 @@
   /* Display font - DM Serif Text for headlines */
   --font-display: 'DM Serif Text', Georgia, serif;
 
-  /* Primary brand color - Green Atlas Travel Blue */
-  --primary: #286EB3;
-  --primary-light: #3A8AD4;
-  --primary-dark: #1E5A94;
+  /* Primary brand color - Brand Red */
+  --primary: #ff2828;
+  --primary-light: #ff2828;
+  --primary-dark: #ff2828;
 
-  /* Secondary - Vibrant Moroccan Orange (CTAs, highlights) */
-  --secondary: #FE5A20;
-  --secondary-light: #FF7A47;
-  --secondary-dark: #E04A15;
+  /* Secondary - Brand Red (CTAs, highlights) */
+  --secondary: #ff2828;
+  --secondary-light: #ff2828;
+  --secondary-dark: #ff2828;
 
-  /* Accent - Desert Gold (luxury, premium badges, ratings) */
-  --accent: #D4A853;
-  --accent-light: #E8C478;
-  --accent-dark: #B8923F;
+  /* Accent - Brand Red (luxury, premium badges, ratings) */
+  --accent: #ff2828;
+  --accent-light: #ff2828;
+  --accent-dark: #ff2828;
 
   /* Neutral tones - warm undertones */
   --sand-light: #FAFAF9;
   --sand-medium: #F5F5F4;
   --sand-dark: #E7E5E4;
 
-  /* Secondary blue tones */
-  --azure-light: #5B9BD5;
-  --azure-medium: #286EB3;
-  --azure-dark: #1E5A94;
+  /* Secondary blue tones -> now red */
+  --azure-light: #ff2828;
+  --azure-medium: #ff2828;
+  --azure-dark: #ff2828;
 
-  /* Sky tones */
-  --sky-light: #7DD3FC;
-  --sky-medium: #38BDF8;
-  --sky-dark: #0EA5E9;
+  /* Sky tones -> now red */
+  --sky-light: #ff2828;
+  --sky-medium: #ff2828;
+  --sky-dark: #ff2828;
 
-  /* Deep tones */
-  --deep-light: #1E5A94;
-  --deep-medium: #286EB3;
-  --deep-dark: #1E4A7A;
+  /* Deep tones -> now red */
+  --deep-light: #ff2828;
+  --deep-medium: #ff2828;
+  --deep-dark: #ff2828;
 
   /* Neutrals */
-  --background: #FAFAF9;
+  --background: #FFFFFF;
   --foreground: #1C1917;
 
   /* Card backgrounds - solid */
@@ -56,8 +56,8 @@
   }
 
   ::selection {
-    background-color: rgba(254, 90, 32, 0.2);
-    color: #FE5A20;
+    background-color: rgba(255, 40, 40, 0.2);
+    color: #ff2828;
   }
 
   h1, h2, h3, h4, h5, h6,
@@ -145,7 +145,7 @@
   .search-input:focus {
     @apply shadow-md;
     background-color: #FFFFFF;
-    box-shadow: 0 0 0 2px rgba(40, 110, 179, 0.2);
+    box-shadow: 0 0 0 2px rgba(255, 40, 40, 0.2);
   }
 
   /* Modern Stats Card */
@@ -277,10 +277,10 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(40, 110, 179, 0.3);
+    box-shadow: 0 0 15px rgba(255, 40, 40, 0.3);
   }
   50% {
-    box-shadow: 0 0 25px rgba(40, 110, 179, 0.5);
+    box-shadow: 0 0 25px rgba(255, 40, 40, 0.5);
   }
 }
 

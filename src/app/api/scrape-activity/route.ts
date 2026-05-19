@@ -81,7 +81,7 @@ async function geocodeLocation(location: string): Promise<{ latitude: number; lo
 
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'GreenAtlasTravel/1.0 (contact@greenatlastravel.com)',
+        'User-Agent': 'AtlasMountainVisit/1.0 (contact@atlasmountainsvisit.com)',
       },
     })
 
@@ -223,7 +223,7 @@ async function scrapeActivity(url: string): Promise<ScrapedActivity> {
     }
   }
 
-  // Extract overview/description - greenatlastravel.com specific
+  // Extract overview/description - atlasmountainsvisit.com specific
   // The description paragraph is inside: .elementor-widget-text-editor .elementor-widget-container p
   let description = ''
 
@@ -234,7 +234,7 @@ async function scrapeActivity(url: string): Promise<ScrapedActivity> {
 
     // Skip short text, footer text, or garbage
     if (text.length < 100) return
-    if (text.includes('Green Atlas Travel offers')) return
+    if (text.includes('Atlas Mountain Visit offers')) return
     if (text.includes('+212') || text.includes('0666-')) return
 
     // The real description contains these keywords and starts properly
@@ -259,7 +259,7 @@ async function scrapeActivity(url: string): Promise<ScrapedActivity> {
   // Short description left empty - Overview from source goes to full description only
   const shortDescription = ''
 
-  // Extract trip highlights - greenatlastravel.com uses Elementor icon lists
+  // Extract trip highlights - atlasmountainsvisit.com uses Elementor icon lists
   const highlights: string[] = []
 
   // Find the "Trip Highlights" heading and extract items from the following list
@@ -330,7 +330,7 @@ async function scrapeActivity(url: string): Promise<ScrapedActivity> {
     }
   }
 
-  // Extract included/excluded - greenatlastravel.com uses SVG icons in Elementor lists
+  // Extract included/excluded - atlasmountainsvisit.com uses SVG icons in Elementor lists
   // e-fas-check = included, e-fas-times = excluded
   const included: string[] = []
   const notIncluded: string[] = []
@@ -442,7 +442,7 @@ async function scrapeActivity(url: string): Promise<ScrapedActivity> {
     }
   })
 
-  // Extract itinerary - greenatlastravel.com uses Elementor accordion (details.e-n-accordion-item)
+  // Extract itinerary - atlasmountainsvisit.com uses Elementor accordion (details.e-n-accordion-item)
   // IMPORTANT: We iterate in DOM order to preserve the exact order from the source page
   const itinerary: { time?: string; activity: string; description?: string }[] = []
 
@@ -667,7 +667,7 @@ async function scrapeActivity(url: string): Promise<ScrapedActivity> {
   // NOTE: Do NOT sort itinerary - DOM order from accordion is already correct
   // Sorting breaks time-based itineraries like "9:00 AM", "Mid-Morning", "4:00 PM"
 
-  // Extract images - WordPress/greenatlastravel.com structure
+  // Extract images - WordPress/atlasmountainsvisit.com structure
   const images: string[] = []
   const baseUrl = new URL(url).origin
 
@@ -691,7 +691,7 @@ async function scrapeActivity(url: string): Promise<ScrapedActivity> {
     }
   }
 
-  // Priority 1: Swiper gallery images (main gallery on greenatlastravel.com)
+  // Priority 1: Swiper gallery images (main gallery on atlasmountainsvisit.com)
   $('.swiper-slide-image, figure.swiper-slide-inner img').each((_, el) => {
     const src = $(el).attr('src') || $(el).attr('data-src')
     if (src) addImage(src)

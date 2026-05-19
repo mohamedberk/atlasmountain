@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!category) {
     return {
-      title: 'Category Not Found | Green Atlas Travel',
+      title: 'Category Not Found | Atlas Mountain Visit',
     }
   }
 
@@ -42,17 +42,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : category.image?.url || '/og-image.jpg'
 
   return {
-    title: `${category.name} | Green Atlas Travel`,
-    description: category.description || `Explore our ${category.name} experiences in Morocco with Green Atlas Travel`,
+    title: `${category.name} | Atlas Mountain Visit`,
+    description: category.description || `Explore our ${category.name} experiences in Morocco with Atlas Mountain Visit`,
     openGraph: {
-      title: `${category.name} | Green Atlas Travel`,
+      title: `${category.name} | Atlas Mountain Visit`,
       description: category.description || `Explore our ${category.name} experiences in Morocco`,
       images: [imageUrl],
       locale: locale,
       type: 'website',
     },
     alternates: {
-      canonical: `https://greenatlastravel.com/${locale}/category/${slug}`,
+      canonical: `https://atlasmountainsvisit.com/${locale}/category/${slug}`,
     },
   }
 }

@@ -162,7 +162,7 @@ export const ContactPage: GlobalConfig = {
                     {
                       name: 'address',
                       type: 'email',
-                      defaultValue: 'info@greenatlastravel.com',
+                      defaultValue: 'info@atlasmountainsvisit.com',
                     },
                     {
                       name: 'responseTime',
@@ -233,7 +233,7 @@ export const ContactPage: GlobalConfig = {
                     {
                       name: 'instagram',
                       type: 'text',
-                      defaultValue: 'https://www.instagram.com/greenatlastravel/',
+                      defaultValue: 'https://www.instagram.com/atlasmountainsvisit/',
                     },
                     {
                       name: 'facebook',

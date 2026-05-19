@@ -24,7 +24,7 @@ import { NavLink } from '@/components/ui/nav-link'
 import { PhoneInput } from '@/components/ui/phone-input'
 import { useTranslations } from 'next-intl'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 interface Props {
   content: {
@@ -279,7 +279,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
               <h2 className="mb-8 font-display text-2xl text-neutral-900">{formTitle}</h2>
 
               {formState === 'success' ? (
-                <div className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center">
+                <div className="rounded-2xl border border-red-200 bg-red-50 p-8 text-center">
                   <div
                     className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full"
                     style={{ backgroundColor: `${ACCENT_GREEN}20` }}
@@ -310,7 +310,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                         required
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                        className="w-full rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 transition-all"
+                        className="w-full rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 transition-all"
                         placeholder="John"
                       />
                     </div>
@@ -324,7 +324,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                         required
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                        className="w-full rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 transition-all"
+                        className="w-full rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 transition-all"
                         placeholder="Doe"
                       />
                     </div>
@@ -340,7 +340,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 transition-all"
+                      className="w-full rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 transition-all"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -364,7 +364,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                       id="subject"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 transition-all"
+                      className="w-full rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 transition-all"
                     >
                       <option value="">{subjectPlaceholder}</option>
                       {subjectOptions.length > 0 ? (
@@ -395,7 +395,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full resize-none rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 transition-all"
+                      className="w-full resize-none rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 transition-all"
                       placeholder={messagePlaceholder}
                     />
                   </div>
@@ -500,7 +500,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                     {phoneNumber && (
                       <a
                         href={`tel:${phoneClean}`}
-                        className="flex items-start gap-4 rounded-2xl border border-neutral-100 bg-white p-5 hover:border-green-200 transition-colors"
+                        className="flex items-start gap-4 rounded-2xl border border-neutral-100 bg-white p-5 hover:border-red-200 transition-colors"
                       >
                         <div
                           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
@@ -518,7 +518,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                     {emailAddress && (
                       <a
                         href={`mailto:${emailAddress}`}
-                        className="flex items-start gap-4 rounded-2xl border border-neutral-100 bg-white p-5 hover:border-green-200 transition-colors"
+                        className="flex items-start gap-4 rounded-2xl border border-neutral-100 bg-white p-5 hover:border-red-200 transition-colors"
                       >
                         <div
                           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
@@ -541,9 +541,9 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                     href={`https://wa.me/${whatsappClean}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-start gap-4 rounded-2xl border border-neutral-100 bg-white p-5 hover:border-green-200 transition-colors"
+                    className="flex items-start gap-4 rounded-2xl border border-neutral-100 bg-white p-5 hover:border-red-200 transition-colors"
                   >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-500">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-500">
                       <MessageCircle className="h-5 w-5 text-white" />
                     </div>
                     <div>

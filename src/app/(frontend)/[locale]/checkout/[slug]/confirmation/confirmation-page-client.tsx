@@ -23,7 +23,7 @@ import { NavLink } from '@/components/ui/nav-link'
 import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 interface ConfirmationBookingData {
   ref: string
@@ -96,7 +96,7 @@ export function ConfirmationPageClient({ locale }: Props) {
     if (navigator.share && booking) {
       try {
         await navigator.share({
-          title: 'Green Atlas Travel Booking',
+          title: 'Atlas Mountain Visit Booking',
           text: `My Morocco adventure is booked! Reference: ${booking.ref}`,
           url: window.location.href,
         })
@@ -127,14 +127,7 @@ export function ConfirmationPageClient({ locale }: Props) {
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="flex items-center justify-between h-16">
               <NavLink href="/" className="flex-shrink-0">
-                <Image
-                  src="/greenatlaslogo.png"
-                  alt="Green Atlas Travel"
-                  width={140}
-                  height={45}
-                  className="h-10 w-auto"
-                  priority
-                />
+                <span className="font-display font-bold text-xl tracking-tight text-neutral-900">Atlas Mountain Visit</span>
               </NavLink>
             </div>
           </div>
@@ -172,14 +165,7 @@ export function ConfirmationPageClient({ locale }: Props) {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
             <NavLink href="/" className="flex-shrink-0">
-              <Image
-                src="/greenatlaslogo.png"
-                alt="Green Atlas Travel"
-                width={140}
-                height={45}
-                className="h-10 w-auto"
-                priority
-              />
+              <span className="font-display font-bold text-xl tracking-tight text-neutral-900">Atlas Mountain Visit</span>
             </NavLink>
             <div className="flex items-center gap-2 text-sm text-neutral-600">
               <Shield className="w-4 h-4" style={{ color: ACCENT_GREEN }} />
@@ -195,7 +181,7 @@ export function ConfirmationPageClient({ locale }: Props) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="rounded-2xl p-6 sm:p-8 text-center text-white mb-6"
-          style={{ background: `linear-gradient(135deg, ${ACCENT_GREEN} 0%, #3da134 100%)` }}
+          style={{ background: `linear-gradient(135deg, ${ACCENT_GREEN} 0%, #ff5050 100%)` }}
         >
           <motion.div
             initial={{ scale: 0 }}
@@ -329,8 +315,8 @@ export function ConfirmationPageClient({ locale }: Props) {
 
             {/* Custom Note Display */}
             {booking.isCustomNote && booking.customPricingNote && (
-              <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-sm text-green-800 font-medium">{booking.customPricingNote}</p>
+              <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-sm text-red-800 font-medium">{booking.customPricingNote}</p>
               </div>
             )}
 

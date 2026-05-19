@@ -142,7 +142,7 @@ export const BlogPosts: CollectionConfig = {
               name: 'author',
               type: 'text',
               required: true,
-              defaultValue: 'Green Atlas Travel Team',
+              defaultValue: 'Atlas Mountain Visit Team',
               admin: {
                 description: 'Author name displayed on the post',
               },

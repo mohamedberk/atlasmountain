@@ -109,7 +109,7 @@ export function ActivityCardCompact({
           />
           {activity.duration && (
             <div className="absolute bottom-2 left-2 inline-flex items-center gap-1 px-2 py-1 bg-white/95 backdrop-blur-md rounded-md border border-white/50 shadow-sm">
-              <Clock className="w-2.5 h-2.5 text-[#49b540]" />
+              <Clock className="w-2.5 h-2.5 text-[#ff2828]" />
               <span className="text-[10px] font-semibold text-neutral-800">{activity.duration}</span>
             </div>
           )}

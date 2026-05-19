@@ -61,7 +61,7 @@ const RouteMap = dynamic(
 
 // Constants
 const STAR_RATINGS = [1, 2, 3, 4, 5] as const
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 // Animation Variants
 const fadeInUp = {
@@ -923,7 +923,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     </div>
                   )}
                   {totalReviews && (!overallRating || overallRating < 4.5) && (
-                    <NavLink href="#reviews" className="text-base text-neutral-600 underline transition-colors hover:text-[#49b540]">
+                    <NavLink href="#reviews" className="text-base text-neutral-600 underline transition-colors hover:text-[#ff2828]">
                       {totalReviews} {t.reviews}
                     </NavLink>
                   )}
@@ -943,8 +943,8 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     /* Custom Note Display */
                     <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-6">
                       <div className="text-center">
-                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-4">
-                          <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-red-100 mb-4">
+                          <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                           </svg>
                         </div>
@@ -979,7 +979,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                               }}
                               className={`w-full flex justify-between items-center p-3 rounded-lg transition-all ${
                                 isSelected
-                                  ? 'bg-green-50 border-2 border-green-500'
+                                  ? 'bg-red-50 border-2 border-red-500'
                                   : 'bg-neutral-50 border border-transparent hover:bg-neutral-100'
                               }`}
                             >
@@ -989,7 +989,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                                   : `${numPeople}-${maxPeople} ${t.peopleLabel}`
                                 }
                               </span>
-                              <span className={`text-sm font-semibold text-green-600 ${isSelected ? 'font-bold' : ''}`}>
+                              <span className={`text-sm font-semibold text-red-600 ${isSelected ? 'font-bold' : ''}`}>
                                 €{tier.pricePerPerson}
                               </span>
                             </button>
@@ -1142,7 +1142,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -50 }}
                         transition={{ duration: 0.3 }}
-                        className="bg-white rounded-2xl p-6 border border-neutral-200 hover:border-[#49b540]/30 hover:shadow-[0_6px_14px_-10px_rgba(0,0,0,0.04)] transition-all shadow-[0_1px_4px_rgba(0,0,0,0.02)] flex flex-col h-full min-h-[220px]"
+                        className="bg-white rounded-2xl p-6 border border-neutral-200 hover:border-[#ff2828]/30 hover:shadow-[0_6px_14px_-10px_rgba(0,0,0,0.04)] transition-all shadow-[0_1px_4px_rgba(0,0,0,0.02)] flex flex-col h-full min-h-[220px]"
                       >
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-center gap-3">
@@ -1155,7 +1155,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                                 referrerPolicy="no-referrer"
                               />
                             ) : (
-                              <div className="w-11 h-11 rounded-full bg-[#49b540] flex items-center justify-center text-white font-semibold text-sm">
+                              <div className="w-11 h-11 rounded-full bg-[#ff2828] flex items-center justify-center text-white font-semibold text-sm">
                                 {googleReviews[reviewCarouselIndex].avatar}
                               </div>
                             )}
@@ -1175,7 +1175,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                           {[...Array(5)].map((_, s) => (
                             <Star
                               key={s}
-                              className={`w-4 h-4 ${s < googleReviews[reviewCarouselIndex].rating ? 'fill-[#49b540] text-[#49b540]' : 'fill-neutral-200 text-neutral-200'}`}
+                              className={`w-4 h-4 ${s < googleReviews[reviewCarouselIndex].rating ? 'fill-[#ff2828] text-[#ff2828]' : 'fill-neutral-200 text-neutral-200'}`}
                             />
                           ))}
                         </div>
@@ -1189,7 +1189,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                               href={googleReviews[reviewCarouselIndex].profileUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-[11px] text-[#49b540] hover:underline"
+                              className="text-[11px] text-[#ff2828] hover:underline"
                             >
                               View profile
                             </a>
@@ -1238,7 +1238,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                       initial="hidden"
                       whileInView="visible"
                       viewport={{ once: true }}
-                      className="bg-white rounded-2xl p-6 border border-neutral-200 hover:border-[#49b540]/30 hover:shadow-[0_6px_14px_-10px_rgba(0,0,0,0.04)] transition-all shadow-[0_1px_4px_rgba(0,0,0,0.02)] flex flex-col h-full min-h-[220px]"
+                      className="bg-white rounded-2xl p-6 border border-neutral-200 hover:border-[#ff2828]/30 hover:shadow-[0_6px_14px_-10px_rgba(0,0,0,0.04)] transition-all shadow-[0_1px_4px_rgba(0,0,0,0.02)] flex flex-col h-full min-h-[220px]"
                     >
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center gap-3">
@@ -1251,7 +1251,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                               referrerPolicy="no-referrer"
                             />
                           ) : (
-                            <div className="w-11 h-11 rounded-full bg-[#49b540] flex items-center justify-center text-white font-semibold text-sm">
+                            <div className="w-11 h-11 rounded-full bg-[#ff2828] flex items-center justify-center text-white font-semibold text-sm">
                               {review.avatar}
                             </div>
                           )}
@@ -1271,7 +1271,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                         {[...Array(5)].map((_, s) => (
                           <Star
                             key={s}
-                            className={`w-4 h-4 ${s < review.rating ? 'fill-[#49b540] text-[#49b540]' : 'fill-neutral-200 text-neutral-200'}`}
+                            className={`w-4 h-4 ${s < review.rating ? 'fill-[#ff2828] text-[#ff2828]' : 'fill-neutral-200 text-neutral-200'}`}
                           />
                         ))}
                       </div>
@@ -1285,7 +1285,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                             href={review.profileUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[11px] text-[#49b540] hover:underline"
+                            className="text-[11px] text-[#ff2828] hover:underline"
                           >
                             View profile
                           </a>
@@ -1652,8 +1652,8 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     /* Custom Note Display */
                     <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-6">
                       <div className="text-center">
-                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-4">
-                          <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-red-100 mb-4">
+                          <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                           </svg>
                         </div>
@@ -1688,7 +1688,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                               }}
                               className={`w-full flex justify-between items-center p-3 rounded-lg transition-all ${
                                 isSelected
-                                  ? 'bg-green-50 border-2 border-green-500'
+                                  ? 'bg-red-50 border-2 border-red-500'
                                   : 'bg-neutral-50 border border-transparent hover:bg-neutral-100'
                               }`}
                             >
@@ -1698,7 +1698,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                                   : `${numPeople}-${maxPeople} ${t.peopleLabel}`
                                 }
                               </span>
-                              <span className={`text-sm font-semibold text-green-600 ${isSelected ? 'font-bold' : ''}`}>
+                              <span className={`text-sm font-semibold text-red-600 ${isSelected ? 'font-bold' : ''}`}>
                                 €{tier.pricePerPerson}
                               </span>
                             </button>

@@ -64,7 +64,7 @@ export const SiteSettings: GlobalConfig = {
                   name: 'email',
                   type: 'email',
                   required: true,
-                  defaultValue: 'contact@greenatlastravel.com',
+                  defaultValue: 'contact@atlasmountainsvisit.com',
                   admin: {
                     description: 'Main contact email address',
                   },
@@ -121,7 +121,7 @@ export const SiteSettings: GlobalConfig = {
                 {
                   name: 'facebook',
                   type: 'text',
-                  defaultValue: 'https://facebook.com/greenatlastravel',
+                  defaultValue: 'https://facebook.com/atlasmountainsvisit',
                   admin: {
                     description: 'Full Facebook page URL',
                   },
@@ -129,7 +129,7 @@ export const SiteSettings: GlobalConfig = {
                 {
                   name: 'instagram',
                   type: 'text',
-                  defaultValue: 'https://instagram.com/greenatlastravel',
+                  defaultValue: 'https://instagram.com/atlasmountainsvisit',
                   admin: {
                     description: 'Full Instagram profile URL',
                   },
@@ -170,7 +170,7 @@ export const SiteSettings: GlobalConfig = {
                   name: 'name',
                   type: 'text',
                   required: true,
-                  defaultValue: 'Green Atlas Travel',
+                  defaultValue: 'Atlas Mountain Visit',
                   admin: {
                     description: 'Official company name',
                   },
@@ -178,7 +178,7 @@ export const SiteSettings: GlobalConfig = {
                 {
                   name: 'shortName',
                   type: 'text',
-                  defaultValue: 'Green Atlas Travel',
+                  defaultValue: 'Atlas Mountain Visit',
                   admin: {
                     description: 'Short company name for headers/emails',
                   },

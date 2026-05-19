@@ -21,12 +21,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!activity) {
     return {
-      title: 'Book Activity | Green Atlas Travel',
+      title: 'Book Activity | Atlas Mountain Visit',
     }
   }
 
   return {
-    title: `Book ${activity.title} | Green Atlas Travel`,
+    title: `Book ${activity.title} | Atlas Mountain Visit`,
     description: `Complete your booking for ${activity.title} in Morocco`,
     robots: {
       index: false, // Don't index checkout pages

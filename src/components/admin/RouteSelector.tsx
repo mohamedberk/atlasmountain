@@ -72,7 +72,7 @@ interface LocationData {
   }
 }
 
-const ROUTE_COLORS = ['#3b82f6', '#22c55e', '#f97316'] // blue, green, orange
+const ROUTE_COLORS = ['#ff2828', '#525252', '#a3a3a3'] // brand red, neutral-600, neutral-400
 
 export const RouteSelectorField: UIFieldClientComponent = () => {
   // Form field hooks
@@ -266,17 +266,17 @@ export const RouteSelectorField: UIFieldClientComponent = () => {
         polylinesRef.current.push(polyline)
       })
 
-      // Add start marker (green)
+      // Add start marker (neutral dark)
       if (startLocation.coordinates?.latitude && startLocation.coordinates?.longitude) {
         const startIcon = L.divIcon({
           className: 'start-marker',
           html: `<div style="
             width: 32px;
             height: 32px;
-            background: #22c55e;
+            background: #171717;
             border: 3px solid white;
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 4px 12px rgba(23, 23, 23, 0.4);
           "></div>`,
           iconSize: [32, 32],
           iconAnchor: [16, 16],
@@ -290,17 +290,17 @@ export const RouteSelectorField: UIFieldClientComponent = () => {
         markersRef.current.push(startMarker)
       }
 
-      // Add end marker (red)
+      // Add end marker (brand red)
       if (endLocation.coordinates?.latitude && endLocation.coordinates?.longitude) {
         const endIcon = L.divIcon({
           className: 'end-marker',
           html: `<div style="
             width: 32px;
             height: 32px;
-            background: #ef4444;
+            background: #ff2828;
             border: 3px solid white;
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 4px 12px rgba(255, 40, 40, 0.4);
           "></div>`,
           iconSize: [32, 32],
           iconAnchor: [16, 16],
@@ -434,7 +434,7 @@ export const RouteSelectorField: UIFieldClientComponent = () => {
                 width: '12px',
                 height: '12px',
                 borderRadius: '50%',
-                backgroundColor: '#22c55e',
+                backgroundColor: '#171717',
               }}
             />
             <span style={{ fontSize: '13px', fontWeight: 500 }}>{startLocation.name}</span>
@@ -446,7 +446,7 @@ export const RouteSelectorField: UIFieldClientComponent = () => {
                 width: '12px',
                 height: '12px',
                 borderRadius: '50%',
-                backgroundColor: '#ef4444',
+                backgroundColor: '#ff2828',
               }}
             />
             <span style={{ fontSize: '13px', fontWeight: 500 }}>{endLocation.name}</span>

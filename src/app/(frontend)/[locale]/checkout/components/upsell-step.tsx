@@ -76,8 +76,8 @@ export const UpsellStep = memo(function UpsellStep({
 
           {activities.length === 0 && (
             <div className="text-center py-8">
-              <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
-                <Check className="w-8 h-8 text-green-600" />
+              <div className="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
+                <Check className="w-8 h-8 text-red-600" />
               </div>
               <h2 className="text-lg font-medium text-neutral-900 mb-2">
                 {tUpsell('youreAllSet')}

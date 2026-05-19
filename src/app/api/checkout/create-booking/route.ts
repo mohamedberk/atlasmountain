@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
     const paymentStatus = 'pending' // Payment is pending for both cases initially
     const paymentMethod = isPayLater ? 'cash' : undefined
 
-    // Generate booking reference (GAT = Green Atlas Travel)
+    // Generate booking reference (GAT = legacy prefix; preserved for continuity)
     const timestamp = Date.now().toString(36).toUpperCase()
     const random = Math.random().toString(36).substring(2, 6).toUpperCase()
     const bookingReference = `GAT-${timestamp}-${random}`

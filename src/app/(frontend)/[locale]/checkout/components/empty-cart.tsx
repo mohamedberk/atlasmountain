@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl'
 import { NavLink } from '@/components/ui/nav-link'
 import { UpsellActivity } from './checkout-types'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 interface EmptyCartProps {
   activities: UpsellActivity[]
@@ -78,14 +78,7 @@ export const EmptyCart = memo(function EmptyCart({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
             <NavLink href="/" className="flex-shrink-0">
-              <Image
-                src="/greenatlaslogo.png"
-                alt="Green Atlas Travel"
-                width={140}
-                height={45}
-                className="h-10 w-auto"
-                priority
-              />
+              <span className="font-display font-bold text-xl tracking-tight text-neutral-900">Atlas Mountain Visit</span>
             </NavLink>
             <div className="flex items-center gap-3">
               <div className="text-sm text-neutral-500">
@@ -270,7 +263,7 @@ const ActivityCard = memo(function ActivityCard({ activity, onOpenModal, onAdd }
               e.stopPropagation()
               onAdd(activity)
             }}
-            className="px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-colors hover:bg-green-50"
+            className="px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-colors hover:bg-red-50"
             style={{ borderColor: ACCENT_GREEN, color: ACCENT_GREEN }}
           >
             {tEmpty('add')}

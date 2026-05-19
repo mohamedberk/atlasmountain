@@ -161,7 +161,7 @@ export const RouteCalculatorField: UIFieldClientComponent = () => {
       const isFirst = index === 0
       const isLast = index === validWaypoints.length - 1
 
-      const color = isFirst ? '#22c55e' : isLast ? '#ef4444' : '#3b82f6'
+      const color = isFirst ? '#171717' : isLast ? '#ff2828' : '#737373'
 
       const icon = L.divIcon({
         className: 'waypoint-marker',
@@ -323,7 +323,7 @@ export const RouteCalculatorField: UIFieldClientComponent = () => {
                     height: '20px',
                     borderRadius: '50%',
                     backgroundColor:
-                      idx === 0 ? '#22c55e' : idx === validWaypoints.length - 1 ? '#ef4444' : '#3b82f6',
+                      idx === 0 ? '#171717' : idx === validWaypoints.length - 1 ? '#ff2828' : '#737373',
                     color: 'white',
                     display: 'flex',
                     alignItems: 'center',

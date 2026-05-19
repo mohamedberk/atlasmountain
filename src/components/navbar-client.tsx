@@ -170,16 +170,13 @@ export function NavbarClient({ initialData }: Props) {
           ? 'bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5'
           : 'bg-white/90 backdrop-blur-lg shadow-md'
       }`}>
-          {/* Logo */}
-          <NavLink href="/" className="flex-shrink-0 flex items-center">
-            <Image
-              src="/greenatlaslogo.png"
-              alt="Green Atlas Travel"
-              width={180}
-              height={56}
-              className="h-11 sm:h-12 w-auto"
-              priority
-            />
+          {/* Wordmark */}
+          <NavLink
+            href="/"
+            className="flex-shrink-0 flex items-center font-display font-bold text-xl tracking-tight text-neutral-900 hover:text-[#ff2828] transition-colors"
+            aria-label="Atlas Mountain Visit"
+          >
+            Atlas Mountain Visit
           </NavLink>
 
           {/* Desktop Navigation - Center */}
@@ -188,16 +185,13 @@ export function NavbarClient({ initialData }: Props) {
               <NavLink
                 key={link.name}
                 href={link.href}
-                className={`relative px-4 py-2 text-sm font-medium rounded-xl transition-all ${
+                className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all ${
                   isActive(link.href)
-                    ? 'text-[#49b540] font-semibold'
-                    : 'text-neutral-700 hover:text-[#49b540]'
+                    ? 'text-[#ff2828] font-semibold bg-[#ff2828]/10 ring-1 ring-[#ff2828]/20'
+                    : 'text-neutral-700 hover:text-[#ff2828] hover:bg-[#ff2828]/5'
                 }`}
               >
                 {link.name}
-                {isActive(link.href) && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#49b540] rounded-full" />
-                )}
               </NavLink>
             ))}
 
@@ -208,17 +202,14 @@ export function NavbarClient({ initialData }: Props) {
               onMouseLeave={handleCategoriesMouseLeave}
             >
               <button
-                className={`relative flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-xl transition-all ${
+                className={`relative flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full transition-all ${
                   isCategoriesOpen || isToursActive
-                    ? 'text-[#49b540] font-semibold'
-                    : 'text-neutral-700 hover:text-[#49b540]'
+                    ? 'text-[#ff2828] font-semibold bg-[#ff2828]/10 ring-1 ring-[#ff2828]/20'
+                    : 'text-neutral-700 hover:text-[#ff2828] hover:bg-[#ff2828]/5'
                 }`}
               >
                 {t('toursCategories') || 'Tours & Categories'}
                 <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isCategoriesOpen ? 'rotate-180' : ''}`} />
-                {isToursActive && !isCategoriesOpen && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#49b540] rounded-full" />
-                )}
               </button>
 
               {/* Categories Dropdown - Full Width Mega Menu */}
@@ -248,7 +239,7 @@ export function NavbarClient({ initialData }: Props) {
                             >
                               <div className={`w-44 p-3 rounded-xl transition-all duration-200 ${
                                 hoveredCategory === category.id
-                                  ? 'bg-primary/10 ring-2 ring-primary/30'
+                                  ? 'bg-[#ff2828]/10 ring-2 ring-[#ff2828]/30'
                                   : 'hover:bg-neutral-50'
                               }`}>
                                 <div className="aspect-[4/3] relative overflow-hidden rounded-xl">
@@ -266,7 +257,7 @@ export function NavbarClient({ initialData }: Props) {
                                   )}
                                 </div>
                                 <p className={`mt-2.5 text-sm font-semibold text-center transition-colors ${
-                                  hoveredCategory === category.id ? 'text-primary' : 'text-neutral-700 group-hover:text-primary'
+                                  hoveredCategory === category.id ? 'text-[#ff2828]' : 'text-neutral-700 group-hover:text-[#ff2828]'
                                 }`}>
                                   {category.name}
                                 </p>
@@ -341,7 +332,7 @@ export function NavbarClient({ initialData }: Props) {
                                             <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20" />
                                           )}
                                         </div>
-                                        <p className="mt-2 text-xs font-medium text-neutral-600 text-center group-hover:text-primary transition-colors line-clamp-2 leading-tight h-8">
+                                        <p className="mt-2 text-xs font-medium text-neutral-600 text-center group-hover:text-[#ff2828] transition-colors line-clamp-2 leading-tight h-8">
                                           {activity.title}
                                         </p>
                                       </div>
@@ -365,7 +356,7 @@ export function NavbarClient({ initialData }: Props) {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleAnchorClick(e, link.href)}
-                  className="px-4 py-2 text-sm text-neutral-700 hover:text-[#49b540] font-medium rounded-xl transition-all cursor-pointer"
+                  className="px-4 py-2 text-sm text-neutral-700 hover:text-[#ff2828] font-medium rounded-xl transition-all cursor-pointer"
                 >
                   {link.name}
                 </a>
@@ -373,16 +364,13 @@ export function NavbarClient({ initialData }: Props) {
                 <NavLink
                   key={link.name}
                   href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-xl transition-all ${
+                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all ${
                     isActive(link.href)
-                      ? 'text-[#49b540] font-semibold'
-                      : 'text-neutral-700 hover:text-[#49b540]'
+                      ? 'text-[#ff2828] font-semibold bg-[#ff2828]/10 ring-1 ring-[#ff2828]/20'
+                      : 'text-neutral-700 hover:text-[#ff2828] hover:bg-[#ff2828]/5'
                   }`}
                 >
                   {link.name}
-                  {isActive(link.href) && (
-                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#49b540] rounded-full" />
-                  )}
                 </NavLink>
               )
             ))}
@@ -416,7 +404,7 @@ export function NavbarClient({ initialData }: Props) {
                         onClick={() => switchLocale(code)}
                         className={`flex items-center gap-2 w-full px-4 py-2.5 text-sm rounded-xl transition-all ${
                           locale === code
-                            ? 'bg-primary/10 text-primary font-semibold'
+                            ? 'bg-[#ff2828]/10 text-[#ff2828] font-semibold'
                             : 'text-neutral-700 hover:bg-neutral-50'
                         }`}
                       >
@@ -432,15 +420,20 @@ export function NavbarClient({ initialData }: Props) {
             {/* Cart */}
             <NavLink
               href="/checkout"
-              className="flex items-center justify-center w-10 h-10 text-neutral-600 hover:text-neutral-900 rounded-xl hover:bg-neutral-100 transition-all"
+              className="relative flex items-center justify-center w-10 h-10 text-neutral-600 hover:text-neutral-900 rounded-xl hover:bg-neutral-100 transition-all"
             >
               <ShoppingBag className="w-5 h-5" />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[10px] font-semibold text-white bg-[#ff2828] rounded-full">
+                  {cartItemCount}
+                </span>
+              )}
             </NavLink>
 
             {/* Book Now CTA */}
             <NavLink
               href={cartItemCount > 0 ? '/checkout' : '/activities'}
-              className="px-5 py-2.5 bg-[#49b540] text-white text-sm font-semibold rounded-xl hover:bg-[#3da035] transition-all shadow-sm hover:shadow-md"
+              className="px-5 py-2.5 bg-[#ff2828] text-white text-sm font-semibold rounded-xl hover:bg-[#e51f1f] transition-all shadow-sm hover:shadow-md"
             >
               {t('book')}
             </NavLink>
@@ -451,9 +444,14 @@ export function NavbarClient({ initialData }: Props) {
             {/* Cart - Mobile */}
             <NavLink
               href="/checkout"
-              className="flex items-center justify-center w-10 h-10 text-neutral-600"
+              className="relative flex items-center justify-center w-10 h-10 text-neutral-600"
             >
               <ShoppingBag className="w-5 h-5" />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[10px] font-semibold text-white bg-[#ff2828] rounded-full">
+                  {cartItemCount}
+                </span>
+              )}
             </NavLink>
 
             {/* Menu Button */}
@@ -497,12 +495,12 @@ export function NavbarClient({ initialData }: Props) {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors ${
                       isActive(link.href)
-                        ? 'text-[#49b540] font-semibold'
-                        : 'text-neutral-800 hover:text-[#49b540]'
+                        ? 'text-[#ff2828] font-semibold'
+                        : 'text-neutral-800 hover:text-[#ff2828]'
                     }`}
                   >
                     {isActive(link.href) && (
-                      <span className="w-2 h-2 bg-[#49b540] rounded-full flex-shrink-0" />
+                      <span className="w-2 h-2 bg-[#ff2828] rounded-full flex-shrink-0" />
                     )}
                     {link.name}
                   </NavLink>
@@ -549,7 +547,7 @@ export function NavbarClient({ initialData }: Props) {
                       <NavLink
                         href="/activities"
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="text-sm font-medium text-primary"
+                        className="text-sm font-medium text-[#ff2828]"
                       >
                         {t('viewAllActivities')} →
                       </NavLink>
@@ -563,7 +561,7 @@ export function NavbarClient({ initialData }: Props) {
                       key={link.name}
                       href={link.href}
                       onClick={(e) => handleAnchorClick(e, link.href)}
-                      className="block px-4 py-3 text-neutral-800 hover:text-[#49b540] rounded-xl font-medium transition-colors cursor-pointer"
+                      className="block px-4 py-3 text-neutral-800 hover:text-[#ff2828] rounded-xl font-medium transition-colors cursor-pointer"
                     >
                       {link.name}
                     </a>
@@ -574,12 +572,12 @@ export function NavbarClient({ initialData }: Props) {
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors ${
                         isActive(link.href)
-                          ? 'text-[#49b540] font-semibold'
-                          : 'text-neutral-800 hover:text-[#49b540]'
+                          ? 'text-[#ff2828] font-semibold'
+                          : 'text-neutral-800 hover:text-[#ff2828]'
                       }`}
                     >
                       {isActive(link.href) && (
-                        <span className="w-2 h-2 bg-[#49b540] rounded-full flex-shrink-0" />
+                        <span className="w-2 h-2 bg-[#ff2828] rounded-full flex-shrink-0" />
                       )}
                       {link.name}
                     </NavLink>
@@ -600,7 +598,7 @@ export function NavbarClient({ initialData }: Props) {
                       onClick={() => switchLocale(code)}
                       className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium transition-all ${
                         locale === code
-                          ? 'bg-primary text-white shadow-sm'
+                          ? 'bg-[#ff2828] text-white shadow-sm'
                           : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
                       }`}
                     >
@@ -614,7 +612,7 @@ export function NavbarClient({ initialData }: Props) {
                 <NavLink
                   href={cartItemCount > 0 ? '/checkout' : '/activities'}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block w-full py-3.5 bg-[#49b540] text-white font-semibold rounded-xl hover:bg-[#3da035] transition-all text-center shadow-sm"
+                  className="block w-full py-3.5 bg-[#ff2828] text-white font-semibold rounded-xl hover:bg-[#e51f1f] transition-all text-center shadow-sm"
                 >
                   {t('book')}
                 </NavLink>

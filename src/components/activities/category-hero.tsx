@@ -100,22 +100,22 @@ interface MoodCategoryProps {
 
 const moodConfigs = {
   adventure: {
-    gradient: 'from-orange-500 to-red-500',
+    gradient: 'from-[#ff2828] to-[#ff5050]',
     icon: '🏜️',
     bgPattern: 'radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%)',
   },
   relaxation: {
-    gradient: 'from-teal-500 to-emerald-500',
+    gradient: 'from-[#ff2828] to-[#ff5050]',
     icon: '🌴',
     bgPattern: 'radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%)',
   },
   culture: {
-    gradient: 'from-amber-500 to-yellow-500',
+    gradient: 'from-[#ff2828] to-[#ff5050]',
     icon: '🕌',
     bgPattern: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)',
   },
   family: {
-    gradient: 'from-blue-500 to-purple-500',
+    gradient: 'from-[#ff2828] to-[#ff5050]',
     icon: '👨‍👩‍👧‍👦',
     bgPattern: 'radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%)',
   },

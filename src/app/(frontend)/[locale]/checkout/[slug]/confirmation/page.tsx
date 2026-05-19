@@ -10,8 +10,8 @@ interface Props {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Booking Confirmed | Green Atlas Travel',
-    description: 'Your booking has been confirmed. Thank you for choosing Green Atlas Travel.',
+    title: 'Booking Confirmed | Atlas Mountain Visit',
+    description: 'Your booking has been confirmed. Thank you for choosing Atlas Mountain Visit.',
     robots: {
       index: false,
       follow: false,

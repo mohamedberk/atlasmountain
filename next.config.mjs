@@ -32,7 +32,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'greenatlastravel.com',
+        hostname: 'atlasmountainsvisit.com',
         pathname: '/api/media/**',
       },
       {

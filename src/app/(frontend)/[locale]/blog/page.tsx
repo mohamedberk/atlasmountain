@@ -47,19 +47,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const content = pageContent[locale] || pageContent.en
 
   return {
-    title: `${content.title} | Green Atlas Travel`,
+    title: `${content.title} | Atlas Mountain Visit`,
     description: content.description,
     keywords: 'Morocco travel blog, Marrakech tips, Moroccan culture, desert tours blog, travel guide Morocco',
     openGraph: {
       title: `${content.title} - ${content.subtitle}`,
       description: content.description,
-      url: `https://greenatlastravel.com/${locale}/blog`,
-      siteName: 'Green Atlas Travel',
+      url: `https://atlasmountainsvisit.com/${locale}/blog`,
+      siteName: 'Atlas Mountain Visit',
       locale: locale,
       type: 'website',
     },
     alternates: {
-      canonical: `https://greenatlastravel.com/${locale}/blog`,
+      canonical: `https://atlasmountainsvisit.com/${locale}/blog`,
       languages: {
         en: '/en/blog',
         fr: '/fr/blog',
@@ -90,13 +90,13 @@ export default async function BlogPage({ params }: Props) {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: `${content.title} - Green Atlas Travel`,
+    name: `${content.title} - Atlas Mountain Visit`,
     description: content.description,
-    url: `https://greenatlastravel.com/${locale}/blog`,
+    url: `https://atlasmountainsvisit.com/${locale}/blog`,
     publisher: {
       '@type': 'Organization',
-      name: 'Green Atlas Travel',
-      logo: 'https://greenatlastravel.com/logo.png',
+      name: 'Atlas Mountain Visit',
+      logo: 'https://atlasmountainsvisit.com/logo.png',
     },
     blogPost: posts.slice(0, 10).map(post => ({
       '@type': 'BlogPosting',
@@ -107,7 +107,7 @@ export default async function BlogPage({ params }: Props) {
         '@type': 'Person',
         name: post.author,
       },
-      url: `https://greenatlastravel.com/${locale}/blog/${post.slug}`,
+      url: `https://atlasmountainsvisit.com/${locale}/blog/${post.slug}`,
     })),
   }
 

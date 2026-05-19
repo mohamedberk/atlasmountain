@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://greenatlastravel.com'
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://atlasmountainsvisit.com'
 const locales = ['en', 'fr'] as const
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

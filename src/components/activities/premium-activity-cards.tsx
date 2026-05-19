@@ -9,7 +9,7 @@ import { getOptimizedImageUrl, getResponsiveSizes } from '@/lib/image-utils'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 const STAR_COLOR = '#F59E0B'
 
 // Animation variants
@@ -119,22 +119,6 @@ export function PremiumActivityCards({ activities, categories, categoriesSection
           className="text-center mb-12"
         >
           <motion.div variants={fadeInUp} custom={0}>
-            {categoriesSectionData?.badgeText && (
-              <motion.div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4"
-                style={{ backgroundColor: `${ACCENT_GREEN}15` }}
-                initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
-                <div className="w-1.5 h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-                <span className="text-sm font-medium uppercase tracking-wider" style={{ color: ACCENT_GREEN }}>
-                  {categoriesSectionData.badgeText}
-                </span>
-                <div className="w-1.5 h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-              </motion.div>
-            )}
             {(categoriesSectionData?.title || categoriesSectionData?.titleHighlight) && (
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-neutral-900 mb-4">
                 {categoriesSectionData?.title && <>{categoriesSectionData.title} </>}
@@ -205,9 +189,9 @@ export function PremiumActivityCards({ activities, categories, categoriesSection
 
                   {/* Duration & Location - Elegant branded badges */}
                   <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-2 sm:mb-3">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#49b540]/10 border border-[#49b540]/20">
-                      <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#49b540]" />
-                      <span className="text-[10px] sm:text-xs font-semibold text-[#49b540] tracking-tight">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#ff2828]/10 border border-[#ff2828]/20">
+                      <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#ff2828]" />
+                      <span className="text-[10px] sm:text-xs font-semibold text-[#ff2828] tracking-tight">
                         {getDurationDisplay((category as any).durationType, locale)}
                       </span>
                     </div>
@@ -218,7 +202,7 @@ export function PremiumActivityCards({ activities, categories, categoriesSection
                   </div>
 
                   {/* Category Name */}
-                  <h3 className="font-display text-lg sm:text-xl font-bold text-neutral-900 mb-3 sm:mb-4 group-hover:text-green-600 transition-colors duration-300">
+                  <h3 className="font-display text-lg sm:text-xl font-bold text-neutral-900 mb-3 sm:mb-4 group-hover:text-red-600 transition-colors duration-300">
                     {category.name}
                   </h3>
 

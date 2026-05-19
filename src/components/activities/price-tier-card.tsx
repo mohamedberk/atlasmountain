@@ -18,44 +18,44 @@ interface PriceTierCardProps {
 
 const tierConfigs = {
   budget: {
-    gradient: 'from-emerald-500 to-teal-500',
-    bgColor: 'bg-emerald-50',
-    textColor: 'text-emerald-700',
-    borderColor: 'border-emerald-200',
+    gradient: 'from-[#ff2828] to-[#ff5050]',
+    bgColor: 'bg-red-50',
+    textColor: 'text-red-700',
+    borderColor: 'border-red-200',
     icon: TrendingUp,
-    iconBg: 'bg-emerald-100',
+    iconBg: 'bg-red-100',
     badgeKey: 'bestValue' as const,
-    badgeBg: 'bg-emerald-500',
+    badgeBg: 'bg-red-500',
   },
   'mid-range': {
-    gradient: 'from-blue-500 to-cyan-500',
-    bgColor: 'bg-blue-50',
-    textColor: 'text-blue-700',
-    borderColor: 'border-blue-200',
+    gradient: 'from-[#ff2828] to-[#ff5050]',
+    bgColor: 'bg-red-50',
+    textColor: 'text-red-700',
+    borderColor: 'border-red-200',
     icon: Star,
-    iconBg: 'bg-blue-100',
+    iconBg: 'bg-red-100',
     badgeKey: 'mostPopular' as const,
-    badgeBg: 'bg-blue-500',
+    badgeBg: 'bg-red-500',
   },
   premium: {
-    gradient: 'from-amber-500 to-orange-500',
-    bgColor: 'bg-amber-50',
-    textColor: 'text-amber-700',
-    borderColor: 'border-amber-200',
+    gradient: 'from-[#ff2828] to-[#ff5050]',
+    bgColor: 'bg-red-50',
+    textColor: 'text-red-700',
+    borderColor: 'border-red-200',
     icon: Gem,
-    iconBg: 'bg-amber-100',
+    iconBg: 'bg-red-100',
     badgeKey: 'premiumPick' as const,
-    badgeBg: 'bg-amber-500',
+    badgeBg: 'bg-red-500',
   },
   luxury: {
-    gradient: 'from-purple-500 to-pink-500',
-    bgColor: 'bg-purple-50',
-    textColor: 'text-purple-700',
-    borderColor: 'border-purple-200',
+    gradient: 'from-[#ff2828] to-[#ff5050]',
+    bgColor: 'bg-red-50',
+    textColor: 'text-red-700',
+    borderColor: 'border-red-200',
     icon: Crown,
-    iconBg: 'bg-purple-100',
+    iconBg: 'bg-red-100',
     badgeKey: 'luxury' as const,
-    badgeBg: 'bg-purple-500',
+    badgeBg: 'bg-red-500',
   },
 }
 
@@ -151,7 +151,7 @@ interface BestValueBadgeProps {
 export function BestValueBadge({ savings, className = '' }: BestValueBadgeProps) {
   const tTier = useTranslations('priceTierCard')
   return (
-    <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full shadow-sm ${className}`}>
+    <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#ff2828] text-white rounded-full shadow-sm ${className}`}>
       <TrendingUp className="w-3.5 h-3.5" />
       <span className="text-xs font-bold">{tTier('save')} €{savings}</span>
     </div>
@@ -168,7 +168,7 @@ interface FlashDealBadgeProps {
 export function FlashDealBadge({ discount, expiresIn, className = '' }: FlashDealBadgeProps) {
   const tTier = useTranslations('priceTierCard')
   return (
-    <div className={`inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full shadow-sm animate-pulse ${className}`}>
+    <div className={`inline-flex items-center gap-2 px-3 py-1.5 bg-[#ff2828] text-white rounded-full shadow-sm animate-pulse ${className}`}>
       <Zap className="w-3.5 h-3.5" />
       <span className="text-xs font-bold">{discount}% {tTier('off')}</span>
       {expiresIn && (

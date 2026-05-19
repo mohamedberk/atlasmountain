@@ -6,7 +6,7 @@ import { NavLink } from '@/components/ui/nav-link'
 import { imagekitUrls } from '@/data/imagekit-urls'
 import { useTranslations } from 'next-intl'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -53,19 +53,6 @@ export function DestinationsSection() {
           variants={staggerContainer}
           className="text-center mb-14"
         >
-          <motion.div variants={fadeInUp} custom={0}>
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
-              style={{ backgroundColor: `${ACCENT_GREEN}15` }}
-            >
-              <div className="w-1.5 h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-              <span className="text-sm font-medium uppercase tracking-wider" style={{ color: ACCENT_GREEN }}>
-                {t('badge')}
-              </span>
-              <div className="w-1.5 h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-            </motion.div>
-          </motion.div>
-
           <motion.h2
             variants={fadeInUp}
             custom={0.1}

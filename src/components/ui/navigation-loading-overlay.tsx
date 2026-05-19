@@ -19,7 +19,7 @@ export function NavigationLoadingOverlay() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-            className="w-12 h-12 border-4 border-[#49b540]/20 border-t-[#49b540] rounded-full"
+            className="w-12 h-12 border-4 border-[#ff2828]/20 border-t-[#ff2828] rounded-full"
           />
         </motion.div>
       )}

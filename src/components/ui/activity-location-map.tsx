@@ -12,11 +12,11 @@ const customMarkerIcon = new L.DivIcon({
     <div style="
       width: 40px;
       height: 40px;
-      background: linear-gradient(135deg, #286EB3 0%, #1a5a9a 100%);
+      background: linear-gradient(135deg, #ff2828 0%, #d11f1f 100%);
       border: 3px solid white;
       border-radius: 50% 50% 50% 0;
       transform: rotate(-45deg);
-      box-shadow: 0 4px 16px rgba(40, 110, 179, 0.5);
+      box-shadow: 0 4px 16px rgba(255, 40, 40, 0.5);
       display: flex;
       align-items: center;
       justify-content: center;

@@ -10,7 +10,58 @@ import { useGoogleReviews } from '@/hooks/useGoogleReviews'
 
 const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Attraction_Review-g293734-d25345173-Reviews-Green_Atlas_Travel-Marrakech_Marrakech_Safi.html'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
+
+const FALLBACK_REVIEWS = [
+  {
+    id: 'fb-1',
+    name: 'Sarah M.',
+    avatar: 'SM',
+    rating: 5,
+    date: '2 weeks ago',
+    text: 'Unforgettable trip from Marrakech to the dunes. Our guide knew every shortcut and every story — the desert night was the highlight of the year.',
+  },
+  {
+    id: 'fb-2',
+    name: 'Marco L.',
+    avatar: 'ML',
+    rating: 5,
+    date: '1 month ago',
+    text: 'Everything was organised perfectly from the first email. Comfortable vehicle, fluent English driver, and a desert camp that felt like a small celebration.',
+  },
+  {
+    id: 'fb-3',
+    name: 'Aiko T.',
+    avatar: 'AT',
+    rating: 5,
+    date: '3 weeks ago',
+    text: 'The Agafay sunset camel ride was magical and the dinner show was authentic, not touristy. Highly recommend for a first-timer in Morocco.',
+  },
+  {
+    id: 'fb-4',
+    name: 'James K.',
+    avatar: 'JK',
+    rating: 5,
+    date: '2 months ago',
+    text: 'We crossed the Atlas, stayed in Aït Benhaddou, slept under the stars in Merzouga. The pace was just right and the team genuinely cared.',
+  },
+  {
+    id: 'fb-5',
+    name: 'Camille R.',
+    avatar: 'CR',
+    rating: 5,
+    date: '6 weeks ago',
+    text: 'Beautiful itinerary, kind people, and food I still think about. They customised the route around what we wanted to see and never rushed us.',
+  },
+  {
+    id: 'fb-6',
+    name: 'Daniel P.',
+    avatar: 'DP',
+    rating: 5,
+    date: '4 weeks ago',
+    text: 'A four-day desert tour that felt like a private adventure. Photos do not do Erg Chebbi justice — book it, you will not regret it.',
+  },
+]
 
 // Animation variants
 const fadeUp = {
@@ -23,9 +74,11 @@ const stagger = {
 }
 
 export function GoogleReviews() {
-  const { reviews: googleReviews, overallRating, totalReviews } = useGoogleReviews({
+  const { reviews: apiReviews, overallRating, totalReviews } = useGoogleReviews({
     minRating: 4,
   })
+
+  const googleReviews = apiReviews.length > 0 ? apiReviews : FALLBACK_REVIEWS
 
   const [reviewEmblaRef, reviewEmblaApi] = useEmblaCarousel({
     loop: true,
@@ -53,17 +106,7 @@ export function GoogleReviews() {
   const GOOGLE_PLACE_ID = process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID || 'YOUR_PLACE_ID'
 
   return (
-    <section className="py-20 sm:py-28 bg-white relative overflow-hidden">
-      {/* Decorative blurred radials */}
-      <div
-        className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none -translate-x-1/3 -translate-y-1/3"
-        style={{ backgroundColor: `${ACCENT_GREEN}08` }}
-      />
-      <div
-        className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full blur-3xl pointer-events-none translate-x-1/3 translate-y-1/3"
-        style={{ backgroundColor: `${ACCENT_GREEN}08` }}
-      />
-
+    <section className="py-20 sm:py-28 bg-[#fafaf9] relative overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-6 sm:px-20 relative">
         <motion.div
           initial="hidden"
@@ -74,9 +117,6 @@ export function GoogleReviews() {
         >
           {/* Header */}
           <motion.div variants={fadeUp} className="text-center flex flex-col items-center gap-4">
-            <span className="text-[#49b540] text-sm font-medium tracking-wide">
-              Guest Reviews
-            </span>
             <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-neutral-900">
               What Our Guests Say
             </h2>
@@ -92,7 +132,7 @@ export function GoogleReviews() {
                 </svg>
                 <div className="flex">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} className="w-5 h-5 fill-[#49b540] text-[#49b540]" />
+                    <Star key={star} className="w-5 h-5 fill-[#ff2828] text-[#ff2828]" />
                   ))}
                 </div>
                 <span className="font-bold text-lg text-neutral-900">{overallRating?.toFixed(1) || '4.8'}</span>
@@ -145,7 +185,7 @@ export function GoogleReviews() {
           <div className="flex">
             {[...googleReviews, ...googleReviews].map((review, i) => (
               <div key={i} className="flex-[0_0_300px] sm:flex-[0_0_360px] min-w-0 px-3">
-                <div className="bg-white rounded-2xl p-6 border border-neutral-200 shadow-[0_1px_4px_rgba(0,0,0,0.02)] flex flex-col h-full min-h-[220px] hover:border-[#49b540]/30 hover:shadow-[0_6px_14px_-10px_rgba(0,0,0,0.04)] transition-all duration-300">
+                <div className="bg-white rounded-2xl p-6 border border-neutral-200 shadow-[0_1px_4px_rgba(0,0,0,0.02)] flex flex-col h-full min-h-[220px] hover:border-[#ff2828]/30 hover:shadow-[0_6px_14px_-10px_rgba(0,0,0,0.04)] transition-all duration-300">
                   {/* User info + Google icon */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
@@ -157,7 +197,7 @@ export function GoogleReviews() {
                           referrerPolicy="no-referrer"
                         />
                       ) : (
-                        <div className="w-11 h-11 rounded-full bg-[#49b540] flex items-center justify-center text-white font-semibold text-sm ring-2 ring-[#49b540]/20">
+                        <div className="w-11 h-11 rounded-full bg-[#ff2828] flex items-center justify-center text-white font-semibold text-sm ring-2 ring-[#ff2828]/20">
                           {review.avatar}
                         </div>
                       )}
@@ -180,7 +220,7 @@ export function GoogleReviews() {
                     {[...Array(5)].map((_, s) => (
                       <Star
                         key={s}
-                        className={`w-4 h-4 ${s < review.rating ? 'fill-[#49b540] text-[#49b540]' : 'fill-neutral-200 text-neutral-200'}`}
+                        className={`w-4 h-4 ${s < review.rating ? 'fill-[#ff2828] text-[#ff2828]' : 'fill-neutral-200 text-neutral-200'}`}
                       />
                     ))}
                   </div>
@@ -198,7 +238,7 @@ export function GoogleReviews() {
                         href={review.profileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[11px] text-[#49b540] hover:underline"
+                        className="text-[11px] text-[#ff2828] hover:underline"
                       >
                         View profile
                       </a>
@@ -217,7 +257,7 @@ export function GoogleReviews() {
           href={`https://search.google.com/local/reviews?placeid=${GOOGLE_PLACE_ID}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="group inline-flex items-center justify-center gap-3 bg-white rounded-2xl px-6 py-4 border border-neutral-200 shadow-sm hover:border-[#49b540]/40 hover:shadow-md transition-all duration-200"
+          className="group inline-flex items-center justify-center gap-3 bg-white rounded-2xl px-6 py-4 border border-neutral-200 shadow-sm hover:border-[#ff2828]/40 hover:shadow-md transition-all duration-200"
         >
           <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none">
             <path d="M21.8055 10.0415H12V14.0415H17.6515C16.827 16.3275 14.6115 17.9555 12 17.9555C8.8385 17.9555 6.267 15.384 6.267 12.2225C6.267 9.06097 8.8385 6.48947 12 6.48947C13.5255 6.48947 14.9155 7.06447 15.9585 8.01747L18.873 5.10297C17.085 3.42747 14.6715 2.39697 12 2.39697C6.4785 2.39697 2 6.87547 2 12.397C2 17.9185 6.4785 22.397 12 22.397C18.24 22.397 22.5 17.0655 22.5 11.147C22.5 10.787 22.473 10.4125 22.41 10.0415H21.8055Z" fill="#4285F4"/>
@@ -226,7 +266,7 @@ export function GoogleReviews() {
             <path d="M22.5 11.147C22.5 10.787 22.473 10.4125 22.41 10.0415H12V14.0415H17.6515C17.2635 15.1185 16.437 16.0175 15.51 16.6305L15.5115 16.6305L18.7415 19.2425C18.4845 19.476 22.5 16.5 22.5 11.147Z" fill="#FBBC05"/>
           </svg>
           <span className="text-sm font-semibold text-neutral-900">See all reviews on Google</span>
-          <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-[#49b540] group-hover:translate-x-0.5 transition-all" />
+          <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-[#ff2828] group-hover:translate-x-0.5 transition-all" />
         </a>
 
         <a

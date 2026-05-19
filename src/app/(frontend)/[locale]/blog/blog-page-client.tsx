@@ -12,7 +12,7 @@ import { NavLink } from '@/components/ui/nav-link'
 import type { BlogPost, Media } from '@/payload-types'
 import { extractPlainText } from '@/lib/utils'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 // Category labels for display
 const categoryLabels: Record<string, Record<string, string>> = {
@@ -201,7 +201,7 @@ export function BlogPageClient({ posts, featuredPost, content }: Props) {
                   placeholder={tBlog('searchArticles')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-11 pl-10 pr-10 rounded-xl border border-neutral-200 bg-[#fafaf9] text-sm focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
+                  className="w-full h-11 pl-10 pr-10 rounded-xl border border-neutral-200 bg-[#fafaf9] text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all"
                 />
                 {searchQuery && (
                   <button
@@ -312,7 +312,7 @@ export function BlogPageClient({ posts, featuredPost, content }: Props) {
         <section className="pb-8">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <NavLink href={`/blog/${featuredPost.slug}`} className="group block">
-              <article className="bg-white rounded-2xl overflow-hidden border border-neutral-100 hover:border-green-200 transition-all">
+              <article className="bg-white rounded-2xl overflow-hidden border border-neutral-100 hover:border-red-200 transition-all">
                 <div className="grid lg:grid-cols-2 gap-0">
                   {/* Image */}
                   <div className="relative h-64 lg:h-[350px] overflow-hidden">
@@ -348,7 +348,7 @@ export function BlogPageClient({ posts, featuredPost, content }: Props) {
                       </div>
                     </div>
 
-                    <h2 className="text-2xl lg:text-3xl font-display font-bold text-neutral-900 mb-4 group-hover:text-green-600 transition-colors">
+                    <h2 className="text-2xl lg:text-3xl font-display font-bold text-neutral-900 mb-4 group-hover:text-red-600 transition-colors">
                       {featuredPost.title}
                     </h2>
 
@@ -403,7 +403,7 @@ export function BlogPageClient({ posts, featuredPost, content }: Props) {
                   className="group"
                 >
                   <NavLink href={`/blog/${post.slug}`}>
-                    <article className="bg-white rounded-2xl overflow-hidden border border-neutral-100 hover:border-green-200 transition-all duration-300 h-full flex flex-col">
+                    <article className="bg-white rounded-2xl overflow-hidden border border-neutral-100 hover:border-red-200 transition-all duration-300 h-full flex flex-col">
                       {/* Image */}
                       <div className="relative h-44 overflow-hidden">
                         <Image
@@ -433,7 +433,7 @@ export function BlogPageClient({ posts, featuredPost, content }: Props) {
                           </span>
                         </div>
 
-                        <h3 className="font-semibold text-neutral-900 mb-2 line-clamp-2 group-hover:text-green-600 transition-colors leading-snug">
+                        <h3 className="font-semibold text-neutral-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors leading-snug">
                           {post.title}
                         </h3>
 
@@ -478,7 +478,7 @@ export function BlogPageClient({ posts, featuredPost, content }: Props) {
                   className="group"
                 >
                   <NavLink href={`/blog/${post.slug}`}>
-                    <article className="bg-white rounded-2xl overflow-hidden border border-neutral-100 hover:border-green-200 transition-all duration-300 flex flex-col md:flex-row">
+                    <article className="bg-white rounded-2xl overflow-hidden border border-neutral-100 hover:border-red-200 transition-all duration-300 flex flex-col md:flex-row">
                       {/* Image */}
                       <div className="relative w-full md:w-64 h-48 md:h-auto flex-shrink-0 overflow-hidden">
                         <Image
@@ -507,7 +507,7 @@ export function BlogPageClient({ posts, featuredPost, content }: Props) {
                           </span>
                         </div>
 
-                        <h3 className="font-semibold text-lg text-neutral-900 mb-2 group-hover:text-green-600 transition-colors">
+                        <h3 className="font-semibold text-lg text-neutral-900 mb-2 group-hover:text-red-600 transition-colors">
                           {post.title}
                         </h3>
 

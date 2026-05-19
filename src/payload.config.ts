@@ -1,4 +1,4 @@
-import { postgresAdapter } from '@payloadcms/db-postgres'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { resendAdapter } from '@payloadcms/email-resend'
 import { lexicalEditor, FixedToolbarFeature } from '@payloadcms/richtext-lexical'
 import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
@@ -36,12 +36,11 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      title: 'Green Atlas Travel Admin',
-      titleSuffix: ' | Green Atlas Travel',
-      description: 'Green Atlas Travel Administration Dashboard - Manage your Morocco travel experiences, activities, and bookings.',
+      title: 'Atlas Mountain Visit Admin',
+      titleSuffix: ' | Atlas Mountain Visit',
+      description: 'Atlas Mountain Visit Administration Dashboard - Manage your Morocco travel experiences, activities, and bookings.',
       icons: [
         { url: '/favicon.ico' },
-        { url: '/green-atlas-icon.png', type: 'image/png', sizes: '192x192' },
       ],
     },
     components: {
@@ -96,14 +95,12 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI || '',
-    },
+  db: mongooseAdapter({
+    url: process.env.DATABASE_URI || '',
   }),
   email: resendAdapter({
-    defaultFromAddress: process.env.RESEND_FROM_EMAIL || 'contact@greenatlastravel.com',
-    defaultFromName: 'Green Atlas Travel',
+    defaultFromAddress: process.env.RESEND_FROM_EMAIL || 'contact@atlasmountainsvisit.com',
+    defaultFromName: 'Atlas Mountain Visit',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
   sharp,

@@ -50,15 +50,15 @@ export function PhoneInput({ value, onChange, placeholder }: PhoneInputProps) {
           transition: all 0.2s;
         }
         .phone-input-wrapper .react-international-phone-input:focus {
-          border-color: #49b540 !important;
-          box-shadow: 0 0 0 2px rgba(73, 181, 64, 0.2) !important;
+          border-color: #ff2828 !important;
+          box-shadow: 0 0 0 2px rgba(255, 40, 40, 0.2) !important;
         }
         .phone-input-wrapper .react-international-phone-country-selector-button {
           transition: all 0.2s;
         }
         .phone-input-wrapper .react-international-phone-country-selector-button:focus,
         .phone-input-wrapper .react-international-phone-country-selector-button:hover {
-          border-color: #49b540 !important;
+          border-color: #ff2828 !important;
         }
         .phone-input-wrapper .react-international-phone-country-selector-dropdown {
           border-radius: 12px;

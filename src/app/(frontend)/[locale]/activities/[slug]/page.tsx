@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!activity) {
     return {
-      title: 'Activity Not Found | Green Atlas Travel',
+      title: 'Activity Not Found | Atlas Mountain Visit',
     }
   }
 
@@ -42,18 +42,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : activity.featuredImage?.url || '/og-image.jpg'
 
   return {
-    title: `${activity.title} | Green Atlas Travel`,
-    description: activity.shortDescription || activity.seo?.metaDescription || `Book ${activity.title} in Marrakech with Green Atlas Travel`,
+    title: `${activity.title} | Atlas Mountain Visit`,
+    description: activity.shortDescription || activity.seo?.metaDescription || `Book ${activity.title} in Marrakech with Atlas Mountain Visit`,
     keywords: activity.seo?.keywords || `${activity.title}, Morocco tours, Marrakech activities`,
     openGraph: {
       title: activity.seo?.metaTitle || activity.title,
-      description: activity.shortDescription || activity.seo?.metaDescription || `Book ${activity.title} in Marrakech with Green Atlas Travel`,
+      description: activity.shortDescription || activity.seo?.metaDescription || `Book ${activity.title} in Marrakech with Atlas Mountain Visit`,
       images: [imageUrl],
       locale: locale,
       type: 'website',
     },
     alternates: {
-      canonical: `https://greenatlastravel.com/${locale}/activities/${slug}`,
+      canonical: `https://atlasmountainsvisit.com/${locale}/activities/${slug}`,
     },
   }
 }

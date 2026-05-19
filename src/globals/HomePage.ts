@@ -348,7 +348,7 @@ export const HomePage: GlobalConfig = {
                   name: 'badgeText',
                   label: 'Badge Text',
                   type: 'text',
-                  defaultValue: 'About Green Atlas Travel',
+                  defaultValue: 'About Atlas Mountain Visit',
                   localized: true,
                 },
                 {
@@ -368,7 +368,7 @@ export const HomePage: GlobalConfig = {
                       name: 'titleHighlight',
                       label: 'Title (Highlighted)',
                       type: 'text',
-                      defaultValue: 'Green Atlas Travel',
+                      defaultValue: 'Atlas Mountain Visit',
                       localized: true,
                       admin: {
                         description: 'Shown in green',
@@ -381,7 +381,7 @@ export const HomePage: GlobalConfig = {
                   name: 'subtitle',
                   label: 'Subtitle',
                   type: 'text',
-                  defaultValue: 'Green Atlas Travel: Your Gateway to Authentic Morocco',
+                  defaultValue: 'Atlas Mountain Visit: Your Gateway to Authentic Morocco',
                   localized: true,
                 },
                 // Content
@@ -389,7 +389,7 @@ export const HomePage: GlobalConfig = {
                   name: 'paragraph1',
                   label: 'Paragraph 1',
                   type: 'textarea',
-                  defaultValue: "At Green Atlas Travel, we craft unforgettable Moroccan journeys designed just for you. Whether you dream of exploring the Sahara's golden dunes, relaxing on serene beaches, trekking the Atlas Mountains, or wandering ancient cities, we bring Morocco's wonders to life.",
+                  defaultValue: "At Atlas Mountain Visit, we craft unforgettable Moroccan journeys designed just for you. Whether you dream of exploring the Sahara's golden dunes, relaxing on serene beaches, trekking the Atlas Mountains, or wandering ancient cities, we bring Morocco's wonders to life.",
                   localized: true,
                 },
                 {
@@ -824,7 +824,7 @@ export const HomePage: GlobalConfig = {
                   name: 'description',
                   label: 'Subtitle',
                   type: 'textarea',
-                  defaultValue: "Everything you need to know about traveling with Green Atlas Travel. Can't find the answer you're looking for? Feel free to contact us.",
+                  defaultValue: "Everything you need to know about traveling with Atlas Mountain Visit. Can't find the answer you're looking for? Feel free to contact us.",
                   localized: true,
                 },
                 // FAQ Items
@@ -882,7 +882,7 @@ export const HomePage: GlobalConfig = {
                       name: 'contactEmail',
                       label: 'Contact Email',
                       type: 'email',
-                      defaultValue: 'greenatlastravel1@gmail.com',
+                      defaultValue: 'atlasmountainsvisit1@gmail.com',
                       admin: {
                         width: '33%',
                       },
@@ -909,7 +909,7 @@ export const HomePage: GlobalConfig = {
                   localized: true,
                   admin: {
                     description: 'Page title in search results (50-60 characters ideal). Leave empty for default.',
-                    placeholder: 'e.g., Green Atlas Travel | Authentic Moroccan Adventures',
+                    placeholder: 'e.g., Atlas Mountain Visit | Authentic Moroccan Adventures',
                   },
                 },
                 {

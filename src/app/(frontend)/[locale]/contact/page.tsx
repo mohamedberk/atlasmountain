@@ -48,13 +48,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${metaTitle} | Green Atlas Travel`,
+    title: `${metaTitle} | Atlas Mountain Visit`,
     description: metaDescription,
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      url: `https://greenatlastravel.com/${locale}/contact`,
-      siteName: 'Green Atlas Travel',
+      url: `https://atlasmountainsvisit.com/${locale}/contact`,
+      siteName: 'Atlas Mountain Visit',
       locale: locale,
       type: 'website',
     },

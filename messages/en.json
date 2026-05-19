@@ -364,7 +364,7 @@
       "exploreMore": "Explore More Adventures",
       "ratedBy": "Rated {rating} by {count} travelers",
       "copyReference": "Copy booking reference",
-      "shareTitle": "Green Atlas Travel Booking",
+      "shareTitle": "Atlas Mountain Visit Booking",
       "shareText": "My Morocco adventure is booked! Reference: {ref}"
     }
   },
@@ -482,17 +482,17 @@
     "gotQuestions": "Got Questions?",
     "frequentlyAsked": "Frequently Asked",
     "questions": "Questions",
-    "description": "Everything you need to know about traveling with Green Atlas Travel. Can't find the answer you're looking for? Feel free to contact us.",
+    "description": "Everything you need to know about traveling with Atlas Mountain Visit. Can't find the answer you're looking for? Feel free to contact us.",
     "stillHaveQuestions": "Still have questions?",
     "contactOurTeam": "Contact our team",
-    "defaultFaq1Question": "What types of tours does Green Atlas Travel offer?",
-    "defaultFaq1Answer": "At Green Atlas Travel, we offer more than just tours — we create immersive experiences that unveil the soul of Morocco.\n\nFrom captivating day trips around Marrakech to multi-day adventures through the Sahara, and tailored cultural circuits across imperial cities, each journey is thoughtfully designed to blend discovery, comfort, and authenticity.\n\nWhether you're seeking golden dunes, mountain peaks, or vibrant medinas, our tours invite you to explore Morocco in its most inspiring and unforgettable form.",
-    "defaultFaq2Question": "Who leads the tours at Green Atlas Travel?",
-    "defaultFaq2Answer": "The heart of every Green Atlas Travel experience lies in the people who guide it. Our tours are led by experienced, official and licensed tourist guides specializing in Morocco's natural landscapes with over 20 years of experience exploring nearly every corner of the country.\n\nPassionate about Morocco's rich heritage and diverse terrains, our hand-picked team of local, multilingual guides and professional drivers are dedicated to sharing their deep knowledge and authentic insight with every traveler.\n\nMore than guides, they are storytellers, cultural ambassadors, and trusted companions — ready to make your Moroccan journey safe, seamless, and unforgettable.",
+    "defaultFaq1Question": "What types of tours does Atlas Mountain Visit offer?",
+    "defaultFaq1Answer": "At Atlas Mountain Visit, we offer more than just tours — we create immersive experiences that unveil the soul of Morocco.\n\nFrom captivating day trips around Marrakech to multi-day adventures through the Sahara, and tailored cultural circuits across imperial cities, each journey is thoughtfully designed to blend discovery, comfort, and authenticity.\n\nWhether you're seeking golden dunes, mountain peaks, or vibrant medinas, our tours invite you to explore Morocco in its most inspiring and unforgettable form.",
+    "defaultFaq2Question": "Who leads the tours at Atlas Mountain Visit?",
+    "defaultFaq2Answer": "The heart of every Atlas Mountain Visit experience lies in the people who guide it. Our tours are led by experienced, official and licensed tourist guides specializing in Morocco's natural landscapes with over 20 years of experience exploring nearly every corner of the country.\n\nPassionate about Morocco's rich heritage and diverse terrains, our hand-picked team of local, multilingual guides and professional drivers are dedicated to sharing their deep knowledge and authentic insight with every traveler.\n\nMore than guides, they are storytellers, cultural ambassadors, and trusted companions — ready to make your Moroccan journey safe, seamless, and unforgettable.",
     "defaultFaq3Question": "What should I expect during a tour?",
     "defaultFaq3Answer": "From the moment your journey begins, you can expect a seamless, immersive, and deeply personalized experience. Our tours are thoughtfully crafted to balance adventure, cultural discovery, and comfort — all guided by passionate locals who know Morocco intimately.\n\nYou'll travel in modern, air-conditioned vehicles, stay in authentic accommodations such as traditional riads or luxury desert camps, and enjoy curated experiences like camel rides at sunset, guided walks through historic medinas, and meals with local families.\n\nExpect flexibility, warmth, and a journey that connects you not only to Morocco's stunning landscapes, but also to its heart and soul.",
-    "defaultFaq4Question": "How can I book a tour with Green Atlas Travel?",
-    "defaultFaq4Answer": "For bookings or specific requests, Green Atlas Travel is here to assist you. We invite you to contact us directly to customize your experience or for any questions regarding our tours.\n\nYou can reach us via WhatsApp at: +212 666 385 584\n\nOr by email at: greenatlastravel1@gmail.com\n\nWe are committed to responding promptly to all inquiries and providing you with a personalized service to make your trip unforgettable."
+    "defaultFaq4Question": "How can I book a tour with Atlas Mountain Visit?",
+    "defaultFaq4Answer": "For bookings or specific requests, Atlas Mountain Visit is here to assist you. We invite you to contact us directly to customize your experience or for any questions regarding our tours.\n\nYou can reach us via WhatsApp at: +212 666 385 584\n\nOr by email at: info@atlasmountainsvisit.com\n\nWe are committed to responding promptly to all inquiries and providing you with a personalized service to make your trip unforgettable."
   },
   "errors": {
     "somethingWentWrong": "Oops, something went wrong!",
@@ -549,7 +549,7 @@
     "badge": "Tailored Tours for Every Traveler",
     "title": "Our",
     "titleHighlight": "Services",
-    "description": "At Green Atlas Travel, we specialize in crafting personalized itineraries tailored to all types of travelers. Whether you're seeking cultural immersion, adventure, or relaxation, we ensure every detail is thoughtfully arranged.",
+    "description": "At Atlas Mountain Visit, we specialize in crafting personalized itineraries tailored to all types of travelers. Whether you're seeking cultural immersion, adventure, or relaxation, we ensure every detail is thoughtfully arranged.",
     "cta": "Plan Your Journey",
     "individualGroupTours": "Individual & Group Tours",
     "individualGroupToursDesc": "Personalized journeys for solo travelers, couples, families, and organized groups.",

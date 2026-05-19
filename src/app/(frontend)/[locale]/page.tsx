@@ -51,10 +51,11 @@ const BlogSection = dynamicImport(
   { loading: () => <div className="h-96 bg-surface/5 animate-pulse" /> }
 )
 
-const ServicesSection = dynamicImport(
-  () => import('@/components/sections/services-section').then(mod => mod.ServicesSection),
-  { loading: () => <div className="h-96 bg-surface/5 animate-pulse" /> }
-)
+// services section hidden — keep import commented in case it gets re-enabled
+// const ServicesSection = dynamicImport(
+//   () => import('@/components/sections/services-section').then(mod => mod.ServicesSection),
+//   { loading: () => <div className="h-96 bg-surface/5 animate-pulse" /> }
+// )
 
 const DestinationsSection = dynamicImport(
   () => import('@/components/sections/destinations-section').then(mod => mod.DestinationsSection),
@@ -70,9 +71,9 @@ export async function generateMetadata({
   const { locale } = await params
 
   const titles: Record<string, string> = {
-    en: 'Green Atlas Travel | Authentic Moroccan Adventures in Marrakech',
-    fr: 'Green Atlas Travel | Aventures Marocaines Authentiques à Marrakech',
-    de: 'Green Atlas Travel | Authentische Marokkanische Abenteuer in Marrakesch',
+    en: 'Atlas Mountain Visit | Authentic Moroccan Adventures in Marrakech',
+    fr: 'Atlas Mountain Visit | Aventures Marocaines Authentiques à Marrakech',
+    de: 'Atlas Mountain Visit | Authentische Marokkanische Abenteuer in Marrakesch',
   }
 
   const descriptions: Record<string, string> = {
@@ -88,13 +89,13 @@ export async function generateMetadata({
     openGraph: {
       title: titles[locale] || titles.en,
       description: descriptions[locale] || descriptions.en,
-      url: `https://greenatlastravel.com/${locale}`,
-      siteName: 'Green Atlas Travel',
+      url: `https://atlasmountainsvisit.com/${locale}`,
+      siteName: 'Atlas Mountain Visit',
       locale: locale,
       type: 'website',
     },
     alternates: {
-      canonical: `https://greenatlastravel.com/${locale}`,
+      canonical: `https://atlasmountainsvisit.com/${locale}`,
       languages: {
         en: '/en',
         fr: '/fr',
@@ -173,8 +174,8 @@ export default async function Home({
     '@type': 'TravelAgency',
     name: siteSettings?.company?.name,
     description: 'Authentic Moroccan adventures in Marrakech. Desert tours, hot air balloons, quad biking, and luxury transport.',
-    url: 'https://greenatlastravel.com',
-    logo: 'https://greenatlastravel.com/logo.png',
+    url: 'https://atlasmountainsvisit.com',
+    logo: 'https://atlasmountainsvisit.com/logo.png',
     address: {
       '@type': 'PostalAddress',
       addressLocality: siteSettings?.contact?.address?.line1,
@@ -238,12 +239,12 @@ export default async function Home({
           </Suspense>
         </ErrorBoundary>
 
-        {/* Services Section */}
-        <ErrorBoundary>
+        {/* services section hidden */}
+        {/* <ErrorBoundary>
           <Suspense fallback={<div className="h-96 bg-surface/5 animate-pulse" />}>
             <ServicesSection />
           </Suspense>
-        </ErrorBoundary>
+        </ErrorBoundary> */}
 
         {/* Destinations Section */}
         <ErrorBoundary>
@@ -261,17 +262,17 @@ export default async function Home({
           </ErrorBoundary>
         )}
 
+        {/* Guest Reviews */}
+        <ErrorBoundary>
+          <Suspense fallback={<div className="h-96 bg-surface/5 animate-pulse" />}>
+            <GoogleReviews />
+          </Suspense>
+        </ErrorBoundary>
+
         {/* FAQ Section */}
         <ErrorBoundary>
           <Suspense fallback={<div className="h-96 bg-surface/5 animate-pulse" />}>
             <FAQSection faqData={homePageData?.faq} />
-          </Suspense>
-        </ErrorBoundary>
-
-        {/* Google Reviews */}
-        <ErrorBoundary>
-          <Suspense fallback={<div className="h-96 bg-surface/5 animate-pulse" />}>
-            <GoogleReviews />
           </Suspense>
         </ErrorBoundary>
 

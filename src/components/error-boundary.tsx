@@ -30,7 +30,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <div className="text-center">
             <h2 className="text-xl font-semibold mb-2">Oops, something went wrong!</h2>
             <button
-              className="text-cyan-400 hover:underline"
+              className="text-[#ff2828] hover:underline"
               onClick={() => this.setState({ hasError: false })}
             >
               Try again

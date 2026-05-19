@@ -19,9 +19,9 @@ export async function generateMetadata({
   const { locale } = await params
 
   const titles: Record<string, string> = {
-    en: 'All Activities | Green Atlas Travel',
-    fr: 'Toutes les Activités | Green Atlas Travel',
-    de: 'Alle Aktivitäten | Green Atlas Travel',
+    en: 'All Activities | Atlas Mountain Visit',
+    fr: 'Toutes les Activités | Atlas Mountain Visit',
+    de: 'Alle Aktivitäten | Atlas Mountain Visit',
   }
 
   const descriptions: Record<string, string> = {
@@ -37,8 +37,8 @@ export async function generateMetadata({
     openGraph: {
       title: titles[locale] || titles.en,
       description: descriptions[locale] || descriptions.en,
-      url: `https://greenatlastravel.com/${locale}/activities`,
-      siteName: 'Green Atlas Travel',
+      url: `https://atlasmountainsvisit.com/${locale}/activities`,
+      siteName: 'Atlas Mountain Visit',
       locale: locale,
       type: 'website',
     },

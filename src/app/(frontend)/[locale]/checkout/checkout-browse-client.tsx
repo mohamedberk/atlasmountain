@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 import { NavLink } from '@/components/ui/nav-link'
 import type { Activity, Media, Location } from '@/payload-types'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 interface CategoryWithActivities {
   id: string | number
@@ -59,14 +59,7 @@ export function CheckoutBrowseClient({ categorizedActivities, locale }: Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <NavLink href="/" className="flex-shrink-0">
-              <Image
-                src="/greenatlaslogo.png"
-                alt="Green Atlas Travel"
-                width={140}
-                height={45}
-                className="h-10 w-auto"
-                priority
-              />
+              <span className="font-display font-bold text-xl tracking-tight text-neutral-900">Atlas Mountain Visit</span>
             </NavLink>
             <div className="flex items-center gap-2 text-sm text-neutral-600">
               <Shield className="w-4 h-4" style={{ color: ACCENT_GREEN }} />

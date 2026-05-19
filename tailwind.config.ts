@@ -61,8 +61,8 @@ const config: Config = {
         glass: '0 8px 32px rgba(0, 0, 0, 0.1)',
         'glass-sm': '0 2px 8px rgba(0, 0, 0, 0.05)',
         'glass-lg': '0 12px 40px rgba(0, 0, 0, 0.15)',
-        glow: '0 0 15px rgba(40, 110, 179, 0.3)',
-        'glow-lg': '0 0 25px rgba(40, 110, 179, 0.5)',
+        glow: '0 0 15px rgba(255, 40, 40, 0.3)',
+        'glow-lg': '0 0 25px rgba(255, 40, 40, 0.5)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -94,8 +94,8 @@ const config: Config = {
           '50%': { transform: 'translateY(-5px)' },
         },
         'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 15px rgba(40, 110, 179, 0.3)' },
-          '50%': { boxShadow: '0 0 25px rgba(40, 110, 179, 0.5)' },
+          '0%, 100%': { boxShadow: '0 0 15px rgba(255, 40, 40, 0.3)' },
+          '50%': { boxShadow: '0 0 25px rgba(255, 40, 40, 0.5)' },
         },
         slideIn: {
           '0%': { transform: 'translateX(-100%)', opacity: '0' },
@@ -114,8 +114,8 @@ const config: Config = {
           '50%': { transform: 'translateY(-3px)' },
         },
         glowPulse: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(40, 110, 179, 0.3)' },
-          '50%': { boxShadow: '0 0 30px rgba(40, 110, 179, 0.6)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(255, 40, 40, 0.3)' },
+          '50%': { boxShadow: '0 0 30px rgba(255, 40, 40, 0.6)' },
         },
       },
     },

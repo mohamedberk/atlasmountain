@@ -88,7 +88,7 @@ export function ActivityCardFeatured({
       }`}>
         {/* Featured Badge */}
         {activity.isFeatured && (
-          <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full text-xs font-semibold shadow-sm">
+          <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1.5 bg-[#ff2828] text-white rounded-full text-xs font-semibold shadow-sm">
             <Award className="w-3 h-3" />
             <span>Featured</span>
           </div>
@@ -124,7 +124,7 @@ export function ActivityCardFeatured({
                 {/* Duration - Elegant branded badge */}
                 {activity.duration && (
                   <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/95 backdrop-blur-md border border-white/50 shadow-sm">
-                    <Clock className="w-3.5 h-3.5 text-[#49b540]" />
+                    <Clock className="w-3.5 h-3.5 text-[#ff2828]" />
                     <span className="text-xs font-semibold text-neutral-900 tracking-tight">{activity.duration}</span>
                   </div>
                 )}
@@ -162,9 +162,9 @@ export function ActivityCardFeatured({
           {highlights.length > 0 && (
             <div className="mb-4 flex flex-wrap gap-2">
               {highlights.slice(0, 3).map((highlight, idx) => (
-                <div key={idx} className="flex items-center gap-1.5 px-2.5 py-1 bg-green-50 rounded-lg">
-                  <Check className="w-3 h-3 text-green-600" strokeWidth={2.5} />
-                  <span className="text-xs text-green-700 font-medium">{highlight}</span>
+                <div key={idx} className="flex items-center gap-1.5 px-2.5 py-1 bg-red-50 rounded-lg">
+                  <Check className="w-3 h-3 text-red-600" strokeWidth={2.5} />
+                  <span className="text-xs text-red-700 font-medium">{highlight}</span>
                 </div>
               ))}
             </div>

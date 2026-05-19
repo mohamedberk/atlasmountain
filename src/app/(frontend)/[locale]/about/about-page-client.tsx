@@ -7,7 +7,7 @@ import { NavLink } from '@/components/ui/nav-link'
 import { imagekitUrls } from '@/data/imagekit-urls'
 import type { Media } from '@/payload-types'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 // Icon mapping
 const iconMap: Record<string, any> = {
@@ -99,7 +99,7 @@ const defaultHighlights = [
 ]
 
 const defaultMissionParagraphs = [
-  "At Green Atlas Travel, every journey is crafted with heart. We're not just passionate about Morocco — we're honored to share its beauty, culture, and soul with travelers from around the world. Guiding you through unforgettable experiences isn't just our job — <strong class=\"text-neutral-900\">it's our privilege</strong>.",
+  "At Atlas Mountain Visit, every journey is crafted with heart. We're not just passionate about Morocco — we're honored to share its beauty, culture, and soul with travelers from around the world. Guiding you through unforgettable experiences isn't just our job — <strong class=\"text-neutral-900\">it's our privilege</strong>.",
   "Our mission is to showcase the richness of Morocco through <strong class=\"text-neutral-900\">tailor-made journeys</strong> that blend authenticity, comfort, and meaningful cultural immersion. Whether you're dreaming of a desert adventure, a mountain retreat, or a journey through imperial cities, we create <strong class=\"text-neutral-900\">personalized experiences</strong> that reflect your individual aspirations.",
   "We are proud to work with some of the <strong class=\"text-neutral-900\">most dedicated and knowledgeable local guides</strong> in the country. Thanks to our in-depth expertise and trusted partnerships, we ensure that every itinerary is thoughtfully designed for a smooth, safe, and enriching experience.",
 ]
@@ -196,7 +196,7 @@ export function AboutPageClient({ content, cmsData }: Props) {
               <span style={{ color: ACCENT_GREEN }}>{hero.titleHighlight || 'Authentic Morocco'}</span>
             </h1>
             <p className="text-xl text-white/90 leading-relaxed whitespace-pre-line">
-              {hero.description || 'Green Atlas Travel is a Moroccan travel agency specializing in tailor-made journeys, from authentic escapes to comfortable and well-crafted adventures.'}
+              {hero.description || 'Atlas Mountain Visit is a Moroccan travel agency specializing in tailor-made journeys, from authentic escapes to comfortable and well-crafted adventures.'}
             </p>
           </motion.div>
         </div>

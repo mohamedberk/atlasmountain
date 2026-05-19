@@ -253,8 +253,8 @@ export function ActivityDetailModal({
                 <div className="space-y-1.5">
                   {activity.included.slice(0, 4).map((item, idx) => (
                     <div key={idx} className="flex items-start gap-2 text-sm text-neutral-600">
-                      <div className="w-4 h-4 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check className="w-2.5 h-2.5 text-green-600" />
+                      <div className="w-4 h-4 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Check className="w-2.5 h-2.5 text-red-600" />
                       </div>
                       <span>{extractPlainText((item as any)?.item ?? item)}</span>
                     </div>
@@ -354,11 +354,11 @@ export function ActivityDetailModal({
 
             <div className="flex items-center justify-center gap-4 mt-4 text-xs text-neutral-500">
               <span className="flex items-center gap-1">
-                <Shield className="w-3.5 h-3.5 text-green-600" />
+                <Shield className="w-3.5 h-3.5 text-red-600" />
                 Free cancellation
               </span>
               <span className="flex items-center gap-1">
-                <Check className="w-3.5 h-3.5 text-green-600" />
+                <Check className="w-3.5 h-3.5 text-red-600" />
                 Instant confirmation
               </span>
             </div>

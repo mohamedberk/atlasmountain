@@ -152,7 +152,7 @@ async function importGlobals() {
       data: {
         hero: {
           badge: data.hero?.badge || 'Since 2004',
-          title: 'About Green Atlas Travel',
+          title: 'About Atlas Mountain Visit',
           description: 'We are passionate local experts dedicated to showing you the real Morocco',
           backgroundImage: mapMediaId(data.hero?.backgroundImage),
         },

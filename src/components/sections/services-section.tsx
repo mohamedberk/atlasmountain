@@ -5,7 +5,7 @@ import { Users, Car, Compass, Hotel, MapPin, Mountain } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { NavLink } from '@/components/ui/nav-link'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -54,19 +54,6 @@ export function ServicesSection() {
           variants={staggerContainer}
           className="text-center mb-14"
         >
-          <motion.div variants={fadeInUp} custom={0}>
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
-              style={{ backgroundColor: `${ACCENT_GREEN}15` }}
-            >
-              <div className="w-1.5 h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-              <span className="text-sm font-medium uppercase tracking-wider" style={{ color: ACCENT_GREEN }}>
-                {t('badge')}
-              </span>
-              <div className="w-1.5 h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-            </motion.div>
-          </motion.div>
-
           <motion.h2
             variants={fadeInUp}
             custom={0.1}
@@ -115,7 +102,7 @@ export function ServicesSection() {
                   >
                     <IconComponent className="w-7 h-7" style={{ color: ACCENT_GREEN }} />
                   </div>
-                  <h3 className="font-display text-xl font-bold text-neutral-900 mb-2 group-hover:text-green-600 transition-colors">
+                  <h3 className="font-display text-xl font-bold text-neutral-900 mb-2 group-hover:text-red-600 transition-colors">
                     {t(service.titleKey)}
                   </h3>
                   <p className="text-neutral-600 text-sm leading-relaxed">

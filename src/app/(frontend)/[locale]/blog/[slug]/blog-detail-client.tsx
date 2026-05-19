@@ -12,7 +12,7 @@ import { RichText } from '@/components/rich-text'
 import type { BlogPost, Media, Activity } from '@/payload-types'
 import { extractPlainText } from '@/lib/utils'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 // Category labels
 const categoryLabels: Record<string, Record<string, string>> = {
@@ -69,7 +69,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
     const shareUrl = `${window.location.origin}/${locale}/blog/${post.slug}`
     const shareData = {
       title: post.title,
-      text: extractPlainText(post.excerpt) || `Read ${post.title} on Green Atlas Travel Blog`,
+      text: extractPlainText(post.excerpt) || `Read ${post.title} on Atlas Mountain Visit Blog`,
       url: shareUrl,
     }
 
@@ -100,11 +100,11 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
           >
             {/* Breadcrumb */}
             <nav className="flex items-center gap-2 text-sm mb-6">
-              <NavLink href="/" className="text-neutral-500 hover:text-green-600 transition-colors">
+              <NavLink href="/" className="text-neutral-500 hover:text-red-600 transition-colors">
                 {tNav('home')}
               </NavLink>
               <ChevronRight className="w-4 h-4 text-neutral-400" />
-              <NavLink href="/blog" className="text-neutral-500 hover:text-green-600 transition-colors">
+              <NavLink href="/blog" className="text-neutral-500 hover:text-red-600 transition-colors">
                 Blog
               </NavLink>
               <ChevronRight className="w-4 h-4 text-neutral-400" />
@@ -232,7 +232,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
 
               {/* Rich Text Content */}
               <div className="bg-white rounded-2xl border border-neutral-100 p-6 md:p-10">
-                <div className="prose prose-lg prose-neutral max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:text-neutral-900 prose-p:text-neutral-700 prose-a:text-green-600 prose-a:font-medium hover:prose-a:text-green-700 prose-img:rounded-xl prose-blockquote:border-l-green-500 prose-blockquote:bg-neutral-50 prose-blockquote:py-1 prose-blockquote:px-6 prose-blockquote:rounded-r-lg">
+                <div className="prose prose-lg prose-neutral max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:text-neutral-900 prose-p:text-neutral-700 prose-a:text-red-600 prose-a:font-medium hover:prose-a:text-red-700 prose-img:rounded-xl prose-blockquote:border-l-red-500 prose-blockquote:bg-neutral-50 prose-blockquote:py-1 prose-blockquote:px-6 prose-blockquote:rounded-r-lg">
                   {post.content && <RichText content={post.content} />}
                 </div>
 
@@ -291,7 +291,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                             />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h4 className="font-medium text-neutral-900 text-sm line-clamp-2 group-hover:text-green-600 transition-colors">
+                            <h4 className="font-medium text-neutral-900 text-sm line-clamp-2 group-hover:text-red-600 transition-colors">
                               {activity.title}
                             </h4>
                             <p className="font-bold text-sm mt-1" style={{ color: ACCENT_GREEN }}>
@@ -346,7 +346,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                               />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <h4 className="font-medium text-neutral-900 text-sm line-clamp-2 group-hover:text-green-600 transition-colors">
+                              <h4 className="font-medium text-neutral-900 text-sm line-clamp-2 group-hover:text-red-600 transition-colors">
                                 {relatedPost.title}
                               </h4>
                               <p className="text-xs text-neutral-500 mt-1">
@@ -370,7 +370,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                 {/* Back to Blog */}
                 <NavLink
                   href="/blog"
-                  className="flex items-center gap-2 text-neutral-600 hover:text-green-600 transition-colors text-sm"
+                  className="flex items-center gap-2 text-neutral-600 hover:text-red-600 transition-colors text-sm"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   {tBlog('backToBlog')}
@@ -407,7 +407,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                 <NavLink
                   key={activity.id}
                   href={`/activities/${activity.slug}`}
-                  className="group bg-[#fafaf9] rounded-2xl overflow-hidden border border-neutral-100 hover:border-green-200 transition-all"
+                  className="group bg-[#fafaf9] rounded-2xl overflow-hidden border border-neutral-100 hover:border-red-200 transition-all"
                 >
                   <div className="relative h-48 overflow-hidden">
                     <Image
@@ -423,7 +423,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                     )}
                   </div>
                   <div className="p-5">
-                    <h3 className="font-semibold text-neutral-900 mb-2 group-hover:text-green-600 transition-colors">
+                    <h3 className="font-semibold text-neutral-900 mb-2 group-hover:text-red-600 transition-colors">
                       {activity.title}
                     </h3>
                     <div className="flex items-center justify-between">
@@ -468,7 +468,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                   href={`/blog/${relatedPost.slug}`}
                   className="group"
                 >
-                  <article className="bg-white rounded-2xl overflow-hidden border border-neutral-100 hover:border-green-200 transition-all h-full flex flex-col">
+                  <article className="bg-white rounded-2xl overflow-hidden border border-neutral-100 hover:border-red-200 transition-all h-full flex flex-col">
                     <div className="relative h-44 overflow-hidden">
                       <Image
                         src={getImageUrl(relatedPost.featuredImage)}
@@ -495,7 +495,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                         </span>
                       </div>
 
-                      <h3 className="font-semibold text-neutral-900 mb-2 line-clamp-2 group-hover:text-green-600 transition-colors">
+                      <h3 className="font-semibold text-neutral-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors">
                         {relatedPost.title}
                       </h3>
 

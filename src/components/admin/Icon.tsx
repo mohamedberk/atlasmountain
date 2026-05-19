@@ -1,18 +1,19 @@
 'use client'
 
-import Image from 'next/image'
-
 export const Icon = () => {
   return (
     <div className="admin-icon">
-      <Image
-        src="/green-atlas-icon.png"
-        alt="Green Atlas Travel"
-        width={28}
-        height={28}
-        priority
-        style={{ objectFit: 'contain' }}
-      />
+      <span
+        style={{
+          fontFamily: 'Georgia, serif',
+          fontSize: '14px',
+          fontWeight: 700,
+          color: '#ff2828',
+          letterSpacing: '-0.5px',
+        }}
+      >
+        AMV
+      </span>
     </div>
   )
 }

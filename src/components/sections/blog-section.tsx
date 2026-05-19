@@ -8,7 +8,7 @@ import { NavLink } from '@/components/ui/nav-link'
 import type { BlogPost, Media } from '@/payload-types'
 import { extractPlainText } from '@/lib/utils'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 // Get image URL helper
 function getImageUrl(image: string | number | Media | null | undefined): string {
@@ -82,20 +82,6 @@ export function BlogSection({ posts, blogSectionData }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            {/* Badge */}
-            {content.badge && (
-              <div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4"
-                style={{ backgroundColor: `${ACCENT_GREEN}15` }}
-              >
-                <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-                <span className="text-sm font-medium uppercase tracking-wider" style={{ color: ACCENT_GREEN }}>
-                  {content.badge}
-                </span>
-                <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-              </div>
-            )}
-
             {/* Title */}
             {(content.title || content.titleHighlight) && (
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-neutral-900 mb-3">
@@ -142,7 +128,7 @@ export function BlogSection({ posts, blogSectionData }: Props) {
               transition={{ delay: index * 0.1 }}
             >
               <NavLink href={`/blog/${post.slug}`} className="group block h-full">
-                <article className="bg-[#fafaf9] rounded-2xl overflow-hidden border border-neutral-100 hover:border-green-200 transition-all h-full flex flex-col">
+                <article className="bg-[#fafaf9] rounded-2xl overflow-hidden border border-neutral-100 hover:border-red-200 transition-all h-full flex flex-col">
                   {/* Image */}
                   <div className="relative h-48 overflow-hidden">
                     <Image
@@ -171,7 +157,7 @@ export function BlogSection({ posts, blogSectionData }: Props) {
                       </span>
                     </div>
 
-                    <h3 className="font-display font-semibold text-lg text-neutral-900 mb-2 line-clamp-2 group-hover:text-green-600 transition-colors">
+                    <h3 className="font-display font-semibold text-lg text-neutral-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors">
                       {post.title}
                     </h3>
 

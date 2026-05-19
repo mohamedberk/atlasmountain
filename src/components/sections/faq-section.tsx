@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Minus, HelpCircle } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 
 interface FAQItem {
@@ -64,13 +64,12 @@ export function FAQSection({ faqData }: Props) {
     { question: tFaq('defaultFaq4Question'), answer: tFaq('defaultFaq4Answer') },
   ]
 
-  const badgeText = faqData?.badgeText || tFaq('gotQuestions')
   const title = faqData?.title || tFaq('frequentlyAsked')
   const titleHighlight = faqData?.titleHighlight || tFaq('questions')
   const description = faqData?.description || tFaq('description')
   const contactCtaText = faqData?.contactCtaText || tFaq('stillHaveQuestions')
   const contactLinkText = faqData?.contactLinkText || tFaq('contactOurTeam')
-  const contactEmail = faqData?.contactEmail || 'greenatlastravel1@gmail.com'
+  const contactEmail = faqData?.contactEmail || 'atlasmountainsvisit1@gmail.com'
 
   const faqs = faqData?.items?.length ? faqData.items : defaultFaqs
 
@@ -79,28 +78,8 @@ export function FAQSection({ faqData }: Props) {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-white relative overflow-hidden" id="faq">
-      {/* Decorative elements */}
-      <motion.div
-        className="absolute top-20 -right-32 w-80 h-80 rounded-full blur-3xl pointer-events-none"
-        style={{ backgroundColor: `${ACCENT_GREEN}08` }}
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.5, 0.8, 0.5],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute bottom-20 -left-32 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-        style={{ backgroundColor: `${ACCENT_GREEN}06` }}
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <section className="py-16 md:py-24 bg-white" id="faq">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial="hidden"
@@ -110,20 +89,6 @@ export function FAQSection({ faqData }: Props) {
           className="text-center mb-12"
         >
           <motion.div variants={fadeInUp} custom={0}>
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4"
-              style={{ backgroundColor: `${ACCENT_GREEN}15` }}
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="w-1.5 h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-              <span className="text-sm font-medium uppercase tracking-wider" style={{ color: ACCENT_GREEN }}>
-                {badgeText}
-              </span>
-              <div className="w-1.5 h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-            </motion.div>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-neutral-900 mb-4">
               {title} <span style={{ color: ACCENT_GREEN }}>{titleHighlight}</span>
             </h2>
@@ -152,7 +117,7 @@ export function FAQSection({ faqData }: Props) {
               <div
                 className={`bg-[#fafaf9] rounded-2xl border overflow-hidden transition-all duration-300 ${
                   openIndex === index
-                    ? 'border-green-200 shadow-[0_1px_4px_rgba(0,0,0,0.02)]'
+                    ? 'border-red-200 shadow-[0_1px_4px_rgba(0,0,0,0.02)]'
                     : 'border-neutral-100 hover:border-neutral-200'
                 }`}
               >

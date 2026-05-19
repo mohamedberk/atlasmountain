@@ -39,15 +39,15 @@ export async function generateMetadata({
   const { locale } = await params
 
   const titles: Record<string, string> = {
-    en: 'Green Atlas Travel | Authentic Moroccan Adventures',
-    fr: 'Green Atlas Travel | Aventures Authentiques au Maroc',
-    de: 'Green Atlas Travel | Authentische Marokkanische Abenteuer',
+    en: 'Atlas Mountain Visit | Authentic Moroccan Adventures',
+    fr: 'Atlas Mountain Visit | Aventures Authentiques au Maroc',
+    de: 'Atlas Mountain Visit | Authentische Marokkanische Abenteuer',
   }
 
   const descriptions: Record<string, string> = {
-    en: 'Experience the real Morocco with Green Atlas Travel. Desert escapes, mountain hikes, and authentic local experiences - no tourist traps, just the Morocco we love.',
-    fr: 'Vivez le vrai Maroc avec Green Atlas Travel. Escapades dans le désert, randonnées en montagne et expériences locales authentiques - pas de pièges à touristes, juste le Maroc que nous aimons.',
-    de: 'Erleben Sie das echte Marokko mit Green Atlas Travel. Wüstenausflüge, Bergwanderungen und authentische lokale Erlebnisse - keine Touristenfallen, nur das Marokko, das wir lieben.',
+    en: 'Experience the real Morocco with Atlas Mountain Visit. Desert escapes, mountain hikes, and authentic local experiences - no tourist traps, just the Morocco we love.',
+    fr: 'Vivez le vrai Maroc avec Atlas Mountain Visit. Escapades dans le désert, randonnées en montagne et expériences locales authentiques - pas de pièges à touristes, juste le Maroc que nous aimons.',
+    de: 'Erleben Sie das echte Marokko mit Atlas Mountain Visit. Wüstenausflüge, Bergwanderungen und authentische lokale Erlebnisse - keine Touristenfallen, nur das Marokko, das wir lieben.',
   }
 
   return {

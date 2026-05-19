@@ -35,13 +35,13 @@ interface DashboardStats {
 
 const statusColors: Record<string, string> = {
   pending: '#f59e0b',
-  paid: '#3b82f6',
-  confirmed: '#22c55e',
+  paid: '#737373',
+  confirmed: '#ff2828',
   in_progress: '#8b5cf6',
-  completed: '#10b981',
+  completed: '#171717',
   cancelled: '#ef4444',
   refunded: '#6b7280',
-  no_show: '#f97316',
+  no_show: '#a3a3a3',
 }
 
 const statusLabels: Record<string, string> = {

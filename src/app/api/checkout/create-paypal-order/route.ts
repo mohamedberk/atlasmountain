@@ -202,7 +202,7 @@ export async function POST(request: NextRequest) {
         purchase_units: [
           {
             reference_id: booking.bookingReference,
-            description: `Green Atlas Travel Booking - ${booking.bookingReference}`,
+            description: `Atlas Mountain Visit Booking - ${booking.bookingReference}`,
             custom_id: booking.id,
             amount: {
               currency_code: 'EUR',
@@ -211,7 +211,7 @@ export async function POST(request: NextRequest) {
           },
         ],
         application_context: {
-          brand_name: 'Green Atlas Travel',
+          brand_name: 'Atlas Mountain Visit',
           locale: locale === 'de' ? 'de-DE' : locale === 'fr' ? 'fr-FR' : 'en-US',
           landing_page: 'NO_PREFERENCE',
           user_action: 'PAY_NOW',

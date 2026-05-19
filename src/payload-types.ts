@@ -96,7 +96,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'fr' | 'de') | ('en' | 'fr' | 'de')[];
   globals: {
@@ -116,9 +116,10 @@ export interface Config {
     'privacy-page': PrivacyPageSelect<false> | PrivacyPageSelect<true>;
   };
   locale: 'en' | 'fr' | 'de';
-  user: User & {
-    collection: 'users';
+  widgets: {
+    collections: CollectionsWidget;
   };
+  user: User;
   jobs: {
     tasks: unknown;
     workflows: unknown;
@@ -147,7 +148,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -165,20 +166,20 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
+  id: string;
   alt?: string | null;
   caption?: string | null;
   /**
    * Optional: Paste an external URL (e.g. from UploadThing) instead of uploading a file
    */
   externalUrl?: string | null;
-  _key?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -192,7 +193,6 @@ export interface Media {
   focalY?: number | null;
   sizes?: {
     thumbnail?: {
-      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -201,7 +201,6 @@ export interface Media {
       filename?: string | null;
     };
     card?: {
-      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -210,7 +209,6 @@ export interface Media {
       filename?: string | null;
     };
     hero?: {
-      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -227,7 +225,7 @@ export interface Media {
  * via the `definition` "categories".
  */
 export interface Category {
-  id: number;
+  id: string;
   /**
    * Category name (e.g., "Desert Adventures", "Mountain Adventures")
    */
@@ -246,7 +244,7 @@ export interface Category {
    * Select a Lucide icon for this category
    */
   icon?: string | null;
-  image?: (number | null) | Media;
+  image?: (string | null) | Media;
   /**
    * Order for display (lower numbers appear first)
    */
@@ -261,7 +259,7 @@ export interface Category {
  * via the `definition` "locations".
  */
 export interface Location {
-  id: number;
+  id: string;
   /**
    * Location name (e.g., "Marrakech Menara Airport", "Jemaa el-Fnaa")
    */
@@ -306,7 +304,7 @@ export interface Location {
  * via the `definition` "activities".
  */
 export interface Activity {
-  id: number;
+  id: string;
   /**
    * Overall rating from 0 to 5 (e.g., 4.9)
    */
@@ -342,7 +340,7 @@ export interface Activity {
   /**
    * Optional - can be set after import
    */
-  category?: (number | null) | Category;
+  category?: (string | null) | Category;
   /**
    * Duration text (e.g., "Full Day", "2 Hours", "Half Day")
    */
@@ -437,10 +435,10 @@ export interface Activity {
   /**
    * Required before publishing - can be added after import
    */
-  featuredImage?: (number | null) | Media;
+  featuredImage?: (string | null) | Media;
   gallery?:
     | {
-        media: number | Media;
+        media: string | Media;
         type?: ('image' | 'video') | null;
         caption?: string | null;
         id?: string | null;
@@ -664,7 +662,7 @@ export interface Activity {
  * via the `definition` "bookings".
  */
 export interface Booking {
-  id: number;
+  id: string;
   /**
    * Auto-generated booking reference
    */
@@ -701,7 +699,7 @@ export interface Booking {
    */
   activities?:
     | {
-        activity?: (number | null) | Activity;
+        activity?: (string | null) | Activity;
         /**
          * Title at time of booking (for records)
          */
@@ -732,7 +730,7 @@ export interface Booking {
         id?: string | null;
       }[]
     | null;
-  pickupLocation?: (number | null) | Location;
+  pickupLocation?: (string | null) | Location;
   /**
    * Custom address if not in location list
    */
@@ -741,7 +739,7 @@ export interface Booking {
    * Confirmed pickup time
    */
   pickupTime?: string | null;
-  dropoffLocation?: (number | null) | Location;
+  dropoffLocation?: (string | null) | Location;
   customDropoffAddress?: string | null;
   /**
    * For airport transfers
@@ -801,7 +799,7 @@ export interface Booking {
         date: string;
         type?: ('email' | 'whatsapp' | 'phone' | 'sms') | null;
         message: string;
-        sentBy?: (number | null) | User;
+        sentBy?: (string | null) | User;
         id?: string | null;
       }[]
     | null;
@@ -824,7 +822,7 @@ export interface Booking {
  * via the `definition` "blog-posts".
  */
 export interface BlogPost {
-  id: number;
+  id: string;
   title: string;
   /**
    * URL-friendly identifier (auto-generated from title). Localized for SEO.
@@ -863,7 +861,7 @@ export interface BlogPost {
     };
     [k: string]: unknown;
   };
-  featuredImage: number | Media;
+  featuredImage: string | Media;
   /**
    * Primary category for this post
    */
@@ -888,11 +886,11 @@ export interface BlogPost {
   /**
    * Related activities to show at the end of the post
    */
-  relatedActivities?: (number | Activity)[] | null;
+  relatedActivities?: (string | Activity)[] | null;
   /**
    * Related blog posts to suggest
    */
-  relatedPosts?: (number | BlogPost)[] | null;
+  relatedPosts?: (string | BlogPost)[] | null;
   seo?: {
     /**
      * Override the page title for SEO (defaults to post title)
@@ -909,7 +907,7 @@ export interface BlogPost {
     /**
      * Custom Open Graph image (defaults to featured image)
      */
-    ogImage?: (number | null) | Media;
+    ogImage?: (string | null) | Media;
     /**
      * Canonical URL if this is syndicated content
      */
@@ -945,7 +943,7 @@ export interface BlogPost {
  * via the `definition` "contact-submissions".
  */
 export interface ContactSubmission {
-  id: number;
+  id: string;
   name: string;
   email: string;
   phone?: string | null;
@@ -970,7 +968,7 @@ export interface ContactSubmission {
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: number;
+  id: string;
   key: string;
   data:
     | {
@@ -987,44 +985,44 @@ export interface PayloadKv {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'users';
-        value: number | User;
+        value: string | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: number | Media;
+        value: string | Media;
       } | null)
     | ({
         relationTo: 'categories';
-        value: number | Category;
+        value: string | Category;
       } | null)
     | ({
         relationTo: 'locations';
-        value: number | Location;
+        value: string | Location;
       } | null)
     | ({
         relationTo: 'activities';
-        value: number | Activity;
+        value: string | Activity;
       } | null)
     | ({
         relationTo: 'bookings';
-        value: number | Booking;
+        value: string | Booking;
       } | null)
     | ({
         relationTo: 'blog-posts';
-        value: number | BlogPost;
+        value: string | BlogPost;
       } | null)
     | ({
         relationTo: 'contact-submissions';
-        value: number | ContactSubmission;
+        value: string | ContactSubmission;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -1034,10 +1032,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -1057,7 +1055,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -1093,7 +1091,6 @@ export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
   externalUrl?: T;
-  _key?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1111,7 +1108,6 @@ export interface MediaSelect<T extends boolean = true> {
         thumbnail?:
           | T
           | {
-              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1122,7 +1118,6 @@ export interface MediaSelect<T extends boolean = true> {
         card?:
           | T
           | {
-              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1133,7 +1128,6 @@ export interface MediaSelect<T extends boolean = true> {
         hero?:
           | T
           | {
-              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1522,7 +1516,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "site-settings".
  */
 export interface SiteSetting {
-  id: number;
+  id: string;
   contact: {
     phone: {
       /**
@@ -1607,18 +1601,18 @@ export interface SiteSetting {
  * via the `definition` "home-page".
  */
 export interface HomePage {
-  id: number;
+  id: string;
   hero: {
     /**
      * Hero background (1920x1080px minimum). Used as the first slide in the carousel.
      */
-    backgroundImage: number | Media;
+    backgroundImage: string | Media;
     /**
      * Add up to 4 more images. Combined with the Background Image above, they auto-rotate every 5 seconds (5 total max).
      */
     backgroundImages?:
       | {
-          image: number | Media;
+          image: string | Media;
           id?: string | null;
         }[]
       | null;
@@ -1644,7 +1638,7 @@ export interface HomePage {
     /**
      * Select exactly 2 activities to showcase in the hero
      */
-    featuredActivities?: (number | Activity)[] | null;
+    featuredActivities?: (string | Activity)[] | null;
     credibility?: {
       /**
        * e.g., "500+", "5K+"
@@ -1678,7 +1672,7 @@ export interface HomePage {
     /**
      * Select exactly 4 activities to feature
      */
-    activities?: (number | Activity)[] | null;
+    activities?: (string | Activity)[] | null;
   };
   about?: {
     badgeText?: string | null;
@@ -1711,7 +1705,7 @@ export interface HomePage {
      */
     images?:
       | {
-          image: number | Media;
+          image: string | Media;
           /**
            * Describe the image for accessibility
            */
@@ -1805,7 +1799,7 @@ export interface HomePage {
  * via the `definition` "about-page".
  */
 export interface AboutPage {
-  id: number;
+  id: string;
   hero?: {
     badge?: string | null;
     title?: string | null;
@@ -1814,7 +1808,7 @@ export interface AboutPage {
      */
     titleHighlight?: string | null;
     description?: string | null;
-    backgroundImage?: (number | null) | Media;
+    backgroundImage?: (string | null) | Media;
   };
   stats?:
     | {
@@ -1849,7 +1843,7 @@ export interface AboutPage {
           id?: string | null;
         }[]
       | null;
-    image?: (number | null) | Media;
+    image?: (string | null) | Media;
     badgeValue?: string | null;
     badgeLabel?: string | null;
   };
@@ -1905,7 +1899,7 @@ export interface AboutPage {
           id?: string | null;
         }[]
       | null;
-    image?: (number | null) | Media;
+    image?: (string | null) | Media;
   };
   teamSection?: {
     title?: string | null;
@@ -1915,7 +1909,7 @@ export interface AboutPage {
           name: string;
           role: string;
           bio?: string | null;
-          image?: (number | null) | Media;
+          image?: (string | null) | Media;
           id?: string | null;
         }[]
       | null;
@@ -1940,7 +1934,7 @@ export interface AboutPage {
  * via the `definition` "contact-page".
  */
 export interface ContactPage {
-  id: number;
+  id: string;
   header: {
     /**
      * Small badge text above the title
@@ -2067,7 +2061,7 @@ export interface ContactPage {
  * via the `definition` "terms-page".
  */
 export interface TermsPage {
-  id: number;
+  id: string;
   title: string;
   /**
    * When the terms were last updated
@@ -2103,7 +2097,7 @@ export interface TermsPage {
  * via the `definition` "privacy-page".
  */
 export interface PrivacyPage {
-  id: number;
+  id: string;
   title: string;
   /**
    * When the privacy policy was last updated
@@ -2604,6 +2598,16 @@ export interface PrivacyPageSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "collections_widget".
+ */
+export interface CollectionsWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

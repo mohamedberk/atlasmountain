@@ -431,7 +431,7 @@ export function ExperiencesDiscovery({ activities }: Props) {
                               </div>
                               <div className="flex justify-between mt-1">
                                 <span className="text-xs text-neutral-500">{t('remainingBudget')}</span>
-                                <span className={`text-sm font-medium ${tripTotals.remaining >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                                <span className={`text-sm font-medium ${tripTotals.remaining >= 0 ? 'text-neutral-900' : 'text-red-500'}`}>
                                   €{tripTotals.remaining}
                                 </span>
                               </div>

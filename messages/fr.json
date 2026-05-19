@@ -364,7 +364,7 @@
       "exploreMore": "Découvrir plus d'aventures",
       "ratedBy": "Noté {rating} par {count} voyageurs",
       "copyReference": "Copier la référence de réservation",
-      "shareTitle": "Réservation Green Atlas Travel",
+      "shareTitle": "Réservation Atlas Mountain Visit",
       "shareText": "Mon aventure au Maroc est réservée ! Référence : {ref}"
     }
   },
@@ -482,17 +482,17 @@
     "gotQuestions": "Des Questions ?",
     "frequentlyAsked": "Questions",
     "questions": "Fréquentes",
-    "description": "Tout ce que vous devez savoir pour voyager avec Green Atlas Travel. Vous ne trouvez pas la réponse ? Contactez-nous.",
+    "description": "Tout ce que vous devez savoir pour voyager avec Atlas Mountain Visit. Vous ne trouvez pas la réponse ? Contactez-nous.",
     "stillHaveQuestions": "D'autres questions ?",
     "contactOurTeam": "Contactez notre équipe",
-    "defaultFaq1Question": "Quels types de circuits Green Atlas Travel propose-t-il ?",
-    "defaultFaq1Answer": "Chez Green Atlas Travel, nous offrons bien plus que de simples visites — nous créons des expériences immersives qui dévoilent l'âme du Maroc.\n\nDes excursions captivantes autour de Marrakech aux aventures de plusieurs jours à travers le Sahara, en passant par des circuits culturels sur mesure à travers les villes impériales, chaque voyage est conçu pour allier découverte, confort et authenticité.\n\nQue vous recherchiez les dunes dorées, les sommets montagneux ou les médinas vibrantes, nos circuits vous invitent à explorer le Maroc sous sa forme la plus inspirante et inoubliable.",
-    "defaultFaq2Question": "Qui dirige les circuits chez Green Atlas Travel ?",
-    "defaultFaq2Answer": "Le cœur de chaque expérience Green Atlas Travel réside dans les personnes qui la guident. Nos circuits sont dirigés par des guides touristiques expérimentés, officiels et agréés, spécialisés dans les paysages naturels du Maroc avec plus de 20 ans d'expérience.\n\nPassionnés par le riche patrimoine et les terrains diversifiés du Maroc, notre équipe triée sur le volet de guides locaux multilingues et de chauffeurs professionnels se consacre à partager leurs connaissances approfondies avec chaque voyageur.\n\nPlus que des guides, ce sont des conteurs, des ambassadeurs culturels et des compagnons de confiance — prêts à rendre votre voyage marocain sûr, fluide et inoubliable.",
+    "defaultFaq1Question": "Quels types de circuits Atlas Mountain Visit propose-t-il ?",
+    "defaultFaq1Answer": "Chez Atlas Mountain Visit, nous offrons bien plus que de simples visites — nous créons des expériences immersives qui dévoilent l'âme du Maroc.\n\nDes excursions captivantes autour de Marrakech aux aventures de plusieurs jours à travers le Sahara, en passant par des circuits culturels sur mesure à travers les villes impériales, chaque voyage est conçu pour allier découverte, confort et authenticité.\n\nQue vous recherchiez les dunes dorées, les sommets montagneux ou les médinas vibrantes, nos circuits vous invitent à explorer le Maroc sous sa forme la plus inspirante et inoubliable.",
+    "defaultFaq2Question": "Qui dirige les circuits chez Atlas Mountain Visit ?",
+    "defaultFaq2Answer": "Le cœur de chaque expérience Atlas Mountain Visit réside dans les personnes qui la guident. Nos circuits sont dirigés par des guides touristiques expérimentés, officiels et agréés, spécialisés dans les paysages naturels du Maroc avec plus de 20 ans d'expérience.\n\nPassionnés par le riche patrimoine et les terrains diversifiés du Maroc, notre équipe triée sur le volet de guides locaux multilingues et de chauffeurs professionnels se consacre à partager leurs connaissances approfondies avec chaque voyageur.\n\nPlus que des guides, ce sont des conteurs, des ambassadeurs culturels et des compagnons de confiance — prêts à rendre votre voyage marocain sûr, fluide et inoubliable.",
     "defaultFaq3Question": "À quoi dois-je m'attendre pendant un circuit ?",
     "defaultFaq3Answer": "Dès le début de votre voyage, vous pouvez vous attendre à une expérience fluide, immersive et profondément personnalisée. Nos circuits sont conçus pour équilibrer aventure, découverte culturelle et confort — le tout guidé par des locaux passionnés qui connaissent le Maroc intimement.\n\nVous voyagerez dans des véhicules modernes et climatisés, séjournerez dans des hébergements authentiques tels que des riads traditionnels ou des camps de luxe dans le désert, et profiterez d'expériences comme des balades à dos de chameau au coucher du soleil, des visites guidées dans les médinas historiques et des repas avec des familles locales.\n\nAttendez-vous à de la flexibilité, de la chaleur et un voyage qui vous connecte non seulement aux paysages époustouflants du Maroc, mais aussi à son cœur et son âme.",
-    "defaultFaq4Question": "Comment puis-je réserver un circuit avec Green Atlas Travel ?",
-    "defaultFaq4Answer": "Pour les réservations ou demandes spécifiques, Green Atlas Travel est là pour vous aider. Nous vous invitons à nous contacter directement pour personnaliser votre expérience ou pour toute question concernant nos circuits.\n\nVous pouvez nous joindre via WhatsApp au : +212 666 385 584\n\nOu par e-mail à : greenatlastravel1@gmail.com\n\nNous nous engageons à répondre rapidement à toutes les demandes et à vous offrir un service personnalisé pour rendre votre voyage inoubliable."
+    "defaultFaq4Question": "Comment puis-je réserver un circuit avec Atlas Mountain Visit ?",
+    "defaultFaq4Answer": "Pour les réservations ou demandes spécifiques, Atlas Mountain Visit est là pour vous aider. Nous vous invitons à nous contacter directement pour personnaliser votre expérience ou pour toute question concernant nos circuits.\n\nVous pouvez nous joindre via WhatsApp au : +212 666 385 584\n\nOu par e-mail à : info@atlasmountainsvisit.com\n\nNous nous engageons à répondre rapidement à toutes les demandes et à vous offrir un service personnalisé pour rendre votre voyage inoubliable."
   },
   "errors": {
     "somethingWentWrong": "Oups, une erreur s'est produite !",
@@ -549,7 +549,7 @@
     "badge": "Des circuits sur mesure pour chaque voyageur",
     "title": "Nos",
     "titleHighlight": "Services",
-    "description": "Chez Green Atlas Travel, nous nous spécialisons dans la création d'itinéraires personnalisés adaptés à tous les types de voyageurs. Que vous recherchiez une immersion culturelle, l'aventure ou la détente, nous veillons à ce que chaque détail soit soigneusement organisé.",
+    "description": "Chez Atlas Mountain Visit, nous nous spécialisons dans la création d'itinéraires personnalisés adaptés à tous les types de voyageurs. Que vous recherchiez une immersion culturelle, l'aventure ou la détente, nous veillons à ce que chaque détail soit soigneusement organisé.",
     "cta": "Planifiez Votre Voyage",
     "individualGroupTours": "Circuits Individuels & en Groupe",
     "individualGroupToursDesc": "Des voyages personnalisés pour les voyageurs solo, les couples, les familles et les groupes organisés.",

@@ -46,22 +46,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) {
     return {
-      title: 'Article Not Found | Green Atlas Travel Blog',
+      title: 'Article Not Found | Atlas Mountain Visit Blog',
     }
   }
 
   const imageUrl = getImageUrl(post.seo?.ogImage || post.featuredImage)
 
   return {
-    title: post.seo?.metaTitle || `${post.title} | Green Atlas Travel Blog`,
+    title: post.seo?.metaTitle || `${post.title} | Atlas Mountain Visit Blog`,
     description: post.seo?.metaDescription || extractPlainText(post.excerpt),
-    keywords: post.seo?.keywords || `Morocco travel, ${post.category}, Green Atlas Travel blog`,
+    keywords: post.seo?.keywords || `Morocco travel, ${post.category}, Atlas Mountain Visit blog`,
     authors: [{ name: post.author }],
     openGraph: {
       title: post.seo?.metaTitle || post.title,
       description: post.seo?.metaDescription || extractPlainText(post.excerpt),
-      url: `https://greenatlastravel.com/${locale}/blog/${slug}`,
-      siteName: 'Green Atlas Travel',
+      url: `https://atlasmountainsvisit.com/${locale}/blog/${slug}`,
+      siteName: 'Atlas Mountain Visit',
       images: [{ url: imageUrl, width: 1200, height: 630, alt: post.title }],
       locale: locale,
       type: 'article',
@@ -75,7 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [imageUrl],
     },
     alternates: {
-      canonical: post.seo?.canonicalUrl || `https://greenatlastravel.com/${locale}/blog/${slug}`,
+      canonical: post.seo?.canonicalUrl || `https://atlasmountainsvisit.com/${locale}/blog/${slug}`,
       languages: {
         en: `/en/blog/${slug}`,
         fr: `/fr/blog/${slug}`,
@@ -121,15 +121,15 @@ export default async function BlogPostPage({ params }: Props) {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Green Atlas Travel',
+      name: 'Atlas Mountain Visit',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://greenatlastravel.com/logo.png',
+        url: 'https://atlasmountainsvisit.com/logo.png',
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://greenatlastravel.com/${locale}/blog/${slug}`,
+      '@id': `https://atlasmountainsvisit.com/${locale}/blog/${slug}`,
     },
     wordCount: post.readingTime ? post.readingTime * 200 : undefined,
   }

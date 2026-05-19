@@ -29,7 +29,7 @@ import { useCart, ActivityCartItem } from '@/context/CartContext'
 import { PhoneInput } from '@/components/ui/phone-input'
 import { LocationMapPicker } from '@/components/ui/location-map-picker'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 
 // Types
 interface BookingItem {
@@ -559,7 +559,7 @@ function RelatedActivityCard({
         ) : (
           <button
             onClick={() => setShowSelector(true)}
-            className="w-full py-2 rounded-lg border-2 text-xs font-semibold transition-colors hover:bg-green-50"
+            className="w-full py-2 rounded-lg border-2 text-xs font-semibold transition-colors hover:bg-red-50"
             style={{ borderColor: ACCENT_GREEN, color: ACCENT_GREEN }}
           >
             <Plus className="w-3 h-3 inline mr-1" />
@@ -816,14 +816,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
             <NavLink href="/" className="flex-shrink-0">
-              <Image
-                src="/greenatlaslogo.png"
-                alt="Green Atlas Travel"
-                width={140}
-                height={45}
-                className="h-10 w-auto"
-                priority
-              />
+              <span className="font-display font-bold text-xl tracking-tight text-neutral-900">Atlas Mountain Visit</span>
             </NavLink>
             <div className="flex items-center gap-2 text-sm text-neutral-600">
               <Shield className="w-4 h-4" style={{ color: ACCENT_GREEN }} />
@@ -1012,7 +1005,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                               type="text"
                               value={formData.firstName}
                               onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                              className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none transition-all"
+                              className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                               placeholder="John"
                             />
                           </div>
@@ -1027,7 +1020,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                               type="text"
                               value={formData.lastName}
                               onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                              className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none transition-all"
+                              className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                               placeholder="Doe"
                             />
                           </div>
@@ -1044,7 +1037,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                             type="email"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none transition-all"
+                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
                             placeholder="john@example.com"
                           />
                         </div>
@@ -1082,7 +1075,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                             value={formData.specialRequests}
                             onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
                             rows={3}
-                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none transition-all resize-none"
+                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all resize-none"
                             placeholder={t('specialRequestsPlaceholder')}
                           />
                         </div>
@@ -1244,8 +1237,8 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
               <h3 className="font-bold text-neutral-900 mb-4">{t('orderSummary')}</h3>
 
               {isCustomNoteMode && customPricingNote && (
-                <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <p className="text-sm text-green-800 font-medium">{customPricingNote}</p>
+                <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-sm text-red-800 font-medium">{customPricingNote}</p>
                 </div>
               )}
 

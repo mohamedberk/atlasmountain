@@ -165,7 +165,7 @@ export async function POST(request: NextRequest) {
         bookingReference: booking.bookingReference,
       },
       receipt_email: guestDetails.email,
-      description: `Green Atlas Travel Booking - ${booking.bookingReference}`,
+      description: `Atlas Mountain Visit Booking - ${booking.bookingReference}`,
     })
 
     // Update booking with payment intent ID

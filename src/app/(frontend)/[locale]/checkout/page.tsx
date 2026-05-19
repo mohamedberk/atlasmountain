@@ -12,7 +12,7 @@ interface Props {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Book Your Experience | Green Atlas Travel',
+    title: 'Book Your Experience | Atlas Mountain Visit',
     description: 'Browse and book amazing Morocco experiences',
   }
 }

@@ -14,7 +14,7 @@ import Image from 'next/image'
 import { getOptimizedImageUrl, getResponsiveSizes } from '@/lib/image-utils'
 import type { Activity, Media, Category, Location } from '@/payload-types'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 const STAR_COLOR = '#F59E0B'
 
 // Animation variants
@@ -285,7 +285,7 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
                 placeholder={tPage('searchActivities')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full h-11 pl-11 pr-11 rounded-xl border border-neutral-200 bg-white text-sm focus:outline-none focus:border-[#49b540] focus:ring-2 focus:ring-[#49b540]/20 transition-all shadow-sm"
+                className="w-full h-11 pl-11 pr-11 rounded-xl border border-neutral-200 bg-white text-sm focus:outline-none focus:border-[#ff2828] focus:ring-2 focus:ring-[#ff2828]/20 transition-all shadow-sm"
               />
               {searchQuery && (
                 <button
@@ -471,7 +471,7 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
 
                       {/* Title */}
                       <NavLink href={`/activities/${activity.slug}`}>
-                        <h3 className="font-display text-lg sm:text-xl font-bold text-neutral-900 mb-2 line-clamp-2 group-hover:text-[#49b540] transition-colors duration-300">
+                        <h3 className="font-display text-lg sm:text-xl font-bold text-neutral-900 mb-2 line-clamp-2 group-hover:text-[#ff2828] transition-colors duration-300">
                           {activity.title}
                         </h3>
                       </NavLink>
@@ -596,7 +596,7 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
                       </div>
 
                       <NavLink href={`/activities/${activity.slug}`}>
-                        <h3 className="font-display text-xl font-bold text-neutral-900 mb-2 group-hover:text-[#49b540] transition-colors">
+                        <h3 className="font-display text-xl font-bold text-neutral-900 mb-2 group-hover:text-[#ff2828] transition-colors">
                           {activity.title}
                         </h3>
                       </NavLink>

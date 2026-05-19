@@ -17,17 +17,17 @@ const fallbackContent: Record<string, { title: string; subtitle: string; descrip
   en: {
     title: 'About Us',
     subtitle: 'Your Trusted Morocco Travel Partner',
-    description: 'Discover Green Atlas Travel - 20+ years of crafting authentic Moroccan experiences. Local expertise, personalized adventures, and unforgettable memories.',
+    description: 'Discover Atlas Mountain Visit - 20+ years of crafting authentic Moroccan experiences. Local expertise, personalized adventures, and unforgettable memories.',
   },
   fr: {
     title: 'À Propos',
     subtitle: 'Votre Partenaire de Voyage au Maroc',
-    description: 'Découvrez Green Atlas Travel - Plus de 20 ans d\'expériences marocaines authentiques.',
+    description: 'Découvrez Atlas Mountain Visit - Plus de 20 ans d\'expériences marocaines authentiques.',
   },
   de: {
     title: 'Über Uns',
     subtitle: 'Ihr Vertrauenswürdiger Marokko-Reisepartner',
-    description: 'Entdecken Sie Green Atlas Travel - 20+ Jahre authentische marokkanische Erlebnisse.',
+    description: 'Entdecken Sie Atlas Mountain Visit - 20+ Jahre authentische marokkanische Erlebnisse.',
   },
 }
 
@@ -48,13 +48,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${metaTitle} | Green Atlas Travel`,
+    title: `${metaTitle} | Atlas Mountain Visit`,
     description: metaDescription,
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      url: `https://greenatlastravel.com/${locale}/about`,
-      siteName: 'Green Atlas Travel',
+      url: `https://atlasmountainsvisit.com/${locale}/about`,
+      siteName: 'Atlas Mountain Visit',
       locale: locale,
       type: 'website',
     },

@@ -8,7 +8,7 @@ import { getResponsiveSizes } from '@/lib/image-utils'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-const ACCENT_GREEN = '#49b540'
+const ACCENT_GREEN = '#ff2828'
 const STAR_COLOR = '#F59E0B'
 
 // Helper function to extract plain text from Payload richText (Lexical format)
@@ -160,19 +160,6 @@ export function CategoryPageClient({ category, activities, locale }: Props) {
               animate="visible"
               variants={staggerContainer}
             >
-              {/* Breadcrumb */}
-              <motion.div
-                variants={fadeInUp}
-                custom={0}
-                className="flex items-center justify-center gap-2 text-white/80 text-sm mb-6"
-              >
-                <NavLink href="/" className="hover:text-white transition-colors">
-                  {tNav('home')}
-                </NavLink>
-                <ChevronRight className="w-4 h-4" />
-                <span className="text-white">{category.name}</span>
-              </motion.div>
-
               {/* Category Badge */}
               <motion.div
                 variants={fadeInUp}
@@ -265,16 +252,6 @@ export function CategoryPageClient({ category, activities, locale }: Props) {
             className="text-center mb-12"
           >
             <motion.div variants={fadeInUp} custom={0}>
-              <motion.div
-                className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4"
-                style={{ backgroundColor: `${ACCENT_GREEN}15` }}
-              >
-                <div className="w-1 sm:w-1.5 h-4 sm:h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-                <span className="text-xs sm:text-sm font-medium uppercase tracking-wider" style={{ color: ACCENT_GREEN }}>
-                  {tCategory('exploreOurExperiences')}
-                </span>
-                <div className="w-1 sm:w-1.5 h-4 sm:h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-              </motion.div>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-neutral-900 mb-3 sm:mb-4">
                 {category.name} <span style={{ color: ACCENT_GREEN }}>{tNav('activities')}</span>
               </h2>
@@ -360,7 +337,7 @@ export function CategoryPageClient({ category, activities, locale }: Props) {
                         </div>
 
                         {/* Activity Title */}
-                        <h3 className="font-display text-lg font-bold text-neutral-900 mb-2 group-hover:text-green-600 transition-colors duration-300 line-clamp-1">
+                        <h3 className="font-display text-lg font-bold text-neutral-900 mb-2 group-hover:text-red-600 transition-colors duration-300 line-clamp-1">
                           {activity.title}
                         </h3>
 
@@ -418,7 +395,7 @@ export function CategoryPageClient({ category, activities, locale }: Props) {
                           {/* View Details Button */}
                           <NavLink
                             href={`/activities/${activity.slug}`}
-                            className="flex-1 inline-flex items-center justify-center h-10 rounded-xl border-2 text-sm font-semibold transition-all duration-300 hover:bg-green-50"
+                            className="flex-1 inline-flex items-center justify-center h-10 rounded-xl border-2 text-sm font-semibold transition-all duration-300 hover:bg-red-50"
                             style={{
                               borderColor: ACCENT_GREEN,
                               color: ACCENT_GREEN,

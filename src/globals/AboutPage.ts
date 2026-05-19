@@ -51,7 +51,7 @@ export const AboutPage: GlobalConfig = {
                 {
                   name: 'description',
                   type: 'textarea',
-                  defaultValue: 'Green Atlas Travel is a Moroccan travel agency specializing in tailor-made journeys, from authentic escapes to comfortable and well-crafted adventures.',
+                  defaultValue: 'Atlas Mountain Visit is a Moroccan travel agency specializing in tailor-made journeys, from authentic escapes to comfortable and well-crafted adventures.',
                   localized: true,
                 },
                 {

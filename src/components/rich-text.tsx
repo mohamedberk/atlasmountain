@@ -93,7 +93,7 @@ function renderNode(node: RichTextNode, index: number): React.ReactNode {
 
     case 'quote':
       return (
-        <blockquote key={key} className="border-l-4 border-orange-500 pl-6 py-2 my-6 bg-gray-50 rounded-r-lg italic text-gray-700">
+        <blockquote key={key} className="border-l-4 border-red-500 pl-6 py-2 my-6 bg-gray-50 rounded-r-lg italic text-gray-700">
           {node.children?.map((child, i) => renderNode(child, i))}
         </blockquote>
       )
@@ -124,7 +124,7 @@ function renderNode(node: RichTextNode, index: number): React.ReactNode {
         <a
           key={key}
           href={node.url}
-          className="text-orange-600 font-medium underline hover:text-orange-700 transition-colors"
+          className="text-red-600 font-medium underline hover:text-red-700 transition-colors"
           target={node.url?.startsWith('http') ? '_blank' : undefined}
           rel={node.url?.startsWith('http') ? 'noopener noreferrer' : undefined}
         >

@@ -931,7 +931,7 @@ async function seed() {
         story: {
           title: 'Our Story',
           paragraphs: [
-            { text: "What started as a simple passion for sharing Morocco's beauty has grown into Green Atlas Travel - a trusted name in authentic Moroccan experiences. Founded in 2004, we've been helping travelers discover the real Morocco for over two decades." },
+            { text: "What started as a simple passion for sharing Morocco's beauty has grown into Atlas Mountain Visit - a trusted name in authentic Moroccan experiences. Founded in 2004, we've been helping travelers discover the real Morocco for over two decades." },
             { text: "Born and raised in Marrakech, our team knows every corner of this magical country. From the bustling souks to the silent Sahara, from the snow-capped Atlas to the blue streets of Chefchaouen - we've explored it all and can't wait to share these adventures with you." },
             { text: "We believe travel should be more than just sightseeing. It should be about connections, understanding, and moments that stay with you forever. That's why we focus on small groups, local experiences, and personalized attention." },
           ],
@@ -972,8 +972,8 @@ async function seed() {
           secondaryButtonLink: '/contact',
         },
         seo: {
-          metaTitle: 'About Green Atlas Travel | Authentic Morocco Experiences Since 2004',
-          metaDescription: 'Meet the passionate Moroccan team behind Green Atlas Travel. 20+ years of experience creating unforgettable desert adventures, city tours, and authentic cultural experiences.',
+          metaTitle: 'About Atlas Mountain Visit | Authentic Morocco Experiences Since 2004',
+          metaDescription: 'Meet the passionate Moroccan team behind Atlas Mountain Visit. 20+ years of experience creating unforgettable desert adventures, city tours, and authentic cultural experiences.',
         },
       },
     })
@@ -1003,7 +1003,7 @@ async function seed() {
         story: {
           title: 'Notre Histoire',
           paragraphs: [
-            { text: "Ce qui a commencé comme une simple passion pour partager la beauté du Maroc est devenu Green Atlas Travel - un nom de confiance dans les expériences marocaines authentiques. Fondé en 2004, nous aidons les voyageurs à découvrir le vrai Maroc depuis plus de deux décennies." },
+            { text: "Ce qui a commencé comme une simple passion pour partager la beauté du Maroc est devenu Atlas Mountain Visit - un nom de confiance dans les expériences marocaines authentiques. Fondé en 2004, nous aidons les voyageurs à découvrir le vrai Maroc depuis plus de deux décennies." },
             { text: "Nés et élevés à Marrakech, notre équipe connaît chaque recoin de ce pays magique. Des souks animés au Sahara silencieux, de l'Atlas enneigé aux rues bleues de Chefchaouen - nous avons tout exploré et avons hâte de partager ces aventures avec vous." },
             { text: "Nous croyons que le voyage devrait être plus que du tourisme. Il devrait s'agir de connexions, de compréhension et de moments qui restent avec vous pour toujours. C'est pourquoi nous nous concentrons sur les petits groupes, les expériences locales et l'attention personnalisée." },
           ],
@@ -1041,8 +1041,8 @@ async function seed() {
           secondaryButtonText: 'Nous Contacter',
         },
         seo: {
-          metaTitle: 'À Propos de Green Atlas Travel | Expériences Authentiques au Maroc Depuis 2004',
-          metaDescription: "Découvrez l'équipe marocaine passionnée derrière Green Atlas Travel. 20+ ans d'expérience à créer des aventures inoubliables dans le désert, visites de villes et expériences culturelles authentiques.",
+          metaTitle: 'À Propos de Atlas Mountain Visit | Expériences Authentiques au Maroc Depuis 2004',
+          metaDescription: "Découvrez l'équipe marocaine passionnée derrière Atlas Mountain Visit. 20+ ans d'expérience à créer des aventures inoubliables dans le désert, visites de villes et expériences culturelles authentiques.",
         },
       },
     })
@@ -1072,7 +1072,7 @@ async function seed() {
         story: {
           title: 'Unsere Geschichte',
           paragraphs: [
-            { text: "Was als einfache Leidenschaft begann, die Schönheit Marokkos zu teilen, ist zu Green Atlas Travel geworden - ein vertrauenswürdiger Name für authentische marokkanische Erlebnisse. Gegründet im Jahr 2004, helfen wir Reisenden seit über zwei Jahrzehnten, das echte Marokko zu entdecken." },
+            { text: "Was als einfache Leidenschaft begann, die Schönheit Marokkos zu teilen, ist zu Atlas Mountain Visit geworden - ein vertrauenswürdiger Name für authentische marokkanische Erlebnisse. Gegründet im Jahr 2004, helfen wir Reisenden seit über zwei Jahrzehnten, das echte Marokko zu entdecken." },
             { text: "In Marrakesch geboren und aufgewachsen, kennt unser Team jeden Winkel dieses magischen Landes. Von den geschäftigen Souks zur stillen Sahara, vom schneebedeckten Atlas zu den blauen Straßen von Chefchaouen - wir haben alles erkundet und können es kaum erwarten, diese Abenteuer mit Ihnen zu teilen." },
             { text: "Wir glauben, dass Reisen mehr sein sollte als nur Sightseeing. Es sollte um Verbindungen, Verständnis und Momente gehen, die für immer bei Ihnen bleiben. Deshalb konzentrieren wir uns auf kleine Gruppen, lokale Erlebnisse und persönliche Betreuung." },
           ],
@@ -1110,8 +1110,8 @@ async function seed() {
           secondaryButtonText: 'Kontaktieren Sie Uns',
         },
         seo: {
-          metaTitle: 'Über Green Atlas Travel | Authentische Marokko-Erlebnisse Seit 2004',
-          metaDescription: 'Lernen Sie das leidenschaftliche marokkanische Team hinter Green Atlas Travel kennen. 20+ Jahre Erfahrung in der Gestaltung unvergesslicher Wüstenabenteuer, Stadttouren und authentischer kultureller Erlebnisse.',
+          metaTitle: 'Über Atlas Mountain Visit | Authentische Marokko-Erlebnisse Seit 2004',
+          metaDescription: 'Lernen Sie das leidenschaftliche marokkanische Team hinter Atlas Mountain Visit kennen. 20+ Jahre Erfahrung in der Gestaltung unvergesslicher Wüstenabenteuer, Stadttouren und authentischer kultureller Erlebnisse.',
         },
       },
     })
@@ -1141,7 +1141,7 @@ async function seed() {
             display: '+212 600 000 000',
           },
           email: {
-            address: 'info@greenatlastravel.com',
+            address: 'info@atlasmountainsvisit.com',
             responseTime: 'We reply within 2 hours',
           },
           whatsapp: {
@@ -1175,8 +1175,8 @@ async function seed() {
           embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3397.0876089817396!2d-7.989755684877!3d31.62556988133001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51%3A0x5950b6534f87adb8!2sJemaa%20el-Fnaa!5e0!3m2!1sen!2sma!4v1',
         },
         seo: {
-          metaTitle: 'Contact Green Atlas Travel | Get in Touch for Morocco Adventures',
-          metaDescription: 'Contact Green Atlas Travel for desert tours, city excursions, and custom Morocco adventures. WhatsApp, email, or call us. We respond within 2 hours.',
+          metaTitle: 'Contact Atlas Mountain Visit | Get in Touch for Morocco Adventures',
+          metaDescription: 'Contact Atlas Mountain Visit for desert tours, city excursions, and custom Morocco adventures. WhatsApp, email, or call us. We respond within 2 hours.',
         },
       },
     })
@@ -1230,8 +1230,8 @@ async function seed() {
           subtitle: "Situés au cœur de la Ville Rouge, nous sommes faciles à trouver.",
         },
         seo: {
-          metaTitle: 'Contactez Green Atlas Travel | Pour Vos Aventures au Maroc',
-          metaDescription: 'Contactez Green Atlas Travel pour des circuits dans le désert, excursions en ville et aventures sur mesure au Maroc. WhatsApp, email ou appelez-nous. Nous répondons dans les 2 heures.',
+          metaTitle: 'Contactez Atlas Mountain Visit | Pour Vos Aventures au Maroc',
+          metaDescription: 'Contactez Atlas Mountain Visit pour des circuits dans le désert, excursions en ville et aventures sur mesure au Maroc. WhatsApp, email ou appelez-nous. Nous répondons dans les 2 heures.',
         },
       },
     })
@@ -1285,8 +1285,8 @@ async function seed() {
           subtitle: "Im Herzen der Roten Stadt gelegen, sind wir leicht zu finden.",
         },
         seo: {
-          metaTitle: 'Kontakt Green Atlas Travel | Für Ihre Marokko-Abenteuer',
-          metaDescription: 'Kontaktieren Sie Green Atlas Travel für Wüstentouren, Stadtausflüge und individuelle Marokko-Abenteuer. WhatsApp, E-Mail oder rufen Sie uns an. Wir antworten innerhalb von 2 Stunden.',
+          metaTitle: 'Kontakt Atlas Mountain Visit | Für Ihre Marokko-Abenteuer',
+          metaDescription: 'Kontaktieren Sie Atlas Mountain Visit für Wüstentouren, Stadtausflüge und individuelle Marokko-Abenteuer. WhatsApp, E-Mail oder rufen Sie uns an. Wir antworten innerhalb von 2 Stunden.',
         },
       },
     })

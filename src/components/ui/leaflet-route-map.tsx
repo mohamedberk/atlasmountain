@@ -6,13 +6,13 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { decodePolyline, formatDistance, formatDuration } from '@/lib/polyline'
 
-// Route color mapping
+// Route color mapping (brand red palette + neutrals)
 const ROUTE_COLORS: Record<string, string> = {
-  blue: '#3b82f6',
-  green: '#22c55e',
-  red: '#ef4444',
-  orange: '#f97316',
-  purple: '#a855f7',
+  blue: '#737373',
+  green: '#ff2828',
+  red: '#ff2828',
+  orange: '#a3a3a3',
+  purple: '#525252',
 }
 
 interface Waypoint {
@@ -34,7 +34,7 @@ interface LeafletRouteMapProps {
 function createWaypointIcon(index: number, total: number): L.DivIcon {
   const isFirst = index === 0
   const isLast = index === total - 1
-  const color = isFirst ? '#22c55e' : isLast ? '#ef4444' : '#3b82f6'
+  const color = isFirst ? '#171717' : isLast ? '#ff2828' : '#737373'
 
   return new L.DivIcon({
     className: 'custom-waypoint-marker',
@@ -174,7 +174,7 @@ export function LeafletRouteMap({
                     className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold"
                     style={{
                       backgroundColor:
-                        idx === 0 ? '#22c55e' : idx === waypoints.length - 1 ? '#ef4444' : '#3b82f6',
+                        idx === 0 ? '#171717' : idx === waypoints.length - 1 ? '#ff2828' : '#737373',
                     }}
                   >
                     {idx + 1}
@@ -246,7 +246,7 @@ export function LeafletRouteMap({
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-medium px-3 py-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors"
+                className="text-xs font-medium px-3 py-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
               >
                 Open in Google Maps
               </a>

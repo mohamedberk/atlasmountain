@@ -38,7 +38,7 @@ export const StepNavigation = memo(function StepNavigation({
               <div
                 className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs font-medium transition-all ${
                   idx < currentStepIndex
-                    ? 'bg-green-500 text-white'
+                    ? 'bg-red-500 text-white'
                     : idx === currentStepIndex
                     ? 'bg-primary text-white'
                     : 'bg-neutral-100 text-neutral-400'
@@ -53,7 +53,7 @@ export const StepNavigation = memo(function StepNavigation({
               {idx < steps.length - 1 && (
                 <div
                   className={`w-4 sm:w-6 h-0.5 mx-0.5 sm:mx-1 transition-all ${
-                    idx < currentStepIndex ? 'bg-green-500' : 'bg-neutral-200'
+                    idx < currentStepIndex ? 'bg-red-500' : 'bg-neutral-200'
                   }`}
                 />
               )}
