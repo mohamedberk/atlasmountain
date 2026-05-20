@@ -144,7 +144,7 @@ export const ContactPage: GlobalConfig = {
                     {
                       name: 'number',
                       type: 'text',
-                      defaultValue: '+212 600 000 000',
+                      defaultValue: '+212 777 926 596',
                     },
                     {
                       name: 'display',
@@ -179,7 +179,7 @@ export const ContactPage: GlobalConfig = {
                     {
                       name: 'number',
                       type: 'text',
-                      defaultValue: '+212 600 000 000',
+                      defaultValue: '+212 777 926 596',
                       admin: {
                         description: 'Include country code',
                       },

@@ -44,18 +44,18 @@ export const SiteSettings: GlobalConfig = {
                       name: 'number',
                       type: 'text',
                       required: true,
-                      defaultValue: '661108803',
+                      defaultValue: '777926596',
                       admin: {
-                        description: 'Phone number without country code (e.g., 661108803)',
+                        description: 'Phone number without country code (e.g., 777926596)',
                         width: '70%',
                       },
                     },
                     {
                       name: 'display',
                       type: 'text',
-                      defaultValue: '+212 661-108803',
+                      defaultValue: '+212 777-926596',
                       admin: {
-                        description: 'Formatted display version (e.g., +212 661-108803)',
+                        description: 'Formatted display version (e.g., +212 777-926596)',
                       },
                     },
                   ],

@@ -990,7 +990,7 @@ User focuses input
   → Country selector shows Morocco flag + +212
   → User types digits
   → react-international-phone auto-formats the number
-  → onChange fires with full international format (e.g. "+212600000000")
+  → onChange fires with full international format (e.g. "+212777926596")
   → Parent form stores the value in formData.phone
 ```
 

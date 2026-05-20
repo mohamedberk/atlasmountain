@@ -1524,11 +1524,11 @@ export interface SiteSetting {
        */
       countryCode: string;
       /**
-       * Phone number without country code (e.g., 661108803)
+       * Phone number without country code (e.g., 777926596)
        */
       number: string;
       /**
-       * Formatted display version (e.g., +212 661-108803)
+       * Formatted display version (e.g., +212 777-926596)
        */
       display?: string | null;
     };

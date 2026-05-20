@@ -1886,7 +1886,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
 
               {/* WhatsApp CTA */}
               <a
-                href="https://wa.me/212751622180"
+                href="https://wa.me/212777926596"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 flex items-center justify-center gap-2 w-full py-3 border-2 border-neutral-200 rounded-xl text-neutral-700 font-medium hover:border-[#25D366] hover:text-[#25D366] transition-colors text-base"

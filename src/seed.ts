@@ -1137,16 +1137,16 @@ async function seed() {
             line2: 'Near Jemaa el-Fnaa Square',
           },
           phone: {
-            number: '+212 600 000 000',
-            display: '+212 600 000 000',
+            number: '+212 777 926 596',
+            display: '+212 777 926 596',
           },
           email: {
             address: 'info@atlasmountainsvisit.com',
             responseTime: 'We reply within 2 hours',
           },
           whatsapp: {
-            number: '+212 600 000 000',
-            display: '+212 600 000 000',
+            number: '+212 777 926 596',
+            display: '+212 777 926 596',
           },
         },
         formSettings: {
