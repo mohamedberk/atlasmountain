@@ -111,7 +111,7 @@ export function ModernHero({ heroData }: Props) {
   }, [heroSlides.length, startAutoRotate])
 
   return (
-    <section className="relative w-full h-[50vh] md:h-auto md:min-h-screen flex items-center overflow-hidden">
+    <section className="relative w-full h-[50vh] md:h-auto md:min-h-screen mt-16 md:mt-0 flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <HeroSlideshow
           slides={heroSlides}
