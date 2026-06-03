@@ -14,6 +14,7 @@ export const Media: CollectionConfig = {
     height: true,
     sizes: true,
     externalUrl: true,
+    _key: true,
   },
   access: {
     read: () => true,
@@ -59,7 +60,13 @@ export const Media: CollectionConfig = {
         position: 'centre',
       },
     ],
-    adminThumbnail: 'thumbnail',
+    adminThumbnail: ({ doc }) => {
+      const sizes = doc?.sizes as { thumbnail?: { url?: string | null } } | undefined
+      if (sizes?.thumbnail?.url) return sizes.thumbnail.url
+      if (typeof doc?.url === 'string' && doc.url) return doc.url
+      if (typeof doc?.externalUrl === 'string' && doc.externalUrl) return doc.externalUrl
+      return null
+    },
     mimeTypes: ['image/*', 'video/*'],
   },
 }

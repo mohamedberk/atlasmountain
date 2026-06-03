@@ -1,10 +1,22 @@
 "use client"
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Shield, Mountain, Heart, Award } from 'lucide-react'
 import type { Media } from '@/payload-types'
 
-const ACCENT_GREEN = '#ff2828'
+const ACCENT_RED = '#ff2828'
+
+const FALLBACK_IMAGE =
+  'https://ec0m9cwfe1.ufs.sh/f/qpHeSXPP9BvaYW4vvNw3nzt8MPTNFO24leIJbAahK9pcHgUW'
+
+const FALLBACK_TITLE = 'About'
+const FALLBACK_TITLE_HIGHLIGHT = 'Me'
+
+const FALLBACK_PARAGRAPH_1 =
+  'Hello, my name is Hamza, and I am a local guide from Imlil in the Atlas Mountains of Morocco. Through Atlas Mountains Visit, I offer authentic travel experiences including trekking adventures, desert trips, cultural tours, city discovery, and organized tours across Morocco.'
+
+const FALLBACK_PARAGRAPH_2 =
+  'My goal is to help travelers explore the real beauty of Morocco, its landscapes, culture, traditions, and warm hospitality.'
 
 interface AboutImage {
   image: string | Media
@@ -34,93 +46,64 @@ interface Props {
   aboutData?: AboutData | null
 }
 
-const defaultCards = [
-  {
-    icon: Shield,
-    title: 'Trusted & Safe',
-    description: 'Licensed local guides and full safety standards on every trip, so you can explore Morocco with complete peace of mind.',
-  },
-  {
-    icon: Mountain,
-    title: 'Atlas Expertise',
-    description: 'Born and raised in the High Atlas, our team knows every trail, summit, and hidden corner of the Toubkal region.',
-  },
-  {
-    icon: Heart,
-    title: 'Authentic Hospitality',
-    description: 'Genuine Berber warmth and personalized service make every guest feel like family from arrival to farewell.',
-  },
-  {
-    icon: Award,
-    title: 'Award-Winning Quality',
-    description: 'Years of experience and hundreds of five-star reviews from travelers who trusted us with their Moroccan adventure.',
-  },
-]
+function resolveImageSrc(image: AboutImage['image'] | undefined): string | null {
+  if (!image) return null
+  if (typeof image === 'string') return image
+  if (typeof image === 'object' && image.url) return image.url
+  return null
+}
 
 export function AboutSection({ aboutData }: Props) {
-  const title = aboutData?.title
-  const titleHighlight = aboutData?.titleHighlight
-  const subtitle = aboutData?.subtitle
+  const title = aboutData?.title?.trim() || FALLBACK_TITLE
+  const titleHighlight = aboutData?.titleHighlight?.trim() || FALLBACK_TITLE_HIGHLIGHT
+  const paragraph1 = aboutData?.paragraph1?.trim() || FALLBACK_PARAGRAPH_1
+  const paragraph2 = aboutData?.paragraph2?.trim() || FALLBACK_PARAGRAPH_2
+
+  const firstImage = aboutData?.images?.[0]
+  const imageSrc = resolveImageSrc(firstImage?.image) || FALLBACK_IMAGE
+  const imageAlt =
+    firstImage?.alt || 'Hamza — local guide from Imlil, Atlas Mountains'
 
   return (
     <section id="about" className="py-20 sm:py-28 bg-[#fafaf9] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Section Header */}
-        <div className="text-center mb-14 max-w-3xl mx-auto">
-          {(title || titleHighlight) && (
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 mb-4"
-            >
-              {title && <>{title} </>}
-              {titleHighlight && <span style={{ color: ACCENT_GREEN }}>{titleHighlight}</span>}
-            </motion.h2>
-          )}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
+          {/* Text Column */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="order-2 lg:order-1 flex flex-col justify-center"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 mb-6">
+              {title} <span style={{ color: ACCENT_RED }}>{titleHighlight}</span>
+            </h2>
+            <p className="text-neutral-700 text-base sm:text-lg leading-relaxed mb-5 whitespace-pre-line">
+              {paragraph1}
+            </p>
+            <p className="text-neutral-700 text-base sm:text-lg leading-relaxed whitespace-pre-line">
+              {paragraph2}
+            </p>
+          </motion.div>
 
-          {subtitle && (
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-neutral-600 text-base sm:text-lg leading-relaxed"
-            >
-              {subtitle}
-            </motion.p>
-          )}
-        </div>
-
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {defaultCards.map((card, index) => {
-            const IconComponent = card.icon
-            return (
-              <motion.div
-                key={card.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -4, boxShadow: '0 6px 14px -10px rgba(0, 0, 0, 0.08)' }}
-                className="bg-white rounded-2xl p-6 h-full border border-neutral-100 hover:border-neutral-200 transition-all duration-300 group"
-              >
-                <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
-                  style={{ backgroundColor: `${ACCENT_GREEN}15` }}
-                >
-                  <IconComponent className="w-7 h-7" style={{ color: ACCENT_GREEN }} />
-                </div>
-                <h3 className="font-display text-xl font-bold text-neutral-900 mb-2 group-hover:text-red-600 transition-colors">
-                  {card.title}
-                </h3>
-                <p className="text-neutral-600 text-sm leading-relaxed">
-                  {card.description}
-                </p>
-              </motion.div>
-            )
-          })}
+          {/* Image Column */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="order-1 lg:order-2 relative aspect-[4/5] sm:aspect-[5/6] lg:aspect-auto lg:h-full lg:min-h-[420px] w-full rounded-2xl overflow-hidden shadow-lg"
+          >
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+              priority={false}
+            />
+          </motion.div>
         </div>
       </div>
     </section>

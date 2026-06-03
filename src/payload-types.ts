@@ -180,6 +180,8 @@ export interface Media {
    * Optional: Paste an external URL (e.g. from UploadThing) instead of uploading a file
    */
   externalUrl?: string | null;
+  _key?: string | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -193,6 +195,7 @@ export interface Media {
   focalY?: number | null;
   sizes?: {
     thumbnail?: {
+      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -201,6 +204,7 @@ export interface Media {
       filename?: string | null;
     };
     card?: {
+      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -209,6 +213,7 @@ export interface Media {
       filename?: string | null;
     };
     hero?: {
+      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -1091,6 +1096,8 @@ export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
   externalUrl?: T;
+  _key?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1108,6 +1115,7 @@ export interface MediaSelect<T extends boolean = true> {
         thumbnail?:
           | T
           | {
+              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1118,6 +1126,7 @@ export interface MediaSelect<T extends boolean = true> {
         card?:
           | T
           | {
+              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1128,6 +1137,7 @@ export interface MediaSelect<T extends boolean = true> {
         hero?:
           | T
           | {
+              _key?: T;
               url?: T;
               width?: T;
               height?: T;
