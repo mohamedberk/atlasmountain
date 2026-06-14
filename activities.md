@@ -1,101 +1,75 @@
-Start your journey with a comfortable pickup from your accommodation in Marrakech and head toward the stunning High Atlas Mountains, where adventure and authentic Berber culture await.
-1h30drvie From Marrakech to imlil
-🏔️ ARRIVAL IN IMLIL – GATEWAY TO THE ATLAS
-Arrive in the famous mountain village of Imlil, meet your professional local guide, and get fitted with a high-quality mountain bike 🚲. After a short safety briefing, your adventure begins.
-🚴‍♂️ RIDE THROUGH TRADITIONAL AMAZIGH VILLAGES
-Cycle through authentic Berber villages such as Ait Souka and Tamatert, surrounded by breathtaking landscapes and panoramic Atlas views.
-🌄 RIDE TOWARDS TACHDERT VILLAGE
-Continue your journey along peaceful mountain trails toward the remote village of Tachdert, discovering authentic Amazigh culture and untouched nature.
-🍲 TRADITIONAL LUNCH IN TACHDERT
-Enjoy a freshly prepared Moroccan lunch in Tachdert with stunning mountain views and local hospitality.
-🌿 SCENIC DESCENT TO ASNI VALLEY
-End your biking adventure with a downhill ride toward Asni Valley before returning comfortably to Marrakech.
-✔️ IIncluded:
-• Full biking experience (3–4 hours ride)
-• Bike & helmet 
-• Professional guide 
-• Transport
-• Traditional lunch
-• Marrakech pickup & drop-off 
-❌ NOT INCLUDED
-• Insurance
-• Drinks 
-• Tips (optional )
+Tittle: Atlas Mountains 6-Day Trek - Berber Villages, Lake Ifni & Toubkal Summit.
 
+6-Day Toubkal Trek from Marrakech Join an unforgettable adventure through the High Atlas Mountains, passing Berber villages, valleys, and Lake Ifni, before reaching the summit of Mount Toubkal (4167m) A perfect mix of trekking, culture, and wild camping in Morocco.
+
+Day 1: Marrakech – Imlil – Tizi Tamatert (2300m) – Tachddirt Village (2314m)
+Drive from Marrakech to Imlil, then start hiking through scenic valleys to Tizi Tamatert pass. Continue to Tachddirt village.
+🏕️ Overnight: Guesthouse or camping
+⏱️ Hiking time: Approx. 5–6 hours
+Day 2: Tachddirt – Tizi Likemt (3550m) – Azib Likemt (2200m)
+A steady and challenging ascent to Tizi Likemt pass with panoramic mountain views, followed by descent to Azib Likemt.
+🏕️ Overnight: Camping
+⏱️ Hiking time: Approx. 6–7 hours
+Day 3: Azib Likemt – Aouray Valley – Amsouzart Village (1700m)
+Trek through the beautiful Aouray Valley with changing landscapes and Berber villages. Arrival in Amsouzart.
+🏨 Overnight: Hotel or guesthouse
+⏱️ Hiking time: Approx. 5–6 hours
+Day 4: Amsouzart – Lake Ifni (2300m)
+Walk through traditional villages and mountain scenery to reach Lake Ifni, the only natural lake in the Toubkal region.
+⛺ Overnight: Camping by the lake
+⏱️ Hiking time: Approx. 5–6 hours
+Day 5: Lake Ifni – Tizi n Ouanoums (3650m) – Toubkal Refuge (3207m)
+The hardest day with a steep climb to the high pass, followed by descent to the refuge.
+🏔️ Overnight: Toubkal Refuge (mountain shelter or tents)
+⏱️ Hiking time: Approx. 7–8 hours
+Day 6: Toubkal Refuge – Toubkal Summit (4167m) – Marrakech
+Early morning climb to the summit of Mount Toubkal, then descend via Sidi Chamharouch back to Imlil and drive to Marrakech.
+🚫 Overnight: Not included (end of trip)
+⏱️ Hiking time: 8–10 hours
+
+✅ Included
+🧭 Professional guide 
+🏡 All accommodation (guesthouses, mountain refuge or tent — your choice)
+🍽️ All meals throughout the trip (breakfasts, lunches & dinners)
+🚐 Transport: (pick-up & drop-off)
+🫏 Mule for carrying group equipment & supplies.
+❌ Not Included
+🛡️ Travel insurance 
+🎒 Personal trekking gear & equipment
+🍫 Personal snacks & extra drinks
+💳 Any expenses of a personal nature
 
 ------
 
-Join us for an unforgettable 2-day adventure to the summit of , the highest peak in North Africa. Discover breathtaking Atlas Mountain landscapes, authentic Berber villages, and stunning panoramic views along the way.
+
+Tittle; 2 Days Atlas Mountains Trek
+
+Escape the city and discover the beauty of the Atlas Mountains on this 2-day trek from Marrakech. Hike through Tizi Mzik Pass, visit the stunning Ighouliden Waterfalls, explore traditional Berber villages, and spend a night in the peaceful Tamsoult Refuge surrounded by breathtaking mountain scenery.
 
 
-Day 1: Marrakech – Imlil – Toubkal Refuge
-Departure from Marrakech towards the mountain village of Imlil, the starting point of the trek.
-You will meet your mountain guide in Imlil and begin hiking through beautiful Berber villages and the shrine of Sidi Chamharouch before continuing to the refuge of Jbel Toubkal.
-Overnight stay at the mountain refuge at 3,207 m altitude.
-🥾 Hiking time: 5 to 6 hours.
-Day 2: Toubkal Summit – Return to Marrakech
-Early morning ascent to the summit of Jbel Toubkal (4,167 m), the highest peak in North Africa.
-Enjoy breathtaking panoramic views over the Atlas Mountains and surrounding landscapes before descending back to Imlil.
-Transfer back to Marrakech in the evening.
-🥾 Hiking time: 10 to 12 hours.
+Day 1: Marrakech – Imlil – Tizi Mzik – Tamsoult
+Pick up from Marrakech and transfer to Imlil (1,740m), the gateway to the High Atlas Mountains. Begin your trek through scenic mountain trails to the Tizi Mzik Pass (2,489m), offering breathtaking panoramic views. Continue down towards the beautiful Ighouliden Waterfalls before reaching Tamsoult Refuge, where you will spend the night surrounded by stunning mountain landscapes.
 
-Highlights
-●Discover the beauty of the High Atlas Mountains
-●Trek to the summit of Jbel Toubkal, the.     highest peak in North Africa
-●Explore authentic Berber villages and mountain landscapes
-●Enjoy breathtaking panoramic views from 4,167 meters above sea level
-●Spend the night at the famous Toubkal mountain refuge
-●Experience a true adventure with a professional local mountain guide
-✅ What's Included
-🚐 Round-trip transfer from/to Marrakech
-🏠 1 night accommodation at Toubkal refuge
-🍽️ Meals during the trek (lunch, dinner & breakfast)
-🚶‍♂️Guide Mountains 
+Day 2: Tamsoult – Azzaden Valley – Tizi Oudid – Marrakech
+After breakfast, trek through the picturesque Azzaden Valley, passing the traditional Berber villages of Tizi Oussem and Aït Aïssa. Ascend to the Tizi Oudid Pass (2,200m) and enjoy spectacular views of the surrounding peaks and valleys. Descend to the village of Aguersioual (1,600m) for lunch before transferring back to Marrakech.
 
-❌ What's Not Included
-🎒 Personal hiking gear and clothing
+🌟 Highlights
+. Scenic trek through the High Atlas Mountains   
+. Cross the Tizi Mzik Pass (2,489m)
+. Visit the beautiful Ighouliden Waterfalls
+. Explore traditional Berber villages
+. Discover the stunning Azzaden Valley
+. Overnight stay at Tamsoult Refuge
+. Visit imlil valley and Azzaden Valley 
+. Experience authentic Berber culture and
+
+✅ Included
+🚐 Transport: (pick-up & drop-off)
+🥾 Professional mountain guide
+🏡 1 night at Tamsoult Refuge
+🍽️ Breakfast, Lunch & Dinner
+🐴 Mule for luggage transport
+❌ Not Included
 💊 Personal medication
-🧑‍🧑‍🧒 Personal expenses
-
-
--------
-
-
-Welcome to Marrakech
-Escape the city and enjoy a beautiful 1-night adventure to Imlil in the heart of the High Atlas Mountains. This flexible experience allows you to choose your favorite activity and discover authentic Berber culture, mountain landscapes, and traditional villages.
-
-
-Day 1 – Journey to the Atlas Mountains
-Your driver will pick you up from Marrakech and take you to the charming mountain village of Imlil, the gateway to the Atlas Mountains.
-After arrival, you can choose one of the following experiences:
-●Visit the beautiful Imlil waterfalls and explore the traditional Berber village of Aroumd.
-●Hike to the famous Tizi Mzik pass (2,489m), with around 4 hours of walking and lunch surrounded by panoramic mountain views.
-●Discover the stunning area of Tamatert (2,700m), including about 4 hours of hiking and lunch at Tizi n'Tamatert with breathtaking scenery over the Atlas valleys.
-
-Day 2 : Breakfast with Mountain Views & Return to Marrakech
-Enjoy a traditional breakfast with spectacular views over Imlil and the surrounding Atlas Mountains.
-After breakfast, meet your driver for the return journey to Marrakech. Along the way, you can stop to discover several authentic Amazigh (Berber) villages and enjoy the peaceful mountain atmosphere before arriving back in Marrakech.
-
-
-Highlights
-●Scenic drive from Marrakech through the High Atlas Mountains
-●Explore the charming mountain village of Imlil
-●Choose your own hiking experience (Easy / Moderate / Challenging)
-●Lunch with panoramic Atlas Mountain views
-●Overnight stay in a traditional guesthouse in Imlil
-●Traditional Moroccan breakfast with mountain views
-
-Included ✅
-●transfer from/to Marrakech
-●Professional local guide
-●Traditional breakfast on Day 2
-●1 night accommodation in Imlil
-● dinner and lunch and breakfast 
-Not Included ❌
-●Personal expenses
-● walking clothes 
-
-
--------
-
-
+🛡️ Travel insurance
+💰 Personal expenses 

@@ -7,7 +7,7 @@ import type { Media } from '@/payload-types'
 const ACCENT_RED = '#ff2828'
 
 const FALLBACK_IMAGE =
-  'https://ec0m9cwfe1.ufs.sh/f/qpHeSXPP9BvaYW4vvNw3nzt8MPTNFO24leIJbAahK9pcHgUW'
+  'https://ec0m9cwfe1.ufs.sh/f/qpHeSXPP9Bva1WyCY2mhNL4rS0xatFcIdYgpAkZ8mGyvBlMf'
 
 const FALLBACK_TITLE = 'About'
 const FALLBACK_TITLE_HIGHLIGHT = 'Me'
@@ -68,15 +68,25 @@ export function AboutSection({ aboutData }: Props) {
     <section id="about" className="py-20 sm:py-28 bg-[#fafaf9] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="order-1 lg:hidden text-3xl sm:text-4xl font-display font-bold text-neutral-900 mb-0"
+          >
+            {title} <span style={{ color: ACCENT_RED }}>{titleHighlight}</span>
+          </motion.h2>
+
           {/* Text Column */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="order-2 lg:order-1 flex flex-col justify-center"
+            className="order-3 lg:order-1 flex flex-col justify-center"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 mb-6">
+            <h2 className="hidden lg:block text-5xl font-display font-bold text-neutral-900 mb-6">
               {title} <span style={{ color: ACCENT_RED }}>{titleHighlight}</span>
             </h2>
             <p className="text-neutral-700 text-base sm:text-lg leading-relaxed mb-5 whitespace-pre-line">
@@ -93,14 +103,14 @@ export function AboutSection({ aboutData }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="order-1 lg:order-2 relative aspect-[4/5] sm:aspect-[5/6] lg:aspect-auto lg:h-full lg:min-h-[420px] w-full rounded-2xl overflow-hidden shadow-lg"
+            className="order-2 lg:order-2 relative aspect-[4/5] sm:aspect-[5/6] lg:aspect-[4/5] lg:max-w-[360px] lg:justify-self-end lg:self-center w-full rounded-2xl overflow-hidden shadow-lg"
           >
             <Image
               src={imageSrc}
               alt={imageAlt}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
+              className="object-cover lg:object-contain"
               priority={false}
             />
           </motion.div>
