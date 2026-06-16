@@ -1,6 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 import { NavLink } from '@/components/ui/nav-link'
 import { MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react'
 import { useSiteSettings } from '@/context/SiteSettingsContext'
@@ -61,10 +62,16 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <NavLink
               href="/"
-              className="inline-block mb-4 font-display font-bold text-xl tracking-tight text-neutral-900 hover:text-[#ff2828] transition-colors"
+              className="inline-block mb-4 transition-opacity hover:opacity-80"
               aria-label="Atlas Mountain Visit"
             >
-              Atlas Mountain Visit
+              <Image
+                src="https://ec0m9cwfe1.ufs.sh/f/qpHeSXPP9BvaKzrt0k7VSDfZeErsq601P9UkTjgm4NM57JQG"
+                alt="Atlas Mountain Visit"
+                width={180}
+                height={56}
+                className="h-12 w-auto object-contain"
+              />
             </NavLink>
             <p className="text-neutral-600 text-sm leading-relaxed mb-4 max-w-xs">
               {t('tagline')}

@@ -104,6 +104,7 @@ export default async function LocaleLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="dns-prefetch" href="https://utfs.io" />
         <link rel="dns-prefetch" href="https://0kswbexj9c.ufs.sh" />
+        <link rel="dns-prefetch" href="https://ec0m9cwfe1.ufs.sh" />
       </head>
       <body className="bg-background text-foreground antialiased" style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}>
         <NextIntlClientProvider locale={locale} messages={messages}>

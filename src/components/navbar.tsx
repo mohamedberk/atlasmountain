@@ -8,7 +8,11 @@ const getImageUrl = (image: unknown): string | null => {
   return getOptimizedImageUrl(image as any, 'thumbnail')
 }
 
-export async function Navbar() {
+interface Props {
+  hideUntilScrolled?: boolean
+}
+
+export async function Navbar({ hideUntilScrolled = false }: Props = {}) {
   const locale = ((await getLocale()) as 'en' | 'fr') || 'en'
 
   const [categoriesResult, activitiesResult] = await Promise.all([
@@ -67,5 +71,10 @@ export async function Navbar() {
     })
   })
 
-  return <NavbarClient initialData={{ categories, activitiesByCategory }} />
+  return (
+    <NavbarClient
+      initialData={{ categories, activitiesByCategory }}
+      hideUntilScrolled={hideUntilScrolled}
+    />
+  )
 }

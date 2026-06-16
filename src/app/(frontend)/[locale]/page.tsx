@@ -200,7 +200,7 @@ export default async function Home({
 
       <main className="relative z-10 w-full overflow-hidden bg-[#f9f9fb]">
         {/* Navbar */}
-        <Navbar />
+        <Navbar hideUntilScrolled />
 
         {/* Hero Section - Static import for fast LCP (no dynamic import delay) */}
         <ModernHero

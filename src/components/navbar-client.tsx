@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { Menu, ChevronDown, ShoppingBag } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
 import { usePathname, useRouter } from '@/i18n/routing'
 import { NavLink } from '@/components/ui/nav-link'
@@ -35,9 +35,10 @@ export interface NavbarData {
 
 interface Props {
   initialData: NavbarData
+  hideUntilScrolled?: boolean
 }
 
-export function NavbarClient({ initialData }: Props) {
+export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false)
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false)
@@ -98,7 +99,7 @@ export function NavbarClient({ initialData }: Props) {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -162,21 +163,34 @@ export function NavbarClient({ initialData }: Props) {
 
   // Check if Tours & Categories should be highlighted
   const isToursActive = pathname.startsWith('/category') || pathname.startsWith('/activities')
+  const isNavbarVisible = !hideUntilScrolled || scrolled || isMobileMenuOpen || isLangMenuOpen || isCategoriesOpen
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <LazyMotion features={domAnimation}>
+      <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isNavbarVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
+      }`}
+    >
       <nav className={`flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
         scrolled
           ? 'bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5'
           : 'bg-white/90 backdrop-blur-lg shadow-md'
       }`}>
-          {/* Wordmark */}
+          {/* Logo */}
           <NavLink
             href="/"
-            className="flex-shrink-0 flex items-center font-display font-bold text-xl tracking-tight text-neutral-900 hover:text-[#ff2828] transition-colors"
+            className="flex-shrink-0 flex items-center transition-opacity hover:opacity-80"
             aria-label="Atlas Mountain Visit"
           >
-            Atlas Mountain Visit
+            <Image
+              src="https://ec0m9cwfe1.ufs.sh/f/qpHeSXPP9BvaKzrt0k7VSDfZeErsq601P9UkTjgm4NM57JQG"
+              alt="Atlas Mountain Visit"
+              width={160}
+              height={48}
+              priority
+              className="h-10 w-auto object-contain"
+            />
           </NavLink>
 
           {/* Desktop Navigation - Center */}
@@ -202,6 +216,7 @@ export function NavbarClient({ initialData }: Props) {
               onMouseLeave={handleCategoriesMouseLeave}
             >
               <button
+                type="button"
                 className={`relative flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full transition-all ${
                   isCategoriesOpen || isToursActive
                     ? 'text-[#ff2828] font-semibold bg-[#ff2828]/10 ring-1 ring-[#ff2828]/20'
@@ -215,7 +230,7 @@ export function NavbarClient({ initialData }: Props) {
               {/* Categories Dropdown - Full Width Mega Menu */}
               <AnimatePresence>
                 {isCategoriesOpen && navbarData && navbarData.categories.length > 0 && (
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, y: -5 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -5 }}
@@ -270,7 +285,7 @@ export function NavbarClient({ initialData }: Props) {
                       {/* Activities Row - Horizontally Scrollable */}
                       <AnimatePresence mode="wait">
                         {hoveredCategory && hoveredCategoryActivities.length > 0 && (
-                          <motion.div
+                          <m.div
                             key={hoveredCategory}
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
@@ -341,11 +356,11 @@ export function NavbarClient({ initialData }: Props) {
                                 </div>
                               </div>
                             </div>
-                          </motion.div>
+                          </m.div>
                         )}
                       </AnimatePresence>
                     </div>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>
@@ -381,6 +396,7 @@ export function NavbarClient({ initialData }: Props) {
             {/* Language Switcher */}
             <div className="relative lang-menu">
               <button
+                type="button"
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                 className="flex items-center gap-1.5 px-3 py-2 text-sm text-neutral-600 hover:text-neutral-900 rounded-xl hover:bg-neutral-100 transition-all"
               >
@@ -391,7 +407,7 @@ export function NavbarClient({ initialData }: Props) {
 
               <AnimatePresence>
                 {isLangMenuOpen && (
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, y: 8, scale: 0.96 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
@@ -400,6 +416,7 @@ export function NavbarClient({ initialData }: Props) {
                   >
                     {Object.entries(localeLabels).map(([code, { flag, label }]) => (
                       <button
+                        type="button"
                         key={code}
                         onClick={() => switchLocale(code)}
                         className={`flex items-center gap-2 w-full px-4 py-2.5 text-sm rounded-xl transition-all ${
@@ -412,7 +429,7 @@ export function NavbarClient({ initialData }: Props) {
                         <span>{label}</span>
                       </button>
                     ))}
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>
@@ -456,6 +473,7 @@ export function NavbarClient({ initialData }: Props) {
 
             {/* Menu Button */}
             <button
+              type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="flex items-center justify-center w-10 h-10 text-neutral-700 rounded-xl hover:bg-neutral-100 transition-colors"
               aria-label="Menu"
@@ -470,7 +488,7 @@ export function NavbarClient({ initialData }: Props) {
         {isMobileMenuOpen && (
           <>
             {/* Backdrop */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -479,7 +497,7 @@ export function NavbarClient({ initialData }: Props) {
             />
 
             {/* Menu Panel */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
@@ -594,6 +612,7 @@ export function NavbarClient({ initialData }: Props) {
                 <div className="flex items-center gap-2">
                   {Object.entries(localeLabels).map(([code, { flag, label }]) => (
                     <button
+                      type="button"
                       key={code}
                       onClick={() => switchLocale(code)}
                       className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium transition-all ${
@@ -617,10 +636,11 @@ export function NavbarClient({ initialData }: Props) {
                   {t('book')}
                 </NavLink>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>
-    </header>
+      </header>
+    </LazyMotion>
   )
 }
