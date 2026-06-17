@@ -126,8 +126,15 @@ export function ConfirmationPageClient({ locale }: Props) {
         <header className="bg-white border-b border-neutral-200">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <div className="flex items-center justify-between h-16">
-              <NavLink href="/" className="flex-shrink-0">
-                <span className="font-display font-bold text-xl tracking-tight text-neutral-900">Atlas Mountain Visit</span>
+              <NavLink href="/" className="flex-shrink-0 flex items-center transition-opacity hover:opacity-80" aria-label="Atlas Mountain Visit">
+                <Image
+                  src="https://ec0m9cwfe1.ufs.sh/f/qpHeSXPP9BvaKzrt0k7VSDfZeErsq601P9UkTjgm4NM57JQG"
+                  alt="Atlas Mountain Visit"
+                  width={160}
+                  height={48}
+                  priority
+                  className="h-10 w-auto object-contain"
+                />
               </NavLink>
             </div>
           </div>
@@ -164,8 +171,15 @@ export function ConfirmationPageClient({ locale }: Props) {
       <header className="bg-white border-b border-neutral-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
-            <NavLink href="/" className="flex-shrink-0">
-              <span className="font-display font-bold text-xl tracking-tight text-neutral-900">Atlas Mountain Visit</span>
+            <NavLink href="/" className="flex-shrink-0 flex items-center transition-opacity hover:opacity-80" aria-label="Atlas Mountain Visit">
+              <Image
+                src="https://ec0m9cwfe1.ufs.sh/f/qpHeSXPP9BvaKzrt0k7VSDfZeErsq601P9UkTjgm4NM57JQG"
+                alt="Atlas Mountain Visit"
+                width={160}
+                height={48}
+                priority
+                className="h-10 w-auto object-contain"
+              />
             </NavLink>
             <div className="flex items-center gap-2 text-sm text-neutral-600">
               <Shield className="w-4 h-4" style={{ color: ACCENT_GREEN }} />
