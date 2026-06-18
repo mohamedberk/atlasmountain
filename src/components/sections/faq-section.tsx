@@ -69,7 +69,7 @@ export function FAQSection({ faqData }: Props) {
   const description = faqData?.description || tFaq('description')
   const contactCtaText = faqData?.contactCtaText || tFaq('stillHaveQuestions')
   const contactLinkText = faqData?.contactLinkText || tFaq('contactOurTeam')
-  const contactEmail = faqData?.contactEmail || 'atlasmountainsvisit1@gmail.com'
+  const contactEmail = faqData?.contactEmail || 'atlasmountainsvisit@gmail.com'
 
   const faqs = faqData?.items?.length ? faqData.items : defaultFaqs
 

@@ -144,7 +144,7 @@ export const ContactPage: GlobalConfig = {
                     {
                       name: 'number',
                       type: 'text',
-                      defaultValue: '+212 777 926 596',
+                      defaultValue: '+212 629 102 424',
                     },
                     {
                       name: 'display',
@@ -162,7 +162,7 @@ export const ContactPage: GlobalConfig = {
                     {
                       name: 'address',
                       type: 'email',
-                      defaultValue: 'info@atlasmountainsvisit.com',
+                      defaultValue: 'atlasmountainsvisit@gmail.com',
                     },
                     {
                       name: 'responseTime',
@@ -179,7 +179,7 @@ export const ContactPage: GlobalConfig = {
                     {
                       name: 'number',
                       type: 'text',
-                      defaultValue: '+212 777 926 596',
+                      defaultValue: '+212 629 102 424',
                       admin: {
                         description: 'Include country code',
                       },
@@ -233,17 +233,17 @@ export const ContactPage: GlobalConfig = {
                     {
                       name: 'instagram',
                       type: 'text',
-                      defaultValue: 'https://www.instagram.com/atlasmountainsvisit/',
+                      defaultValue: 'https://www.instagram.com/atlas_mountains_visit?igsh=MWJhN3FpeXh5dXV0dQ==',
                     },
                     {
                       name: 'facebook',
                       type: 'text',
-                      defaultValue: 'https://www.facebook.com/p/Green-Atlas-Travel-100037206949855',
+                      defaultValue: 'https://www.facebook.com/share/18rfo2mmva/',
                     },
                     {
                       name: 'tiktok',
                       type: 'text',
-                      defaultValue: 'https://www.tiktok.com/@green.atlas.travel',
+                      defaultValue: 'https://www.tiktok.com/@visit_atlas_mountains?_r=1&_t=ZS-972qRKPxftc',
                     },
                     {
                       name: 'youtube',

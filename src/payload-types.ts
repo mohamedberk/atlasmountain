@@ -1534,7 +1534,7 @@ export interface SiteSetting {
        */
       countryCode: string;
       /**
-       * Phone number without country code (e.g., 777926596)
+       * Phone number without country code (e.g., 629102424)
        */
       number: string;
       /**

@@ -44,16 +44,16 @@ export const SiteSettings: GlobalConfig = {
                       name: 'number',
                       type: 'text',
                       required: true,
-                      defaultValue: '777926596',
+                      defaultValue: '629102424',
                       admin: {
-                        description: 'Phone number without country code (e.g., 777926596)',
+                        description: 'Phone number without country code (e.g., 629102424)',
                         width: '70%',
                       },
                     },
                     {
                       name: 'display',
                       type: 'text',
-                      defaultValue: '+212 777-926596',
+                      defaultValue: '+212 629-102424',
                       admin: {
                         description: 'Formatted display version (e.g., +212 777-926596)',
                       },
@@ -64,7 +64,7 @@ export const SiteSettings: GlobalConfig = {
                   name: 'email',
                   type: 'email',
                   required: true,
-                  defaultValue: 'contact@atlasmountainsvisit.com',
+                  defaultValue: 'atlasmountainsvisit@gmail.com',
                   admin: {
                     description: 'Main contact email address',
                   },
@@ -121,7 +121,7 @@ export const SiteSettings: GlobalConfig = {
                 {
                   name: 'facebook',
                   type: 'text',
-                  defaultValue: 'https://facebook.com/atlasmountainsvisit',
+                  defaultValue: 'https://www.facebook.com/share/18rfo2mmva/',
                   admin: {
                     description: 'Full Facebook page URL',
                   },
@@ -129,7 +129,7 @@ export const SiteSettings: GlobalConfig = {
                 {
                   name: 'instagram',
                   type: 'text',
-                  defaultValue: 'https://instagram.com/atlasmountainsvisit',
+                  defaultValue: 'https://www.instagram.com/atlas_mountains_visit?igsh=MWJhN3FpeXh5dXV0dQ==',
                   admin: {
                     description: 'Full Instagram profile URL',
                   },
@@ -144,6 +144,7 @@ export const SiteSettings: GlobalConfig = {
                 {
                   name: 'tiktok',
                   type: 'text',
+                  defaultValue: 'https://www.tiktok.com/@visit_atlas_mountains?_r=1&_t=ZS-972qRKPxftc',
                   admin: {
                     description: 'Full TikTok profile URL (optional)',
                   },

@@ -882,7 +882,7 @@ export const HomePage: GlobalConfig = {
                       name: 'contactEmail',
                       label: 'Contact Email',
                       type: 'email',
-                      defaultValue: 'atlasmountainsvisit1@gmail.com',
+                      defaultValue: 'atlasmountainsvisit@gmail.com',
                       admin: {
                         width: '33%',
                       },
