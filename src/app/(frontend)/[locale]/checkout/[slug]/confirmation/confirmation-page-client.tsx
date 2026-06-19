@@ -64,7 +64,7 @@ export function ConfirmationPageClient({ locale }: Props) {
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
-    const storedData = localStorage.getItem('greenatlas_booking')
+    const storedData = localStorage.getItem('atlasmountainsvisit_booking')
     if (storedData) {
       try {
         const parsed = JSON.parse(storedData)

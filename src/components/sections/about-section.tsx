@@ -13,10 +13,10 @@ const FALLBACK_TITLE = 'About'
 const FALLBACK_TITLE_HIGHLIGHT = 'Me'
 
 const FALLBACK_PARAGRAPH_1 =
-  'Hello, my name is Hamza, and I am a local guide from Imlil in the Atlas Mountains of Morocco. Through Atlas Mountains Visit, I offer authentic travel experiences including trekking adventures, desert trips, cultural tours, city discovery, and organized tours across Morocco.'
+  'Hello, my name is Hamza, and I am a local guide from Imlil in the Atlas Mountains of Morocco. Through ATLASMOUNTAINSVISIT, I offer authentic travel experiences including trekking adventures, desert trips, cultural tours, city discovery, and organized tours across Morocco.'
 
 const FALLBACK_PARAGRAPH_2 =
-  'My goal is to help travelers explore the real beauty of Morocco, its landscapes, culture, traditions, and warm hospitality.'
+  'My goal is to help travelers explore the real beauty of Morocco, its landscapes, culture, traditions, and warm hospitality'
 
 interface AboutImage {
   image: string | Media

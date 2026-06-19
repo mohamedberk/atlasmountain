@@ -202,36 +202,24 @@ function HorizontalActivityCard({ activity, index, onBook, tCommon, tActivities,
             </div>
           )}
 
-          <div className="mt-auto border-t border-neutral-200 pt-4 sm:pt-5 flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-0">
-            <div>
-              <p className="text-xs sm:text-sm text-neutral-500">{tActivities('startingFrom')}</p>
-              <div className="flex items-baseline gap-1">
-                <span className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-neutral-900">
-                  €{getPrice(activity)}
-                </span>
-                <span className="text-[10px] sm:text-xs md:text-sm text-neutral-600">/{tActivities('perPerson')}</span>
-              </div>
-            </div>
+          <div className="mt-auto border-t border-neutral-200 pt-4 sm:pt-5 flex items-center gap-3">
+            <NavLink
+              href={`/activities/${activity.slug}`}
+              className="flex-1 h-10 sm:h-11 md:h-12 rounded-lg sm:rounded-xl bg-white text-neutral-800 flex items-center justify-center gap-1.5 sm:gap-2 text-sm font-medium border border-neutral-200 shadow-sm hover:shadow hover:bg-neutral-50 transition-all duration-300"
+            >
+              <span>{tCommon('details')}</span>
+            </NavLink>
 
-            <div className="flex items-center gap-2">
-              <NavLink
-                href={`/activities/${activity.slug}`}
-                className="h-9 sm:h-10 md:h-12 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl bg-white text-neutral-800 flex items-center gap-1.5 sm:gap-2 text-sm font-medium border border-neutral-200 shadow-sm hover:shadow hover:bg-neutral-50 transition-all duration-300"
-              >
-                <span>{tCommon('details')}</span>
-              </NavLink>
-
-              <button
-                onClick={() => onBook(activity)}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT_GREEN)}
-                className="h-9 sm:h-10 md:h-12 px-3 sm:px-4 md:px-6 rounded-lg sm:rounded-xl text-white flex items-center gap-1.5 sm:gap-2 text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
-                style={{ backgroundColor: ACCENT_GREEN }}
-              >
-                <span>{tCommon('book')}</span>
-                <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              </button>
-            </div>
+            <button
+              onClick={() => onBook(activity)}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT_GREEN)}
+              className="flex-1 h-10 sm:h-11 md:h-12 rounded-lg sm:rounded-xl text-white flex items-center justify-center gap-1.5 sm:gap-2 text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+              style={{ backgroundColor: ACCENT_GREEN }}
+            >
+              <span>{tCommon('book')}</span>
+              <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </button>
           </div>
         </div>
       </div>
@@ -320,36 +308,24 @@ function ColumnActivityCard({ activity, index, onBook, tCommon, tActivities }: C
             </div>
           </div>
 
-          <div className="mt-auto border-t border-neutral-200 pt-4 flex items-end justify-between gap-2">
-            <div>
-              <p className="text-xs text-neutral-500">{tActivities('startingFrom')}</p>
-              <div className="flex items-baseline gap-1">
-                <span className="text-xl sm:text-2xl font-display font-bold text-neutral-900">
-                  €{getPrice(activity)}
-                </span>
-                <span className="text-[10px] sm:text-xs text-neutral-600">/{tActivities('perPerson')}</span>
-              </div>
-            </div>
+          <div className="mt-auto border-t border-neutral-200 pt-4 flex items-center gap-2">
+            <NavLink
+              href={`/activities/${activity.slug}`}
+              className="flex-1 h-10 rounded-lg bg-white text-neutral-800 flex items-center justify-center gap-1.5 text-sm font-medium border border-neutral-200 shadow-sm hover:shadow hover:bg-neutral-50 transition-all duration-300"
+            >
+              <span>{tCommon('details')}</span>
+            </NavLink>
 
-            <div className="flex items-center gap-2">
-              <NavLink
-                href={`/activities/${activity.slug}`}
-                className="h-9 px-3 rounded-lg bg-white text-neutral-800 flex items-center gap-1.5 text-xs font-medium border border-neutral-200 shadow-sm hover:shadow hover:bg-neutral-50 transition-all duration-300"
-              >
-                <span>{tCommon('details')}</span>
-              </NavLink>
-
-              <button
-                onClick={() => onBook(activity)}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT_GREEN)}
-                className="h-9 px-3 rounded-lg text-white flex items-center gap-1.5 text-xs font-medium shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
-                style={{ backgroundColor: ACCENT_GREEN }}
-              >
-                <span>{tCommon('book')}</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
+            <button
+              onClick={() => onBook(activity)}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT_GREEN)}
+              className="flex-1 h-10 rounded-lg text-white flex items-center justify-center gap-1.5 text-sm font-medium shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+              style={{ backgroundColor: ACCENT_GREEN }}
+            >
+              <span>{tCommon('book')}</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
       </div>

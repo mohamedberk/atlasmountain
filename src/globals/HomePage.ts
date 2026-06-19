@@ -389,14 +389,14 @@ export const HomePage: GlobalConfig = {
                   name: 'paragraph1',
                   label: 'Paragraph 1',
                   type: 'textarea',
-                  defaultValue: "At Atlas Mountain Visit, we craft unforgettable Moroccan journeys designed just for you. Whether you dream of exploring the Sahara's golden dunes, relaxing on serene beaches, trekking the Atlas Mountains, or wandering ancient cities, we bring Morocco's wonders to life.",
+                  defaultValue: 'Hello, my name is Hamza, and I am a local guide from Imlil in the Atlas Mountains of Morocco. Through ATLASMOUNTAINSVISIT, I offer authentic travel experiences including trekking adventures, desert trips, cultural tours, city discovery, and organized tours across Morocco.',
                   localized: true,
                 },
                 {
                   name: 'paragraph2',
                   label: 'Paragraph 2',
                   type: 'textarea',
-                  defaultValue: 'Our expert team ensures seamless travel with personalized itineraries, local guides, comfortable accommodations, and reliable transportation.',
+                  defaultValue: 'My goal is to help travelers explore the real beauty of Morocco, its landscapes, culture, traditions, and warm hospitality',
                   localized: true,
                 },
                 {
@@ -740,7 +740,7 @@ export const HomePage: GlobalConfig = {
                   name: 'tripAdvisorUrl',
                   label: 'TripAdvisor Page URL',
                   type: 'text',
-                  defaultValue: 'https://www.tripadvisor.com/Attraction_Review-g293734-d20238379-Reviews-Morocco_Trips_solutions-Marrakech_Marrakech_Safi.html',
+                  defaultValue: 'https://www.tripadvisor.com/Attraction_Review-g293734-d33305949-Reviews-Atlas_Mountains_Visit-Marrakech_Marrakech_Safi.html',
                   admin: {
                     description: 'Link to your TripAdvisor page',
                   },

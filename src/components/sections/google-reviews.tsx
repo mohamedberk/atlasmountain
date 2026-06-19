@@ -8,7 +8,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import AutoScroll from 'embla-carousel-auto-scroll'
 import { useGoogleReviews, type GoogleReview } from '@/hooks/useGoogleReviews'
 
-const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Attraction_Review-g293734-d25345173-Reviews-Green_Atlas_Travel-Marrakech_Marrakech_Safi.html'
+const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Attraction_Review-g293734-d33305949-Reviews-Atlas_Mountains_Visit-Marrakech_Marrakech_Safi.html'
 
 const ACCENT_GREEN = '#ff2828'
 

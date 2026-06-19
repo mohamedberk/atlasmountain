@@ -1,4 +1,4 @@
-# Performance Optimization Guide — Green Atlas Travel
+# Performance Optimization Guide — Atlas Mountains Visit
 
 Complete guide combining backend (Payload CMS + Next.js data layer) and frontend (caching, fonts, bundling) performance work.
 

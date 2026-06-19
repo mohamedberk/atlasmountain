@@ -798,7 +798,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
       }
 
       // Store in localStorage for the confirmation page
-      localStorage.setItem('greenatlas_booking', JSON.stringify(bookingDataForConfirmation))
+      localStorage.setItem('atlasmountainsvisit_booking', JSON.stringify(bookingDataForConfirmation))
 
       // Redirect to confirmation page
       router.push(`/${locale}/checkout/${activity.slug}/confirmation`)

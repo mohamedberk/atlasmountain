@@ -240,10 +240,6 @@ export interface Category {
    */
   slug: string;
   type: 'activity' | 'transport';
-  /**
-   * Duration type shown on category cards
-   */
-  durationType?: ('multi-day' | 'day-trip') | null;
   description?: string | null;
   /**
    * Select a Lucide icon for this category
@@ -1155,7 +1151,6 @@ export interface CategoriesSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   type?: T;
-  durationType?: T;
   description?: T;
   icon?: T;
   image?: T;

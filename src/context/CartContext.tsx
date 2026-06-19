@@ -89,7 +89,7 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
-const CART_STORAGE_KEY = 'greenatlas-cart'
+const CART_STORAGE_KEY = 'atlasmountainsvisit-cart'
 const CART_EXPIRY_MINUTES = 30
 
 interface StoredCart {

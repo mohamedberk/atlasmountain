@@ -330,7 +330,7 @@ export function CheckoutClient() {
       paymentMethod,
       createdAt: new Date().toISOString(),
     }
-    localStorage.setItem('greenatlas_booking', JSON.stringify(bookingData))
+    localStorage.setItem('atlasmountainsvisit_booking', JSON.stringify(bookingData))
     setGuestDetails({ ...formData, pickupLocation: formData.pickupLocation, specialRequests: formData.specialRequests })
 
     // Show appropriate toast based on payment method
