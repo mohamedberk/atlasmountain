@@ -90,13 +90,6 @@ function getImageUrl(image: string | number | Media | null | undefined): string 
   return image.externalUrl || image.url || '/placeholder-activity.jpg'
 }
 
-// Helper function to get duration display text
-function getDurationDisplay(durationType: string | undefined | null, locale?: string): string {
-  const isFrench = locale === 'fr'
-  if (durationType === 'day-trip') return isFrench ? 'Excursion d\'une journée' : 'Day Trip'
-  return isFrench ? 'Plusieurs jours' : 'Multi-Day'
-}
-
 // Helper to get price from activity
 function getActivityPrice(activity: Activity): number | null {
   if (activity.pricingType === 'tiered' && activity.tieredPricing?.tiers && activity.tieredPricing.tiers.length > 0) {
@@ -160,19 +153,8 @@ export function CategoryPageClient({ category, activities, locale }: Props) {
               animate="visible"
               variants={staggerContainer}
             >
-              {/* Category Badge */}
-              <motion.div
-                variants={fadeInUp}
-                custom={0.1}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
-                style={{ backgroundColor: `${ACCENT_GREEN}30` }}
-              >
-                <div className="w-1.5 h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-                <span className="text-sm font-medium uppercase tracking-wider text-white">
-                  {getDurationDisplay((category as any).durationType, locale)}
-                </span>
-                <div className="w-1.5 h-6 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-              </motion.div>
+              {/* Spacer to preserve hero layout */}
+              <div className="h-10 mb-6" aria-hidden="true" />
 
               {/* Title */}
               <motion.h1

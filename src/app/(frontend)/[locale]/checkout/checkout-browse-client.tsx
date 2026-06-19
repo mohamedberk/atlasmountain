@@ -29,18 +29,6 @@ function getImageUrl(image: string | number | Media | null | undefined): string 
   return image.externalUrl || image.url || '/placeholder-activity.jpg'
 }
 
-function getActivityPrice(activity: Activity): number {
-  if (activity.pricingType === 'tiered' && activity.tieredPricing?.tiers && activity.tieredPricing.tiers.length > 0) {
-    // Get the LOWEST price from all tiers
-    const lowestPrice = Math.min(...activity.tieredPricing.tiers.map(tier => tier.pricePerPerson || 0))
-    return lowestPrice
-  }
-  if (activity.pricingType === 'fixed' && activity.privatePricing?.basePrice) {
-    return activity.privatePricing.basePrice
-  }
-  return 0
-}
-
 function getLocationName(location: string | number | Location | null | undefined): string {
   if (!location) return 'Morocco'
   if (typeof location === 'string') return location
@@ -175,7 +163,6 @@ export function CheckoutBrowseClient({ categorizedActivities, locale }: Props) {
 
 function ActivityCard({ activity, index }: { activity: Activity; index: number }) {
   const tCommon = useTranslations('common')
-  const price = getActivityPrice(activity)
   const imageUrl = getImageUrl(activity.featuredImage)
   const location = getLocationName(activity.location)
 
@@ -206,13 +193,6 @@ function ActivityCard({ activity, index }: { activity: Activity; index: number }
           </div>
 
 
-          {/* Price Tag */}
-          <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-white/95 backdrop-blur-sm shadow-sm">
-            <span className="text-base font-bold" style={{ color: ACCENT_GREEN }}>
-              €{price}
-            </span>
-            <span className="text-xs text-neutral-500 ml-1">{tCommon('perPersonShort')}</span>
-          </div>
         </div>
 
         {/* Content */}

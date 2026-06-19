@@ -7,7 +7,7 @@ export const Categories: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     group: 'Content',
-    defaultColumns: ['name', 'type', 'durationType', 'displayOrder', 'updatedAt'],
+    defaultColumns: ['name', 'type', 'displayOrder', 'updatedAt'],
     description: 'Manage activity and transport categories',
   },
   defaultPopulate: {
@@ -16,7 +16,6 @@ export const Categories: CollectionConfig = {
     type: true,
     icon: true,
     image: true,
-    durationType: true,
   },
   access: {
     read: () => true,
@@ -67,20 +66,6 @@ export const Categories: CollectionConfig = {
         { label: 'Transport', value: 'transport' },
       ],
       defaultValue: 'activity',
-    },
-    {
-      name: 'durationType',
-      type: 'select',
-      required: true,
-      options: [
-        { label: 'Multi-Day', value: 'multi-day' },
-        { label: 'Day Trip', value: 'day-trip' },
-      ],
-      defaultValue: 'multi-day',
-      admin: {
-        description: 'Duration type shown on category cards',
-        condition: (data) => data?.type === 'activity',
-      },
     },
     {
       name: 'description',
