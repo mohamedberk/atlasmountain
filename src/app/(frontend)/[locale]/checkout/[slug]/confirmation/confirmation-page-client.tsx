@@ -58,6 +58,8 @@ interface Props {
 
 export function ConfirmationPageClient({ locale }: Props) {
   const t = useTranslations('checkoutFlow')
+  const tCommon = useTranslations('common')
+  const tBookingForm = useTranslations('bookingForm')
   const intlLocale = useLocale()
   const [booking, setBooking] = useState<ConfirmationBookingData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -96,8 +98,8 @@ export function ConfirmationPageClient({ locale }: Props) {
     if (navigator.share && booking) {
       try {
         await navigator.share({
-          title: 'Atlas Mountain Visit Booking',
-          text: `My Morocco adventure is booked! Reference: ${booking.ref}`,
+          title: tBookingForm('shareTitle'),
+          text: tBookingForm('shareText', { ref: booking.ref }),
           url: window.location.href,
         })
       } catch {
@@ -238,7 +240,7 @@ export function ConfirmationPageClient({ locale }: Props) {
             <button
               onClick={copyBookingRef}
               className="p-2 hover:bg-white/20 rounded-lg transition-colors"
-              title="Copy booking reference"
+              title={t('confirmation.copyReference')}
             >
               {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
             </button>
@@ -309,10 +311,7 @@ export function ConfirmationPageClient({ locale }: Props) {
                     {item.adults && (
                       <span className="flex items-center gap-1">
                         <Users className="w-3 h-3" />
-                        {item.adults} Adult{item.adults > 1 ? 's' : ''}
-                        {item.children
-                          ? `, ${item.children} Child${item.children > 1 ? 'ren' : ''}`
-                          : ''}
+                        {tBookingForm('guestsCount', { adults: item.adults, children: item.children ?? 0 })}
                       </span>
                     )}
                   </div>

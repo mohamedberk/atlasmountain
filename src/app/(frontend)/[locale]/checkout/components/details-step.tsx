@@ -48,7 +48,7 @@ export const DetailsStep = memo(function DetailsStep({ formData, onFormChange }:
             value={formData.firstName}
             onChange={(e) => updateField('firstName', e.target.value)}
             className="w-full h-12 px-4 rounded-xl border border-neutral-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-            placeholder="John"
+            placeholder={t('details.firstNamePlaceholder')}
           />
         </div>
 
@@ -61,7 +61,7 @@ export const DetailsStep = memo(function DetailsStep({ formData, onFormChange }:
             value={formData.lastName}
             onChange={(e) => updateField('lastName', e.target.value)}
             className="w-full h-12 px-4 rounded-xl border border-neutral-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-            placeholder="Doe"
+            placeholder={t('details.lastNamePlaceholder')}
           />
         </div>
 
@@ -78,7 +78,7 @@ export const DetailsStep = memo(function DetailsStep({ formData, onFormChange }:
                 ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
                 : 'border-neutral-300 focus:border-primary focus:ring-primary/20'
             } focus:ring-2`}
-            placeholder="john@example.com"
+            placeholder={t('details.emailPlaceholder')}
           />
         </div>
 
@@ -91,7 +91,7 @@ export const DetailsStep = memo(function DetailsStep({ formData, onFormChange }:
             value={formData.phone}
             onChange={(e) => updateField('phone', e.target.value)}
             className="w-full h-12 px-4 rounded-xl border border-neutral-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-            placeholder="+1 234 567 890"
+            placeholder={t('details.phonePlaceholder')}
           />
         </div>
 
@@ -102,7 +102,7 @@ export const DetailsStep = memo(function DetailsStep({ formData, onFormChange }:
           <LocationMapPicker
             value={formData.pickupLocation}
             onChange={(value) => updateField('pickupLocation', value)}
-            placeholder={t('details.pickupLocationPlaceholder') || 'Search or click on map to select location...'}
+            placeholder={t('details.mapPlaceholder')}
           />
         </div>
 

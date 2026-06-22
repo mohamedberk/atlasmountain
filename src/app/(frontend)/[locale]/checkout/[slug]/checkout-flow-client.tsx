@@ -460,6 +460,7 @@ function RelatedActivityCard({
   isAdded: boolean
 }) {
   const t = useTranslations('checkoutFlow')
+  const tCommon = useTranslations('common')
   const [showSelector, setShowSelector] = useState(false)
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
@@ -493,7 +494,7 @@ function RelatedActivityCard({
             style={{ backgroundColor: `${ACCENT_GREEN}15`, color: ACCENT_GREEN }}
           >
             <Clock className="w-2.5 h-2.5" />
-            {activity.duration || '1 Day'}
+            {activity.duration || tCommon('oneDay')}
           </div>
         </div>
 
@@ -575,6 +576,9 @@ function RelatedActivityCard({
 export function CheckoutFlowClient({ activity, relatedActivities, locale }: Props) {
   const router = useRouter()
   const t = useTranslations('checkoutFlow')
+  const tCommonHook = useTranslations('common')
+  const tBookingForm = useTranslations('bookingForm')
+  const tCheckout = useTranslations('checkout')
   const intlLocale = useLocale()
   const [currentStep, setCurrentStep] = useState(0)
   const steps = [t('steps.yourBooking'), t('steps.yourDetails'), t('steps.youMayAlsoLike'), t('steps.reviewAndPay')]
@@ -762,12 +766,12 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
         data = await response.json()
       } catch {
         console.error('Failed to parse response as JSON, status:', response.status)
-        throw new Error(`Server error (${response.status}). Please try again.`)
+        throw new Error(tBookingForm('serverError', { status: response.status }))
       }
 
       if (!response.ok) {
         console.error('API error:', data)
-        throw new Error(data.error || data.details || 'Failed to create booking')
+        throw new Error(data.error || data.details || tBookingForm('failedToCreateBooking'))
       }
 
       // Prepare booking data for confirmation modal
@@ -804,7 +808,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
       router.push(`/${locale}/checkout/${activity.slug}/confirmation`)
     } catch (error) {
       console.error('Error creating booking:', error)
-      setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred')
+      setSubmitError(error instanceof Error ? error.message : tBookingForm('unexpectedError'))
       setIsSubmitting(false)
     }
   }
@@ -869,7 +873,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                             className="text-xs font-medium px-2 py-0.5 rounded-full"
                             style={{ backgroundColor: `${ACCENT_GREEN}15`, color: ACCENT_GREEN }}
                           >
-                            {activity.duration || '1 Day'}
+                            {activity.duration || tCommonHook('oneDay')}
                           </span>
                         </div>
                         <h3 className="font-semibold text-neutral-900 mb-1">{activity.title}</h3>
@@ -963,8 +967,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                                 <div>
                                   <p className="font-medium text-neutral-900 text-sm">{item.activity.title}</p>
                                   <p className="text-xs text-neutral-500">
-                                    {item.adults} adult{item.adults > 1 ? 's' : ''}
-                                    {item.children > 0 && `, ${item.children} child${item.children > 1 ? 'ren' : ''}`}
+                                    {tBookingForm('guestsCount', { adults: item.adults, children: item.children })}
                                   </p>
                                 </div>
                               </div>
@@ -1013,7 +1016,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                               value={formData.firstName}
                               onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                               className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
-                              placeholder="John"
+                              placeholder={tCheckout('details.firstNamePlaceholder')}
                             />
                           </div>
                         </div>
@@ -1028,7 +1031,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                               value={formData.lastName}
                               onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                               className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
-                              placeholder="Doe"
+                              placeholder={tCheckout('details.lastNamePlaceholder')}
                             />
                           </div>
                         </div>
@@ -1045,7 +1048,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-300 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all"
-                            placeholder="john@example.com"
+                            placeholder={tCheckout('details.emailPlaceholder')}
                           />
                         </div>
                       </div>
@@ -1057,7 +1060,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                         <PhoneInput
                           value={formData.phone}
                           onChange={(value) => setFormData({ ...formData, phone: value })}
-                          placeholder="600 000 000"
+                          placeholder={tCheckout('details.phonePlaceholder')}
                         />
                       </div>
 
@@ -1122,8 +1125,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                           <div className="flex-1">
                             <h4 className="font-semibold text-neutral-900">{item.activity.title}</h4>
                             <p className="text-sm text-neutral-600">
-                              {item.adults} adult{item.adults > 1 ? 's' : ''}
-                              {item.children > 0 && `, ${item.children} child${item.children > 1 ? 'ren' : ''}`}
+                              {tBookingForm('guestsCount', { adults: item.adults, children: item.children })}
                             </p>
                             {item.date && (
                               <p className="text-sm text-neutral-500 flex items-center gap-1 mt-1">
@@ -1261,13 +1263,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                       )}
                     </div>
                     <div className="flex items-center gap-3 text-xs text-neutral-500">
-                      <span>{item.adults} {t('adult')}{item.adults > 1 ? 's' : ''}</span>
-                      {item.children > 0 && (
-                        <>
-                          <span className="w-1 h-1 rounded-full bg-neutral-300" />
-                          <span>{item.children} {t('child')}{item.children > 1 ? 'ren' : ''}</span>
-                        </>
-                      )}
+                      <span>{tBookingForm('guestsCount', { adults: item.adults, children: item.children })}</span>
                       {item.date && (
                         <>
                           <span className="w-1 h-1 rounded-full bg-neutral-300" />

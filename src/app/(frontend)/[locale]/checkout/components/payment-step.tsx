@@ -83,6 +83,7 @@ export const PaymentStep = memo(function PaymentStep({
   const tCommon = useTranslations('common')
   const tPayment = useTranslations('paymentStep')
   const tCheckoutFlow = useTranslations('checkoutFlow')
+  const tBookingForm = useTranslations('bookingForm')
   const locale = useLocale()
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('stripe')
@@ -140,14 +141,14 @@ export const PaymentStep = memo(function PaymentStep({
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to initialize payment')
+        throw new Error(errorData.error || tBookingForm('failedToInitPayment'))
       }
 
       const data = await response.json()
       setClientSecret(data.clientSecret)
       setBookingReference(data.bookingReference)
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Failed to initialize payment'
+      const message = error instanceof Error ? error.message : tBookingForm('failedToInitPayment')
       setIntentError(message)
       onError(message)
     } finally {
@@ -172,7 +173,7 @@ export const PaymentStep = memo(function PaymentStep({
   // Handle Pay Later - creates booking without payment
   const handlePayLater = async () => {
     if (!selectedDate) {
-      onError('Please select a date')
+      onError(tBookingForm('pleaseSelectDate'))
       return
     }
 
@@ -205,13 +206,13 @@ export const PaymentStep = memo(function PaymentStep({
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to create booking')
+        throw new Error(errorData.error || tBookingForm('failedToCreateBooking'))
       }
 
       const data = await response.json()
       onSuccess(data.bookingReference, 'pay_later')
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Failed to create booking'
+      const message = error instanceof Error ? error.message : tBookingForm('failedToCreateBooking')
       onError(message)
     } finally {
       setIsProcessingPayLater(false)

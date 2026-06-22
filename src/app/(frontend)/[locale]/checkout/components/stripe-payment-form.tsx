@@ -7,6 +7,7 @@ import {
   useElements,
 } from '@stripe/react-stripe-js'
 import { Shield, Loader2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface StripePaymentFormProps {
   total: number
@@ -21,6 +22,7 @@ export function StripePaymentForm({
 }: StripePaymentFormProps) {
   const stripe = useStripe()
   const elements = useElements()
+  const tBookingForm = useTranslations('bookingForm')
   const [isProcessing, setIsProcessing] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
@@ -46,8 +48,8 @@ export function StripePaymentForm({
 
       if (error) {
         // Payment failed
-        setErrorMessage(error.message || 'Payment failed. Please try again.')
-        onError(error.message || 'Payment failed')
+        setErrorMessage(error.message || tBookingForm('paymentFailed'))
+        onError(error.message || tBookingForm('paymentFailedShort'))
       } else if (paymentIntent) {
         // Payment succeeded
         if (paymentIntent.status === 'succeeded') {
@@ -57,13 +59,13 @@ export function StripePaymentForm({
           onSuccess(paymentIntent.id)
         } else if (paymentIntent.status === 'requires_action') {
           // 3D Secure or other action required - Stripe handles this automatically
-          setErrorMessage('Additional authentication required. Please follow the prompts.')
+          setErrorMessage(tBookingForm('additionalAuthRequired'))
         } else {
-          setErrorMessage('Payment status: ' + paymentIntent.status)
+          setErrorMessage(tBookingForm('paymentStatusLabel') + ' ' + paymentIntent.status)
         }
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'An unexpected error occurred'
+      const message = err instanceof Error ? err.message : tBookingForm('unexpectedError')
       setErrorMessage(message)
       onError(message)
     } finally {
@@ -96,19 +98,19 @@ export function StripePaymentForm({
         {isProcessing ? (
           <>
             <Loader2 className="w-5 h-5 animate-spin" />
-            Processing...
+            {tBookingForm('processingShort')}
           </>
         ) : (
           <>
             <Shield className="w-5 h-5" />
-            Pay €{total.toFixed(2)}
+            {tBookingForm('payAmount', { amount: total.toFixed(2) })}
           </>
         )}
       </button>
 
       <p className="text-center text-xs text-neutral-500 flex items-center justify-center gap-1">
         <Shield className="w-3.5 h-3.5" />
-        Secured by Stripe - 256-bit SSL encryption
+        {tBookingForm('securedByStripe')}
       </p>
     </form>
   )

@@ -29,11 +29,11 @@ function getImageUrl(image: string | number | Media | null | undefined): string 
   return image.externalUrl || image.url || '/placeholder-activity.jpg'
 }
 
-function getLocationName(location: string | number | Location | null | undefined): string {
-  if (!location) return 'Morocco'
+function getLocationName(location: string | number | Location | null | undefined, fallback: string): string {
+  if (!location) return fallback
   if (typeof location === 'string') return location
-  if (typeof location === 'number') return 'Morocco'
-  return location.name || 'Morocco'
+  if (typeof location === 'number') return fallback
+  return location.name || fallback
 }
 
 export function CheckoutBrowseClient({ categorizedActivities, locale }: Props) {
@@ -164,7 +164,7 @@ export function CheckoutBrowseClient({ categorizedActivities, locale }: Props) {
 function ActivityCard({ activity, index }: { activity: Activity; index: number }) {
   const tCommon = useTranslations('common')
   const imageUrl = getImageUrl(activity.featuredImage)
-  const location = getLocationName(activity.location)
+  const location = getLocationName(activity.location, tCommon('morocco'))
 
   return (
     <motion.div

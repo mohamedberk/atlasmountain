@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { Loader2, Shield } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface PayPalPaymentFormProps {
   items: any[]
@@ -37,6 +38,7 @@ export function PayPalPaymentForm({
 }: PayPalPaymentFormProps) {
   const [{ isPending, isRejected }] = usePayPalScriptReducer()
   const [isProcessing, setIsProcessing] = useState(false)
+  const tBookingForm = useTranslations('bookingForm')
 
   const createOrder = async (): Promise<string> => {
     try {
@@ -52,13 +54,13 @@ export function PayPalPaymentForm({
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to create PayPal order')
+        throw new Error(errorData.error || tBookingForm('failedToCreatePaypal'))
       }
 
       const data = await response.json()
       return data.orderId
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Failed to create order'
+      const message = error instanceof Error ? error.message : tBookingForm('failedToCreateOrder')
       onError(message)
       throw error
     }
@@ -75,7 +77,7 @@ export function PayPalPaymentForm({
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to capture payment')
+        throw new Error(errorData.error || tBookingForm('failedToCapture'))
       }
 
       const captureData = await response.json()
@@ -83,10 +85,10 @@ export function PayPalPaymentForm({
       if (captureData.status === 'COMPLETED') {
         onSuccess(captureData.bookingNumber)
       } else {
-        throw new Error('Payment was not completed')
+        throw new Error(tBookingForm('paymentNotCompleted'))
       }
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Payment failed'
+      const message = error instanceof Error ? error.message : tBookingForm('paymentFailedShort')
       onError(message)
     } finally {
       setIsProcessing(false)
@@ -95,11 +97,11 @@ export function PayPalPaymentForm({
 
   const handleError = (err: Record<string, unknown>) => {
     console.error('PayPal error:', err)
-    onError('PayPal payment failed. Please try again.')
+    onError(tBookingForm('paypalFailed'))
   }
 
   const handleCancel = () => {
-    onError('Payment was cancelled')
+    onError(tBookingForm('paymentCancelled'))
   }
 
   if (isPending) {
@@ -113,7 +115,7 @@ export function PayPalPaymentForm({
   if (isRejected) {
     return (
       <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-red-700">
-        Failed to load PayPal. Please refresh the page or try a different payment method.
+        {tBookingForm('failedToLoadPaypal')}
       </div>
     )
   }
@@ -123,7 +125,7 @@ export function PayPalPaymentForm({
       {isProcessing && (
         <div className="flex items-center justify-center py-4 bg-neutral-50 rounded-lg">
           <Loader2 className="w-6 h-6 animate-spin text-neutral-600 mr-2" />
-          <span className="text-neutral-600">Processing payment...</span>
+          <span className="text-neutral-600">{tBookingForm('processingPayment')}</span>
         </div>
       )}
 
@@ -146,7 +148,7 @@ export function PayPalPaymentForm({
 
       <p className="text-center text-xs text-neutral-500 flex items-center justify-center gap-1">
         <Shield className="w-3.5 h-3.5" />
-        Secured by PayPal - Buyer Protection
+        {tBookingForm('securedByPaypal')}
       </p>
     </div>
   )

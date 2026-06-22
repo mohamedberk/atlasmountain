@@ -19,24 +19,26 @@ interface SidebarProps {
 }
 
 // Helper to get guest count display
-const getGuestDisplay = (item: CartItem): string => {
+const getGuestDisplay = (
+  item: CartItem,
+  tBookingForm: ReturnType<typeof useTranslations>,
+): string => {
   if (item.type === 'activity') {
     const actItem = item as ActivityCartItem
-    const parts = [`${actItem.adults} Adult${actItem.adults > 1 ? 's' : ''}`]
-    if (actItem.children > 0) {
-      parts.push(`${actItem.children} Child${actItem.children > 1 ? 'ren' : ''}`)
-    }
-    return parts.join(', ')
+    return tBookingForm('guestsCount', { adults: actItem.adults, children: actItem.children })
   }
   return ''
 }
 
 // Helper to get pricing type badge
-const getPricingTypeBadge = (item: CartItem): { label: string; color: string } | null => {
+const getPricingTypeBadge = (
+  item: CartItem,
+  tBookingForm: ReturnType<typeof useTranslations>,
+): { label: string; color: string } | null => {
   if (item.type === 'activity') {
     const actItem = item as ActivityCartItem
     if (actItem.pricingType === 'private' || actItem.pricingType === 'fixed') {
-      return { label: 'Private', color: 'bg-amber-100 text-amber-700' }
+      return { label: tBookingForm('pricingPrivate'), color: 'bg-amber-100 text-amber-700' }
     }
     return null
   }
@@ -55,6 +57,7 @@ export const Sidebar = memo(function Sidebar({
   const t = useTranslations('checkout')
   const tSidebar = useTranslations('sidebarCheckout')
   const tCommon = useTranslations('common')
+  const tBookingForm = useTranslations('bookingForm')
 
   return (
     <div className="bg-white rounded-2xl border border-neutral-200 p-6 sticky top-24">
@@ -64,8 +67,8 @@ export const Sidebar = memo(function Sidebar({
 
       <div className="space-y-3 mb-6">
         {items.map((item) => {
-          const guestDisplay = getGuestDisplay(item)
-          const pricingBadge = getPricingTypeBadge(item)
+          const guestDisplay = getGuestDisplay(item, tBookingForm)
+          const pricingBadge = getPricingTypeBadge(item, tBookingForm)
 
           return (
             <div key={`${item.type}-${item.id}`} className="flex gap-3">

@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { setRequestLocale } from 'next-intl/server'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { ConfirmationPageClient } from './confirmation-page-client'
 
 export const revalidate = 0
@@ -8,10 +8,13 @@ interface Props {
   params: Promise<{ locale: string; slug: string }>
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const t = await getTranslations({ locale: typedLocale, namespace: 'checkout' })
   return {
-    title: 'Booking Confirmed | Atlas Mountain Visit',
-    description: 'Your booking has been confirmed. Thank you for choosing Atlas Mountain Visit.',
+    title: `${t('confirmationMetaTitle')} | Atlas Mountain Visit`,
+    description: t('confirmationMetaDescription'),
     robots: {
       index: false,
       follow: false,

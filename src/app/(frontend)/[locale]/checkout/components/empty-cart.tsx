@@ -62,14 +62,14 @@ export const EmptyCart = memo(function EmptyCart({
     if (uncategorized.length > 0) {
       categories.push({
         id: 'uncategorized',
-        name: 'Other Experiences',
+        name: tEmpty('otherExperiences'),
         slug: '',
         activities: uncategorized,
       })
     }
 
     return categories
-  }, [activities])
+  }, [activities, tEmpty])
 
   return (
     <div className="min-h-screen bg-[#f9f9fb]">

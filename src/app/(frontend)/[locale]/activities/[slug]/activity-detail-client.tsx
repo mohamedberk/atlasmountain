@@ -110,18 +110,18 @@ function getImageUrl(image: string | number | Media | null | undefined): string 
   return image.externalUrl || image.url || null
 }
 
-function getLocationName(location: string | number | Location | null | undefined): string {
-  if (!location) return 'Morocco'
+function getLocationName(location: string | number | Location | null | undefined, fallback: string): string {
+  if (!location) return fallback
   if (typeof location === 'string') return location
-  if (typeof location === 'number') return 'Morocco' // ID reference, not populated
-  return location.name || 'Morocco'
+  if (typeof location === 'number') return fallback // ID reference, not populated
+  return location.name || fallback
 }
 
-function getCategoryName(category: string | number | Category | null | undefined): string {
-  if (!category) return 'Experience'
+function getCategoryName(category: string | number | Category | null | undefined, fallback: string): string {
+  if (!category) return fallback
   if (typeof category === 'string') return category
-  if (typeof category === 'number') return 'Experience' // ID reference, not populated
-  return category.name || 'Experience'
+  if (typeof category === 'number') return fallback // ID reference, not populated
+  return category.name || fallback
 }
 
 function getHighlights(highlights: Activity['highlights']): any[] {
@@ -217,108 +217,6 @@ function getRouteData(activity: Activity): RouteData | null {
   }
 }
 
-// Section translations
-const getSectionTranslations = (lang: string) => {
-  if (lang === 'fr') {
-    return {
-      aboutThisActivity: 'À propos de cette activité',
-      highlights: 'Points forts',
-      customerReviews: 'Avis clients',
-      reviews: 'avis',
-      seeAllReviews: 'Voir tous les',
-      seeAllReviewsOnGoogle: 'Voir tous les avis sur Google',
-      fullDescription: 'Description complète',
-      showLess: 'Voir moins',
-      seeMore: 'Voir plus',
-      whatsIncluded: 'Ce qui est inclus',
-      whatsNotIncluded: 'Ce qui n\'est pas inclus',
-      yourExperienceStepByStep: 'Votre expérience étape par étape',
-      importantInformation: 'Informations importantes',
-      knowBeforeYouGo: 'À savoir avant de partir :',
-      share: 'Partager',
-      linkCopied: 'Lien copié !',
-      youMightAlsoLike: 'Vous aimerez aussi',
-      whatOurCustomersSay: 'Ce que disent nos clients',
-      basedOn: 'Basé sur',
-      meetingPoint: 'Point de rencontre',
-      whatToBring: 'Quoi apporter',
-      overview: 'Aperçu',
-      aboutExperience: 'À propos de cette expérience',
-      headerText: 'Sélectionnez les participants et la date',
-      fromLabel: 'À partir de',
-      perPersonLabel: 'par personne',
-      totalLabel: 'total',
-      adultsLabel: 'Adultes',
-      adultLabel: 'Adulte',
-      childrenLabel: 'Enfants',
-      childLabel: 'Enfant',
-      eachLabel: 'chacun',
-      checkAvailabilityButton: 'Vérifier la disponibilité',
-      whatsappCta: 'Des questions ? Contactez-nous sur WhatsApp',
-      group: 'Groupe',
-      private: 'Privé',
-      extraGuest: 'invité supplémentaire',
-      fixedPrice: 'Prix fixe',
-      yearRound: 'Toute l\'année',
-      groupPricingLabel: 'Tarifs de groupe',
-      personLabel: 'personne',
-      peopleLabel: 'personnes',
-      freeCancellation: 'Annulation gratuite jusqu\'à 24h avant',
-      instantConfirmation: 'Confirmation instantanée',
-      whatsappQuestion: 'Des questions ? WhatsApp',
-      bookNowButton: 'Réserver maintenant',
-    }
-  }
-  return {
-    aboutThisActivity: 'About this activity',
-    highlights: 'Highlights',
-    customerReviews: 'Customer Reviews',
-    reviews: 'reviews',
-    seeAllReviews: 'See all',
-    seeAllReviewsOnGoogle: 'See all reviews on Google',
-    fullDescription: 'Full description',
-    showLess: 'Show less',
-    seeMore: 'See more',
-    whatsIncluded: 'What\'s included',
-    whatsNotIncluded: 'What\'s not included',
-    yourExperienceStepByStep: 'Your experience step by step',
-    importantInformation: 'Important information',
-    knowBeforeYouGo: 'Know before you go:',
-    share: 'Share',
-    linkCopied: 'Link copied!',
-    youMightAlsoLike: 'You might also like',
-    whatOurCustomersSay: 'What Our Customers Say',
-    basedOn: 'Based on',
-    meetingPoint: 'Meeting point',
-    whatToBring: 'What to bring',
-    overview: 'Overview',
-    aboutExperience: 'About This Experience',
-    headerText: 'Select participants and date',
-    fromLabel: 'From',
-    perPersonLabel: 'per person',
-    totalLabel: 'total',
-    adultsLabel: 'Adults',
-    adultLabel: 'Adult',
-    childrenLabel: 'Children',
-    childLabel: 'Child',
-    eachLabel: 'each',
-    checkAvailabilityButton: 'Check availability',
-    whatsappCta: 'Questions? WhatsApp us',
-    group: 'Group',
-    private: 'Private',
-    extraGuest: 'extra guest',
-    fixedPrice: 'Fixed price',
-    yearRound: 'Year round',
-    groupPricingLabel: 'Group Pricing',
-    personLabel: 'person',
-    peopleLabel: 'people',
-    freeCancellation: 'Free cancellation up to 24h before',
-    instantConfirmation: 'Instant confirmation',
-    whatsappQuestion: 'Questions? WhatsApp us',
-    bookNowButton: 'Book now',
-  }
-}
-
 // Star Rating Component
 function StarRating({ rating, size = 'sm' }: { rating: number; size?: 'sm' | 'md' | 'lg' | 'xl' }) {
   const sizeClasses = {
@@ -385,7 +283,6 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
   const { addItem } = useCart()
   const router = useRouter()
   const locale = useLocale()
-  const t = useMemo(() => getSectionTranslations(locale), [locale])
 
   // Google Reviews
   const { reviews: googleReviews, totalReviews: googleTotalReviews, overallRating: googleOverallRating } = useGoogleReviews({ minRating: 4 })
@@ -638,12 +535,12 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
     })()
 
     return [
-      { icon: 'clock', title: activity.duration || '3-4 hours', description: tNav('yearRound') },
-      { icon: 'users', title: activity.pricingType === 'fixed' ? t.private : t.group, description: groupSizeDescription },
-      { icon: 'map-pin', title: getLocationName((activity as any).location), description: tDetail('meetingPointDesc') },
+      { icon: 'clock', title: activity.duration || tDetail('defaultDuration'), description: tNav('yearRound') },
+      { icon: 'users', title: activity.pricingType === 'fixed' ? tNav('private') : tNav('group'), description: groupSizeDescription },
+      { icon: 'map-pin', title: getLocationName((activity as any).location, tCommon('morocco')), description: tDetail('meetingPointDesc') },
       ...(languages.length > 0 ? [{ icon: 'globe', title: languages.slice(0, 2).join(', '), description: tDetail('availableLanguages') }] : []),
     ]
-  }, [activity, languages, t, tNav, tDetail])
+  }, [activity, languages, tNav, tDetail, tCommon])
 
   return (
     <div className="min-h-screen bg-white">
@@ -660,7 +557,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
               <div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-2xl font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
-                  <span className="text-sm text-neutral-500">{isPrivateMode ? t.totalLabel : t.perPersonLabel}</span>
+                  <span className="text-sm text-neutral-500">{isPrivateMode ? tDetail('totalLabel') : tCommon('perPerson')}</span>
                 </div>
                 {activity.isFeatured && (
                   <div className="mt-1">
@@ -678,7 +575,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
               className={`${isCustomNoteMode ? 'w-full' : 'flex-1 max-w-[200px]'} px-6 py-3.5 text-white font-bold text-base rounded-xl transition-all shadow-sm hover:shadow-md`}
               style={{ backgroundColor: ACCENT_GREEN }}
             >
-              {t.checkAvailabilityButton}
+              {tDetail('checkAvailabilityButton')}
             </motion.button>
           </div>
         </div>
@@ -700,16 +597,16 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                   {(overallRating || totalReviews) && (
                     <div className="flex items-center gap-2">
                       <StarRating rating={Math.round(overallRating || 5)} size="md" />
-                      <span className="text-base text-neutral-600">{overallRating} ({totalReviews} {t.reviews})</span>
+                      <span className="text-base text-neutral-600">{overallRating} ({totalReviews} {tDetail('reviewsLower')})</span>
                     </div>
                   )}
                 </div>
                 <div className="flex items-center gap-6">
                   {!isCustomNoteMode && (
                     <div>
-                      <span className="text-sm text-neutral-500">{t.fromLabel} </span>
+                      <span className="text-sm text-neutral-500">{tCommon('from')} </span>
                       <span className="text-2xl font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
-                      <span className="text-base text-neutral-500"> /{isPrivateMode ? t.totalLabel : t.perPersonLabel}</span>
+                      <span className="text-base text-neutral-500"> /{isPrivateMode ? tDetail('totalLabel') : tCommon('perPerson')}</span>
                     </div>
                   )}
                   <motion.button
@@ -719,7 +616,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     className="px-6 py-3 text-white font-bold text-base rounded-xl transition-all shadow-md"
                     style={{ backgroundColor: ACCENT_GREEN }}
                   >
-                    {t.checkAvailabilityButton}
+                    {tDetail('checkAvailabilityButton')}
                   </motion.button>
                 </div>
               </div>
@@ -784,7 +681,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                 {/* Category Badge */}
                 <div className="absolute top-4 left-4 flex gap-2">
                   <span className="bg-white/95 backdrop-blur-sm text-neutral-900 px-3 py-1.5 rounded-full font-semibold text-xs shadow-sm">
-                    {getCategoryName(activity.category)}
+                    {getCategoryName(activity.category, tCommon('defaultCategory'))}
                   </span>
                   {activity.isFeatured && (
                     <span className="text-white px-3 py-1.5 rounded-full font-semibold text-xs flex items-center gap-1" style={{ backgroundColor: ACCENT_GREEN }}>
@@ -906,12 +803,12 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                   {linkCopied ? (
                     <>
                       <Check className="w-4 h-4 text-[#4CAF50]" />
-                      <span className="text-[#4CAF50]">{t.linkCopied}</span>
+                      <span className="text-[#4CAF50]">{tDetail('linkCopied')}</span>
                     </>
                   ) : (
                     <>
                       <Share2 className="w-4 h-4" />
-                      <span>{t.share}</span>
+                      <span>{tDetail('share')}</span>
                     </>
                   )}
                 </button>
@@ -928,7 +825,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                   )}
                   {totalReviews && (!overallRating || overallRating < 4.5) && (
                     <NavLink href="#reviews" className="text-base text-neutral-600 underline transition-colors hover:text-[#ff2828]">
-                      {totalReviews} {t.reviews}
+                      {totalReviews} {tDetail('reviewsLower')}
                     </NavLink>
                   )}
                 </div>
@@ -962,8 +859,8 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     <>
                       {/* Header with "Group Pricing" and "per person" */}
                       <div className="flex justify-between items-baseline">
-                        <h3 className="text-lg font-semibold text-neutral-900">{t.groupPricingLabel}</h3>
-                        <span className="text-sm text-neutral-600">{t.perPersonLabel}</span>
+                        <h3 className="text-lg font-semibold text-neutral-900">{tDetail('groupPricingLabel')}</h3>
+                        <span className="text-sm text-neutral-600">{tCommon('perPerson')}</span>
                       </div>
 
                       {/* Tiered pricing list */}
@@ -989,8 +886,8 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                             >
                               <span className={`text-sm ${isSelected ? 'font-semibold' : ''}`}>
                                 {isSinglePerson
-                                  ? `${numPeople} ${numPeople === 1 ? t.personLabel : t.peopleLabel}`
-                                  : `${numPeople}-${maxPeople} ${t.peopleLabel}`
+                                  ? `${numPeople} ${numPeople === 1 ? tDetail('personLabel') : tDetail('peopleLabel')}`
+                                  : `${numPeople}-${maxPeople} ${tDetail('peopleLabel')}`
                                 }
                               </span>
                               <span className={`text-sm font-semibold text-red-600 ${isSelected ? 'font-bold' : ''}`}>
@@ -1006,7 +903,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     <div>
                       <div className="flex items-baseline gap-2">
                         <span className="text-3xl font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
-                        <span className="text-base text-neutral-500">{isPrivateMode ? t.totalLabel : t.perPersonLabel}</span>
+                        <span className="text-base text-neutral-500">{isPrivateMode ? tDetail('totalLabel') : tCommon('perPerson')}</span>
                       </div>
                       {isPrivateMode && privateAdditionalGuestPrice > 0 && (
                         <p className="text-sm text-neutral-500 mt-1">
@@ -1029,7 +926,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
             {/* Full Description - Moved above About this activity */}
             {activity.description?.root?.children && activity.description.root.children.length > 0 && (
               <div className="space-y-5">
-                <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{t.fullDescription}</h2>
+                <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{tDetail('fullDescription')}</h2>
 
                 {/* Mobile - Collapsible */}
                 <div className="lg:hidden">
@@ -1041,7 +938,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     className="flex items-center gap-1 mt-2 text-sm font-semibold hover:underline"
                     style={{ color: ACCENT_GREEN }}
                   >
-                    {expandedSections.fullDescription ? t.showLess : t.seeMore}
+                    {expandedSections.fullDescription ? tDetail('showLess') : tDetail('seeMore')}
                     <ChevronDown className={`w-4 h-4 transition-transform ${expandedSections.fullDescription ? 'rotate-180' : ''}`} />
                   </button>
                 </div>
@@ -1061,7 +958,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
               viewport={{ once: true, margin: "-50px" }}
               className="space-y-5"
             >
-              <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{t.aboutThisActivity}</h2>
+              <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{tDetail('aboutThisActivity')}</h2>
               <div className="space-y-4">
                 {activityFeatures.map((feature, idx) => (
                   <motion.div
@@ -1095,7 +992,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                 viewport={{ once: true, margin: "-50px" }}
                 className="space-y-5"
               >
-                <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{t.highlights}</h2>
+                <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{tCommon('highlights')}</h2>
                 <ul className="space-y-3">
                   {highlights.map((highlight, idx) => (
                     <motion.li
@@ -1120,7 +1017,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
             {hasReviews && (
               <div id="reviews" className="space-y-5">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{t.customerReviews}</h2>
+                  <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{tDetail('customerReviews')}</h2>
                   {(overallRating || totalReviews) && (
                     <div className="flex items-center gap-2">
                       {overallRating && (
@@ -1130,7 +1027,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                         </div>
                       )}
                       {totalReviews && (
-                        <span className="text-base text-neutral-500">({totalReviews} {t.reviews})</span>
+                        <span className="text-base text-neutral-500">({totalReviews} {tDetail('reviewsLower')})</span>
                       )}
                     </div>
                   )}
@@ -1306,7 +1203,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     className="inline-flex items-center gap-1 text-sm font-medium hover:underline"
                     style={{ color: ACCENT_GREEN }}
                   >
-                    {t.seeAllReviews} {totalReviews} {t.reviews}
+                    {tDetail('seeAllReviews')} {totalReviews} {tDetail('reviewsLower')}
                     <ChevronRight className="w-4 h-4" />
                   </NavLink>
                 )}
@@ -1321,12 +1218,12 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                   onClick={() => toggleSection('included')}
                   className="lg:hidden w-full flex items-center justify-between py-3 border-b border-neutral-100"
                 >
-                  <h2 className="text-xl font-bold text-neutral-900">{t.whatsIncluded}</h2>
+                  <h2 className="text-xl font-bold text-neutral-900">{tNav('whatsIncluded')}</h2>
                   <ChevronDown className={`w-6 h-6 text-neutral-500 transition-transform ${expandedSections.included ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Desktop - Static Header */}
-                <h2 className="hidden lg:block text-xl lg:text-2xl font-bold text-neutral-900">{t.whatsIncluded}</h2>
+                <h2 className="hidden lg:block text-xl lg:text-2xl font-bold text-neutral-900">{tNav('whatsIncluded')}</h2>
 
                 {/* Mobile - Collapsible Content */}
                 <AnimatePresence>
@@ -1374,12 +1271,12 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                   onClick={() => toggleSection('notIncluded')}
                   className="lg:hidden w-full flex items-center justify-between py-3 border-b border-neutral-100"
                 >
-                  <h2 className="text-xl font-bold text-neutral-900">{t.whatsNotIncluded}</h2>
+                  <h2 className="text-xl font-bold text-neutral-900">{tNav('whatsNotIncluded')}</h2>
                   <ChevronDown className={`w-6 h-6 text-neutral-500 transition-transform ${expandedSections.notIncluded ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Desktop - Static Header */}
-                <h2 className="hidden lg:block text-xl lg:text-2xl font-bold text-neutral-900">{t.whatsNotIncluded}</h2>
+                <h2 className="hidden lg:block text-xl lg:text-2xl font-bold text-neutral-900">{tNav('whatsNotIncluded')}</h2>
 
                 {/* Mobile - Collapsible Content */}
                 <AnimatePresence>
@@ -1427,12 +1324,12 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                   onClick={() => toggleSection('itinerary')}
                   className="lg:hidden w-full flex items-center justify-between py-3 border-b border-neutral-100"
                 >
-                  <h2 className="text-xl font-bold text-neutral-900">{t.yourExperienceStepByStep}</h2>
+                  <h2 className="text-xl font-bold text-neutral-900">{tDetail('yourExperienceStepByStep')}</h2>
                   <ChevronDown className={`w-6 h-6 text-neutral-500 transition-transform ${expandedSections.itinerary ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Desktop - Static Header */}
-                <h2 className="hidden lg:block text-xl lg:text-2xl font-bold text-neutral-900">{t.yourExperienceStepByStep}</h2>
+                <h2 className="hidden lg:block text-xl lg:text-2xl font-bold text-neutral-900">{tDetail('yourExperienceStepByStep')}</h2>
 
                 {/* Mobile - Collapsible Content */}
                 <AnimatePresence>
@@ -1526,12 +1423,12 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                   onClick={() => toggleSection('recommendations')}
                   className="lg:hidden w-full flex items-center justify-between py-3 border-b border-neutral-100"
                 >
-                  <h2 className="text-xl font-bold text-neutral-900">{t.whatToBring}</h2>
+                  <h2 className="text-xl font-bold text-neutral-900">{tDetail('whatToBring')}</h2>
                   <ChevronDown className={`w-6 h-6 text-neutral-500 transition-transform ${expandedSections.recommendations ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Desktop - Static Header */}
-                <h2 className="hidden lg:block text-xl lg:text-2xl font-bold text-neutral-900">{t.whatToBring}</h2>
+                <h2 className="hidden lg:block text-xl lg:text-2xl font-bold text-neutral-900">{tDetail('whatToBring')}</h2>
 
                 {/* Mobile - Collapsible Content */}
                 <AnimatePresence>
@@ -1607,16 +1504,16 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                 viewport={{ once: true }}
                 className="space-y-5"
               >
-                <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{t.meetingPoint}</h2>
+                <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{tNav('meetingPoint')}</h2>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 text-neutral-600 text-base">
                     <MapPin className="w-5 h-5" style={{ color: ACCENT_GREEN }} />
-                    <span>{getLocationName((activity as any).location)}</span>
+                    <span>{getLocationName((activity as any).location, tCommon('morocco'))}</span>
                   </div>
                   <ActivityLocationMap
                     latitude={locationCoords.lat}
                     longitude={locationCoords.lng}
-                    locationName={getLocationName((activity as any).location)}
+                    locationName={getLocationName((activity as any).location, tCommon('morocco'))}
                     activityTitle={activity.title}
                     className="border border-neutral-200 rounded-xl overflow-hidden"
                   />
@@ -1671,8 +1568,8 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     <>
                       {/* Header with "Group Pricing" and "per person" */}
                       <div className="flex justify-between items-baseline">
-                        <h3 className="text-lg font-semibold text-neutral-900">{t.groupPricingLabel}</h3>
-                        <span className="text-sm text-neutral-600">{t.perPersonLabel}</span>
+                        <h3 className="text-lg font-semibold text-neutral-900">{tDetail('groupPricingLabel')}</h3>
+                        <span className="text-sm text-neutral-600">{tCommon('perPerson')}</span>
                       </div>
 
                       {/* Tiered pricing list */}
@@ -1698,8 +1595,8 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                             >
                               <span className={`text-sm ${isSelected ? 'font-semibold' : ''}`}>
                                 {isSinglePerson
-                                  ? `${numPeople} ${numPeople === 1 ? t.personLabel : t.peopleLabel}`
-                                  : `${numPeople}-${maxPeople} ${t.peopleLabel}`
+                                  ? `${numPeople} ${numPeople === 1 ? tDetail('personLabel') : tDetail('peopleLabel')}`
+                                  : `${numPeople}-${maxPeople} ${tDetail('peopleLabel')}`
                                 }
                               </span>
                               <span className={`text-sm font-semibold text-red-600 ${isSelected ? 'font-bold' : ''}`}>
@@ -1726,18 +1623,18 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                         }`}
                         style={{ backgroundColor: applicableTier ? ACCENT_GREEN : undefined }}
                       >
-                        {t.bookNowButton}
+                        {tCommon('bookNow')}
                       </motion.button>
 
                       {/* Trust signals */}
                       <div className="space-y-2">
                         <div className="flex items-center gap-3 text-sm text-neutral-600">
                           <Shield className="w-5 h-5 text-[#4CAF50]" />
-                          <span>{t.freeCancellation}</span>
+                          <span>{tDetail('freeCancellation')}</span>
                         </div>
                         <div className="flex items-center gap-3 text-sm text-neutral-600">
                           <Check className="w-5 h-5 text-[#4CAF50]" />
-                          <span>{t.instantConfirmation}</span>
+                          <span>{tDetail('instantConfirmation')}</span>
                         </div>
                       </div>
                     </>
@@ -1746,7 +1643,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     <div>
                       <div className="flex items-baseline gap-2">
                         <span className="text-3xl font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
-                        <span className="text-base text-neutral-500">{isPrivateMode ? t.totalLabel : t.perPersonLabel}</span>
+                        <span className="text-base text-neutral-500">{isPrivateMode ? tDetail('totalLabel') : tCommon('perPerson')}</span>
                       </div>
                       {isPrivateMode && privateAdditionalGuestPrice > 0 && (
                         <p className="text-sm text-neutral-500 mt-1">
@@ -1769,7 +1666,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                       <div className="flex items-center gap-3">
                         <Users className="w-6 h-6 text-neutral-700" />
                         <span className="text-neutral-900 font-medium text-base">
-                          {t.adultLabel} x {adults}{children > 0 ? `, ${t.childLabel} x ${children}` : ''}
+                          {tDetail('adultLabel')} x {adults}{children > 0 ? `, ${tDetail('childLabel')} x ${children}` : ''}
                         </span>
                       </div>
                       <ChevronDown className={`w-6 h-6 text-neutral-500 transition-transform ${showParticipants ? 'rotate-180' : ''}`} />
@@ -1789,12 +1686,12 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                             {/* Adults Row */}
                             <div className="flex items-center justify-between">
                               <div>
-                                <p className="font-medium text-neutral-900">{t.adultsLabel}</p>
+                                <p className="font-medium text-neutral-900">{tCommon('adults')}</p>
                                 {!isCustomNoteMode && (
                                   <p className="text-sm text-neutral-500">
                                     {isPrivateMode
-                                      ? (privateAdditionalGuestPrice > 0 ? `+€${privateAdditionalGuestPrice}/${t.extraGuest}` : t.fixedPrice)
-                                      : `€${0} ${t.eachLabel}`}
+                                      ? (privateAdditionalGuestPrice > 0 ? `+€${privateAdditionalGuestPrice}/${tDetail('extraGuest')}` : tDetail('fixedPrice'))
+                                      : `€${0} ${tDetail('eachLabel')}`}
                                   </p>
                                 )}
                               </div>
@@ -1820,12 +1717,12 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                             {/* Children Row */}
                             <div className="flex items-center justify-between">
                               <div>
-                                <p className="font-medium text-neutral-900">{t.childrenLabel} <span className="text-neutral-500 font-normal">(0-{12})</span></p>
+                                <p className="font-medium text-neutral-900">{tCommon('children')} <span className="text-neutral-500 font-normal">(0-{12})</span></p>
                                 {!isCustomNoteMode && (
                                   <p className="text-sm text-neutral-500">
                                     {isPrivateMode
-                                      ? (privateAdditionalGuestPrice > 0 ? `+€${privateAdditionalGuestPrice}/${t.extraGuest}` : t.fixedPrice)
-                                      : `€${childPrice} ${t.eachLabel}`}
+                                      ? (privateAdditionalGuestPrice > 0 ? `+€${privateAdditionalGuestPrice}/${tDetail('extraGuest')}` : tDetail('fixedPrice'))
+                                      : `€${childPrice} ${tDetail('eachLabel')}`}
                                   </p>
                                 )}
                               </div>
@@ -1869,7 +1766,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                         className="w-full py-4 text-white font-bold text-lg rounded-xl transition-all shadow-sm hover:shadow-md"
                         style={{ backgroundColor: ACCENT_GREEN }}
                       >
-                        {t.checkAvailabilityButton}
+                        {tDetail('checkAvailabilityButton')}
                       </motion.button>
 
                       {/* Trust Signals */}
@@ -1898,7 +1795,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                 </svg>
-                {t.whatsappCta}
+                {tDetail('whatsappCta')}
               </a>
             </motion.div>
           </div>

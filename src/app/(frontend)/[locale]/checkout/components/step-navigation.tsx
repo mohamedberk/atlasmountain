@@ -80,7 +80,7 @@ export const StepNavigation = memo(function StepNavigation({
 
           {/* Center: Total (mobile only) */}
           <div className="flex-1 text-center lg:hidden">
-            <p className="text-xs text-neutral-500">Total</p>
+            <p className="text-xs text-neutral-500">{tCommon('total')}</p>
             <p className="text-base font-bold text-secondary">€{total}</p>
           </div>
 

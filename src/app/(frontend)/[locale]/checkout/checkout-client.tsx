@@ -62,6 +62,7 @@ export function CheckoutClient() {
   const searchParams = useSearchParams()
   const locale = useLocale()
   const tClient = useTranslations('checkoutClient')
+  const tCommon = useTranslations('common')
 
   const {
     items, removeItem, updateItem, clearCart, getTotal,
@@ -109,7 +110,7 @@ export function CheckoutClient() {
     duration: a.duration || '',
     slug: a.slug,
     shortDescription: a.shortDescription || '',
-    location: typeof a.location === 'string' ? a.location : a.location?.name || 'Morocco',
+    location: typeof a.location === 'string' ? a.location : a.location?.name || tCommon('morocco'),
     highlights: (a.highlights || []).map((h: any) => h.highlight || '').filter(Boolean),
     included: (a.included || []).map((i: any) => i.item || '').filter(Boolean),
     rating: a.rating || 4.8,
@@ -125,7 +126,7 @@ export function CheckoutClient() {
     privateMinGuests: a.privatePricing?.minGuests,
     privateMaxGuests: a.privatePricing?.maxGuests,
     privateAdditionalGuestPrice: a.privatePricing?.additionalGuestPrice,
-  }), [])
+  }), [tCommon])
 
   // Start prefetching immediately when locale is known
   useEffect(() => {

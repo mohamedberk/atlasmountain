@@ -61,6 +61,7 @@ interface ActivityGuestCardProps {
 
 const ActivityGuestCard = memo(function ActivityGuestCard({ item, onUpdate }: ActivityGuestCardProps) {
   const tGuests = useTranslations('guestsStep')
+  const tBookingForm = useTranslations('bookingForm')
   const pricing = getActivityPricingFromCartItem(item)
   const guests = { adults: item.adults, children: item.children }
   const isPrivateMode = item.pricingType === 'private' || item.pricingType === 'fixed'
@@ -76,14 +77,16 @@ const ActivityGuestCard = memo(function ActivityGuestCard({ item, onUpdate }: Ac
       return {
         label: tGuests('privateTour'),
         description: additionalPrice > 0
-          ? `€${basePrice} base + €${additionalPrice}/extra guest above ${minGuests}`
-          : `€${basePrice} total`,
+          ? tBookingForm('guestPriceBase', { base: basePrice, additional: additionalPrice, min: minGuests })
+          : tBookingForm('guestPriceTotal', { base: basePrice }),
         showPerPerson: false,
       }
     }
     return {
       label: tGuests('perPerson'),
-      description: `€${item.price}/adult${item.childPrice > 0 ? `, €${item.childPrice}/child` : ''}`,
+      description: item.childPrice > 0
+        ? tBookingForm('guestPriceAdultChild', { adult: item.price, child: item.childPrice })
+        : tBookingForm('guestPriceAdult', { adult: item.price }),
       showPerPerson: true,
     }
   }
@@ -125,7 +128,7 @@ const ActivityGuestCard = memo(function ActivityGuestCard({ item, onUpdate }: Ac
           // For private/fixed: show counters without per-person prices
           <>
             <CompactCounter
-              label="Adults"
+              label={tBookingForm('adultsLabel')}
               value={item.adults}
               priceLabel=""
               onDecrement={() => onUpdate(item.id, 'adults', -1)}
@@ -135,7 +138,7 @@ const ActivityGuestCard = memo(function ActivityGuestCard({ item, onUpdate }: Ac
             />
             <div className="w-px h-8 bg-neutral-200" />
             <CompactCounter
-              label="Children"
+              label={tBookingForm('childrenLabel')}
               value={item.children}
               priceLabel=""
               onDecrement={() => onUpdate(item.id, 'children', -1)}
@@ -148,7 +151,7 @@ const ActivityGuestCard = memo(function ActivityGuestCard({ item, onUpdate }: Ac
           // For per_person: show price per type
           <>
             <CompactCounter
-              label="Adults"
+              label={tBookingForm('adultsLabel')}
               value={item.adults}
               priceLabel={`€${item.price}/ea`}
               onDecrement={() => onUpdate(item.id, 'adults', -1)}
@@ -158,7 +161,7 @@ const ActivityGuestCard = memo(function ActivityGuestCard({ item, onUpdate }: Ac
             />
             <div className="w-px h-8 bg-neutral-200" />
             <CompactCounter
-              label="Children"
+              label={tBookingForm('childrenLabel')}
               value={item.children}
               priceLabel={`€${item.childPrice}/ea`}
               onDecrement={() => onUpdate(item.id, 'children', -1)}
