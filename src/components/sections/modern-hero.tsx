@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import type { Activity, Media } from '@/payload-types'
 
 interface HeroData {
@@ -34,9 +35,10 @@ interface HeroSlideshowProps {
   currentSlide: number
   onFirstLoad: () => void
   firstLoaded: boolean
+  alt: string
 }
 
-function HeroSlideshow({ slides, currentSlide, onFirstLoad, firstLoaded }: HeroSlideshowProps) {
+function HeroSlideshow({ slides, currentSlide, onFirstLoad, firstLoaded, alt }: HeroSlideshowProps) {
   return (
     <LazyMotion features={domAnimation}>
       <AnimatePresence mode="sync">
@@ -50,7 +52,7 @@ function HeroSlideshow({ slides, currentSlide, onFirstLoad, firstLoaded }: HeroS
         >
           <Image
             src={slides[currentSlide]}
-            alt="Morocco"
+            alt={alt}
             fill
             sizes="100vw"
             className="object-cover"
@@ -67,6 +69,7 @@ export function ModernHero(_props: Props) {
   const [heroImageLoaded, setHeroImageLoaded] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
+  const t = useTranslations('home')
 
   const scrollToNext = useCallback(() => {
     const next = sectionRef.current?.nextElementSibling as HTMLElement | null
@@ -108,6 +111,7 @@ export function ModernHero(_props: Props) {
           currentSlide={currentSlide}
           onFirstLoad={() => setHeroImageLoaded(true)}
           firstLoaded={heroImageLoaded}
+          alt={t('heroImageAlt')}
         />
       </div>
 
@@ -116,7 +120,7 @@ export function ModernHero(_props: Props) {
           <button
             type="button"
             onClick={goPrev}
-            aria-label="Previous slide"
+            aria-label={t('heroPrevSlide')}
             className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 text-white flex items-center justify-center transition-all duration-300"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -124,7 +128,7 @@ export function ModernHero(_props: Props) {
           <button
             type="button"
             onClick={goNext}
-            aria-label="Next slide"
+            aria-label={t('heroNextSlide')}
             className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 text-white flex items-center justify-center transition-all duration-300"
           >
             <ChevronRight className="w-6 h-6" />
@@ -138,7 +142,7 @@ export function ModernHero(_props: Props) {
                 onClick={() => {
                   setCurrentSlide(i)
                 }}
-                aria-label={`Go to slide ${i + 1}`}
+                aria-label={t('heroGoToSlide', { number: i + 1 })}
                 className={`h-1.5 rounded-full transition-all duration-500 ${
                   i === currentSlide ? 'w-8 bg-[#ff2828]' : 'w-1.5 bg-white/40 hover:bg-white/70'
                 }`}

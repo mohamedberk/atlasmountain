@@ -36,6 +36,7 @@
     "experience": "expérience",
     "experiences": "expériences",
     "morocco": "Maroc",
+    "defaultCategory": "Expérience",
     "item": "article",
     "items": "articles",
     "share": "Partager",
@@ -635,5 +636,40 @@
     "description": "Découvrez des conseils, guides et histoires pour inspirer votre prochaine aventure marocaine.",
     "viewAll": "Voir Tous les Articles",
     "readMore": "Lire Plus"
+  },
+  "activityMetadata": {
+    "bookDescription": "Réserver {title} à Marrakech avec Atlas Mountain Visit",
+    "defaultKeywords": "{title}, circuits Maroc, activités Marrakech"
+  },
+  "home": {
+    "heroImageAlt": "Maroc",
+    "heroPrevSlide": "Diapositive précédente",
+    "heroNextSlide": "Diapositive suivante",
+    "heroGoToSlide": "Aller à la diapositive {number}",
+    "heroScrollToNext": "Défiler vers la section suivante",
+    "heroScrollLabel": "Défiler",
+    "reviewsTitle": "Ce que disent nos voyageurs",
+    "reviewsPrev": "Avis précédents",
+    "reviewsNext": "Avis suivants",
+    "reviewsPostedOnGoogle": "Publié sur Google",
+    "reviewsViewProfile": "Voir le profil",
+    "reviewsSeeAllGoogle": "Voir tous les avis sur Google",
+    "reviewsSeeAllTripAdvisor": "Voir tous les avis sur TripAdvisor",
+    "aboutFallbackTitle": "À propos de",
+    "aboutFallbackTitleHighlight": "moi",
+    "aboutFallbackParagraph1": "Bonjour, je m'appelle Hamza, et je suis un guide local d'Imlil dans les montagnes de l'Atlas au Maroc. À travers ATLASMOUNTAINSVISIT, je propose des expériences de voyage authentiques : aventures de trekking, excursions dans le désert, circuits culturels, découverte de villes et circuits organisés à travers le Maroc.",
+    "aboutFallbackParagraph2": "Mon objectif est d'aider les voyageurs à explorer la véritable beauté du Maroc, ses paysages, sa culture, ses traditions et son hospitalité chaleureuse",
+    "aboutFallbackImageAlt": "Hamza — guide local d'Imlil, montagnes de l'Atlas",
+    "bestTripsFallbackTitle": "Nos meilleures",
+    "bestTripsFallbackTitleHighlight": "aventures",
+    "bestTripsFallbackDescription": "Ce sont les endroits qui nous font, nous les locaux, sortir l'appareil photo. Chacun est unique à sa façon — nous sommes certains que vous allez adorer.",
+    "categoryDurationDayTrip": "Excursion d'une journée",
+    "categoryDurationMultiDay": "Plusieurs jours"
+  },
+  "chrome": {
+    "logoAlt": "Atlas Mountain Visit",
+    "mobileMenu": "Menu",
+    "whatsAppCta": "Contactez-nous sur WhatsApp",
+    "whatsAppDefaultMessage": "Bonjour ! J'ai une question sur vos circuits."
   }
 }

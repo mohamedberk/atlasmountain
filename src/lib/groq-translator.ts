@@ -286,18 +286,25 @@ ${JSON.stringify(preparedContent, null, 2)}`
         status === 429 ||
         code === 'rate_limit_exceeded' ||
         /rate.?limit|too large|TPM|tokens per minute/i.test(msg)
+      const isTransient =
+        status === 500 ||
+        status === 502 ||
+        status === 503 ||
+        status === 504 ||
+        /connection|timeout|ECONN|ENOTFOUND|EAI_AGAIN|fetch failed/i.test(msg)
 
       // Log the raw error on first failure so we can diagnose
       if (attempt === 1) {
         console.log(`   ⚠️  groq error [status=${status} code=${code}]: ${msg.slice(0, 280)}`)
       }
 
-      if (isRate && attempt < 6) {
+      if ((isRate || isTransient) && attempt < 6) {
         let waitMs = 0
         const m = msg.match(/try again in ([0-9.]+)s/i)
         if (m) waitMs = Math.ceil(parseFloat(m[1]) * 1000) + 500
-        if (!waitMs) waitMs = Math.min(65000, 5000 * attempt)
-        console.log(`   ⏳ rate-limited, waiting ${Math.round(waitMs / 1000)}s (attempt ${attempt}/6)`)
+        if (!waitMs) waitMs = isTransient ? Math.min(20000, 1500 * attempt) : Math.min(65000, 5000 * attempt)
+        const tag = isRate ? 'rate-limited' : 'network error'
+        console.log(`   ⏳ ${tag}, waiting ${Math.round(waitMs / 1000)}s (attempt ${attempt}/6)`)
         await sleep(waitMs)
         continue
       }
@@ -415,12 +422,50 @@ export async function translateContent(
   const targetLang = LOCALE_NAMES[targetLocale] || targetLocale
 
   const preparedContent: Record<string, any> = {}
+  // single rich-text field
   const richTextFields: string[] = []
+  // array-of-rich-text field (each element is Lexical JSON)
+  const richTextArrayFields: string[] = []
+  // array-of-objects field — preserve original items, translate each object's text/richText subfields
+  // value: { originals: any[], plain: Array<Record<string, string>>, schema: Record<string, 'text'|'rich'> }
+  type ObjectArrayPlan = {
+    originals: any[]
+    plain: Array<Record<string, string>>
+    schema: Record<string, 'text' | 'rich'>
+  }
+  const objectArrayFields: Record<string, ObjectArrayPlan> = {}
+
+  const isRichText = (v: any) => v && typeof v === 'object' && (v as any).root
+  const isPlainObject = (v: any) =>
+    v && typeof v === 'object' && !Array.isArray(v) && !isRichText(v)
 
   for (const [key, value] of Object.entries(content)) {
-    if (value && typeof value === 'object' && (value as any).root) {
+    if (isRichText(value)) {
       preparedContent[key] = richTextToPlainText(value)
       richTextFields.push(key)
+    } else if (Array.isArray(value) && value.length > 0 && value.every(isRichText)) {
+      preparedContent[key] = value.map((v: any) => richTextToPlainText(v))
+      richTextArrayFields.push(key)
+    } else if (Array.isArray(value) && value.length > 0 && value.every(isPlainObject)) {
+      // Array of structured items (e.g. highlights[], itinerary[], features[])
+      const plan: ObjectArrayPlan = { originals: value, plain: [], schema: {} }
+      for (const item of value) {
+        const plainItem: Record<string, string> = {}
+        for (const [k, v] of Object.entries(item)) {
+          if (k === 'id' || k === '_id' || k === 'createdAt' || k === 'updatedAt') continue
+          if (isRichText(v)) {
+            plainItem[k] = richTextToPlainText(v)
+            plan.schema[k] = 'rich'
+          } else if (typeof v === 'string') {
+            plainItem[k] = v
+            plan.schema[k] = 'text'
+          }
+          // Skip non-text fields (numbers, booleans, nested objects, IDs)
+        }
+        plan.plain.push(plainItem)
+      }
+      objectArrayFields[key] = plan
+      preparedContent[key] = plan.plain
     } else {
       preparedContent[key] = value
     }
@@ -450,6 +495,37 @@ export async function translateContent(
     }
   }
 
+  for (const key of richTextArrayFields) {
+    const arr = translated[key]
+    if (Array.isArray(arr)) {
+      translated[key] = arr.map((s: any) =>
+        typeof s === 'string' ? plainTextToRichText(s) : s,
+      )
+    }
+  }
+
+  for (const [key, plan] of Object.entries(objectArrayFields)) {
+    const translatedArr = translated[key]
+    if (!Array.isArray(translatedArr)) continue
+    const rebuilt: any[] = []
+    for (let i = 0; i < plan.originals.length; i++) {
+      const original = plan.originals[i]
+      const translatedItem = translatedArr[i]
+      if (!translatedItem || typeof translatedItem !== 'object') {
+        rebuilt.push(original)
+        continue
+      }
+      const merged: any = { ...original }
+      for (const [subKey, kind] of Object.entries(plan.schema)) {
+        const val = (translatedItem as any)[subKey]
+        if (typeof val !== 'string') continue
+        merged[subKey] = kind === 'rich' ? plainTextToRichText(val) : val
+      }
+      rebuilt.push(merged)
+    }
+    translated[key] = rebuilt
+  }
+
   for (const [key, value] of Object.entries(translated)) {
     if (key.toLowerCase().includes('slug') && typeof value === 'string') {
       translated[key] = slugify(value)
@@ -477,7 +553,11 @@ export function applyTranslatedContent(
   translatedContent: Record<string, any>,
   fieldPaths: string[],
 ): any {
-  const result: any = {}
+  // Start with a deep clone of the source doc so non-text localized fields
+  // (uploads, relationships, etc.) carry over and pass Payload validation.
+  // System fields are stripped to avoid 'cannot update id' errors.
+  const cleanedSource = removeSystemFields(JSON.parse(JSON.stringify(originalDoc)))
+  const result: any = cleanedSource
 
   for (const path of fieldPaths) {
     if (path.includes('[]')) {

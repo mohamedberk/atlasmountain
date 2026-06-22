@@ -36,6 +36,7 @@
     "experience": "experience",
     "experiences": "experiences",
     "morocco": "Morocco",
+    "defaultCategory": "Experience",
     "item": "item",
     "items": "items",
     "share": "Share",
@@ -635,5 +636,40 @@
     "description": "Discover tips, guides, and stories to inspire your next Moroccan adventure.",
     "viewAll": "View All Articles",
     "readMore": "Read More"
+  },
+  "activityMetadata": {
+    "bookDescription": "Book {title} in Marrakech with Atlas Mountain Visit",
+    "defaultKeywords": "{title}, Morocco tours, Marrakech activities"
+  },
+  "home": {
+    "heroImageAlt": "Morocco",
+    "heroPrevSlide": "Previous slide",
+    "heroNextSlide": "Next slide",
+    "heroGoToSlide": "Go to slide {number}",
+    "heroScrollToNext": "Scroll to next section",
+    "heroScrollLabel": "Scroll",
+    "reviewsTitle": "What Our Guests Say",
+    "reviewsPrev": "Previous reviews",
+    "reviewsNext": "Next reviews",
+    "reviewsPostedOnGoogle": "Posted on Google",
+    "reviewsViewProfile": "View profile",
+    "reviewsSeeAllGoogle": "See all reviews on Google",
+    "reviewsSeeAllTripAdvisor": "See all reviews on TripAdvisor",
+    "aboutFallbackTitle": "About",
+    "aboutFallbackTitleHighlight": "Me",
+    "aboutFallbackParagraph1": "Hello, my name is Hamza, and I am a local guide from Imlil in the Atlas Mountains of Morocco. Through ATLASMOUNTAINSVISIT, I offer authentic travel experiences including trekking adventures, desert trips, cultural tours, city discovery, and organized tours across Morocco.",
+    "aboutFallbackParagraph2": "My goal is to help travelers explore the real beauty of Morocco, its landscapes, culture, traditions, and warm hospitality",
+    "aboutFallbackImageAlt": "Hamza — local guide from Imlil, Atlas Mountains",
+    "bestTripsFallbackTitle": "Our Best",
+    "bestTripsFallbackTitleHighlight": "Trips",
+    "bestTripsFallbackDescription": "These are the spots that even have us locals taking pictures. Each one's special in its own way - we think you'll dig them.",
+    "categoryDurationDayTrip": "Day Trip",
+    "categoryDurationMultiDay": "Multi-Day"
+  },
+  "chrome": {
+    "logoAlt": "Atlas Mountain Visit",
+    "mobileMenu": "Menu",
+    "whatsAppCta": "WhatsApp Us",
+    "whatsAppDefaultMessage": "Hello! I have a question about your tours."
   }
 }

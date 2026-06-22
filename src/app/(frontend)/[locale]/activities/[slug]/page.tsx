@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { setRequestLocale } from 'next-intl/server'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { getActivityBySlug, getActivities, getFeaturedActivities } from '@/lib/payload'
 import { ActivityDetailClient } from './activity-detail-client'
 import { Navbar } from '@/components/navbar'
@@ -41,13 +41,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? '/og-image.jpg'
     : activity.featuredImage?.url || '/og-image.jpg'
 
+  const t = await getTranslations({ locale: typedLocale, namespace: 'activityMetadata' })
+  const bookDescription = t('bookDescription', { title: activity.title })
+  const defaultKeywords = t('defaultKeywords', { title: activity.title })
+
   return {
     title: `${activity.title} | Atlas Mountain Visit`,
-    description: activity.shortDescription || activity.seo?.metaDescription || `Book ${activity.title} in Marrakech with Atlas Mountain Visit`,
-    keywords: activity.seo?.keywords || `${activity.title}, Morocco tours, Marrakech activities`,
+    description: activity.shortDescription || activity.seo?.metaDescription || bookDescription,
+    keywords: activity.seo?.keywords || defaultKeywords,
     openGraph: {
       title: activity.seo?.metaTitle || activity.title,
-      description: activity.shortDescription || activity.seo?.metaDescription || `Book ${activity.title} in Marrakech with Atlas Mountain Visit`,
+      description: activity.shortDescription || activity.seo?.metaDescription || bookDescription,
       images: [imageUrl],
       locale: locale,
       type: 'website',

@@ -61,18 +61,18 @@ function getImageUrl(image: string | number | Media | null | undefined): string 
   return getOptimizedImageUrl(image, 'card')
 }
 
-function getLocationName(location: string | number | Location | null | undefined): string {
-  if (!location) return 'Morocco'
+function getLocationName(location: string | number | Location | null | undefined, defaultLocation: string): string {
+  if (!location) return defaultLocation
   if (typeof location === 'string') return location
-  if (typeof location === 'number') return 'Morocco'
-  return location.name || 'Morocco'
+  if (typeof location === 'number') return defaultLocation
+  return location.name || defaultLocation
 }
 
-function getCategoryInfo(category: string | number | Category | null | undefined): { name: string; slug: string } {
-  if (!category) return { name: 'Experience', slug: 'all' }
+function getCategoryInfo(category: string | number | Category | null | undefined, defaultCategory: string): { name: string; slug: string } {
+  if (!category) return { name: defaultCategory, slug: 'all' }
   if (typeof category === 'string') return { name: category, slug: 'all' }
-  if (typeof category === 'number') return { name: 'Experience', slug: 'all' }
-  return { name: category.name || 'Experience', slug: category.slug || 'all' }
+  if (typeof category === 'number') return { name: defaultCategory, slug: 'all' }
+  return { name: category.name || defaultCategory, slug: category.slug || 'all' }
 }
 
 function getPrice(activity: Activity): number {
@@ -136,7 +136,7 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
     // Category filter
     if (activeCategory !== 'all') {
       result = result.filter((activity) => {
-        const categoryInfo = getCategoryInfo(activity.category)
+        const categoryInfo = getCategoryInfo(activity.category, tCommon('defaultCategory'))
         return categoryInfo.slug === activeCategory
       })
     }
@@ -146,7 +146,7 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
       const query = searchQuery.toLowerCase()
       result = result.filter((activity) => {
         const title = activity.title?.toLowerCase() || ''
-        const location = getLocationName(activity.location)?.toLowerCase() || ''
+        const location = getLocationName(activity.location, tCommon('morocco'))?.toLowerCase() || ''
         return title.includes(query) || location.includes(query)
       })
     }
@@ -451,7 +451,7 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
                       {/* Location */}
                       <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white z-10">
                         <MapPin className="w-4 h-4" />
-                        <span className="text-sm font-medium">{getLocationName(activity.location)}</span>
+                        <span className="text-sm font-medium">{getLocationName(activity.location, tCommon('morocco'))}</span>
                       </div>
                     </div>
 
@@ -575,7 +575,7 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
                       <div className="flex items-center gap-3 text-sm text-neutral-500 mb-2">
                         <div className="flex items-center gap-1.5">
                           <MapPin className="w-4 h-4" />
-                          {getLocationName(activity.location)}
+                          {getLocationName(activity.location, tCommon('morocco'))}
                         </div>
                         {activity.duration && (
                           <div className="flex items-center gap-1.5">
