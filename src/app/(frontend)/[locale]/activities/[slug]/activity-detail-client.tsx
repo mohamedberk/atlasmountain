@@ -656,24 +656,26 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
       >
         <div className="px-4 py-4">
           <div className="flex items-center justify-between gap-4">
-            <div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
-                <span className="text-sm text-neutral-500">{isPrivateMode ? t.totalLabel : t.perPersonLabel}</span>
-              </div>
-              {activity.isFeatured && (
-                <div className="mt-1">
-                  <span className="inline-block px-2.5 py-1 text-white text-xs font-semibold rounded" style={{ backgroundColor: ACCENT_GREEN }}>
-                    {tCommon('featured')}
-                  </span>
+            {!isCustomNoteMode && (
+              <div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
+                  <span className="text-sm text-neutral-500">{isPrivateMode ? t.totalLabel : t.perPersonLabel}</span>
                 </div>
-              )}
-            </div>
+                {activity.isFeatured && (
+                  <div className="mt-1">
+                    <span className="inline-block px-2.5 py-1 text-white text-xs font-semibold rounded" style={{ backgroundColor: ACCENT_GREEN }}>
+                      {tCommon('featured')}
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
             <motion.button
               onClick={handleAddToCart}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="flex-1 max-w-[200px] px-6 py-3.5 text-white font-bold text-base rounded-xl transition-all shadow-sm hover:shadow-md"
+              className={`${isCustomNoteMode ? 'w-full' : 'flex-1 max-w-[200px]'} px-6 py-3.5 text-white font-bold text-base rounded-xl transition-all shadow-sm hover:shadow-md`}
               style={{ backgroundColor: ACCENT_GREEN }}
             >
               {t.checkAvailabilityButton}
@@ -703,11 +705,13 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                   )}
                 </div>
                 <div className="flex items-center gap-6">
-                  <div>
-                    <span className="text-sm text-neutral-500">{t.fromLabel} </span>
-                    <span className="text-2xl font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
-                    <span className="text-base text-neutral-500"> /{isPrivateMode ? t.totalLabel : t.perPersonLabel}</span>
-                  </div>
+                  {!isCustomNoteMode && (
+                    <div>
+                      <span className="text-sm text-neutral-500">{t.fromLabel} </span>
+                      <span className="text-2xl font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
+                      <span className="text-base text-neutral-500"> /{isPrivateMode ? t.totalLabel : t.perPersonLabel}</span>
+                    </div>
+                  )}
                   <motion.button
                     onClick={handleAddToCart}
                     whileHover={{ scale: 1.02 }}

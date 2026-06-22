@@ -254,7 +254,7 @@ export function GoogleReviews() {
       {/* "See all reviews" — Google + TripAdvisor button cards */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mt-12 px-6 relative">
         <a
-          href={`https://search.google.com/local/reviews?placeid=${GOOGLE_PLACE_ID}`}
+          href="https://maps.app.goo.gl/rRjL6HttiQKP6J6F8?g_st=ac"
           target="_blank"
           rel="noopener noreferrer"
           className="group inline-flex items-center justify-center gap-3 bg-white rounded-2xl px-6 py-4 border border-neutral-200 shadow-sm hover:border-[#ff2828]/40 hover:shadow-md transition-all duration-200"
