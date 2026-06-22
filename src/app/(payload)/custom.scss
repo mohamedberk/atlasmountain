@@ -233,6 +233,24 @@ textarea {
   padding-left: 40px;
 }
 
+/* Mobile: reduce the 40px paddings so content isn't cramped */
+@media (max-width: 768px) {
+  .tabs-field__content-wrap {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .render-fields {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .global-edit .document-fields {
+    padding-left: 12px;
+  }
+  .tabs-field [role="tabpanel"] {
+    padding-left: 12px;
+  }
+}
+
 /* ===========================================
    COLLECTION & DOCUMENT PAGES
    =========================================== */
@@ -246,6 +264,17 @@ textarea {
 .collection-edit,
 .global-edit {
   padding: 0 20px;
+}
+
+/* Mobile: tighter side padding for list/edit views so content fits */
+@media (max-width: 768px) {
+  .collection-list {
+    padding: 0 12px;
+  }
+  .collection-edit,
+  .global-edit {
+    padding: 0 8px;
+  }
 }
 
 /* Sidebar navigation - clean look */
@@ -338,6 +367,16 @@ textarea {
   padding: 0 40px;
 }
 
+/* Mobile: tighter drawer/list controls padding */
+@media (max-width: 768px) {
+  .drawer__content {
+    padding: 16px;
+  }
+  .list-controls {
+    padding: 0 12px;
+  }
+}
+
 /* ===========================================
    CUSTOM DASHBOARD STYLING
    =========================================== */
@@ -352,6 +391,18 @@ textarea {
 .dashboard__wrap {
   padding-left: 24px !important;
   padding-right: 24px !important;
+}
+
+/* Mobile: tighter dashboard padding so cards & tables get more room */
+@media (max-width: 768px) {
+  .custom-dashboard {
+    padding: 12px;
+  }
+  .dashboard,
+  .dashboard__wrap {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }
 
 .dashboard-header {
@@ -746,7 +797,64 @@ textarea {
   margin-top: 0.5rem;
 }
 
-/* Hide default Payload dashboard cards when custom dashboard is present */
-.custom-dashboard ~ .dashboard__group {
+/* Hide default Payload dashboard cards when custom dashboard is present.
+   Payload renders collection/global groups as `.collections__group` inside an
+   unclassed wrapper that's a sibling of `.custom-dashboard`. The legacy
+   `.dashboard__group` selector no longer matches, so we also hide the
+   sibling wrapper directly. */
+.custom-dashboard ~ .dashboard__group,
+.custom-dashboard ~ div:has(.collections__group),
+.dashboard:has(.custom-dashboard) .collections__group {
   display: none !important;
+}
+
+/* Mobile-specific dashboard tweaks */
+@media (max-width: 768px) {
+  /* Tighten section padding so cards stop hugging the viewport edge */
+  .dashboard-section {
+    padding: 1rem 0.875rem;
+  }
+
+  /* Recent bookings table — give it real width so overflow-x:auto can scroll
+     instead of clipping the right edge. */
+  .recent-bookings-table {
+    margin: 0 -0.875rem; /* extend to section edges so scroll feels natural */
+    padding: 0 0.875rem;
+  }
+  .recent-bookings-table table {
+    min-width: 520px;
+  }
+  .recent-bookings-table th,
+  .recent-bookings-table td {
+    padding: 0.625rem 0.75rem;
+    white-space: nowrap;
+  }
+
+  /* Dashboard header sizing */
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+  .dashboard-subtitle {
+    font-size: 0.9rem;
+  }
+
+  /* Secondary stats — make each pill fluid so they fit three across */
+  .mini-stat {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.625rem 0.5rem;
+  }
+  .mini-stat-value {
+    font-size: 1.25rem;
+  }
+
+  /* Quick actions: stack to full width buttons */
+  .quick-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .quick-action-btn {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
