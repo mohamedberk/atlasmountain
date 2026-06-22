@@ -239,33 +239,35 @@ export function ActivityDetailsPopup({ activity, isOpen, onClose }: ActivityDeta
               </div>
 
               {/* Pricing */}
-              <div className="mb-4 sm:mb-6">
-                <h3 className="text-base sm:text-lg font-medium text-neutral-900 mb-2 sm:mb-3">{t('pricing')}</h3>
+              {activity.pricingType !== 'custom_note' && (
+                <div className="mb-4 sm:mb-6">
+                  <h3 className="text-base sm:text-lg font-medium text-neutral-900 mb-2 sm:mb-3">{t('pricing')}</h3>
 
-                <div className="bg-white shadow-[0_1px_4px_rgba(0,0,0,0.02)] rounded-xl border border-neutral-100 p-4 sm:p-6 hover:shadow-[0_6px_14px_-10px_rgba(0,0,0,0.04)] transition-shadow">
-                  <div className="flex justify-between items-start mb-3">
-                    <h4 className="font-medium text-neutral-900 text-sm sm:text-base">{t('groupExperience')}</h4>
-                    <div className="bg-primary/10 text-primary text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-full">
-                      {t('bestValue')}
-                    </div>
-                  </div>
-                  <p className="text-xs sm:text-sm text-neutral-500 mb-3">{t('groupDescription')}</p>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-xl sm:text-2xl font-bold text-neutral-900">€{activity.price}</span>
-                        <span className="text-xs sm:text-sm text-neutral-500">{t('perAdult')}</span>
+                  <div className="bg-white shadow-[0_1px_4px_rgba(0,0,0,0.02)] rounded-xl border border-neutral-100 p-4 sm:p-6 hover:shadow-[0_6px_14px_-10px_rgba(0,0,0,0.04)] transition-shadow">
+                    <div className="flex justify-between items-start mb-3">
+                      <h4 className="font-medium text-neutral-900 text-sm sm:text-base">{t('groupExperience')}</h4>
+                      <div className="bg-primary/10 text-primary text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-full">
+                        {t('bestValue')}
                       </div>
                     </div>
-                    <div>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-xl sm:text-2xl font-bold text-neutral-900">€{activity.childPrice}</span>
-                        <span className="text-xs sm:text-sm text-neutral-500">{t('perChild')}</span>
+                    <p className="text-xs sm:text-sm text-neutral-500 mb-3">{t('groupDescription')}</p>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-xl sm:text-2xl font-bold text-neutral-900">€{activity.price}</span>
+                          <span className="text-xs sm:text-sm text-neutral-500">{t('perAdult')}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-xl sm:text-2xl font-bold text-neutral-900">€{activity.childPrice}</span>
+                          <span className="text-xs sm:text-sm text-neutral-500">{t('perChild')}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Highlights section */}
               {activity.highlights && activity.highlights.length > 0 && (

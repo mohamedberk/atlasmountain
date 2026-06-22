@@ -485,12 +485,14 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
 
                       {/* Price and CTA */}
                       <div className="pt-4 border-t border-neutral-100 flex items-center justify-between">
-                        <div>
-                          <span className="text-2xl font-bold" style={{ color: ACCENT_GREEN }}>
-                            €{getPrice(activity)}
-                          </span>
-                          <span className="text-sm text-neutral-500 ml-1">{tCommon('perPersonShort')}</span>
-                        </div>
+                        {activity.pricingType !== 'custom_note' ? (
+                          <div>
+                            <span className="text-2xl font-bold" style={{ color: ACCENT_GREEN }}>
+                              €{getPrice(activity)}
+                            </span>
+                            <span className="text-sm text-neutral-500 ml-1">{tCommon('perPersonShort')}</span>
+                          </div>
+                        ) : <div />}
 
                         <NavLink
                           href={`/activities/${activity.slug}`}
@@ -609,12 +611,14 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
 
                       {/* Price and Actions */}
                       <div className="flex items-center justify-between pt-4 border-t border-neutral-100">
-                        <div>
-                          <span className="text-2xl font-bold" style={{ color: ACCENT_GREEN }}>
-                            €{getPrice(activity)}
-                          </span>
-                          <span className="text-sm text-neutral-500 ml-1">{tCommon('perPersonShort')}</span>
-                        </div>
+                        {activity.pricingType !== 'custom_note' ? (
+                          <div>
+                            <span className="text-2xl font-bold" style={{ color: ACCENT_GREEN }}>
+                              €{getPrice(activity)}
+                            </span>
+                            <span className="text-sm text-neutral-500 ml-1">{tCommon('perPersonShort')}</span>
+                          </div>
+                        ) : <div />}
 
                         <div className="flex items-center gap-3">
                           <NavLink

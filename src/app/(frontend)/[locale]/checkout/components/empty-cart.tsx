@@ -232,11 +232,13 @@ const ActivityCard = memo(function ActivityCard({ activity, onOpenModal, onAdd }
           </div>
         )}
         {/* Price tag */}
-        <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg bg-white/95 backdrop-blur-sm">
-          <span className="text-sm font-bold" style={{ color: ACCENT_GREEN }}>
-            €{activity.price}
-          </span>
-        </div>
+        {activity.pricingType !== 'custom_note' && (
+          <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg bg-white/95 backdrop-blur-sm">
+            <span className="text-sm font-bold" style={{ color: ACCENT_GREEN }}>
+              €{activity.price}
+            </span>
+          </div>
+        )}
       </div>
       <div className="p-4">
         <h3

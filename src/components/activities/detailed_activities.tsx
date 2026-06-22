@@ -191,13 +191,15 @@ export function PremiumActivityCards({ activities }: PremiumActivityCardsProps) 
 
                   {/* Price and CTA */}
                   <div className="mt-auto border-t border-neutral-200 pt-6 flex items-end justify-between">
-                    <div>
-                      <p className="text-sm text-neutral-500">{t('startingFrom')}</p>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-2xl sm:text-3xl font-display font-bold text-neutral-900">€{getPrice(activity)}</span>
-                        <span className="text-xs sm:text-sm text-neutral-600">/{t('perPerson')}</span>
+                    {activity.pricingType !== 'custom_note' ? (
+                      <div>
+                        <p className="text-sm text-neutral-500">{t('startingFrom')}</p>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-2xl sm:text-3xl font-display font-bold text-neutral-900">€{getPrice(activity)}</span>
+                          <span className="text-xs sm:text-sm text-neutral-600">/{t('perPerson')}</span>
+                        </div>
                       </div>
-                    </div>
+                    ) : <div />}
 
                     <div className="flex items-center gap-3">
                       <NavLink

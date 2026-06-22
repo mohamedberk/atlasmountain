@@ -78,8 +78,12 @@ export function ActivityCardCompact({
             </h4>
             <div className="flex items-center gap-2 mt-0.5">
               <span className="text-xs text-neutral-500">{activity.duration}</span>
-              <span className="w-1 h-1 bg-neutral-300 rounded-full" />
-              <span className="text-sm font-semibold text-primary">€{price}</span>
+              {activity.pricingType !== 'custom_note' && (
+                <>
+                  <span className="w-1 h-1 bg-neutral-300 rounded-full" />
+                  <span className="text-sm font-semibold text-primary">€{price}</span>
+                </>
+              )}
             </div>
           </div>
 
@@ -130,10 +134,12 @@ export function ActivityCardCompact({
           </div>
 
           <div className="flex items-center justify-between mt-2">
-            <div className="flex items-baseline gap-0.5">
-              <span className="text-base font-bold text-neutral-900">€{price}</span>
-              <span className="text-[10px] text-neutral-400">/pp</span>
-            </div>
+            {activity.pricingType !== 'custom_note' ? (
+              <div className="flex items-baseline gap-0.5">
+                <span className="text-base font-bold text-neutral-900">€{price}</span>
+                <span className="text-[10px] text-neutral-400">/pp</span>
+              </div>
+            ) : <div />}
             {onBookNow ? (
               <button
                 onClick={() => onBookNow(activity)}

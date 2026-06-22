@@ -22,7 +22,7 @@ export interface UpsellActivity {
   categoryName?: string
   categorySlug?: string
   // Pricing type info
-  pricingType?: 'per_person' | 'fixed' | 'both'
+  pricingType?: 'tiered' | 'fixed' | 'custom_note'
   // Private pricing details
   privateBasePrice?: number
   privateMinGuests?: number

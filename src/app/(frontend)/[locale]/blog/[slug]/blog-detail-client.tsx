@@ -294,9 +294,11 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                             <h4 className="font-medium text-neutral-900 text-sm line-clamp-2 group-hover:text-red-600 transition-colors">
                               {activity.title}
                             </h4>
-                            <p className="font-bold text-sm mt-1" style={{ color: ACCENT_GREEN }}>
-                              €{getActivityPrice(activity)}
-                            </p>
+                            {activity.pricingType !== 'custom_note' && (
+                              <p className="font-bold text-sm mt-1" style={{ color: ACCENT_GREEN }}>
+                                €{getActivityPrice(activity)}
+                              </p>
+                            )}
                           </div>
                         </NavLink>
                       ))}
@@ -427,9 +429,11 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                       {activity.title}
                     </h3>
                     <div className="flex items-center justify-between">
-                      <span className="font-bold" style={{ color: ACCENT_GREEN }}>
-                        {tCommon('from')} €{getActivityPrice(activity)}
-                      </span>
+                      {activity.pricingType !== 'custom_note' ? (
+                        <span className="font-bold" style={{ color: ACCENT_GREEN }}>
+                          {tCommon('from')} €{getActivityPrice(activity)}
+                        </span>
+                      ) : <span />}
                       <span className="text-sm text-neutral-500 flex items-center gap-1">
                         <Clock className="w-3.5 h-3.5" />
                         {activity.duration}

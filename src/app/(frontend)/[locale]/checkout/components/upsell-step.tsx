@@ -130,7 +130,9 @@ const UpsellCard = memo(function UpsellCard({ activity, onOpenModal, onQuickAdd 
         <span>{activity.duration}</span>
       </div>
       <div className="flex items-center justify-between">
-        <span className="font-bold text-secondary text-sm sm:text-base">€{activity.price}</span>
+        {activity.pricingType !== 'custom_note' ? (
+          <span className="font-bold text-secondary text-sm sm:text-base">€{activity.price}</span>
+        ) : <span />}
         <button
           onClick={(e) => {
             e.stopPropagation()

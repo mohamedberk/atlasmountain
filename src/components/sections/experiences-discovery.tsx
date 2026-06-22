@@ -289,7 +289,9 @@ export function ExperiencesDiscovery({ activities }: Props) {
                                 </div>
                               </div>
                               <div className="flex items-center justify-between mt-2">
-                                <span className="text-base font-bold text-neutral-900">€{getPrice(activity)}</span>
+                                {activity.pricingType !== 'custom_note' ? (
+                                  <span className="text-base font-bold text-neutral-900">€{getPrice(activity)}</span>
+                                ) : <span />}
                                 <button
                                   onClick={() => handleAddToCart(activity)}
                                   className="h-7 px-3 rounded-lg bg-secondary text-white text-xs font-semibold hover:bg-secondary/90 transition-colors"
@@ -509,7 +511,9 @@ export function ExperiencesDiscovery({ activities }: Props) {
                                       <span>{activity.duration}</span>
                                     </div>
                                     <div className="flex items-center justify-between mt-2">
-                                      <span className="font-bold text-neutral-900">€{getPrice(activity)}</span>
+                                      {activity.pricingType !== 'custom_note' ? (
+                                        <span className="font-bold text-neutral-900">€{getPrice(activity)}</span>
+                                      ) : <span />}
                                       {wouldExceedBudget && (
                                         <span className="text-xs text-red-500">{t('overBudget')}</span>
                                       )}

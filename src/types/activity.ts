@@ -77,6 +77,7 @@ export interface Activity {
   price: number;
   childPrice: number;
   reviewCount: number;
+  pricingType?: 'tiered' | 'fixed' | 'custom_note';
   video?: string;
   itinerary?: {
     activity: string;

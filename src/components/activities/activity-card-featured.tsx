@@ -172,12 +172,14 @@ export function ActivityCardFeatured({
 
           {/* Bottom Row - Price and Actions */}
           <div className="flex items-center justify-between pt-4 border-t border-neutral-100">
-            <div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-2xl font-bold text-neutral-900">€{price}</span>
-                <span className="text-sm text-neutral-400">/person</span>
+            {activity.pricingType !== 'custom_note' ? (
+              <div>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-2xl font-bold text-neutral-900">€{price}</span>
+                  <span className="text-sm text-neutral-400">/person</span>
+                </div>
               </div>
-            </div>
+            ) : <div />}
 
             <div className="flex items-center gap-2">
               <NavLink

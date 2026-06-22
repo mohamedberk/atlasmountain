@@ -24,6 +24,7 @@ export interface ActivityInfo {
   included?: string[]
   rating?: number
   reviewCount?: number
+  pricingType?: 'tiered' | 'fixed' | 'custom_note'
 }
 
 interface ActivityDetailModalProps {
@@ -80,6 +81,7 @@ export function ActivityDetailModal({
 
   if (!mounted || !isOpen || !activity) return null
 
+  const isCustomNote = activity.pricingType === 'custom_note'
   const modalTotalPrice = (activity.price * modalAdults) + (activity.childPrice * modalChildren)
 
   const handleAdd = () => {
@@ -267,15 +269,19 @@ export function ActivityDetailModal({
               <>
                 {/* Pricing & Guest Selection */}
                 <div className="bg-neutral-50 rounded-xl p-4 mb-4">
-                  <div className="flex items-baseline gap-2 mb-3">
-                    <span className="text-2xl font-display font-bold text-neutral-900">€{activity.price}</span>
-                    <span className="text-neutral-500 text-sm">/person</span>
-                  </div>
+                  {!isCustomNote && (
+                    <div className="flex items-baseline gap-2 mb-3">
+                      <span className="text-2xl font-display font-bold text-neutral-900">€{activity.price}</span>
+                      <span className="text-neutral-500 text-sm">/person</span>
+                    </div>
+                  )}
 
                   <div className="flex items-center justify-between py-2 border-b border-neutral-200">
                     <div>
                       <p className="font-medium text-neutral-900 text-sm">Adults</p>
-                      <p className="text-xs text-neutral-500">€{activity.price} each</p>
+                      {!isCustomNote && (
+                        <p className="text-xs text-neutral-500">€{activity.price} each</p>
+                      )}
                     </div>
                     <div className="flex items-center gap-2">
                       <button
@@ -297,7 +303,9 @@ export function ActivityDetailModal({
                   <div className="flex items-center justify-between py-2">
                     <div>
                       <p className="font-medium text-neutral-900 text-sm">Children</p>
-                      <p className="text-xs text-neutral-500">€{activity.childPrice} each</p>
+                      {!isCustomNote && (
+                        <p className="text-xs text-neutral-500">€{activity.childPrice} each</p>
+                      )}
                     </div>
                     <div className="flex items-center gap-2">
                       <button
@@ -316,10 +324,12 @@ export function ActivityDetailModal({
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-3 mt-2 border-t border-neutral-200">
-                    <span className="font-medium text-neutral-900">Total</span>
-                    <span className="text-xl font-display font-bold text-secondary">€{modalTotalPrice}</span>
-                  </div>
+                  {!isCustomNote && (
+                    <div className="flex items-center justify-between pt-3 mt-2 border-t border-neutral-200">
+                      <span className="font-medium text-neutral-900">Total</span>
+                      <span className="text-xl font-display font-bold text-secondary">€{modalTotalPrice}</span>
+                    </div>
+                  )}
                 </div>
 
                 <button
@@ -333,15 +343,17 @@ export function ActivityDetailModal({
             ) : (
               <>
                 {/* View Mode - Show price and link to activity page */}
-                <div className="bg-neutral-50 rounded-xl p-4 mb-4">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-display font-bold text-neutral-900">€{activity.price}</span>
-                    <span className="text-neutral-500 text-sm">/person</span>
+                {!isCustomNote && (
+                  <div className="bg-neutral-50 rounded-xl p-4 mb-4">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-2xl font-display font-bold text-neutral-900">€{activity.price}</span>
+                      <span className="text-neutral-500 text-sm">/person</span>
+                    </div>
+                    {activity.childPrice > 0 && (
+                      <p className="text-sm text-neutral-500 mt-1">Children: €{activity.childPrice}/child</p>
+                    )}
                   </div>
-                  {activity.childPrice > 0 && (
-                    <p className="text-sm text-neutral-500 mt-1">Children: €{activity.childPrice}/child</p>
-                  )}
-                </div>
+                )}
 
                 <NavLink
                   href={`/activities/${activity.slug}`}

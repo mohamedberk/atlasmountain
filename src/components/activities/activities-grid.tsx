@@ -103,11 +103,13 @@ export function ActivitiesGrid({ activities }: ActivitiesGridProps) {
                   />
 
                   {/* Price */}
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-primary text-white text-sm font-medium px-4 py-1.5 rounded-full">
-                      €{getPrice(activity)}
-                    </span>
-                  </div>
+                  {activity.pricingType !== 'custom_note' && (
+                    <div className="absolute top-4 right-4">
+                      <span className="bg-primary text-white text-sm font-medium px-4 py-1.5 rounded-full">
+                        €{getPrice(activity)}
+                      </span>
+                    </div>
+                  )}
                 </NavLink>
 
                 {/* Content section */}
