@@ -307,7 +307,7 @@ export function CategoryPageClient({ category, activities, locale }: Props) {
 
                         {/* Description from richText - 2 lines */}
                         <p className="text-sm text-neutral-500 mb-3 line-clamp-2 leading-relaxed min-h-[2.5rem]">
-                          {extractPlainText(activity.description) || `Discover the magic of ${activity.title}. An unforgettable experience awaits you in Morocco.`}
+                          {extractPlainText(activity.description) || tCategory('activityFallbackDescription', { title: activity.title })}
                         </p>
 
                         {/* Included Items - Show first 3 (fixed height for consistency) */}

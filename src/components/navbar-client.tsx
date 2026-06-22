@@ -4,15 +4,10 @@ import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { Menu, ChevronDown, ShoppingBag } from 'lucide-react'
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
-import { useTranslations, useLocale } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from '@/i18n/routing'
 import { NavLink } from '@/components/ui/nav-link'
 import { useCart } from '@/context/CartContext'
-
-const localeLabels: Record<string, { flag: string; label: string }> = {
-  en: { flag: '🇬🇧', label: 'EN' },
-  fr: { flag: '🇫🇷', label: 'FR' },
-}
 
 interface NavCategory {
   id: string
@@ -40,7 +35,6 @@ interface Props {
 
 export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false)
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false)
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
@@ -50,7 +44,7 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
   const activitiesTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const t = useTranslations('nav')
-  const locale = useLocale()
+  const tChrome = useTranslations('chrome')
   const pathname = usePathname()
   const router = useRouter()
   const { items } = useCart()
@@ -103,22 +97,6 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (isLangMenuOpen && !(e.target as Element).closest('.lang-menu')) {
-        setIsLangMenuOpen(false)
-      }
-    }
-    document.addEventListener('click', handleClickOutside)
-    return () => document.removeEventListener('click', handleClickOutside)
-  }, [isLangMenuOpen])
-
-  const switchLocale = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale as 'en' | 'fr' })
-    setIsLangMenuOpen(false)
-    setIsMobileMenuOpen(false)
-  }
-
   // Handle mouse enter on Tours & Categories
   const handleCategoriesMouseEnter = () => {
     if (categoriesTimeoutRef.current) {
@@ -163,7 +141,7 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
 
   // Check if Tours & Categories should be highlighted
   const isToursActive = pathname.startsWith('/category') || pathname.startsWith('/activities')
-  const isNavbarVisible = !hideUntilScrolled || scrolled || isMobileMenuOpen || isLangMenuOpen || isCategoriesOpen
+  const isNavbarVisible = !hideUntilScrolled || scrolled || isMobileMenuOpen || isCategoriesOpen
 
   return (
     <LazyMotion features={domAnimation}>
@@ -181,11 +159,11 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
           <NavLink
             href="/"
             className="flex-shrink-0 flex items-center transition-opacity hover:opacity-80"
-            aria-label="Atlas Mountain Visit"
+            aria-label={tChrome('logoAlt')}
           >
             <Image
               src="https://ec0m9cwfe1.ufs.sh/f/qpHeSXPP9BvaKzrt0k7VSDfZeErsq601P9UkTjgm4NM57JQG"
-              alt="Atlas Mountain Visit"
+              alt={tChrome('logoAlt')}
               width={160}
               height={48}
               priority
@@ -393,47 +371,6 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
 
           {/* Desktop Right Side */}
           <div className="hidden lg:flex items-center gap-3">
-            {/* Language Switcher */}
-            <div className="relative lang-menu">
-              <button
-                type="button"
-                onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                className="flex items-center gap-1.5 px-3 py-2 text-sm text-neutral-600 hover:text-neutral-900 rounded-xl hover:bg-neutral-100 transition-all"
-              >
-                <span>{localeLabels[locale].flag}</span>
-                <span className="font-medium">{localeLabels[locale].label}</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isLangMenuOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              <AnimatePresence>
-                {isLangMenuOpen && (
-                  <m.div
-                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute top-full right-0 mt-2 w-36 bg-white rounded-2xl shadow-md border border-neutral-100 overflow-hidden p-2"
-                  >
-                    {Object.entries(localeLabels).map(([code, { flag, label }]) => (
-                      <button
-                        type="button"
-                        key={code}
-                        onClick={() => switchLocale(code)}
-                        className={`flex items-center gap-2 w-full px-4 py-2.5 text-sm rounded-xl transition-all ${
-                          locale === code
-                            ? 'bg-[#ff2828]/10 text-[#ff2828] font-semibold'
-                            : 'text-neutral-700 hover:bg-neutral-50'
-                        }`}
-                      >
-                        <span>{flag}</span>
-                        <span>{label}</span>
-                      </button>
-                    ))}
-                  </m.div>
-                )}
-              </AnimatePresence>
-            </div>
-
             {/* Cart */}
             <NavLink
               href="/checkout"
@@ -476,7 +413,7 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="flex items-center justify-center w-10 h-10 text-neutral-700 rounded-xl hover:bg-neutral-100 transition-colors"
-              aria-label="Menu"
+              aria-label={tChrome('mobileMenu')}
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -608,25 +545,6 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
 
               {/* Bottom Section */}
               <div className="p-4 space-y-4">
-                {/* Language Row */}
-                <div className="flex items-center gap-2">
-                  {Object.entries(localeLabels).map(([code, { flag, label }]) => (
-                    <button
-                      type="button"
-                      key={code}
-                      onClick={() => switchLocale(code)}
-                      className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium transition-all ${
-                        locale === code
-                          ? 'bg-[#ff2828] text-white shadow-sm'
-                          : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
-                      }`}
-                    >
-                      <span>{flag}</span>
-                      <span>{label}</span>
-                    </button>
-                  ))}
-                </div>
-
                 {/* Book Now */}
                 <NavLink
                   href={cartItemCount > 0 ? '/checkout' : '/activities'}

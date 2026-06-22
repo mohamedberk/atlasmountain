@@ -161,7 +161,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
 
     if (!captchaToken) {
       setFormState('error')
-      setErrorMessage(isFrench ? 'Veuillez compléter la vérification anti-bot.' : 'Please complete the anti-bot verification.')
+      setErrorMessage(tContact('captchaError'))
       return
     }
 
@@ -196,7 +196,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
       }, 5000)
     } catch (error) {
       setFormState('error')
-      setErrorMessage(isFrench ? 'Une erreur s\'est produite. Veuillez réessayer ou nous contacter via WhatsApp.' : 'Something went wrong. Please try again or contact us via WhatsApp.')
+      setErrorMessage(tContact('submitError'))
       setCaptchaToken('')
       turnstileRef.current?.reset()
     }
@@ -311,7 +311,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                         className="w-full rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 transition-all"
-                        placeholder="John"
+                        placeholder={tContact('firstNamePlaceholder')}
                       />
                     </div>
                     <div>
@@ -325,7 +325,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                         className="w-full rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 transition-all"
-                        placeholder="Doe"
+                        placeholder={tContact('lastNamePlaceholder')}
                       />
                     </div>
                   </div>
@@ -341,7 +341,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full rounded-xl border border-neutral-200 bg-[#fafaf9] px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 transition-all"
-                      placeholder="john@example.com"
+                      placeholder={tContact('emailPlaceholder')}
                     />
                   </div>
 
@@ -352,7 +352,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                     <PhoneInput
                       value={formData.phone}
                       onChange={(value) => setFormData({ ...formData, phone: value })}
-                      placeholder="600 000 000"
+                      placeholder={tContact('phonePlaceholder')}
                     />
                   </div>
 
@@ -373,13 +373,13 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
                         ))
                       ) : (
                         <>
-                          <option value="day-trip">{isFrench ? 'Excursion d\'une journée depuis Marrakech' : 'Day Trip from Marrakech'}</option>
-                          <option value="desert-tour">{isFrench ? 'Circuit dans le désert (Sahara)' : 'Desert Tour (Sahara)'}</option>
-                          <option value="multi-day">{isFrench ? 'Aventure de plusieurs jours' : 'Multi-Day Adventure'}</option>
-                          <option value="custom-tour">{isFrench ? 'Demande de circuit personnalisé' : 'Custom Tour Request'}</option>
-                          <option value="airport-transfer">{isFrench ? 'Transfert aéroport' : 'Airport Transfer'}</option>
-                          <option value="group-booking">{isFrench ? 'Réservation de groupe' : 'Group Booking'}</option>
-                          <option value="other">{isFrench ? 'Autre demande' : 'Other Inquiry'}</option>
+                          <option value="day-trip">{tContact('subjectDayTrip')}</option>
+                          <option value="desert-tour">{tContact('subjectDesertTour')}</option>
+                          <option value="multi-day">{tContact('subjectMultiDay')}</option>
+                          <option value="custom-tour">{tContact('subjectCustomTour')}</option>
+                          <option value="airport-transfer">{tContact('subjectAirportTransfer')}</option>
+                          <option value="group-booking">{tContact('subjectGroupBooking')}</option>
+                          <option value="other">{tContact('subjectOther')}</option>
                         </>
                       )}
                     </select>
@@ -402,7 +402,7 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
 
                   {/* Honeypot — hidden from real users, bots fill it */}
                   <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}>
-                    <label htmlFor="website">Website</label>
+                    <label htmlFor="website">{tContact('websiteHoneypotLabel')}</label>
                     <input
                       type="text"
                       id="website"

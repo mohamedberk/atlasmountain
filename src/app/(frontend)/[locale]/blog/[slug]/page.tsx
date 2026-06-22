@@ -2,7 +2,7 @@ import dynamicImport from 'next/dynamic'
 import { Suspense } from 'react'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { setRequestLocale } from 'next-intl/server'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { getBlogPostBySlug, getRelatedBlogPosts, getAllBlogPostSlugs } from '@/lib/payload'
 import { ErrorBoundary } from '@/components/error-boundary'
 import { Navbar } from '@/components/navbar'
@@ -45,8 +45,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getBlogPostBySlug(slug, typedLocale)
 
   if (!post) {
+    const t = await getTranslations({ locale: typedLocale, namespace: 'blogPage' })
     return {
-      title: 'Article Not Found | Atlas Mountain Visit Blog',
+      title: `${t('notFoundTitle')} | Atlas Mountain Visit Blog`,
     }
   }
 

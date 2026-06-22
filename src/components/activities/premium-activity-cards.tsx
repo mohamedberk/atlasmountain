@@ -57,10 +57,12 @@ function getCategoryImageUrl(image: string | number | Media | null | undefined):
 }
 
 // Helper function to get duration display text
-function getDurationDisplay(durationType: string | undefined | null, locale?: string): string {
-  const isFrench = locale === 'fr'
-  if (durationType === 'day-trip') return isFrench ? 'Excursion d\'une journée' : 'Day Trip'
-  return isFrench ? 'Plusieurs jours' : 'Multi-Day'
+function getDurationDisplay(
+  durationType: string | undefined | null,
+  t: (key: string) => string
+): string {
+  if (durationType === 'day-trip') return t('categoryDurationDayTrip')
+  return t('categoryDurationMultiDay')
 }
 
 interface CategoriesSectionData {
@@ -79,6 +81,8 @@ interface Props {
 
 export function PremiumActivityCards({ activities, categories, categoriesSectionData, locale }: Props) {
   const t = useTranslations('categoriesSection')
+  const tHome = useTranslations('home')
+  const tCommon = useTranslations('common')
   // Sort categories by display order (categories are already filtered by type in the data fetch)
   const sortedCategories = useMemo(() => {
     return [...categories].sort((a, b) => (a.displayOrder || 99) - (b.displayOrder || 99))
@@ -192,12 +196,12 @@ export function PremiumActivityCards({ activities, categories, categoriesSection
                     <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#ff2828]/10 border border-[#ff2828]/20">
                       <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#ff2828]" />
                       <span className="text-[10px] sm:text-xs font-semibold text-[#ff2828] tracking-tight">
-                        {getDurationDisplay((category as any).durationType, locale)}
+                        {getDurationDisplay((category as any).durationType, tHome)}
                       </span>
                     </div>
                     <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-neutral-100 border border-neutral-200">
                       <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-neutral-500" />
-                      <span className="text-[10px] sm:text-xs font-medium text-neutral-600">{locale === 'fr' ? 'Maroc' : 'Morocco'}</span>
+                      <span className="text-[10px] sm:text-xs font-medium text-neutral-600">{tCommon('morocco')}</span>
                     </div>
                   </div>
 

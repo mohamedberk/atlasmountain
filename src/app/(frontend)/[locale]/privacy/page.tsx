@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { RichText } from '@/components/rich-text'
@@ -50,6 +50,8 @@ export default async function PrivacyPage({ params }: Props) {
   const typedLocale = (locale as 'en' | 'fr') || 'en'
   setRequestLocale(locale)
 
+  const t = await getTranslations({ locale, namespace: 'privacyPage' })
+
   let pageData = null
   try {
     pageData = await getPrivacyPage(typedLocale)
@@ -57,7 +59,7 @@ export default async function PrivacyPage({ params }: Props) {
     console.log('Privacy page not configured in CMS, using fallback')
   }
 
-  const title = pageData?.title || fallbackContent[typedLocale]?.title || 'Privacy Policy'
+  const title = pageData?.title || fallbackContent[typedLocale]?.title || t('fallbackTitle')
   const lastUpdated = pageData?.lastUpdated ? format(new Date(pageData.lastUpdated), 'MMMM d, yyyy') : null
 
   return (
@@ -73,7 +75,7 @@ export default async function PrivacyPage({ params }: Props) {
             </h1>
             {lastUpdated && (
               <p className="text-neutral-500">
-                Last updated: {lastUpdated}
+                {t('lastUpdated', { date: lastUpdated })}
               </p>
             )}
           </div>
@@ -86,7 +88,7 @@ export default async function PrivacyPage({ params }: Props) {
               </div>
             ) : (
               <p className="text-neutral-500 text-center py-10">
-                Privacy Policy content will appear here once configured in the CMS.
+                {t('fallbackContent')}
               </p>
             )}
           </div>

@@ -334,16 +334,17 @@ function ColumnActivityCard({ activity, index, onBook, tCommon, tActivities }: C
 }
 
 export function DetailedActivitiesSection({ activities, bestTripsData }: Props) {
-  const title = bestTripsData?.title || 'Our Best'
-  const titleHighlight = bestTripsData?.titleHighlight || 'Trips'
-  const description = bestTripsData?.description || "These are the spots that even have us locals taking pictures. Each one's special in its own way - we think you'll dig them."
+  const tCommon = useTranslations('common')
+  const tActivities = useTranslations('activities')
+  const tHome = useTranslations('home')
+  const title = bestTripsData?.title || tHome('bestTripsFallbackTitle')
+  const titleHighlight = bestTripsData?.titleHighlight || tHome('bestTripsFallbackTitleHighlight')
+  const description = bestTripsData?.description || tHome('bestTripsFallbackDescription')
 
   // Use CMS selected activities if available, otherwise use first 4 from all activities
   const displayActivities = bestTripsData?.activities?.length
     ? bestTripsData.activities.slice(0, 4)
     : activities.slice(0, 4)
-  const tCommon = useTranslations('common')
-  const tActivities = useTranslations('activities')
   const locale = useLocale()
   const router = useRouter()
   const { addItem } = useCart()

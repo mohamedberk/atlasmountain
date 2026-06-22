@@ -6,6 +6,7 @@ import { Star, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import AutoScroll from 'embla-carousel-auto-scroll'
+import { useTranslations } from 'next-intl'
 import { useGoogleReviews, type GoogleReview } from '@/hooks/useGoogleReviews'
 
 const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Attraction_Review-g293734-d33305949-Reviews-Atlas_Mountains_Visit-Marrakech_Marrakech_Safi.html'
@@ -74,6 +75,7 @@ const stagger = {
 }
 
 export function GoogleReviews() {
+  const t = useTranslations('home')
   const { reviews: apiReviews, overallRating, totalReviews } = useGoogleReviews({
     minRating: 4,
   })
@@ -118,7 +120,7 @@ export function GoogleReviews() {
           {/* Header */}
           <motion.div variants={fadeUp} className="text-center flex flex-col items-center gap-4">
             <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-neutral-900">
-              What Our Guests Say
+              {t('reviewsTitle')}
             </h2>
             {/* Overall Ratings: Google + TripAdvisor */}
             <div className="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-12 gap-y-3 mt-1">
@@ -168,14 +170,14 @@ export function GoogleReviews() {
         <button
           onClick={scrollReviewsPrev}
           className="absolute left-2 sm:left-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 bg-white/90 backdrop-blur-sm rounded-full border border-neutral-200 flex items-center justify-center hover:bg-white hover:scale-105 transition-all opacity-0 group-hover:opacity-100"
-          aria-label="Previous reviews"
+          aria-label={t('reviewsPrev')}
         >
           <ChevronLeft className="w-5 h-5 text-neutral-900" />
         </button>
         <button
           onClick={scrollReviewsNext}
           className="absolute right-2 sm:right-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 bg-white/90 backdrop-blur-sm rounded-full border border-neutral-200 flex items-center justify-center hover:bg-white hover:scale-105 transition-all opacity-0 group-hover:opacity-100"
-          aria-label="Next reviews"
+          aria-label={t('reviewsNext')}
         >
           <ChevronRight className="w-5 h-5 text-neutral-900" />
         </button>
@@ -232,7 +234,7 @@ export function GoogleReviews() {
 
                   {/* Footer */}
                   <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between">
-                    <span className="text-[11px] text-neutral-400">Posted on Google</span>
+                    <span className="text-[11px] text-neutral-400">{t('reviewsPostedOnGoogle')}</span>
                     {review.profileUrl && (
                       <a
                         href={review.profileUrl}
@@ -240,7 +242,7 @@ export function GoogleReviews() {
                         rel="noopener noreferrer"
                         className="text-[11px] text-[#ff2828] hover:underline"
                       >
-                        View profile
+                        {t('reviewsViewProfile')}
                       </a>
                     )}
                   </div>
@@ -265,7 +267,7 @@ export function GoogleReviews() {
             <path d="M12 22.397C14.6115 22.397 16.9695 21.4145 18.74 19.8115L15.5115 17.1975C14.5717 17.8679 13.3654 18.255 12 18.255C9.39904 18.255 7.19054 16.6415 6.35404 14.3695L3.09754 16.8925C4.75204 20.1555 8.13754 22.397 12 22.397Z" fill="#34A853"/>
             <path d="M22.5 11.147C22.5 10.787 22.473 10.4125 22.41 10.0415H12V14.0415H17.6515C17.2635 15.1185 16.437 16.0175 15.51 16.6305L15.5115 16.6305L18.7415 19.2425C18.4845 19.476 22.5 16.5 22.5 11.147Z" fill="#FBBC05"/>
           </svg>
-          <span className="text-sm font-semibold text-neutral-900">See all reviews on Google</span>
+          <span className="text-sm font-semibold text-neutral-900">{t('reviewsSeeAllGoogle')}</span>
           <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-[#ff2828] group-hover:translate-x-0.5 transition-all" />
         </a>
 
@@ -276,7 +278,7 @@ export function GoogleReviews() {
           className="group inline-flex items-center justify-center gap-3 bg-white rounded-2xl px-6 py-4 border border-neutral-200 shadow-sm hover:border-[#00AA6C]/40 hover:shadow-md transition-all duration-200"
         >
           <Image src="/tripadvisor.png" alt="TripAdvisor" width={28} height={28} className="w-6 h-6 shrink-0" />
-          <span className="text-sm font-semibold text-neutral-900">See all reviews on TripAdvisor</span>
+          <span className="text-sm font-semibold text-neutral-900">{t('reviewsSeeAllTripAdvisor')}</span>
           <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-[#00AA6C] group-hover:translate-x-0.5 transition-all" />
         </a>
       </div>

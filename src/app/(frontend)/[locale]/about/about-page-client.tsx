@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Heart, MapPin, Star, Shield, Users, Compass, Mountain, Sparkles, CheckCircle, ArrowRight, Clock, Award, Globe } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { NavLink } from '@/components/ui/nav-link'
 import { imagekitUrls } from '@/data/imagekit-urls'
 import type { Media } from '@/payload-types'
@@ -58,57 +59,6 @@ interface Props {
   cmsData?: any
 }
 
-// Default values for fallback
-const defaultStats = [
-  { value: '10+', label: 'Years Experience', icon: 'star' },
-  { value: '5,000+', label: 'Happy Travelers', icon: 'users' },
-  { value: '4.9', label: 'Google Rating', icon: 'star' },
-  { value: '50+', label: 'Unique Experiences', icon: 'mapPin' },
-]
-
-const defaultValues = [
-  {
-    icon: 'heart',
-    title: 'Crafted with Heart',
-    description: 'Every journey is designed with passion. We\'re honored to share Morocco\'s beauty, culture, and soul with travelers from around the world.',
-  },
-  {
-    icon: 'compass',
-    title: 'Tailor-Made Journeys',
-    description: 'We create personalized experiences that reflect your individual aspirations - from desert adventures to mountain retreats.',
-  },
-  {
-    icon: 'users',
-    title: 'Local Expertise',
-    description: 'We work with the most dedicated and knowledgeable local guides in Morocco, ensuring authentic and enriching experiences.',
-  },
-  {
-    icon: 'shield',
-    title: 'Seamless & Safe',
-    description: 'Every itinerary is thoughtfully designed for a smooth, safe, and enriching experience with trusted partnerships.',
-  },
-]
-
-const defaultHighlights = [
-  'Personalized itineraries that match your dreams',
-  'Local guides who know Morocco intimately',
-  'Comfortable accommodations & reliable transport',
-  'Authentic experiences, no tourist traps',
-  'Small groups for personal attention',
-  'Flexible journeys to suit your pace',
-]
-
-const defaultMissionParagraphs = [
-  "At Atlas Mountain Visit, every journey is crafted with heart. We're not just passionate about Morocco — we're honored to share its beauty, culture, and soul with travelers from around the world. Guiding you through unforgettable experiences isn't just our job — <strong class=\"text-neutral-900\">it's our privilege</strong>.",
-  "Our mission is to showcase the richness of Morocco through <strong class=\"text-neutral-900\">tailor-made journeys</strong> that blend authenticity, comfort, and meaningful cultural immersion. Whether you're dreaming of a desert adventure, a mountain retreat, or a journey through imperial cities, we create <strong class=\"text-neutral-900\">personalized experiences</strong> that reflect your individual aspirations.",
-  "We are proud to work with some of the <strong class=\"text-neutral-900\">most dedicated and knowledgeable local guides</strong> in the country. Thanks to our in-depth expertise and trusted partnerships, we ensure that every itinerary is thoughtfully designed for a smooth, safe, and enriching experience.",
-]
-
-const defaultStoryParagraphs = [
-  "We create unforgettable experiences that offer a true immersion into the heart of Morocco. Whether you're wandering through the vibrant souks of Marrakech, sleeping under the stars in the Sahara, trekking in the majestic High Atlas Mountains, or uncovering Morocco's hidden gems, we design personalized itineraries that match your dreams and desires.",
-  "Thanks to our local expertise and trusted partners, every journey we craft blends discovery, comfort, and quality.",
-]
-
 // Helper to get image URL
 function getImageUrl(image: Media | string | null | undefined, fallback: string): string {
   if (!image) return fallback
@@ -117,6 +67,43 @@ function getImageUrl(image: Media | string | null | undefined, fallback: string)
 }
 
 export function AboutPageClient({ content, cmsData }: Props) {
+  const t = useTranslations('aboutPage')
+
+  // Default values for fallback (translated)
+  const defaultStats = [
+    { value: '10+', label: t('statYearsExperience'), icon: 'star' },
+    { value: '5,000+', label: t('statHappyTravelers'), icon: 'users' },
+    { value: '4.9', label: t('statGoogleRating'), icon: 'star' },
+    { value: '50+', label: t('statUniqueExperiences'), icon: 'mapPin' },
+  ]
+
+  const defaultValues = [
+    { icon: 'heart', title: t('valueHeartTitle'), description: t('valueHeartDescription') },
+    { icon: 'compass', title: t('valueCompassTitle'), description: t('valueCompassDescription') },
+    { icon: 'users', title: t('valueUsersTitle'), description: t('valueUsersDescription') },
+    { icon: 'shield', title: t('valueShieldTitle'), description: t('valueShieldDescription') },
+  ]
+
+  const defaultHighlights = [
+    t('highlightPersonalized'),
+    t('highlightLocalGuides'),
+    t('highlightAccommodations'),
+    t('highlightAuthentic'),
+    t('highlightSmallGroups'),
+    t('highlightFlexible'),
+  ]
+
+  const defaultMissionParagraphs = [
+    t('missionParagraph1'),
+    t('missionParagraph2'),
+    t('missionParagraph3'),
+  ]
+
+  const defaultStoryParagraphs = [
+    t('storyParagraph1'),
+    t('storyParagraph2'),
+  ]
+
   // Extract CMS data with fallbacks
   const hero = cmsData?.hero || {}
   const stats = cmsData?.stats?.length > 0 ? cmsData.stats : defaultStats
@@ -166,7 +153,7 @@ export function AboutPageClient({ content, cmsData }: Props) {
         <div className="absolute inset-0 h-[550px]">
           <Image
             src={heroImage}
-            alt="Morocco landscape"
+            alt={t('heroImageAlt')}
             fill
             className="object-cover"
             priority
@@ -187,16 +174,16 @@ export function AboutPageClient({ content, cmsData }: Props) {
             >
               <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
               <span className="text-sm font-medium uppercase tracking-wider text-white">
-                {hero.badge || 'Who We Are'}
+                {hero.badge || t('heroBadge')}
               </span>
               <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6">
-              {hero.title || 'Your Gateway to'}{' '}
-              <span style={{ color: ACCENT_GREEN }}>{hero.titleHighlight || 'Authentic Morocco'}</span>
+              {hero.title || t('heroTitle')}{' '}
+              <span style={{ color: ACCENT_GREEN }}>{hero.titleHighlight || t('heroTitleHighlight')}</span>
             </h1>
             <p className="text-xl text-white/90 leading-relaxed whitespace-pre-line">
-              {hero.description || 'Atlas Mountain Visit is a Moroccan travel agency specializing in tailor-made journeys, from authentic escapes to comfortable and well-crafted adventures.'}
+              {hero.description || t('heroDescription')}
             </p>
           </motion.div>
         </div>
@@ -252,7 +239,7 @@ export function AboutPageClient({ content, cmsData }: Props) {
                 <div className="relative rounded-2xl overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.02)]">
                   <Image
                     src={storyImage}
-                    alt="Morocco adventure"
+                    alt={t('storyImageAlt')}
                     width={600}
                     height={500}
                     className="w-full h-[280px] sm:h-[350px] lg:h-[450px] object-cover"
@@ -270,7 +257,7 @@ export function AboutPageClient({ content, cmsData }: Props) {
                 style={{ backgroundColor: ACCENT_GREEN }}
               >
                 <p className="text-2xl sm:text-4xl font-display font-bold">{story.badgeValue || '10+'}</p>
-                <p className="text-xs sm:text-sm text-white/90">{story.badgeLabel || 'Years creating'}<br/>unforgettable memories</p>
+                <p className="text-xs sm:text-sm text-white/90">{story.badgeLabel || t('storyBadgeLabel')}<br/>{t('storyBadgeMemories')}</p>
               </motion.div>
             </motion.div>
 
@@ -288,14 +275,14 @@ export function AboutPageClient({ content, cmsData }: Props) {
               >
                 <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
                 <span className="text-sm font-medium uppercase tracking-wider" style={{ color: ACCENT_GREEN }}>
-                  {story.badge || 'Our Story'}
+                  {story.badge || t('storyBadge')}
                 </span>
                 <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
               </div>
 
               <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-900">
-                {story.title || 'Driven by a Deep'}{' '}
-                <span style={{ color: ACCENT_GREEN }}>{story.titleHighlight || 'Passion for Morocco'}</span>
+                {story.title || t('storyTitle')}{' '}
+                <span style={{ color: ACCENT_GREEN }}>{story.titleHighlight || t('storyTitleHighlight')}</span>
               </h2>
 
               <div className="space-y-4 text-neutral-600 leading-relaxed">
@@ -303,8 +290,7 @@ export function AboutPageClient({ content, cmsData }: Props) {
                   <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
                 ))}
                 <p className="font-semibold text-neutral-900">
-                  Our promise? A seamless and enriching travel experience, guided by the warmth of
-                  Moroccan hospitality.
+                  {t('storyPromise')}
                 </p>
               </div>
 
@@ -339,14 +325,14 @@ export function AboutPageClient({ content, cmsData }: Props) {
               >
                 <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
                 <span className="text-sm font-medium uppercase tracking-wider" style={{ color: ACCENT_GREEN }}>
-                  {mission.badge || 'Our Mission'}
+                  {mission.badge || t('missionBadge')}
                 </span>
                 <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
               </div>
 
               <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-900">
-                {mission.title || 'Your Memories,'}{' '}
-                <span style={{ color: ACCENT_GREEN }}>{mission.titleHighlight || 'Our Privilege'}</span>
+                {mission.title || t('missionTitle')}{' '}
+                <span style={{ color: ACCENT_GREEN }}>{mission.titleHighlight || t('missionTitleHighlight')}</span>
               </h2>
 
               <div className="space-y-4 text-neutral-600 leading-relaxed">
@@ -354,7 +340,7 @@ export function AboutPageClient({ content, cmsData }: Props) {
                   <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
                 ))}
                 <p className="font-semibold text-neutral-900">
-                  {mission.goalText || "Our goal? To turn every trip into a lasting memory — inspired by Moroccan hospitality and elevated by our commitment to exceptional service."}
+                  {mission.goalText || t('missionGoal')}
                 </p>
               </div>
             </motion.div>
@@ -372,7 +358,7 @@ export function AboutPageClient({ content, cmsData }: Props) {
                   <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-sm">
                     <Image
                       src={imagekitUrls.ouzoud || 'https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=400'}
-                      alt="Ouzoud Falls"
+                      alt={t('missionImageOuzoudAlt')}
                       width={300}
                       height={250}
                       className="w-full h-[120px] sm:h-[160px] lg:h-[200px] object-cover"
@@ -381,7 +367,7 @@ export function AboutPageClient({ content, cmsData }: Props) {
                   <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-sm">
                     <Image
                       src={imagekitUrls.camelPalmeraie || 'https://images.unsplash.com/photo-1531219432768-9f540ce91ef3?w=400'}
-                      alt="Camel ride"
+                      alt={t('missionImageCamelAlt')}
                       width={300}
                       height={300}
                       className="w-full h-[150px] sm:h-[200px] lg:h-[250px] object-cover"
@@ -392,7 +378,7 @@ export function AboutPageClient({ content, cmsData }: Props) {
                   <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-sm">
                     <Image
                       src={imagekitUrls.agafayNormal || 'https://images.unsplash.com/photo-1517821099606-cef63a9e11f4?w=400'}
-                      alt="Agafay desert"
+                      alt={t('missionImageAgafayAlt')}
                       width={300}
                       height={300}
                       className="w-full h-[150px] sm:h-[200px] lg:h-[250px] object-cover"
@@ -401,7 +387,7 @@ export function AboutPageClient({ content, cmsData }: Props) {
                   <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-sm">
                     <Image
                       src={imagekitUrls.ourika || 'https://images.unsplash.com/photo-1504392022767-a8fc0771f239?w=400'}
-                      alt="Ourika Valley"
+                      alt={t('missionImageOurikaAlt')}
                       width={300}
                       height={200}
                       className="w-full h-[120px] sm:h-[160px] lg:h-[200px] object-cover"
@@ -431,15 +417,15 @@ export function AboutPageClient({ content, cmsData }: Props) {
               >
                 <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
                 <span className="text-sm font-medium uppercase tracking-wider" style={{ color: ACCENT_GREEN }}>
-                  {valuesSection.badge || 'What Drives Us'}
+                  {valuesSection.badge || t('valuesBadge')}
                 </span>
                 <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
               </div>
               <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-900 mb-4">
-                {valuesSection.title || 'Our'} <span style={{ color: ACCENT_GREEN }}>{valuesSection.titleHighlight || 'Values'}</span>
+                {valuesSection.title || t('valuesTitle')} <span style={{ color: ACCENT_GREEN }}>{valuesSection.titleHighlight || t('valuesTitleHighlight')}</span>
               </h2>
               <p className="text-neutral-600 max-w-2xl mx-auto">
-                {valuesSection.subtitle || 'Our values guide everything we do, from the experiences we create to the way we treat every guest.'}
+                {valuesSection.subtitle || t('valuesSubtitle')}
               </p>
             </motion.div>
           </motion.div>
@@ -484,7 +470,7 @@ export function AboutPageClient({ content, cmsData }: Props) {
             >
               <Image
                 src={whyImage}
-                alt="Morocco experience"
+                alt={t('whyImageAlt')}
                 fill
                 className="object-cover"
               />
@@ -507,18 +493,18 @@ export function AboutPageClient({ content, cmsData }: Props) {
               >
                 <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
                 <span className="text-sm font-medium uppercase tracking-wider" style={{ color: ACCENT_GREEN }}>
-                  {whyChooseUs.badge || 'Why Choose Us'}
+                  {whyChooseUs.badge || t('whyBadge')}
                 </span>
                 <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
               </div>
 
               <h2 className="text-3xl md:text-4xl font-display font-bold text-neutral-900">
-                {whyChooseUs.title || 'Experience Morocco'}{' '}
-                <span style={{ color: ACCENT_GREEN }}>{whyChooseUs.titleHighlight || 'Like Never Before'}</span>
+                {whyChooseUs.title || t('whyTitle')}{' '}
+                <span style={{ color: ACCENT_GREEN }}>{whyChooseUs.titleHighlight || t('whyTitleHighlight')}</span>
               </h2>
 
               <p className="text-neutral-600 leading-relaxed whitespace-pre-line">
-                {whyChooseUs.description || "We don't just show you Morocco — we help you feel it. Every detail is carefully curated to ensure your journey is seamless, memorable, and truly authentic."}
+                {whyChooseUs.description || t('whyDescription')}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -555,10 +541,10 @@ export function AboutPageClient({ content, cmsData }: Props) {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-6">
-              {cta.title || 'Ready to Explore Morocco?'}
+              {cta.title || t('ctaTitle')}
             </h2>
             <p className="text-white/90 mb-10 text-lg max-w-2xl mx-auto">
-              {cta.subtitle || 'Let us create an unforgettable adventure tailored just for you. Start your Moroccan journey today.'}
+              {cta.subtitle || t('ctaSubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <NavLink
@@ -566,14 +552,14 @@ export function AboutPageClient({ content, cmsData }: Props) {
                 className="inline-flex items-center gap-2 h-14 px-8 bg-white font-semibold rounded-xl hover:bg-neutral-100 transition-all hover:shadow-md hover:-translate-y-1"
                 style={{ color: ACCENT_GREEN }}
               >
-                {cta.primaryButtonText || 'Browse Activities'}
+                {cta.primaryButtonText || t('ctaPrimary')}
                 <ArrowRight className="w-5 h-5" />
               </NavLink>
               <NavLink
                 href={cta.secondaryButtonLink || '/contact'}
                 className="inline-flex items-center gap-2 h-14 px-8 bg-white/10 text-white font-semibold rounded-xl hover:bg-white/20 transition-all border border-white/30"
               >
-                {cta.secondaryButtonText || 'Contact Us'}
+                {cta.secondaryButtonText || t('ctaSecondary')}
               </NavLink>
             </div>
           </motion.div>

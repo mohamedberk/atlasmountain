@@ -11,6 +11,7 @@ export function FloatingWhatsApp() {
   const [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
   const tWA = useTranslations('whatsapp')
+  const tChrome = useTranslations('chrome')
   const { settings, getWhatsAppLink } = useSiteSettings()
   const pathname = usePathname()
 
@@ -19,7 +20,7 @@ export function FloatingWhatsApp() {
   const hasStickyBottomBar = /^\/(([a-z]{2})\/)?(activities|checkout)\/[^/]+$/.test(pathname)
 
   const handleSend = () => {
-    const whatsappUrl = getWhatsAppLink(message || 'Hello! I have a question about your tours.')
+    const whatsappUrl = getWhatsAppLink(message || tChrome('whatsAppDefaultMessage'))
     window.open(whatsappUrl, '_blank')
     setIsOpen(false)
     setMessage('')

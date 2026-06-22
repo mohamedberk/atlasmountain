@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { setRequestLocale } from 'next-intl/server'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { getCategoryBySlug, getActivitiesByCategory, getCategories } from '@/lib/payload'
 import { CategoryPageClient } from './category-page-client'
 import { Navbar } from '@/components/navbar'
@@ -28,10 +28,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const typedLocale = (locale as 'en' | 'fr') || 'en'
 
   const category = await getCategoryBySlug(slug, typedLocale) as Category | null
+  const tCategory = await getTranslations({ locale: typedLocale, namespace: 'categoryPage' })
 
   if (!category) {
     return {
-      title: 'Category Not Found | Atlas Mountain Visit',
+      title: `${tCategory('notFoundTitle')} | Atlas Mountain Visit`,
     }
   }
 
@@ -43,10 +44,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${category.name} | Atlas Mountain Visit`,
-    description: category.description || `Explore our ${category.name} experiences in Morocco with Atlas Mountain Visit`,
+    description: category.description || tCategory('defaultMetaDescription', { name: category.name }),
     openGraph: {
       title: `${category.name} | Atlas Mountain Visit`,
-      description: category.description || `Explore our ${category.name} experiences in Morocco`,
+      description: category.description || tCategory('defaultOgDescription', { name: category.name }),
       images: [imageUrl],
       locale: locale,
       type: 'website',

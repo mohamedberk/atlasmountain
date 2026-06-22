@@ -2,21 +2,13 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import type { Media } from '@/payload-types'
 
 const ACCENT_RED = '#ff2828'
 
 const FALLBACK_IMAGE =
   'https://ec0m9cwfe1.ufs.sh/f/qpHeSXPP9Bva1WyCY2mhNL4rS0xatFcIdYgpAkZ8mGyvBlMf'
-
-const FALLBACK_TITLE = 'About'
-const FALLBACK_TITLE_HIGHLIGHT = 'Me'
-
-const FALLBACK_PARAGRAPH_1 =
-  'Hello, my name is Hamza, and I am a local guide from Imlil in the Atlas Mountains of Morocco. Through ATLASMOUNTAINSVISIT, I offer authentic travel experiences including trekking adventures, desert trips, cultural tours, city discovery, and organized tours across Morocco.'
-
-const FALLBACK_PARAGRAPH_2 =
-  'My goal is to help travelers explore the real beauty of Morocco, its landscapes, culture, traditions, and warm hospitality'
 
 interface AboutImage {
   image: string | Media
@@ -54,15 +46,16 @@ function resolveImageSrc(image: AboutImage['image'] | undefined): string | null 
 }
 
 export function AboutSection({ aboutData }: Props) {
-  const title = aboutData?.title?.trim() || FALLBACK_TITLE
-  const titleHighlight = aboutData?.titleHighlight?.trim() || FALLBACK_TITLE_HIGHLIGHT
-  const paragraph1 = aboutData?.paragraph1?.trim() || FALLBACK_PARAGRAPH_1
-  const paragraph2 = aboutData?.paragraph2?.trim() || FALLBACK_PARAGRAPH_2
+  const t = useTranslations('home')
+  const title = aboutData?.title?.trim() || t('aboutFallbackTitle')
+  const titleHighlight = aboutData?.titleHighlight?.trim() || t('aboutFallbackTitleHighlight')
+  const paragraph1 = aboutData?.paragraph1?.trim() || t('aboutFallbackParagraph1')
+  const paragraph2 = aboutData?.paragraph2?.trim() || t('aboutFallbackParagraph2')
 
   const firstImage = aboutData?.images?.[0]
   const imageSrc = resolveImageSrc(firstImage?.image) || FALLBACK_IMAGE
   const imageAlt =
-    firstImage?.alt || 'Hamza — local guide from Imlil, Atlas Mountains'
+    firstImage?.alt || t('aboutFallbackImageAlt')
 
   return (
     <section id="about" className="py-20 sm:py-28 bg-[#fafaf9] relative overflow-hidden">

@@ -1,6 +1,7 @@
 'use client'
 
 import { Component, ErrorInfo, ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   children?: ReactNode
@@ -8,6 +9,23 @@ interface Props {
 
 interface State {
   hasError: boolean
+}
+
+function ErrorFallback({ onReset }: { onReset: () => void }) {
+  const t = useTranslations('errors')
+  return (
+    <div className="min-h-[400px] flex items-center justify-center">
+      <div className="text-center">
+        <h2 className="text-xl font-semibold mb-2">{t('somethingWentWrong')}</h2>
+        <button
+          className="text-[#ff2828] hover:underline"
+          onClick={onReset}
+        >
+          {t('tryAgain')}
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export class ErrorBoundary extends Component<Props, State> {
@@ -25,19 +43,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError) {
-      return (
-        <div className="min-h-[400px] flex items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-xl font-semibold mb-2">Oops, something went wrong!</h2>
-            <button
-              className="text-[#ff2828] hover:underline"
-              onClick={() => this.setState({ hasError: false })}
-            >
-              Try again
-            </button>
-          </div>
-        </div>
-      )
+      return <ErrorFallback onReset={() => this.setState({ hasError: false })} />
     }
 
     return this.props.children

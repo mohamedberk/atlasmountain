@@ -8,6 +8,7 @@ import { CartProvider } from '@/context/CartContext'
 import { SiteSettingsProvider, type SiteSettingsData } from '@/context/SiteSettingsContext'
 import { getSiteSettings } from '@/lib/payload'
 import { FloatingWhatsApp } from '@/components/ui/floating-whatsapp'
+import { FloatingLanguageSwitcher } from '@/components/ui/floating-language-switcher'
 import { NavigationLoadingWrapper } from '@/components/providers/navigation-loading-wrapper'
 import '../globals.css'
 
@@ -113,6 +114,7 @@ export default async function LocaleLayout({
               <NavigationLoadingWrapper>
                 {children}
                 <FloatingWhatsApp />
+                <FloatingLanguageSwitcher />
               </NavigationLoadingWrapper>
             </CartProvider>
           </SiteSettingsProvider>

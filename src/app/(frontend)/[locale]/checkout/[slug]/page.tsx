@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { setRequestLocale } from 'next-intl/server'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { getActivityBySlug, getActivitiesByCategory } from '@/lib/payload'
 import { CheckoutFlowClient } from './checkout-flow-client'
 import type { Activity, Category } from '@/payload-types'
@@ -18,16 +18,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const typedLocale = (locale as 'en' | 'fr') || 'en'
 
   const activity = await getActivityBySlug(slug, typedLocale)
+  const t = await getTranslations({ locale: typedLocale, namespace: 'checkout' })
 
   if (!activity) {
     return {
-      title: 'Book Activity | Atlas Mountain Visit',
+      title: `${t('bookActivityFallbackTitle')} | Atlas Mountain Visit`,
     }
   }
 
   return {
-    title: `Book ${activity.title} | Atlas Mountain Visit`,
-    description: `Complete your booking for ${activity.title} in Morocco`,
+    title: `${t('bookActivityTitle', { title: activity.title })} | Atlas Mountain Visit`,
+    description: t('bookActivityDescription', { title: activity.title }),
     robots: {
       index: false, // Don't index checkout pages
       follow: false,

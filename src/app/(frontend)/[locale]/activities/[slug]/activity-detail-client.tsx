@@ -202,7 +202,7 @@ function getRouteData(activity: Activity): RouteData | null {
     .map((wp: any) => ({
       lat: wp.coordinates.latitude,
       lng: wp.coordinates.longitude,
-      name: wp.name || 'Waypoint',
+      name: wp.name || '',
     }))
 
   // Need at least 2 valid waypoints
@@ -766,7 +766,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     >
                       <Image
                         src={images[activeImageIndex]}
-                        alt={`${activity.title} - Photo ${activeImageIndex + 1}`}
+                        alt={tDetail('photoAlt', { title: activity.title, index: activeImageIndex + 1 })}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 900px"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -852,7 +852,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     >
                       <Image
                         src={img}
-                        alt={`Thumbnail ${idx + 1}`}
+                        alt={tDetail('thumbnailAlt', { index: idx + 1 })}
                         fill
                         sizes="120px"
                         className="object-cover"
@@ -882,7 +882,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                 <div className="flex items-center gap-2">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold text-white" style={{ backgroundColor: ACCENT_GREEN }}>
                     <Award className="w-4 h-4" />
-                    Top rated
+                    {tDetail('topRated')}
                   </span>
                   <div className="flex items-center gap-1">
                     <Star className="w-5 h-5 fill-[#FFB800] text-[#FFB800]" />
@@ -1010,7 +1010,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                       </div>
                       {isPrivateMode && privateAdditionalGuestPrice > 0 && (
                         <p className="text-sm text-neutral-500 mt-1">
-                          +€{privateAdditionalGuestPrice} per {t.extraGuest} above {privateMinGuests}
+                          {tDetail('additionalGuestNote', { price: privateAdditionalGuestPrice, min: privateMinGuests })}
                         </p>
                       )}
                     </div>
@@ -1187,7 +1187,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                           &ldquo;{googleReviews[reviewCarouselIndex].text}&rdquo;
                         </p>
                         <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between">
-                          <span className="text-[11px] text-neutral-400">Posted on Google</span>
+                          <span className="text-[11px] text-neutral-400">{tDetail('postedOnGoogle')}</span>
                           {googleReviews[reviewCarouselIndex].profileUrl && (
                             <a
                               href={googleReviews[reviewCarouselIndex].profileUrl}
@@ -1195,7 +1195,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                               rel="noopener noreferrer"
                               className="text-[11px] text-[#ff2828] hover:underline"
                             >
-                              View profile
+                              {tDetail('viewProfile')}
                             </a>
                           )}
                         </div>
@@ -1283,7 +1283,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                         &ldquo;{review.text}&rdquo;
                       </p>
                       <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between">
-                        <span className="text-[11px] text-neutral-400">Posted on Google</span>
+                        <span className="text-[11px] text-neutral-400">{tDetail('postedOnGoogle')}</span>
                         {review.profileUrl && (
                           <a
                             href={review.profileUrl}
@@ -1291,7 +1291,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                             rel="noopener noreferrer"
                             className="text-[11px] text-[#ff2828] hover:underline"
                           >
-                            View profile
+                            {tDetail('viewProfile')}
                           </a>
                         )}
                       </div>
@@ -1456,7 +1456,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                                 <h3 className="font-bold text-neutral-900 text-base">{step.activity}</h3>
                                 {step.time && (
                                   <p className="text-sm font-medium mt-1" style={{ color: ACCENT_GREEN }}>
-                                    Time: {step.time}
+                                    {tDetail('timeLabel')} {step.time}
                                   </p>
                                 )}
                                 {step.description && (
@@ -1498,7 +1498,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                           <h3 className="font-bold text-neutral-900 text-base">{step.activity}</h3>
                           {step.time && (
                             <p className="text-sm font-medium mt-1" style={{ color: ACCENT_GREEN }}>
-                              Time: {step.time}
+                              {tDetail('timeLabel')} {step.time}
                             </p>
                           )}
                           {step.description && (
@@ -1587,7 +1587,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                 className="space-y-5"
               >
                 <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">
-                  {locale === 'fr' ? 'Itinéraire du trajet' : 'Travel Route'}
+                  {tDetail('travelRoute')}
                 </h2>
                 <RouteMap
                   waypoints={routeData.waypoints}
@@ -1645,7 +1645,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                   <div className="text-white text-center py-2 px-4" style={{ backgroundColor: ACCENT_GREEN }}>
                     <span className="font-semibold text-sm flex items-center justify-center gap-2">
                       <Award className="w-4 h-4" />
-                      Featured Experience
+                      {tDetail('featuredExperience')}
                     </span>
                   </div>
                 )}
@@ -1750,7 +1750,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                       </div>
                       {isPrivateMode && privateAdditionalGuestPrice > 0 && (
                         <p className="text-sm text-neutral-500 mt-1">
-                          +€{privateAdditionalGuestPrice} per {t.extraGuest} above {privateMinGuests}
+                          {tDetail('additionalGuestNote', { price: privateAdditionalGuestPrice, min: privateMinGuests })}
                         </p>
                       )}
                     </div>
@@ -1876,11 +1876,11 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                       <div className="pt-4 space-y-2.5">
                         <div className="flex items-center gap-3 text-sm text-neutral-600">
                           <Shield className="w-5 h-5 text-[#4CAF50]" />
-                          <span>Free cancellation up to 24h before</span>
+                          <span>{tDetail('freeCancellation')}</span>
                         </div>
                         <div className="flex items-center gap-3 text-sm text-neutral-600">
                           <Check className="w-5 h-5 text-[#4CAF50]" />
-                          <span>Instant confirmation</span>
+                          <span>{tDetail('instantConfirmation')}</span>
                         </div>
                       </div>
                     </>
@@ -1944,7 +1944,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                       >
                         <Image
                           src={images[activeImageIndex]}
-                          alt={`${activity.title} - Photo ${activeImageIndex + 1}`}
+                          alt={tDetail('photoAlt', { title: activity.title, index: activeImageIndex + 1 })}
                           fill
                           sizes="(max-width: 1280px) 100vw, 1280px"
                           className="object-contain"

@@ -30,8 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const activity = await getActivityBySlug(slug, typedLocale)
 
   if (!activity) {
+    const tDetail = await getTranslations({ locale: typedLocale, namespace: 'activityDetail' })
     return {
-      title: 'Activity Not Found | Atlas Mountain Visit',
+      title: `${tDetail('notFoundTitle')} | Atlas Mountain Visit`,
     }
   }
 

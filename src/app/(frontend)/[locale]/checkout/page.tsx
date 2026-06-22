@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { setRequestLocale } from 'next-intl/server'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { getActivities, getCategories } from '@/lib/payload'
 import { CheckoutBrowseClient } from './checkout-browse-client'
 import type { Activity, Category, Media } from '@/payload-types'
@@ -10,10 +10,13 @@ interface Props {
   params: Promise<{ locale: string }>
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const t = await getTranslations({ locale: typedLocale, namespace: 'checkout' })
   return {
-    title: 'Book Your Experience | Atlas Mountain Visit',
-    description: 'Browse and book amazing Morocco experiences',
+    title: `${t('metaTitle')} | Atlas Mountain Visit`,
+    description: t('metaDescription'),
   }
 }
 

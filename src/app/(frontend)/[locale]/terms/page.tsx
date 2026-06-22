@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { RichText } from '@/components/rich-text'
@@ -50,6 +50,8 @@ export default async function TermsPage({ params }: Props) {
   const typedLocale = (locale as 'en' | 'fr') || 'en'
   setRequestLocale(locale)
 
+  const t = await getTranslations({ locale, namespace: 'termsPage' })
+
   let pageData = null
   try {
     pageData = await getTermsPage(typedLocale)
@@ -57,7 +59,7 @@ export default async function TermsPage({ params }: Props) {
     console.log('Terms page not configured in CMS, using fallback')
   }
 
-  const title = pageData?.title || fallbackContent[typedLocale]?.title || 'Terms & Conditions'
+  const title = pageData?.title || fallbackContent[typedLocale]?.title || t('fallbackTitle')
   const lastUpdated = pageData?.lastUpdated ? format(new Date(pageData.lastUpdated), 'MMMM d, yyyy') : null
 
   return (
@@ -73,7 +75,7 @@ export default async function TermsPage({ params }: Props) {
             </h1>
             {lastUpdated && (
               <p className="text-neutral-500">
-                Last updated: {lastUpdated}
+                {t('lastUpdated', { date: lastUpdated })}
               </p>
             )}
           </div>
@@ -86,7 +88,7 @@ export default async function TermsPage({ params }: Props) {
               </div>
             ) : (
               <p className="text-neutral-500 text-center py-10">
-                Terms & Conditions content will appear here once configured in the CMS.
+                {t('fallbackContent')}
               </p>
             )}
           </div>

@@ -62,6 +62,7 @@ interface Props {
 export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Props) {
   const locale = useLocale()
   const tBlog = useTranslations('blog')
+  const tBlogPage = useTranslations('blogPage')
   const tCommon = useTranslations('common')
   const tNav = useTranslations('nav')
 
@@ -69,7 +70,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
     const shareUrl = `${window.location.origin}/${locale}/blog/${post.slug}`
     const shareData = {
       title: post.title,
-      text: extractPlainText(post.excerpt) || `Read ${post.title} on Atlas Mountain Visit Blog`,
+      text: extractPlainText(post.excerpt) || tBlogPage('readArticleOn', { title: post.title }),
       url: shareUrl,
     }
 
@@ -105,7 +106,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
               </NavLink>
               <ChevronRight className="w-4 h-4 text-neutral-400" />
               <NavLink href="/blog" className="text-neutral-500 hover:text-red-600 transition-colors">
-                Blog
+                {tBlogPage('breadcrumbBlog')}
               </NavLink>
               <ChevronRight className="w-4 h-4 text-neutral-400" />
               <span className="text-neutral-900 font-medium truncate max-w-[200px]">{post.title}</span>
@@ -196,7 +197,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-9 h-9 rounded-full bg-[#1877F2] hover:bg-[#1877F2]/90 flex items-center justify-center text-white transition-colors"
-                      aria-label="Share on Facebook"
+                      aria-label={tBlogPage('shareOnFacebook')}
                     >
                       <Facebook className="w-4 h-4" />
                     </a>
@@ -205,7 +206,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-9 h-9 rounded-full bg-black hover:bg-neutral-800 flex items-center justify-center text-white transition-colors"
-                      aria-label="Share on X"
+                      aria-label={tBlogPage('shareOnX')}
                     >
                       <Twitter className="w-4 h-4" />
                     </a>
@@ -214,7 +215,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-9 h-9 rounded-full bg-[#0A66C2] hover:bg-[#0A66C2]/90 flex items-center justify-center text-white transition-colors"
-                      aria-label="Share on LinkedIn"
+                      aria-label={tBlogPage('shareOnLinkedIn')}
                     >
                       <Linkedin className="w-4 h-4" />
                     </a>
@@ -222,7 +223,7 @@ export function BlogDetailClient({ post, relatedPosts, relatedActivities }: Prop
                       onClick={handleShare}
                       className="w-9 h-9 rounded-full flex items-center justify-center text-white transition-colors hover:opacity-90"
                       style={{ backgroundColor: ACCENT_GREEN }}
-                      aria-label="Share"
+                      aria-label={tBlogPage('share')}
                     >
                       <Share2 className="w-4 h-4" />
                     </button>

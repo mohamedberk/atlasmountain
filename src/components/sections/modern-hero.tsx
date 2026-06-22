@@ -157,14 +157,14 @@ export function ModernHero(_props: Props) {
         <m.button
           type="button"
           onClick={scrollToNext}
-          aria-label="Scroll to next section"
+          aria-label={t('heroScrollToNext')}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.5 }}
           className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 text-white/90 hover:text-white transition-colors group"
         >
           <span className="text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase">
-            Scroll
+            {t('heroScrollLabel')}
           </span>
           <m.span
             animate={{ y: [0, 6, 0] }}
