@@ -176,7 +176,7 @@ export async function POST(request: NextRequest) {
         },
         activities: activities.length > 0 ? activities : undefined,
         source: 'website',
-        language: (locale === 'de' ? 'de' : locale === 'fr' ? 'fr' : 'en') as 'en' | 'fr',
+        language: locale === 'fr' ? 'fr' : 'en',
       },
     })
 

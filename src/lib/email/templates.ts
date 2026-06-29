@@ -488,15 +488,14 @@ export const extractBookingEmailData = (booking: Booking): BookingEmailData => {
     guestEmail: booking.guestEmail || '',
     guestPhone: booking.guestPhone || '',
     bookingDate: booking.bookingDate || new Date().toISOString(),
-    bookingTime: booking.bookingTime || undefined,
     tourType: booking.tourType || 'group',
     status: booking.status || 'pending',
     paymentStatus: booking.payment?.status as BookingEmailData['paymentStatus'],
     paymentMethod: booking.payment?.method as BookingEmailData['paymentMethod'],
     activities: (booking.activities || []).map((a) => ({
       title: a.activityTitle || 'Activity',
-      adults: (a as any).adults || a.quantity || 1,
-      children: (a as any).children || 0,
+      adults: a.adults || 1,
+      children: a.children || 0,
       subtotal: a.subtotal || 0,
     })),
     // Transport bookings are not yet supported

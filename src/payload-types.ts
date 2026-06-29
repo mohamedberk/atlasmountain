@@ -98,7 +98,7 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'fr' | 'de') | ('en' | 'fr' | 'de')[];
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'fr') | ('en' | 'fr')[];
   globals: {
     'site-settings': SiteSetting;
     'home-page': HomePage;
@@ -115,7 +115,7 @@ export interface Config {
     'terms-page': TermsPageSelect<false> | TermsPageSelect<true>;
     'privacy-page': PrivacyPageSelect<false> | PrivacyPageSelect<true>;
   };
-  locale: 'en' | 'fr' | 'de';
+  locale: 'en' | 'fr';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -671,14 +671,9 @@ export interface Booking {
   status: 'pending' | 'paid' | 'confirmed' | 'in_progress' | 'completed' | 'cancelled' | 'refunded' | 'no_show';
   bookingType?: ('activities' | 'transport' | 'combined') | null;
   /**
-   * Primary date of the activity/transport
+   * Primary date of the activity
    */
   bookingDate: string;
-  /**
-   * Preferred time (if applicable)
-   */
-  bookingTime?: string | null;
-  tourType?: ('group' | 'private') | null;
   guestName: string;
   guestEmail: string;
   guestPhone: string;
@@ -686,133 +681,48 @@ export interface Booking {
   guests: {
     adults: number;
     children?: number | null;
-    /**
-     * Ages of children (if applicable)
-     */
-    childrenAges?: string | null;
   };
   /**
-   * Dietary restrictions, accessibility needs, special occasions, etc.
+   * Pickup location entered at checkout
    */
+  customPickupAddress?: string | null;
   specialRequests?: string | null;
   /**
-   * Booked activities/experiences
+   * Booked activities
    */
   activities?:
     | {
-        activity?: (string | null) | Activity;
-        /**
-         * Title at time of booking (for records)
-         */
         activityTitle?: string | null;
         date?: string | null;
-        /**
-         * Number of adults
-         */
         adults?: number | null;
-        /**
-         * Number of children
-         */
         children?: number | null;
-        /**
-         * Legacy field - use adults/children instead
-         */
-        quantity?: number | null;
-        /**
-         * If a specific duration/option was selected
-         */
-        selectedVariant?: {
-          variantLabel?: string | null;
-          variantPrice?: number | null;
-        };
         pricePerAdult: number;
         pricePerChild?: number | null;
         subtotal: number;
         id?: string | null;
       }[]
     | null;
-  pickupLocation?: (string | null) | Location;
-  /**
-   * Custom address if not in location list
-   */
-  customPickupAddress?: string | null;
-  /**
-   * Confirmed pickup time
-   */
-  pickupTime?: string | null;
-  dropoffLocation?: (string | null) | Location;
-  customDropoffAddress?: string | null;
-  /**
-   * For airport transfers
-   */
-  flightDetails?: {
-    flightNumber?: string | null;
-    airline?: string | null;
-    arrivalTime?: string | null;
-    departureTime?: string | null;
-  };
   pricing: {
-    /**
-     * Subtotal before discounts (EUR)
-     */
     subtotal: number;
-    /**
-     * Final total (EUR)
-     */
     totalAmount: number;
-    discountCode?: string | null;
-    discountAmount?: number | null;
-    /**
-     * Additional pickup/dropoff fee
-     */
-    pickupFee?: number | null;
     currency?: ('EUR' | 'USD' | 'MAD' | 'GBP') | null;
   };
   payment: {
     status: 'pending' | 'processing' | 'paid' | 'failed' | 'refunded' | 'partial_refund';
     method?: ('stripe' | 'paypal' | 'cash' | 'bank_transfer') | null;
-    /**
-     * Payment gateway transaction ID
-     */
     transactionId?: string | null;
     stripeSessionId?: string | null;
     stripePaymentIntentId?: string | null;
     paypalOrderId?: string | null;
     paidAt?: string | null;
-    refundAmount?: number | null;
-    refundReason?: string | null;
-    refundedAt?: string | null;
   };
-  /**
-   * Internal notes (not visible to customer)
-   */
-  internalNotes?: string | null;
-  /**
-   * Assigned driver/guide name
-   */
-  assignedDriver?: string | null;
-  /**
-   * Assigned vehicle details
-   */
-  assignedVehicle?: string | null;
-  communicationLog?:
-    | {
-        date: string;
-        type?: ('email' | 'whatsapp' | 'phone' | 'sms') | null;
-        message: string;
-        sentBy?: (string | null) | User;
-        id?: string | null;
-      }[]
-    | null;
   /**
    * Total booking amount
    */
   totalAmount?: number | null;
   source?: ('website' | 'whatsapp' | 'phone' | 'email' | 'walkin' | 'partner') | null;
-  /**
-   * Customer preferred language
-   */
-  language?: ('en' | 'fr' | 'de') | null;
+  language?: ('en' | 'fr') | null;
+  tourType?: ('group' | 'private') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1329,8 +1239,6 @@ export interface BookingsSelect<T extends boolean = true> {
   status?: T;
   bookingType?: T;
   bookingDate?: T;
-  bookingTime?: T;
-  tourType?: T;
   guestName?: T;
   guestEmail?: T;
   guestPhone?: T;
@@ -1340,50 +1248,26 @@ export interface BookingsSelect<T extends boolean = true> {
     | {
         adults?: T;
         children?: T;
-        childrenAges?: T;
       };
+  customPickupAddress?: T;
   specialRequests?: T;
   activities?:
     | T
     | {
-        activity?: T;
         activityTitle?: T;
         date?: T;
         adults?: T;
         children?: T;
-        quantity?: T;
-        selectedVariant?:
-          | T
-          | {
-              variantLabel?: T;
-              variantPrice?: T;
-            };
         pricePerAdult?: T;
         pricePerChild?: T;
         subtotal?: T;
         id?: T;
-      };
-  pickupLocation?: T;
-  customPickupAddress?: T;
-  pickupTime?: T;
-  dropoffLocation?: T;
-  customDropoffAddress?: T;
-  flightDetails?:
-    | T
-    | {
-        flightNumber?: T;
-        airline?: T;
-        arrivalTime?: T;
-        departureTime?: T;
       };
   pricing?:
     | T
     | {
         subtotal?: T;
         totalAmount?: T;
-        discountCode?: T;
-        discountAmount?: T;
-        pickupFee?: T;
         currency?: T;
       };
   payment?:
@@ -1396,25 +1280,11 @@ export interface BookingsSelect<T extends boolean = true> {
         stripePaymentIntentId?: T;
         paypalOrderId?: T;
         paidAt?: T;
-        refundAmount?: T;
-        refundReason?: T;
-        refundedAt?: T;
-      };
-  internalNotes?: T;
-  assignedDriver?: T;
-  assignedVehicle?: T;
-  communicationLog?:
-    | T
-    | {
-        date?: T;
-        type?: T;
-        message?: T;
-        sentBy?: T;
-        id?: T;
       };
   totalAmount?: T;
   source?: T;
   language?: T;
+  tourType?: T;
   updatedAt?: T;
   createdAt?: T;
 }

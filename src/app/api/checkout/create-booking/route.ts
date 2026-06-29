@@ -146,7 +146,7 @@ export async function POST(request: NextRequest) {
           method: paymentMethod,
         },
         source: 'website',
-        language: (body.locale === 'de' ? 'de' : body.locale === 'fr' ? 'fr' : 'en') as 'en' | 'fr',
+        language: body.locale === 'fr' ? 'fr' : 'en',
       },
     })
 
