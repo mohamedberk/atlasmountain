@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -42,6 +41,12 @@ import {
   Lightbulb
 } from 'lucide-react'
 import { useTranslations, useLocale } from 'next-intl'
+import Lightbox from 'yet-another-react-lightbox'
+import Counter from 'yet-another-react-lightbox/plugins/counter'
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
+import 'yet-another-react-lightbox/styles.css'
+import 'yet-another-react-lightbox/plugins/counter.css'
+import 'yet-another-react-lightbox/plugins/thumbnails.css'
 import { NavLink } from '@/components/ui/nav-link'
 import { useCart, ActivityCartItem } from '@/context/CartContext'
 import type { Activity, Media, Category, Location } from '@/payload-types'
@@ -430,18 +435,6 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
     })
   }, [images])
 
-  // Lock body scroll when gallery is open
-  useEffect(() => {
-    if (isGalleryOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isGalleryOpen])
-
   const handleAddToCart = useCallback(() => {
     const cartItem: ActivityCartItem = {
       type: 'activity',
@@ -678,18 +671,15 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                {/* Category Badge */}
-                <div className="absolute top-4 left-4 flex gap-2">
-                  <span className="bg-white/95 backdrop-blur-sm text-neutral-900 px-3 py-1.5 rounded-full font-semibold text-xs shadow-sm">
-                    {getCategoryName(activity.category, tCommon('defaultCategory'))}
-                  </span>
-                  {activity.isFeatured && (
+                {/* Featured Badge */}
+                {activity.isFeatured && (
+                  <div className="absolute top-4 left-4">
                     <span className="text-white px-3 py-1.5 rounded-full font-semibold text-xs flex items-center gap-1" style={{ backgroundColor: ACCENT_GREEN }}>
                       <Award className="w-3.5 h-3.5" />
                       {tCommon('featured')}
                     </span>
-                  )}
-                </div>
+                  </div>
+                )}
 
                 {/* Photo count badge */}
                 <button className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 hover:bg-black/70 transition-colors">
@@ -704,13 +694,15 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                   <>
                     <button
                       onClick={(e) => { e.stopPropagation(); prevImage() }}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-sm flex items-center justify-center hover:bg-white transition-colors opacity-0 group-hover:opacity-100"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center hover:bg-white transition-colors"
+                      aria-label="Previous image"
                     >
                       <ChevronLeft className="w-5 h-5 text-neutral-900" />
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); nextImage() }}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-sm flex items-center justify-center hover:bg-white transition-colors opacity-0 group-hover:opacity-100"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center hover:bg-white transition-colors"
+                      aria-label="Next image"
                     >
                       <ChevronRight className="w-5 h-5 text-neutral-900" />
                     </button>
@@ -1803,72 +1795,27 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
 
       </div>
 
-      {/* Fullscreen Gallery Modal */}
-      {typeof document !== 'undefined' && createPortal(
-        <AnimatePresence>
-          {isGalleryOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[9999] bg-black"
-            >
-              <button
-                onClick={() => setIsGalleryOpen(false)}
-                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
-
-              <div className="h-full flex items-center justify-center p-4">
-                <button
-                  onClick={prevImage}
-                  className="absolute left-4 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-
-                <div className="relative w-full max-w-5xl aspect-[16/10]">
-                  <AnimatePresence mode="popLayout" initial={false}>
-                    {images[activeImageIndex] && (
-                      <motion.div
-                        key={activeImageIndex}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="absolute inset-0"
-                      >
-                        <Image
-                          src={images[activeImageIndex]}
-                          alt={tDetail('photoAlt', { title: activity.title, index: activeImageIndex + 1 })}
-                          fill
-                          sizes="(max-width: 1280px) 100vw, 1280px"
-                          className="object-contain"
-                          unoptimized={images[activeImageIndex].includes('utfs.io') || images[activeImageIndex].includes('uploadthing')}
-                        />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                <button
-                  onClick={nextImage}
-                  className="absolute right-4 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-
-                {/* Counter */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm">
-                  {activeImageIndex + 1} / {images.length}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>,
-        document.body
-      )}
+      {/* Fullscreen Gallery — yet-another-react-lightbox */}
+      <Lightbox
+        open={isGalleryOpen}
+        close={() => setIsGalleryOpen(false)}
+        index={activeImageIndex}
+        on={{ view: ({ index }) => setActiveImageIndex(index) }}
+        slides={images.map((src) => ({
+          src,
+          alt: tDetail('photoAlt', { title: activity.title, index: activeImageIndex + 1 }),
+        }))}
+        plugins={[Counter, Thumbnails]}
+        counter={{ container: { style: { top: 'unset', bottom: 0 } } }}
+        carousel={{ finite: false, padding: '16px', spacing: '30%' }}
+        controller={{ closeOnBackdropClick: true }}
+        animation={{ fade: 250, swipe: 300 }}
+        thumbnails={{ position: 'bottom', width: 80, height: 60, border: 0, gap: 8 }}
+        styles={{
+          container: { backgroundColor: 'rgba(0, 0, 0, 0.95)' },
+          slide: { padding: 0 },
+        }}
+      />
     </div>
   )
 }
