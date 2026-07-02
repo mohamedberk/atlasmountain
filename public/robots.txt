@@ -1,9 +1,9 @@
-# robots.txt for atlasmountainsvisit.com
+# robots.txt for www.atlasmountainsvisit.com
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://atlasmountainsvisit.com/sitemap.xml
+Sitemap: https://www.atlasmountainsvisit.com/sitemap.xml
 
 # Disallow admin and API routes
 Disallow: /api/

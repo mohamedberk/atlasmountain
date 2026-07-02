@@ -2,13 +2,13 @@ import type { MetadataRoute } from 'next'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://atlasmountainsvisit.com'
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://www.atlasmountainsvisit.com'
 const locales = ['en', 'fr'] as const
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const payload = await getPayload({ config })
 
-  const [activitiesResult, blogPostsResult] = await Promise.all([
+  const [activitiesResult, blogPostsResult, categoriesResult] = await Promise.all([
     payload.find({
       collection: 'activities',
       where: { isActive: { equals: true } },
@@ -21,6 +21,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       limit: 0,
       depth: 0,
     }),
+    payload.find({
+      collection: 'categories',
+      limit: 0,
+      depth: 0,
+    }),
   ])
 
   const staticPages = [
@@ -29,8 +34,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/blog', priority: 0.8, changeFrequency: 'weekly' as const },
     { path: '/about', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/contact', priority: 0.7, changeFrequency: 'monthly' as const },
-    { path: '/checkout', priority: 0.5, changeFrequency: 'monthly' as const },
-    { path: '/reviews', priority: 0.6, changeFrequency: 'weekly' as const },
     { path: '/terms', priority: 0.3, changeFrequency: 'yearly' as const },
     { path: '/privacy', priority: 0.3, changeFrequency: 'yearly' as const },
   ]
@@ -77,6 +80,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date(activity.updatedAt),
         changeFrequency: 'weekly',
         priority: 0.8,
+        alternates: {
+          languages: alternates,
+        },
+      })
+    }
+  }
+
+  // Add category pages for each locale
+  for (const category of categoriesResult.docs) {
+    if (!category.slug) continue
+
+    const safeSlug = encodeURIComponent(category.slug)
+    for (const locale of locales) {
+      const url = `${BASE_URL}/${locale}/category/${safeSlug}`
+
+      const alternates: Record<string, string> = {}
+      for (const altLocale of locales) {
+        alternates[altLocale] = `${BASE_URL}/${altLocale}/category/${safeSlug}`
+      }
+
+      sitemapEntries.push({
+        url,
+        lastModified: new Date(category.updatedAt),
+        changeFrequency: 'weekly',
+        priority: 0.7,
         alternates: {
           languages: alternates,
         },
