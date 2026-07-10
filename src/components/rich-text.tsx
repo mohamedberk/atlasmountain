@@ -19,6 +19,17 @@ interface RichTextNode {
     alt?: string
     width?: number
     height?: number
+    slug?: string
+  }
+  relationTo?: string
+  fields?: {
+    url?: string
+    newTab?: boolean
+    linkType?: 'custom' | 'internal'
+    doc?: {
+      value?: string | { id?: string; slug?: string } | null
+      relationTo?: string
+    }
   }
   listType?: string
   indent?: number
@@ -120,17 +131,42 @@ function renderNode(node: RichTextNode, index: number): React.ReactNode {
       )
 
     case 'link':
+    case 'autolink': {
+      const fields = node.fields
+      let href = node.url || fields?.url || '#'
+
+      // Handle internal doc links (Payload relation)
+      if (fields?.linkType === 'internal' && fields.doc) {
+        const doc = fields.doc
+        const docValue = typeof doc.value === 'object' && doc.value ? doc.value : null
+        const slug = docValue?.slug || (typeof doc.value === 'string' ? doc.value : '')
+        const collection = doc.relationTo
+        if (slug && collection) {
+          const pathByCollection: Record<string, string> = {
+            'blog-posts': `/blog/${slug}`,
+            'activities': `/activities/${slug}`,
+            'locations': `/locations/${slug}`,
+            'categories': `/categories/${slug}`,
+          }
+          href = pathByCollection[collection] || `/${collection}/${slug}`
+        }
+      }
+
+      const isExternal = /^https?:\/\//i.test(href)
+      const openNewTab = fields?.newTab || isExternal
+
       return (
         <a
           key={key}
-          href={node.url}
+          href={href}
           className="text-red-600 font-medium underline hover:text-red-700 transition-colors"
-          target={node.url?.startsWith('http') ? '_blank' : undefined}
-          rel={node.url?.startsWith('http') ? 'noopener noreferrer' : undefined}
+          target={openNewTab ? '_blank' : undefined}
+          rel={openNewTab ? 'noopener noreferrer' : undefined}
         >
           {node.children?.map((child, i) => renderNode(child, i))}
         </a>
       )
+    }
 
     case 'upload':
       const imageUrl = node.value?.url || node.src
