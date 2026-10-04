@@ -8,6 +8,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import type { BlogPost } from '@/payload-types'
 import { extractPlainText } from '@/lib/utils'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 // Revalidate every hour as fallback (on-demand revalidation via tags is primary)
 export const revalidate = 3600
@@ -34,10 +35,15 @@ const pageContent: Record<string, { title: string; subtitle: string; description
     subtitle: 'Histoires, Conseils & Aventures Marocaines',
     description: 'Découvrez le Maroc à travers nos récits de voyage, conseils d\'initiés et aperçus culturels.',
   },
-  de: {
-    title: 'Reiseblog',
-    subtitle: 'Geschichten, Tipps & Marokkanische Abenteuer',
-    description: 'Entdecken Sie Marokko durch unsere Reisegeschichten, Insider-Tipps und kulturelle Einblicke.',
+  es: {
+    title: 'Blog de Viajes',
+    subtitle: 'Historias, Consejos y Aventuras Marroquíes',
+    description: 'Descubre Marruecos a través de nuestras historias de viaje, consejos de expertos y perspectivas culturales.',
+  },
+  cs: {
+    title: 'Cestovní Blog',
+    subtitle: 'Příběhy, Tipy a Marocká Dobrodružství',
+    description: 'Objevte Maroko prostřednictvím našich cestovních příběhů, zasvěcených tipů a kulturních postřehů.',
   },
 }
 
@@ -63,7 +69,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       languages: {
         en: '/en/blog',
         fr: '/fr/blog',
-        de: '/de/blog',
+        es: '/es/blog',
+        cs: '/cs/blog',
       },
     },
   }
@@ -71,7 +78,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPage({ params }: Props) {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   setRequestLocale(locale)
 

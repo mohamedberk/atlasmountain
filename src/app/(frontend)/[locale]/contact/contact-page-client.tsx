@@ -65,7 +65,6 @@ const defaultFeatures = [
 
 export function ContactPageClient({ content, cmsData, locale }: Props) {
   const tContact = useTranslations('contactPage')
-  const isFrench = locale === 'fr'
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [captchaToken, setCaptchaToken] = useState('')
@@ -103,7 +102,6 @@ export function ContactPageClient({ content, cmsData, locale }: Props) {
 
   const emailData = contactInfo.email || {}
   const emailAddress = emailData.address || ''
-  const emailResponseTime = emailData.responseTime || ''
 
   const whatsappData = contactInfo.whatsapp || {}
   const whatsappNumber = whatsappData.number || ''

@@ -6,6 +6,7 @@ import { CategoryPageClient } from './category-page-client'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import type { Category, Activity } from '@/payload-types'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 // Revalidate every hour as fallback (on-demand revalidation is primary)
 export const revalidate = 3600
@@ -25,7 +26,7 @@ export async function generateStaticParams() {
 // Generate metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   const category = await getCategoryBySlug(slug, typedLocale) as Category | null
   const tCategory = await getTranslations({ locale: typedLocale, namespace: 'categoryPage' })
@@ -54,13 +55,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     alternates: {
       canonical: `https://atlasmountainsvisit.com/${locale}/category/${slug}`,
+      languages: {
+        en: `/en/category/${slug}`,
+        fr: `/fr/category/${slug}`,
+        es: `/es/category/${slug}`,
+        cs: `/cs/category/${slug}`,
+      },
     },
   }
 }
 
 export default async function CategoryPage({ params }: Props) {
   const { locale, slug } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   setRequestLocale(locale)
 

@@ -4,6 +4,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { setRequestLocale, getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
+import type { Locale } from '@/i18n/config'
 import { CartProvider } from '@/context/CartContext'
 import { SiteSettingsProvider, type SiteSettingsData } from '@/context/SiteSettingsContext'
 import { getSiteSettings } from '@/lib/payload'
@@ -42,13 +43,15 @@ export async function generateMetadata({
   const titles: Record<string, string> = {
     en: 'Atlas Mountain Visit | Authentic Moroccan Adventures',
     fr: 'Atlas Mountain Visit | Aventures Authentiques au Maroc',
-    de: 'Atlas Mountain Visit | Authentische Marokkanische Abenteuer',
+    es: 'Atlas Mountain Visit | Aventuras Marroquíes Auténticas',
+    cs: 'Atlas Mountain Visit | Autentická Marocká Dobrodružství',
   }
 
   const descriptions: Record<string, string> = {
     en: 'Experience the real Morocco with Atlas Mountain Visit. Desert escapes, mountain hikes, and authentic local experiences - no tourist traps, just the Morocco we love.',
     fr: 'Vivez le vrai Maroc avec Atlas Mountain Visit. Escapades dans le désert, randonnées en montagne et expériences locales authentiques - pas de pièges à touristes, juste le Maroc que nous aimons.',
-    de: 'Erleben Sie das echte Marokko mit Atlas Mountain Visit. Wüstenausflüge, Bergwanderungen und authentische lokale Erlebnisse - keine Touristenfallen, nur das Marokko, das wir lieben.',
+    es: 'Vive el verdadero Marruecos con Atlas Mountain Visit. Escapadas al desierto, rutas de montaña y experiencias locales auténticas - sin trampas para turistas, solo el Marruecos que amamos.',
+    cs: 'Zažijte skutečné Maroko s Atlas Mountain Visit. Výlety do pouště, horské túry a autentické místní zážitky - žádné turistické pasti, jen Maroko, které milujeme.',
   }
 
   return {
@@ -59,7 +62,8 @@ export async function generateMetadata({
       languages: {
         en: '/',
         fr: '/fr',
-        de: '/de',
+        es: '/es',
+        cs: '/cs',
       },
     },
   }
@@ -85,7 +89,7 @@ export default async function LocaleLayout({
   // Get translations and site settings in parallel
   const [messages, siteSettingsRaw] = await Promise.all([
     getMessages({ locale }),
-    getSiteSettings(locale as 'en' | 'fr'),
+    getSiteSettings(locale as Locale),
   ])
 
   // Transform the raw settings to match our context type

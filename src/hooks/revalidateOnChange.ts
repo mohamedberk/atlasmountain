@@ -17,13 +17,13 @@ const COLLECTION_TAGS: Record<string, string[]> = {
 
 // Map collections to paths for path-based revalidation
 const COLLECTION_PATHS: Record<string, string[]> = {
-  activities: ['/en', '/fr', '/en/activities', '/fr/activities'],
-  'blog-posts': ['/en/blog', '/fr/blog'],
-  categories: ['/en', '/fr', '/en/activities', '/fr/activities'],
-  locations: ['/en', '/fr'],
-  'home-page': ['/en', '/fr'],
-  'about-page': ['/en/about', '/fr/about'],
-  'contact-page': ['/en/contact', '/fr/contact'],
+  activities: ['/en', '/fr', '/es', '/cs', '/en/activities', '/fr/activities', '/es/activities', '/cs/activities'],
+  'blog-posts': ['/en/blog', '/fr/blog', '/es/blog', '/cs/blog'],
+  categories: ['/en', '/fr', '/es', '/cs', '/en/activities', '/fr/activities', '/es/activities', '/cs/activities'],
+  locations: ['/en', '/fr', '/es', '/cs'],
+  'home-page': ['/en', '/fr', '/es', '/cs'],
+  'about-page': ['/en/about', '/fr/about', '/es/about', '/cs/about'],
+  'contact-page': ['/en/contact', '/fr/contact', '/es/contact', '/cs/contact'],
 }
 
 /**
@@ -52,7 +52,7 @@ function revalidateForSlug(slug: string, docSlug?: string, collection?: string) 
   // Revalidate specific document paths
   if (docSlug && collection) {
     const prefix = collection === 'blog-posts' ? 'blog' : collection
-    for (const locale of ['en', 'fr']) {
+    for (const locale of ['en', 'fr', 'es', 'cs']) {
       try {
         revalidatePath(`/${locale}/${prefix}/${docSlug}`)
       } catch (e) {

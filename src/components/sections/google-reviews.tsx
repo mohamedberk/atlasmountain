@@ -9,9 +9,22 @@ import AutoScroll from 'embla-carousel-auto-scroll'
 import { useTranslations } from 'next-intl'
 import { useGoogleReviews, type GoogleReview } from '@/hooks/useGoogleReviews'
 
-const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Attraction_Review-g293734-d33305949-Reviews-Atlas_Mountains_Visit-Marrakech_Marrakech_Safi.html'
+const DEFAULT_GOOGLE_MAPS_URL = 'https://maps.app.goo.gl/rRjL6HttiQKP6J6F8?g_st=ac'
+const DEFAULT_TRIPADVISOR_URL = 'https://www.tripadvisor.com/Attraction_Review-g293734-d33305949-Reviews-Atlas_Mountains_Visit-Marrakech_Marrakech_Safi.html'
 
 const ACCENT_GREEN = '#ff2828'
+
+interface ReviewsSectionData {
+  title?: string | null
+  seeAllOnGoogleText?: string | null
+  googleMapsUrl?: string | null
+  seeAllOnTripAdvisorText?: string | null
+  tripAdvisorUrl?: string | null
+}
+
+interface Props {
+  reviewsData?: ReviewsSectionData | null
+}
 
 const FALLBACK_REVIEWS: GoogleReview[] = [
   {
@@ -74,13 +87,19 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.1 } },
 }
 
-export function GoogleReviews() {
+export function GoogleReviews({ reviewsData }: Props) {
   const t = useTranslations('home')
   const { reviews: apiReviews, overallRating, totalReviews } = useGoogleReviews({
     minRating: 4,
   })
 
   const googleReviews = apiReviews.length > 0 ? apiReviews : FALLBACK_REVIEWS
+
+  const title = reviewsData?.title?.trim() || t('reviewsTitle')
+  const seeAllOnGoogleText = reviewsData?.seeAllOnGoogleText?.trim() || t('reviewsSeeAllGoogle')
+  const googleMapsUrl = reviewsData?.googleMapsUrl?.trim() || DEFAULT_GOOGLE_MAPS_URL
+  const seeAllOnTripAdvisorText = reviewsData?.seeAllOnTripAdvisorText?.trim() || t('reviewsSeeAllTripAdvisor')
+  const tripAdvisorUrl = reviewsData?.tripAdvisorUrl?.trim() || DEFAULT_TRIPADVISOR_URL
 
   const [reviewEmblaRef, reviewEmblaApi] = useEmblaCarousel({
     loop: true,
@@ -120,7 +139,7 @@ export function GoogleReviews() {
           {/* Header */}
           <motion.div variants={fadeUp} className="text-center flex flex-col items-center gap-4">
             <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-neutral-900">
-              {t('reviewsTitle')}
+              {title}
             </h2>
             {/* Overall Ratings: Google + TripAdvisor */}
             <div className="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-12 gap-y-3 mt-1">
@@ -256,7 +275,7 @@ export function GoogleReviews() {
       {/* "See all reviews" — Google + TripAdvisor button cards */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mt-12 px-6 relative">
         <a
-          href="https://maps.app.goo.gl/rRjL6HttiQKP6J6F8?g_st=ac"
+          href={googleMapsUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="group inline-flex items-center justify-center gap-3 bg-white rounded-2xl px-6 py-4 border border-neutral-200 shadow-sm hover:border-[#ff2828]/40 hover:shadow-md transition-all duration-200"
@@ -267,18 +286,18 @@ export function GoogleReviews() {
             <path d="M12 22.397C14.6115 22.397 16.9695 21.4145 18.74 19.8115L15.5115 17.1975C14.5717 17.8679 13.3654 18.255 12 18.255C9.39904 18.255 7.19054 16.6415 6.35404 14.3695L3.09754 16.8925C4.75204 20.1555 8.13754 22.397 12 22.397Z" fill="#34A853"/>
             <path d="M22.5 11.147C22.5 10.787 22.473 10.4125 22.41 10.0415H12V14.0415H17.6515C17.2635 15.1185 16.437 16.0175 15.51 16.6305L15.5115 16.6305L18.7415 19.2425C18.4845 19.476 22.5 16.5 22.5 11.147Z" fill="#FBBC05"/>
           </svg>
-          <span className="text-sm font-semibold text-neutral-900">{t('reviewsSeeAllGoogle')}</span>
+          <span className="text-sm font-semibold text-neutral-900">{seeAllOnGoogleText}</span>
           <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-[#ff2828] group-hover:translate-x-0.5 transition-all" />
         </a>
 
         <a
-          href={TRIPADVISOR_URL}
+          href={tripAdvisorUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="group inline-flex items-center justify-center gap-3 bg-white rounded-2xl px-6 py-4 border border-neutral-200 shadow-sm hover:border-[#00AA6C]/40 hover:shadow-md transition-all duration-200"
         >
           <Image src="/tripadvisor.png" alt="TripAdvisor" width={28} height={28} className="w-6 h-6 shrink-0" />
-          <span className="text-sm font-semibold text-neutral-900">{t('reviewsSeeAllTripAdvisor')}</span>
+          <span className="text-sm font-semibold text-neutral-900">{seeAllOnTripAdvisorText}</span>
           <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-[#00AA6C] group-hover:translate-x-0.5 transition-all" />
         </a>
       </div>

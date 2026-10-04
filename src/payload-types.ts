@@ -98,7 +98,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'fr') | ('en' | 'fr')[];
+  fallbackLocale:
+    | ('false' | 'none' | 'null')
+    | false
+    | null
+    | ('en' | 'fr' | 'es' | 'cs')
+    | ('en' | 'fr' | 'es' | 'cs')[];
   globals: {
     'site-settings': SiteSetting;
     'home-page': HomePage;
@@ -115,7 +120,7 @@ export interface Config {
     'terms-page': TermsPageSelect<false> | TermsPageSelect<true>;
     'privacy-page': PrivacyPageSelect<false> | PrivacyPageSelect<true>;
   };
-  locale: 'en' | 'fr';
+  locale: 'en' | 'fr' | 'es' | 'cs';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -721,7 +726,7 @@ export interface Booking {
    */
   totalAmount?: number | null;
   source?: ('website' | 'whatsapp' | 'phone' | 'email' | 'walkin' | 'partner') | null;
-  language?: ('en' | 'fr') | null;
+  language?: ('en' | 'fr' | 'es' | 'cs') | null;
   tourType?: ('group' | 'private') | null;
   updatedAt: string;
   createdAt: string;
@@ -1477,51 +1482,20 @@ export interface SiteSetting {
  */
 export interface HomePage {
   id: string;
-  hero: {
+  hero?: {
     /**
-     * Hero background (1920x1080px minimum). Used as the first slide in the carousel.
+     * Background images for the hero carousel (1920x1080px minimum). Auto-rotates every 5 seconds. Leave empty to use the default images.
      */
-    backgroundImage: string | Media;
-    /**
-     * Add up to 4 more images. Combined with the Background Image above, they auto-rotate every 5 seconds (5 total max).
-     */
-    backgroundImages?:
+    slides?:
       | {
           image: string | Media;
+          /**
+           * Describe the image for accessibility
+           */
+          alt?: string | null;
           id?: string | null;
         }[]
       | null;
-    /**
-     * Small badge text above headline
-     */
-    badgeText?: string | null;
-    title: string;
-    /**
-     * Shown in green
-     */
-    titleHighlight: string;
-    description: string;
-    /**
-     * Green button
-     */
-    ctaButtonText?: string | null;
-    /**
-     * Outline button
-     */
-    secondaryCtaText?: string | null;
-    viewAllExperiencesText?: string | null;
-    /**
-     * Select exactly 2 activities to showcase in the hero
-     */
-    featuredActivities?: (string | Activity)[] | null;
-    credibility?: {
-      /**
-       * e.g., "500+", "5K+"
-       */
-      travelersCount?: string | null;
-      travelersLabel?: string | null;
-      ratingLabel?: string | null;
-    };
     scrollText?: string | null;
   };
   categoriesSection?: {
@@ -1550,33 +1524,15 @@ export interface HomePage {
     activities?: (string | Activity)[] | null;
   };
   about?: {
-    badgeText?: string | null;
     title?: string | null;
     /**
      * Shown in green
      */
     titleHighlight?: string | null;
-    subtitle?: string | null;
     paragraph1?: string | null;
     paragraph2?: string | null;
     /**
-     * Highlighted closing text
-     */
-    paragraph3?: string | null;
-    /**
-     * Small badges highlighting key features
-     */
-    features?:
-      | {
-          icon: 'shield' | 'clock' | 'heart' | 'gem' | 'award' | 'star' | 'users' | 'map';
-          title: string;
-          id?: string | null;
-        }[]
-      | null;
-    ctaButtonText?: string | null;
-    secondaryCtaText?: string | null;
-    /**
-     * Images displayed in a mosaic/bento layout
+     * Image displayed next to the About text
      */
     images?:
       | {
@@ -1588,18 +1544,6 @@ export interface HomePage {
           id?: string | null;
         }[]
       | null;
-  };
-  packsSection?: {
-    /**
-     * Text shown in the badge above the title
-     */
-    badgeText?: string | null;
-    title?: string | null;
-    /**
-     * Shown in green
-     */
-    titleHighlight?: string | null;
-    seeMoreText?: string | null;
   };
   blogSection?: {
     /**
@@ -1616,26 +1560,17 @@ export interface HomePage {
     readMoreText?: string | null;
   };
   reviewsSection?: {
-    badgeText?: string | null;
     title?: string | null;
+    seeAllOnGoogleText?: string | null;
     /**
-     * Shown in TripAdvisor green
+     * Link to your Google Maps reviews
      */
-    titleHighlight?: string | null;
-    happyTravelersLabel?: string | null;
-    averageRatingLabel?: string | null;
-    wouldRecommendLabel?: string | null;
-    tripAdvisorReviewsLabel?: string | null;
-    seeAllReviewsText?: string | null;
+    googleMapsUrl?: string | null;
     seeAllOnTripAdvisorText?: string | null;
     /**
      * Link to your TripAdvisor page
      */
     tripAdvisorUrl?: string | null;
-    readMoreText?: string | null;
-    seeLessText?: string | null;
-    verifiedReviewText?: string | null;
-    postedOnTripAdvisorText?: string | null;
   };
   faq?: {
     badgeText?: string | null;
@@ -1776,19 +1711,6 @@ export interface AboutPage {
       | null;
     image?: (string | null) | Media;
   };
-  teamSection?: {
-    title?: string | null;
-    subtitle?: string | null;
-    members?:
-      | {
-          name: string;
-          role: string;
-          bio?: string | null;
-          image?: (string | null) | Media;
-          id?: string | null;
-        }[]
-      | null;
-  };
   cta?: {
     title?: string | null;
     subtitle?: string | null;
@@ -1847,7 +1769,6 @@ export interface ContactPage {
     };
     email?: {
       address?: string | null;
-      responseTime?: string | null;
     };
     whatsapp?: {
       /**
@@ -1906,19 +1827,7 @@ export interface ContactPage {
     whatsappTitle?: string | null;
     followUsTitle?: string | null;
   };
-  faq?: {
-    title?: string | null;
-    questions?:
-      | {
-          question: string;
-          answer: string;
-          id?: string | null;
-        }[]
-      | null;
-  };
   map?: {
-    title?: string | null;
-    subtitle?: string | null;
     /**
      * Google Maps embed URL
      */
@@ -2056,27 +1965,12 @@ export interface HomePageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        backgroundImage?: T;
-        backgroundImages?:
+        slides?:
           | T
           | {
               image?: T;
+              alt?: T;
               id?: T;
-            };
-        badgeText?: T;
-        title?: T;
-        titleHighlight?: T;
-        description?: T;
-        ctaButtonText?: T;
-        secondaryCtaText?: T;
-        viewAllExperiencesText?: T;
-        featuredActivities?: T;
-        credibility?:
-          | T
-          | {
-              travelersCount?: T;
-              travelersLabel?: T;
-              ratingLabel?: T;
             };
         scrollText?: T;
       };
@@ -2100,22 +1994,10 @@ export interface HomePageSelect<T extends boolean = true> {
   about?:
     | T
     | {
-        badgeText?: T;
         title?: T;
         titleHighlight?: T;
-        subtitle?: T;
         paragraph1?: T;
         paragraph2?: T;
-        paragraph3?: T;
-        features?:
-          | T
-          | {
-              icon?: T;
-              title?: T;
-              id?: T;
-            };
-        ctaButtonText?: T;
-        secondaryCtaText?: T;
         images?:
           | T
           | {
@@ -2123,14 +2005,6 @@ export interface HomePageSelect<T extends boolean = true> {
               alt?: T;
               id?: T;
             };
-      };
-  packsSection?:
-    | T
-    | {
-        badgeText?: T;
-        title?: T;
-        titleHighlight?: T;
-        seeMoreText?: T;
       };
   blogSection?:
     | T
@@ -2145,20 +2019,11 @@ export interface HomePageSelect<T extends boolean = true> {
   reviewsSection?:
     | T
     | {
-        badgeText?: T;
         title?: T;
-        titleHighlight?: T;
-        happyTravelersLabel?: T;
-        averageRatingLabel?: T;
-        wouldRecommendLabel?: T;
-        tripAdvisorReviewsLabel?: T;
-        seeAllReviewsText?: T;
+        seeAllOnGoogleText?: T;
+        googleMapsUrl?: T;
         seeAllOnTripAdvisorText?: T;
         tripAdvisorUrl?: T;
-        readMoreText?: T;
-        seeLessText?: T;
-        verifiedReviewText?: T;
-        postedOnTripAdvisorText?: T;
       };
   faq?:
     | T
@@ -2277,21 +2142,6 @@ export interface AboutPageSelect<T extends boolean = true> {
             };
         image?: T;
       };
-  teamSection?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        members?:
-          | T
-          | {
-              name?: T;
-              role?: T;
-              bio?: T;
-              image?: T;
-              id?: T;
-            };
-      };
   cta?:
     | T
     | {
@@ -2352,7 +2202,6 @@ export interface ContactPageSelect<T extends boolean = true> {
           | T
           | {
               address?: T;
-              responseTime?: T;
             };
         whatsapp?:
           | T
@@ -2409,23 +2258,9 @@ export interface ContactPageSelect<T extends boolean = true> {
         whatsappTitle?: T;
         followUsTitle?: T;
       };
-  faq?:
-    | T
-    | {
-        title?: T;
-        questions?:
-          | T
-          | {
-              question?: T;
-              answer?: T;
-              id?: T;
-            };
-      };
   map?:
     | T
     | {
-        title?: T;
-        subtitle?: T;
         embedUrl?: T;
       };
   seo?:

@@ -359,55 +359,6 @@ export const AboutPage: GlobalConfig = {
           ],
         },
         {
-          label: 'Team',
-          fields: [
-            {
-              name: 'teamSection',
-              type: 'group',
-              fields: [
-                {
-                  name: 'title',
-                  type: 'text',
-                  defaultValue: 'Meet Our Team',
-                  localized: true,
-                },
-                {
-                  name: 'subtitle',
-                  type: 'text',
-                  localized: true,
-                },
-                {
-                  name: 'members',
-                  type: 'array',
-                  fields: [
-                    {
-                      name: 'name',
-                      type: 'text',
-                      required: true,
-                    },
-                    {
-                      name: 'role',
-                      type: 'text',
-                      required: true,
-                      localized: true,
-                    },
-                    {
-                      name: 'bio',
-                      type: 'text',
-                      localized: true,
-                    },
-                    {
-                      name: 'image',
-                      type: 'upload',
-                      relationTo: 'media',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
           label: 'CTA',
           fields: [
             {

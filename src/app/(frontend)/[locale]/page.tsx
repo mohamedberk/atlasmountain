@@ -9,13 +9,13 @@ import { ModernHero } from '@/components/sections/modern-hero'
 import { GoogleReviews } from '@/components/sections/google-reviews'
 import {
   getActivities,
-  getFeaturedActivities,
   getCategories,
   getHomePage,
   getBlogPosts,
   getSiteSettings,
 } from '@/lib/payload'
 import type { Activity, Category, BlogPost } from '@/payload-types'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 // Revalidate every hour as fallback (on-demand revalidation via tags is primary)
 export const revalidate = 3600
@@ -73,22 +73,28 @@ export async function generateMetadata({
   const titles: Record<string, string> = {
     en: 'Atlas Mountain Visit | Authentic Moroccan Adventures in Marrakech',
     fr: 'Atlas Mountain Visit | Aventures Marocaines Authentiques à Marrakech',
-    de: 'Atlas Mountain Visit | Authentische Marokkanische Abenteuer in Marrakesch',
+    es: 'Atlas Mountain Visit | Aventuras Marroquíes Auténticas en Marrakech',
+    cs: 'Atlas Mountain Visit | Autentická Marocká Dobrodružství v Marrákeši',
   }
 
   const descriptions: Record<string, string> = {
     en: 'Book unforgettable experiences in Morocco. Desert tours, hot air balloons, quad biking, and luxury transport. 20+ years of excellence.',
     fr: 'Réservez des expériences inoubliables au Maroc. Tours du désert, montgolfières, quad et transport de luxe. Plus de 20 ans d\'excellence.',
-    de: 'Buchen Sie unvergessliche Erlebnisse in Marokko. Wüstentouren, Heißluftballons, Quadfahren und Luxustransport. Über 20 Jahre Exzellenz.',
+    es: 'Reserva experiencias inolvidables en Marruecos. Tours por el desierto, globos aerostáticos, quads y transporte de lujo. Más de 20 años de excelencia.',
+    cs: 'Rezervujte si nezapomenutelné zážitky v Maroku. Pouštní zájezdy, horkovzdušné balóny, čtyřkolky a luxusní doprava. Více než 20 let zkušeností.',
   }
 
+  const homePageData = (await getHomePage(locale as Locale)) as any
+  const title = homePageData?.seo?.metaTitle?.trim() || titles[locale] || titles.en
+  const description = homePageData?.seo?.metaDescription?.trim() || descriptions[locale] || descriptions.en
+
   return {
-    title: titles[locale] || titles.en,
-    description: descriptions[locale] || descriptions.en,
+    title,
+    description,
     keywords: 'Morocco tours, Marrakech activities, desert safari, quad biking Morocco, hot air balloon Marrakech, Agafay desert, Ouzoud falls, transport Marrakech',
     openGraph: {
-      title: titles[locale] || titles.en,
-      description: descriptions[locale] || descriptions.en,
+      title,
+      description,
       url: `https://atlasmountainsvisit.com/${locale}`,
       siteName: 'Atlas Mountain Visit',
       locale: locale,
@@ -99,7 +105,8 @@ export async function generateMetadata({
       languages: {
         en: '/en',
         fr: '/fr',
-        de: '/de',
+        es: '/es',
+        cs: '/cs',
       },
     },
     robots: {
@@ -115,7 +122,7 @@ export default async function Home({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   // Enable static rendering
   setRequestLocale(locale)
@@ -123,14 +130,12 @@ export default async function Home({
   // Fetch all data from CMS in parallel
   const [
     activitiesResult,
-    featuredActivitiesResult,
     categoriesResult,
     homePageResult,
     blogPostsResult,
     siteSettingsResult,
   ] = await Promise.all([
     getActivities(typedLocale),
-    getFeaturedActivities(typedLocale),
     getCategories('activity', typedLocale),
     getHomePage(typedLocale),
     getBlogPosts(typedLocale, 3),
@@ -139,19 +144,13 @@ export default async function Home({
 
   // Extract docs from results
   const activities = activitiesResult.docs as Activity[]
-  const featuredActivities = featuredActivitiesResult.docs as Activity[]
   const categories = categoriesResult.docs as Category[]
   const blogPosts = blogPostsResult.docs as BlogPost[]
 
   // Cast homePageData since types aren't regenerated yet
   const homePageData = homePageResult as any
 
-  // Get hero activities - use global selection if set, otherwise use featured activities
-  const heroActivities = homePageData?.hero?.featuredActivities?.length
-    ? (homePageData.hero.featuredActivities as Activity[])
-    : featuredActivities
-
-  // Default review stats (used for Hero badge + JSON-LD aggregateRating)
+  // Default review stats (used for JSON-LD aggregateRating)
   const reviewStats = {
     totalReviews: 8,
     averageRating: 5.0,
@@ -203,12 +202,7 @@ export default async function Home({
         <Navbar />
 
         {/* Hero Section - Static import for fast LCP (no dynamic import delay) */}
-        <ModernHero
-          featuredActivities={heroActivities}
-          activities={activities}
-          heroData={homePageData?.hero}
-          reviewStats={reviewStats}
-        />
+        <ModernHero heroData={homePageData?.hero} />
 
         {/* About Section */}
         <ErrorBoundary>
@@ -265,7 +259,7 @@ export default async function Home({
         {/* Guest Reviews */}
         <ErrorBoundary>
           <Suspense fallback={<div className="h-96 bg-surface/5 animate-pulse" />}>
-            <GoogleReviews />
+            <GoogleReviews reviewsData={homePageData?.reviewsSection} />
           </Suspense>
         </ErrorBoundary>
 

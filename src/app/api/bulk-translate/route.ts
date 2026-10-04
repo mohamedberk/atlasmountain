@@ -16,7 +16,8 @@ const anthropic = new Anthropic({
 const LOCALE_NAMES: Record<string, string> = {
   en: 'English',
   fr: 'French',
-  de: 'German',
+  es: 'Spanish',
+  cs: 'Czech',
 }
 
 // Get value at a nested path
@@ -479,7 +480,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Revalidate paths after all translations
-        const pathsToRevalidate = ['/en', '/fr', '/de', '/en/activities', '/fr/activities', '/de/activities']
+        const pathsToRevalidate = ['/en', '/fr', '/es', '/cs', '/en/activities', '/fr/activities', '/es/activities', '/cs/activities']
         for (const path of pathsToRevalidate) {
           try {
             revalidatePath(path)

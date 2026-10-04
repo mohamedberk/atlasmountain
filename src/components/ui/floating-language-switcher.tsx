@@ -5,11 +5,19 @@ import { usePathname as useNextPathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { usePathname, useRouter } from '@/i18n/routing'
+import type { Locale } from '@/i18n/config'
 
 const localeLabels: Record<string, { flag: string; label: string }> = {
   en: { flag: '🇬🇧', label: 'EN' },
   fr: { flag: '🇫🇷', label: 'FR' },
+  es: { flag: '🇪🇸', label: 'ES' },
+  cs: { flag: '🇨🇿', label: 'CS' },
 }
+
+// Hidden from the switcher for now (not launched yet) — the locale itself stays fully functional,
+// so a direct link to /cs still works and still shows the correct flag as the current locale.
+const HIDDEN_LOCALES = new Set(['cs'])
+const visibleLocaleEntries = Object.entries(localeLabels).filter(([code]) => !HIDDEN_LOCALES.has(code))
 
 export function FloatingLanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false)
@@ -33,7 +41,7 @@ export function FloatingLanguageSwitcher() {
   }, [isOpen])
 
   const switchLocale = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale as 'en' | 'fr' })
+    router.replace(pathname, { locale: newLocale as Locale })
     setIsOpen(false)
   }
 
@@ -53,7 +61,7 @@ export function FloatingLanguageSwitcher() {
             transition={{ duration: 0.15 }}
             className="absolute bottom-full left-0 mb-3 w-36 bg-white rounded-2xl shadow-md border border-neutral-100 overflow-hidden p-2"
           >
-            {Object.entries(localeLabels).map(([code, { flag, label }]) => (
+            {visibleLocaleEntries.map(([code, { flag, label }]) => (
               <button
                 type="button"
                 key={code}

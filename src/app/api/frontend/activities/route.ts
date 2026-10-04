@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
-    const locale = (searchParams.get('locale') as 'en' | 'fr') || 'en'
+    const locale = (searchParams.get('locale') as Locale) || defaultLocale
     const limit = parseInt(searchParams.get('limit') || '50')
 
     const payload = await getPayload({ config })

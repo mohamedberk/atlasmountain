@@ -3,6 +3,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { getActivities, getCategories } from '@/lib/payload'
 import { CheckoutBrowseClient } from './checkout-browse-client'
 import type { Activity, Category, Media } from '@/payload-types'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 export const revalidate = 0
 
@@ -12,7 +13,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
   const t = await getTranslations({ locale: typedLocale, namespace: 'checkout' })
   return {
     title: `${t('metaTitle')} | Atlas Mountain Visit`,
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CheckoutPage({ params }: Props) {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   setRequestLocale(locale)
 

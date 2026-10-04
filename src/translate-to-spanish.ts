@@ -1,14 +1,14 @@
 /**
- * Bulk-translate all Payload CMS content from English to French using Groq.
+ * Bulk-translate Payload CMS content from English to Spanish using Groq.
  *
  * Usage:
- *   pnpm translate:fr                    # translate every collection + global
- *   pnpm translate:fr -- --only=activities,home-page
- *   pnpm translate:fr -- --overwrite     # also re-translate docs that already have French content
- *   pnpm translate:fr -- --dry-run       # show what would be translated, don't write
+ *   pnpm translate:es                    # translate every collection + global
+ *   pnpm translate:es -- --only=activities,home-page
+ *   pnpm translate:es -- --overwrite     # also re-translate docs that already have Spanish content
+ *   pnpm translate:es -- --dry-run       # show what would be translated, don't write
  *
  * Source locale: en
- * Target locale: fr
+ * Target locale: es
  */
 
 import { getPayload } from 'payload'
@@ -21,7 +21,7 @@ import {
 } from './lib/groq-translator'
 
 const SOURCE = 'en'
-const TARGET = 'fr'
+const TARGET = 'es'
 
 const INTER_DOC_PAUSE_MS = Number(process.env.GROQ_DOC_PAUSE_MS || 2000)
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
@@ -44,7 +44,7 @@ function parseArgs(argv: string[]): Args {
   return args
 }
 
-function isFrenchPopulated(doc: any, paths: string[]): boolean {
+function isTargetPopulated(doc: any, paths: string[]): boolean {
   const content = extractTranslatableContent(doc, paths)
   for (const v of Object.values(content)) {
     if (typeof v === 'string' && v.trim()) return true
@@ -98,15 +98,15 @@ async function translateCollection(
 
     if (!args.overwrite) {
       try {
-        const frDoc = await payload.findByID({
+        const targetDoc = await payload.findByID({
           collection: slug,
           id: doc.id,
           locale: TARGET,
           fallbackLocale: false as any,
           depth: 0,
         })
-        if (isFrenchPopulated(frDoc, paths)) {
-          console.log(`   ✓  ${label} — already has French (use --overwrite to redo)`)
+        if (isTargetPopulated(targetDoc, paths)) {
+          console.log(`   ✓  ${label} — already has Spanish (use --overwrite to redo)`)
           skipped++
           continue
         }
@@ -162,14 +162,14 @@ async function translateGlobal(payload: any, slug: string, fields: any[], args: 
 
   if (!args.overwrite) {
     try {
-      const frGlobal = await payload.findGlobal({
+      const targetGlobal = await payload.findGlobal({
         slug,
         locale: TARGET,
         fallbackLocale: false as any,
         depth: 0,
       })
-      if (isFrenchPopulated(frGlobal, paths)) {
-        console.log(`   ✓  already has French (use --overwrite to redo)`)
+      if (isTargetPopulated(targetGlobal, paths)) {
+        console.log(`   ✓  already has Spanish (use --overwrite to redo)`)
         return { done: 0, skipped: 1, failed: 0 }
       }
     } catch {
@@ -202,9 +202,9 @@ async function main() {
   }
 
   const args = parseArgs(process.argv.slice(2))
-  console.log(`🇫🇷 Translating ${SOURCE} → ${TARGET}  (model: ${process.env.GROQ_MODEL || 'openai/gpt-oss-120b'})`)
+  console.log(`🇪🇸 Translating ${SOURCE} → ${TARGET}  (model: ${process.env.GROQ_MODEL || 'openai/gpt-oss-120b'})`)
   if (args.only) console.log(`   filter: --only=${args.only.join(',')}`)
-  if (args.overwrite) console.log(`   --overwrite ON: existing French content will be replaced`)
+  if (args.overwrite) console.log(`   --overwrite ON: existing Spanish content will be replaced`)
   if (args.dryRun) console.log(`   --dry-run ON: no writes will happen`)
 
   const payload = await getPayload({ config })

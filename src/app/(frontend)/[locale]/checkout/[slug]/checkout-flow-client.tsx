@@ -31,6 +31,8 @@ import { LocationMapPicker } from '@/components/ui/location-map-picker'
 
 const ACCENT_GREEN = '#ff2828'
 
+const DATE_LOCALE_MAP: Record<string, string> = { en: 'en-US', fr: 'fr-FR', es: 'es-ES', cs: 'cs-CZ' }
+
 // Types
 interface BookingItem {
   activity: Activity
@@ -135,7 +137,7 @@ function calculateItemTotal(item: BookingItem): number {
 }
 
 function formatDate(date: Date, locale: string = 'en'): string {
-  return date.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
+  return date.toLocaleDateString(DATE_LOCALE_MAP[locale] ?? 'en-US', {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
@@ -233,7 +235,7 @@ function DatePicker({
           <ChevronLeft className="w-5 h-5" />
         </button>
         <h3 className="font-semibold text-neutral-900">
-          {currentMonth.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', { month: 'long', year: 'numeric' })}
+          {currentMonth.toLocaleDateString(DATE_LOCALE_MAP[locale] ?? 'en-US', { month: 'long', year: 'numeric' })}
         </h3>
         <button
           onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
@@ -397,7 +399,7 @@ function MiniDatePicker({
           <ChevronLeft className="w-4 h-4" />
         </button>
         <span className="text-xs font-medium text-neutral-700">
-          {currentMonth.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', { month: 'short', year: 'numeric' })}
+          {currentMonth.toLocaleDateString(DATE_LOCALE_MAP[locale] ?? 'en-US', { month: 'short', year: 'numeric' })}
         </span>
         <button
           onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
@@ -1269,7 +1271,7 @@ export function CheckoutFlowClient({ activity, relatedActivities, locale }: Prop
                           <span className="w-1 h-1 rounded-full bg-neutral-300" />
                           <span className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
-                            {item.date.toLocaleDateString(intlLocale === 'fr' ? 'fr-FR' : 'en-US', { month: 'short', day: 'numeric' })}
+                            {item.date.toLocaleDateString(DATE_LOCALE_MAP[intlLocale] ?? 'en-US', { month: 'short', day: 'numeric' })}
                           </span>
                         </>
                       )}

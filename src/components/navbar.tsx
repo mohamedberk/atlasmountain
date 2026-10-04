@@ -2,6 +2,7 @@ import { getLocale } from 'next-intl/server'
 import { getCategories, getActivities } from '@/lib/payload'
 import { getOptimizedImageUrl } from '@/lib/image-utils'
 import { NavbarClient, type NavbarData } from './navbar-client'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 const getImageUrl = (image: unknown): string | null => {
   if (!image) return null
@@ -13,7 +14,7 @@ interface Props {
 }
 
 export async function Navbar({ hideUntilScrolled = false }: Props = {}) {
-  const locale = ((await getLocale()) as 'en' | 'fr') || 'en'
+  const locale = ((await getLocale()) as Locale) || defaultLocale
 
   const [categoriesResult, activitiesResult] = await Promise.all([
     getCategories('activity', locale),

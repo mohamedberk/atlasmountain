@@ -30,13 +30,13 @@ interface TranslateRequest {
 }
 
 const REVALIDATION_MAP: Record<string, string[]> = {
-  activities: ['/en', '/fr', '/de', '/en/activities', '/fr/activities', '/de/activities'],
-  'blog-posts': ['/en/blog', '/fr/blog', '/de/blog'],
-  categories: ['/en', '/fr', '/de', '/en/activities', '/fr/activities', '/de/activities'],
-  locations: ['/en', '/fr', '/de'],
-  'home-page': ['/en', '/fr', '/de'],
-  'about-page': ['/en/about', '/fr/about', '/de/about'],
-  'contact-page': ['/en/contact', '/fr/contact', '/de/contact'],
+  activities: ['/en', '/fr', '/es', '/cs', '/en/activities', '/fr/activities', '/es/activities', '/cs/activities'],
+  'blog-posts': ['/en/blog', '/fr/blog', '/es/blog', '/cs/blog'],
+  categories: ['/en', '/fr', '/es', '/cs', '/en/activities', '/fr/activities', '/es/activities', '/cs/activities'],
+  locations: ['/en', '/fr', '/es', '/cs'],
+  'home-page': ['/en', '/fr', '/es', '/cs'],
+  'about-page': ['/en/about', '/fr/about', '/es/about', '/cs/about'],
+  'contact-page': ['/en/contact', '/fr/contact', '/es/contact', '/cs/contact'],
 }
 
 const COLLECTION_TAGS: Record<string, string[]> = {

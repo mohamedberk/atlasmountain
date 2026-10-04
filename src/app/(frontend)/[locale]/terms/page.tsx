@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer'
 import { RichText } from '@/components/rich-text'
 import { getTermsPage } from '@/lib/payload'
 import { format } from 'date-fns'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 interface Props {
   params: Promise<{ locale: string }>
@@ -13,12 +14,13 @@ interface Props {
 const fallbackContent: Record<string, { title: string }> = {
   en: { title: 'Terms & Conditions' },
   fr: { title: 'Conditions Générales' },
-  de: { title: 'Allgemeine Geschäftsbedingungen' },
+  es: { title: 'Términos y Condiciones' },
+  cs: { title: 'Obchodní Podmínky' },
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   let metaTitle = fallbackContent[typedLocale]?.title || 'Terms & Conditions'
   let metaDescription = ''
@@ -47,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TermsPage({ params }: Props) {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
   setRequestLocale(locale)
 
   const t = await getTranslations({ locale, namespace: 'termsPage' })

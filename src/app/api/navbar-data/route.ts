@@ -1,13 +1,14 @@
 import { NextResponse } from 'next/server'
 import { getCategories, getActivities } from '@/lib/payload'
 import { getOptimizedImageUrl } from '@/lib/image-utils'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 export const revalidate = 3600
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
-    const locale = (searchParams.get('locale') as 'en' | 'fr') || 'en'
+    const locale = (searchParams.get('locale') as Locale) || defaultLocale
 
     // Fetch categories and activities in parallel
     const [categoriesResult, activitiesResult] = await Promise.all([

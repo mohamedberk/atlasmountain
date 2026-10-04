@@ -19,6 +19,7 @@
     "import-globals": "cross-env NODE_OPTIONS=--no-deprecation tsx --env-file=.env.local src/import-globals.ts",
     "import-media": "cross-env NODE_OPTIONS=--no-deprecation tsx --env-file=.env.local src/import-media.ts",
     "translate:fr": "cross-env NODE_OPTIONS=--no-deprecation tsx --env-file=.env.local src/translate-to-french.ts",
+    "translate:es": "cross-env NODE_OPTIONS=--no-deprecation tsx --env-file=.env.local src/translate-to-spanish.ts",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "test": "pnpm run test:int && pnpm run test:e2e",
     "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --no-experimental-strip-types\" pnpm exec playwright test",

@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer'
 import { RichText } from '@/components/rich-text'
 import { getPrivacyPage } from '@/lib/payload'
 import { format } from 'date-fns'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 interface Props {
   params: Promise<{ locale: string }>
@@ -13,12 +14,13 @@ interface Props {
 const fallbackContent: Record<string, { title: string }> = {
   en: { title: 'Privacy Policy' },
   fr: { title: 'Politique de Confidentialité' },
-  de: { title: 'Datenschutzerklärung' },
+  es: { title: 'Política de Privacidad' },
+  cs: { title: 'Zásady Ochrany Osobních Údajů' },
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   let metaTitle = fallbackContent[typedLocale]?.title || 'Privacy Policy'
   let metaDescription = ''
@@ -47,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PrivacyPage({ params }: Props) {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
   setRequestLocale(locale)
 
   const t = await getTranslations({ locale, namespace: 'privacyPage' })

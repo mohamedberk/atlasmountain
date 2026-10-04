@@ -31,26 +31,15 @@ export const HomePage: GlobalConfig = {
               type: 'group',
               fields: [
                 {
-                  name: 'backgroundImage',
-                  label: 'Background Image',
-                  type: 'upload',
-                  relationTo: 'media',
-                  required: true,
-                  admin: {
-                    description: 'Hero background (1920x1080px minimum). Used as the first slide in the carousel.',
-                  },
-                },
-                {
-                  name: 'backgroundImages',
-                  label: 'Additional Carousel Images',
+                  name: 'slides',
+                  label: 'Carousel Images',
                   type: 'array',
-                  maxRows: 4,
                   labels: {
                     singular: 'Slide',
                     plural: 'Slides',
                   },
                   admin: {
-                    description: 'Add up to 4 more images. Combined with the Background Image above, they auto-rotate every 5 seconds (5 total max).',
+                    description: 'Background images for the hero carousel (1920x1080px minimum). Auto-rotates every 5 seconds. Leave empty to use the default images.',
                   },
                   fields: [
                     {
@@ -60,144 +49,14 @@ export const HomePage: GlobalConfig = {
                       relationTo: 'media',
                       required: true,
                     },
-                  ],
-                },
-                // Headline fields
-                {
-                  name: 'badgeText',
-                  label: 'Badge Text',
-                  type: 'text',
-                  defaultValue: '20+ Years of Excellence',
-                  localized: true,
-                  admin: {
-                    description: 'Small badge text above headline',
-                  },
-                },
-                {
-                  type: 'row',
-                  fields: [
                     {
-                      name: 'title',
-                      label: 'Headline (Part 1)',
+                      name: 'alt',
+                      label: 'Alt Text',
                       type: 'text',
-                      required: true,
-                      defaultValue: 'Discover the Real',
                       localized: true,
                       admin: {
-                        width: '50%',
+                        description: 'Describe the image for accessibility',
                       },
-                    },
-                    {
-                      name: 'titleHighlight',
-                      label: 'Headline (Highlighted)',
-                      type: 'text',
-                      required: true,
-                      defaultValue: 'Morocco',
-                      localized: true,
-                      admin: {
-                        description: 'Shown in green',
-                        width: '50%',
-                      },
-                    },
-                  ],
-                },
-                {
-                  name: 'description',
-                  label: 'Subheadline',
-                  type: 'textarea',
-                  required: true,
-                  defaultValue: 'Handcrafted adventures by local experts with 20+ years of experience',
-                  localized: true,
-                },
-                // CTA Buttons
-                {
-                  type: 'row',
-                  fields: [
-                    {
-                      name: 'ctaButtonText',
-                      label: 'Primary Button',
-                      type: 'text',
-                      defaultValue: 'Explore Experiences',
-                      localized: true,
-                      admin: {
-                        description: 'Green button',
-                        width: '50%',
-                      },
-                    },
-                    {
-                      name: 'secondaryCtaText',
-                      label: 'Secondary Button',
-                      type: 'text',
-                      defaultValue: 'Plan Your Trip',
-                      localized: true,
-                      admin: {
-                        description: 'Outline button',
-                        width: '50%',
-                      },
-                    },
-                  ],
-                },
-                {
-                  name: 'viewAllExperiencesText',
-                  label: 'View All Link Text',
-                  type: 'text',
-                  defaultValue: 'View all experiences',
-                  localized: true,
-                },
-                // Featured Activities
-                {
-                  name: 'featuredActivities',
-                  label: 'Featured Activity Cards',
-                  type: 'relationship',
-                  relationTo: 'activities',
-                  hasMany: true,
-                  minRows: 2,
-                  maxRows: 2,
-                  admin: {
-                    description: 'Select exactly 2 activities to showcase in the hero',
-                    isSortable: true,
-                  },
-                },
-                // Credibility Stats
-                {
-                  name: 'credibility',
-                  label: 'Credibility Stats',
-                  type: 'group',
-                  fields: [
-                    {
-                      type: 'row',
-                      fields: [
-                        {
-                          name: 'travelersCount',
-                          label: 'Travelers Count',
-                          type: 'text',
-                          defaultValue: '500+',
-                          admin: {
-                            description: 'e.g., "500+", "5K+"',
-                            width: '33%',
-                          },
-                        },
-                        {
-                          name: 'travelersLabel',
-                          label: 'Travelers Label',
-                          type: 'text',
-                          defaultValue: 'Happy Travelers',
-                          localized: true,
-                          admin: {
-                            width: '33%',
-                          },
-                        },
-                        {
-                          name: 'ratingLabel',
-                          label: 'Rating Label',
-                          type: 'text',
-                          defaultValue: 'Google Rating',
-                          localized: true,
-                          admin: {
-                            width: '33%',
-                          },
-                        },
-                      ],
                     },
                   ],
                 },
@@ -343,14 +202,6 @@ export const HomePage: GlobalConfig = {
               name: 'about',
               type: 'group',
               fields: [
-                // Header
-                {
-                  name: 'badgeText',
-                  label: 'Badge Text',
-                  type: 'text',
-                  defaultValue: 'About Atlas Mountain Visit',
-                  localized: true,
-                },
                 {
                   type: 'row',
                   fields: [
@@ -377,13 +228,6 @@ export const HomePage: GlobalConfig = {
                     },
                   ],
                 },
-                {
-                  name: 'subtitle',
-                  label: 'Subtitle',
-                  type: 'text',
-                  defaultValue: 'Atlas Mountain Visit: Your Gateway to Authentic Morocco',
-                  localized: true,
-                },
                 // Content
                 {
                   name: 'paragraph1',
@@ -399,107 +243,19 @@ export const HomePage: GlobalConfig = {
                   defaultValue: 'My goal is to help travelers explore the real beauty of Morocco, its landscapes, culture, traditions, and warm hospitality',
                   localized: true,
                 },
-                {
-                  name: 'paragraph3',
-                  label: 'Closing Statement',
-                  type: 'text',
-                  defaultValue: 'Start your Moroccan adventure with us—authentic, tailored, and unforgettable.',
-                  localized: true,
-                  admin: {
-                    description: 'Highlighted closing text',
-                  },
-                },
-                // Features
-                {
-                  name: 'features',
-                  label: 'Feature Pills (4)',
-                  type: 'array',
-                  minRows: 4,
-                  maxRows: 4,
-                  labels: {
-                    singular: 'Feature',
-                    plural: 'Features',
-                  },
-                  admin: {
-                    description: 'Small badges highlighting key features',
-                  },
-                  fields: [
-                    {
-                      type: 'row',
-                      fields: [
-                        {
-                          name: 'icon',
-                          label: 'Icon',
-                          type: 'select',
-                          required: true,
-                          admin: {
-                            width: '40%',
-                          },
-                          options: [
-                            { label: 'Shield - Local Experts', value: 'shield' },
-                            { label: 'Clock - 24/7 Support', value: 'clock' },
-                            { label: 'Heart - Handcrafted Tours', value: 'heart' },
-                            { label: 'Gem - Authentic Experiences', value: 'gem' },
-                            { label: 'Award', value: 'award' },
-                            { label: 'Star', value: 'star' },
-                            { label: 'Users', value: 'users' },
-                            { label: 'Map', value: 'map' },
-                          ],
-                        },
-                        {
-                          name: 'title',
-                          label: 'Title',
-                          type: 'text',
-                          required: true,
-                          localized: true,
-                          admin: {
-                            width: '60%',
-                            placeholder: 'e.g., "Local Experts"',
-                          },
-                        },
-                      ],
-                    },
-                  ],
-                },
-                // CTA Buttons
-                {
-                  type: 'row',
-                  fields: [
-                    {
-                      name: 'ctaButtonText',
-                      label: 'Primary Button',
-                      type: 'text',
-                      defaultValue: 'Book Now',
-                      localized: true,
-                      admin: {
-                        width: '50%',
-                      },
-                    },
-                    {
-                      name: 'secondaryCtaText',
-                      label: 'Secondary Button',
-                      type: 'text',
-                      defaultValue: 'Contact Us',
-                      localized: true,
-                      admin: {
-                        width: '50%',
-                      },
-                    },
-                  ],
-                },
-                // Bento Images
+                // Image
                 {
                   name: 'images',
-                  label: 'Bento Grid Images (7)',
+                  label: 'Image',
                   type: 'array',
-                  minRows: 7,
-                  maxRows: 7,
+                  minRows: 1,
+                  maxRows: 1,
                   labels: {
                     singular: 'Image',
                     plural: 'Images',
                   },
                   admin: {
-                    description: 'Images displayed in a mosaic/bento layout',
+                    description: 'Image displayed next to the About text',
                   },
                   fields: [
                     {
@@ -521,62 +277,6 @@ export const HomePage: GlobalConfig = {
                       },
                     },
                   ],
-                },
-              ],
-            },
-          ],
-        },
-        // ==================== PACKS SECTION ====================
-        {
-          label: 'Packs Section',
-          description: 'Adventure packs/combo deals section',
-          fields: [
-            {
-              name: 'packsSection',
-              type: 'group',
-              fields: [
-                {
-                  name: 'badgeText',
-                  label: 'Badge Text',
-                  type: 'text',
-                  defaultValue: 'Best Value Combos',
-                  localized: true,
-                  admin: {
-                    description: 'Text shown in the badge above the title',
-                  },
-                },
-                {
-                  type: 'row',
-                  fields: [
-                    {
-                      name: 'title',
-                      label: 'Title (Part 1)',
-                      type: 'text',
-                      defaultValue: 'Our Best',
-                      localized: true,
-                      admin: {
-                        width: '50%',
-                      },
-                    },
-                    {
-                      name: 'titleHighlight',
-                      label: 'Title (Highlighted)',
-                      type: 'text',
-                      defaultValue: 'Trips',
-                      localized: true,
-                      admin: {
-                        description: 'Shown in green',
-                        width: '50%',
-                      },
-                    },
-                  ],
-                },
-                {
-                  name: 'seeMoreText',
-                  label: 'See More Button Text',
-                  type: 'text',
-                  defaultValue: 'See More',
-                  localized: true,
                 },
               ],
             },
@@ -662,116 +362,61 @@ export const HomePage: GlobalConfig = {
               type: 'group',
               fields: [
                 {
-                  name: 'badgeText',
-                  label: 'Badge Text',
+                  name: 'title',
+                  label: 'Header Title',
                   type: 'text',
-                  defaultValue: 'TripAdvisor Reviews',
+                  defaultValue: 'What Our Guests Say',
                   localized: true,
                 },
                 {
                   type: 'row',
                   fields: [
                     {
-                      name: 'title',
-                      label: 'Title (Part 1)',
+                      name: 'seeAllOnGoogleText',
+                      label: 'See All on Google (Button Text)',
                       type: 'text',
-                      defaultValue: 'Trusted by',
+                      defaultValue: 'See all reviews on Google',
                       localized: true,
                       admin: {
                         width: '50%',
                       },
                     },
                     {
-                      name: 'titleHighlight',
-                      label: 'Title (Highlighted)',
+                      name: 'googleMapsUrl',
+                      label: 'See All on Google (Link)',
                       type: 'text',
-                      defaultValue: 'Travelers Worldwide',
-                      localized: true,
+                      defaultValue: 'https://maps.app.goo.gl/rRjL6HttiQKP6J6F8?g_st=ac',
                       admin: {
-                        description: 'Shown in TripAdvisor green',
+                        description: 'Link to your Google Maps reviews',
                         width: '50%',
                       },
                     },
                   ],
                 },
                 {
-                  name: 'happyTravelersLabel',
-                  label: 'Happy Travelers Label',
-                  type: 'text',
-                  defaultValue: 'Happy Travelers',
-                  localized: true,
-                },
-                {
-                  name: 'averageRatingLabel',
-                  label: 'Average Rating Label',
-                  type: 'text',
-                  defaultValue: 'Average Rating',
-                  localized: true,
-                },
-                {
-                  name: 'wouldRecommendLabel',
-                  label: 'Would Recommend Label',
-                  type: 'text',
-                  defaultValue: 'Would Recommend',
-                  localized: true,
-                },
-                {
-                  name: 'tripAdvisorReviewsLabel',
-                  label: 'TripAdvisor Reviews Count Label',
-                  type: 'text',
-                  defaultValue: 'TripAdvisor Reviews',
-                  localized: true,
-                },
-                {
-                  name: 'seeAllReviewsText',
-                  label: 'See All Reviews Button Text',
-                  type: 'text',
-                  defaultValue: 'See All Reviews',
-                  localized: true,
-                },
-                {
-                  name: 'seeAllOnTripAdvisorText',
-                  label: 'See All on TripAdvisor Button Text',
-                  type: 'text',
-                  defaultValue: 'See All on TripAdvisor',
-                  localized: true,
-                },
-                {
-                  name: 'tripAdvisorUrl',
-                  label: 'TripAdvisor Page URL',
-                  type: 'text',
-                  defaultValue: 'https://www.tripadvisor.com/Attraction_Review-g293734-d33305949-Reviews-Atlas_Mountains_Visit-Marrakech_Marrakech_Safi.html',
-                  admin: {
-                    description: 'Link to your TripAdvisor page',
-                  },
-                },
-                {
-                  name: 'readMoreText',
-                  label: 'Read More Text',
-                  type: 'text',
-                  defaultValue: 'Read More',
-                  localized: true,
-                },
-                {
-                  name: 'seeLessText',
-                  label: 'See Less Text',
-                  type: 'text',
-                  defaultValue: 'See Less',
-                  localized: true,
-                },
-                {
-                  name: 'verifiedReviewText',
-                  label: 'Verified Review Text',
-                  type: 'text',
-                  defaultValue: 'Verified Review',
-                  localized: true,
-                },
-                {
-                  name: 'postedOnTripAdvisorText',
-                  label: 'Posted on TripAdvisor Text',
-                  type: 'text',
-                  defaultValue: 'Posted on TripAdvisor',
-                  localized: true,
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'seeAllOnTripAdvisorText',
+                      label: 'See All on TripAdvisor (Button Text)',
+                      type: 'text',
+                      defaultValue: 'See all reviews on TripAdvisor',
+                      localized: true,
+                      admin: {
+                        width: '50%',
+                      },
+                    },
+                    {
+                      name: 'tripAdvisorUrl',
+                      label: 'See All on TripAdvisor (Link)',
+                      type: 'text',
+                      defaultValue: 'https://www.tripadvisor.com/Attraction_Review-g293734-d33305949-Reviews-Atlas_Mountains_Visit-Marrakech_Marrakech_Safi.html',
+                      admin: {
+                        description: 'Link to your TripAdvisor page',
+                        width: '50%',
+                      },
+                    },
+                  ],
                 },
               ],
             },

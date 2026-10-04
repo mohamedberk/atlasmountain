@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import type { Locale } from '@/i18n/config'
+
+const PAYPAL_LOCALE_MAP: Record<string, string> = { en: 'en_US', fr: 'fr_FR', es: 'es_ES', cs: 'cs_CZ' }
 
 interface CartItem {
   type: 'activity' | 'transport'
@@ -176,7 +179,7 @@ export async function POST(request: NextRequest) {
         },
         activities: activities.length > 0 ? activities : undefined,
         source: 'website',
-        language: locale === 'fr' ? 'fr' : 'en',
+        language: locale as Locale,
       },
     })
 
@@ -212,7 +215,7 @@ export async function POST(request: NextRequest) {
         ],
         application_context: {
           brand_name: 'Atlas Mountain Visit',
-          locale: locale === 'de' ? 'de-DE' : locale === 'fr' ? 'fr-FR' : 'en-US',
+          locale: PAYPAL_LOCALE_MAP[locale] ?? 'en_US',
           landing_page: 'NO_PREFERENCE',
           user_action: 'PAY_NOW',
           return_url: `${appUrl}/${locale}/confirmation?ref=${booking.bookingReference}`,

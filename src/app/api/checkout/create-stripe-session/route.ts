@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import type { Locale } from '@/i18n/config'
+
+const STRIPE_LOCALES = new Set(['en', 'fr', 'es', 'cs'])
 
 // Lazy initialization to avoid build-time errors when env vars are not available
 function getStripe() {
@@ -156,7 +159,7 @@ export async function POST(request: NextRequest) {
           children: items.find(i => i.type === 'activity')?.children || 0,
         },
         source: 'website',
-        language: locale as 'en' | 'fr',
+        language: locale as Locale,
       },
     })
 
@@ -175,7 +178,7 @@ export async function POST(request: NextRequest) {
         bookingId: booking.id,
         bookingReference,
       },
-      locale: locale === 'fr' ? 'fr' : 'en',
+      locale: (STRIPE_LOCALES.has(locale) ? locale : 'en') as Stripe.Checkout.SessionCreateParams.Locale,
     })
 
     // Update booking with Stripe session ID

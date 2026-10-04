@@ -6,6 +6,7 @@ import { Footer } from '@/components/footer'
 import { getActivities, getCategories } from '@/lib/payload'
 import type { Activity, Category } from '@/payload-types'
 import { ActivitiesPageClient } from './activities-page-client'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 // Revalidate every hour as fallback (on-demand revalidation is primary)
 export const revalidate = 3600
@@ -21,13 +22,15 @@ export async function generateMetadata({
   const titles: Record<string, string> = {
     en: 'All Activities | Atlas Mountain Visit',
     fr: 'Toutes les Activités | Atlas Mountain Visit',
-    de: 'Alle Aktivitäten | Atlas Mountain Visit',
+    es: 'Todas las Actividades | Atlas Mountain Visit',
+    cs: 'Všechny Aktivity | Atlas Mountain Visit',
   }
 
   const descriptions: Record<string, string> = {
     en: 'Explore our complete collection of authentic Moroccan experiences. Desert adventures, hot air balloons, quad biking, and more in Marrakech.',
     fr: 'Découvrez notre collection complète d\'expériences marocaines authentiques. Aventures dans le désert, montgolfières, quad et plus à Marrakech.',
-    de: 'Entdecken Sie unsere vollständige Sammlung authentischer marokkanischer Erlebnisse. Wüstenabenteuer, Heißluftballons, Quadfahren und mehr in Marrakesch.',
+    es: 'Explora nuestra colección completa de experiencias marroquíes auténticas. Aventuras en el desierto, globos aerostáticos, quads y más en Marrakech.',
+    cs: 'Prozkoumejte naši kompletní sbírku autentických marockých zážitků. Pouštní dobrodružství, horkovzdušné balóny, čtyřkolky a další v Marrákeši.',
   }
 
   return {
@@ -51,7 +54,7 @@ export default async function ActivitiesPage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   // Enable static rendering
   setRequestLocale(locale)

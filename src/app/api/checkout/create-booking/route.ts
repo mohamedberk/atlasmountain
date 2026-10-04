@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { sendBookingEmails } from '@/lib/email/send-booking-emails'
+import { locales, defaultLocale, type Locale } from '@/i18n/config'
 
 interface BookingItem {
   type: 'activity' | 'transport'
@@ -146,7 +147,7 @@ export async function POST(request: NextRequest) {
           method: paymentMethod,
         },
         source: 'website',
-        language: body.locale === 'fr' ? 'fr' : 'en',
+        language: body.locale && (locales as readonly string[]).includes(body.locale) ? (body.locale as Locale) : defaultLocale,
       },
     })
 

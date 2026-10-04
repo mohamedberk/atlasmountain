@@ -4,6 +4,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { getActivityBySlug, getActivitiesByCategory } from '@/lib/payload'
 import { CheckoutFlowClient } from './checkout-flow-client'
 import type { Activity, Category } from '@/payload-types'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 // Revalidate every hour
 export const revalidate = 0
@@ -15,7 +16,7 @@ interface Props {
 // Generate metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   const activity = await getActivityBySlug(slug, typedLocale)
   const t = await getTranslations({ locale: typedLocale, namespace: 'checkout' })
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CheckoutActivityPage({ params }: Props) {
   const { locale, slug } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   setRequestLocale(locale)
 

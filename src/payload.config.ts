@@ -10,6 +10,8 @@ import sharp from 'sharp'
 // Admin Panel translations (i18n)
 import { en } from '@payloadcms/translations/languages/en'
 import { fr } from '@payloadcms/translations/languages/fr'
+import { es } from '@payloadcms/translations/languages/es'
+import { cs } from '@payloadcms/translations/languages/cs'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -72,7 +74,7 @@ export default buildConfig({
   ],
   // i18n: Admin Panel UI translations
   i18n: {
-    supportedLanguages: { en, fr },
+    supportedLanguages: { en, fr, es, cs },
     fallbackLanguage: 'en',
   },
   // Localization: Content/data translations in the database
@@ -80,9 +82,14 @@ export default buildConfig({
     locales: [
       { label: 'English', code: 'en' },
       { label: 'Français', code: 'fr' },
+      { label: 'Español', code: 'es' },
+      { label: 'Čeština', code: 'cs' },
     ],
     defaultLocale: 'en',
     fallback: true,
+    // Czech isn't launched yet — hide it from the admin locale switcher without removing
+    // it from the config, so its content/fields stay fully functional underneath.
+    filterAvailableLocales: ({ locales }) => locales.filter((l) => l.code !== 'cs'),
   },
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [

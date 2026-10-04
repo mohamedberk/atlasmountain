@@ -164,12 +164,6 @@ export const ContactPage: GlobalConfig = {
                       type: 'email',
                       defaultValue: 'atlasmountainsvisit@gmail.com',
                     },
-                    {
-                      name: 'responseTime',
-                      type: 'text',
-                      defaultValue: 'We reply within 2 hours',
-                      localized: true,
-                    },
                   ],
                 },
                 {
@@ -403,59 +397,12 @@ export const ContactPage: GlobalConfig = {
           ],
         },
         {
-          label: 'FAQ',
-          fields: [
-            {
-              name: 'faq',
-              type: 'group',
-              fields: [
-                {
-                  name: 'title',
-                  type: 'text',
-                  defaultValue: 'Frequently Asked Questions',
-                  localized: true,
-                },
-                {
-                  name: 'questions',
-                  type: 'array',
-                  fields: [
-                    {
-                      name: 'question',
-                      type: 'text',
-                      required: true,
-                      localized: true,
-                    },
-                    {
-                      name: 'answer',
-                      type: 'textarea',
-                      required: true,
-                      localized: true,
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
           label: 'Map',
           fields: [
             {
               name: 'map',
               type: 'group',
               fields: [
-                {
-                  name: 'title',
-                  type: 'text',
-                  defaultValue: 'Find Us in Marrakech',
-                  localized: true,
-                },
-                {
-                  name: 'subtitle',
-                  type: 'text',
-                  defaultValue: 'Located in the heart of the Red City, we\'re easy to find.',
-                  localized: true,
-                },
                 {
                   name: 'embedUrl',
                   type: 'textarea',

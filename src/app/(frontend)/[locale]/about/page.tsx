@@ -4,6 +4,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { AboutPageClient } from './about-page-client'
 import { getAboutPage } from '@/lib/payload'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 // Revalidate every hour as fallback (on-demand revalidation via tags is primary)
 export const revalidate = 3600
@@ -24,16 +25,21 @@ const fallbackContent: Record<string, { title: string; subtitle: string; descrip
     subtitle: 'Votre Partenaire de Voyage au Maroc',
     description: 'Découvrez Atlas Mountain Visit - Plus de 20 ans d\'expériences marocaines authentiques.',
   },
-  de: {
-    title: 'Über Uns',
-    subtitle: 'Ihr Vertrauenswürdiger Marokko-Reisepartner',
-    description: 'Entdecken Sie Atlas Mountain Visit - 20+ Jahre authentische marokkanische Erlebnisse.',
+  es: {
+    title: 'Sobre Nosotros',
+    subtitle: 'Tu Socio de Confianza para Viajar a Marruecos',
+    description: 'Descubre Atlas Mountain Visit - Más de 20 años creando experiencias marroquíes auténticas.',
+  },
+  cs: {
+    title: 'O Nás',
+    subtitle: 'Váš Důvěryhodný Partner pro Cesty do Maroka',
+    description: 'Objevte Atlas Mountain Visit - Více než 20 let autentických marockých zážitků.',
   },
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   // Try to get from CMS
   let metaTitle = fallbackContent[typedLocale]?.title || 'About Us'
@@ -63,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function AboutPage({ params }: Props) {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
   setRequestLocale(locale)
 
   // Try to fetch from CMS

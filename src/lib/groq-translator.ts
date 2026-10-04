@@ -1,6 +1,6 @@
 import Groq from 'groq-sdk'
 
-const GROQ_MODEL = process.env.GROQ_MODEL || 'llama-3.3-70b-versatile'
+const GROQ_MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-120b'
 
 let _client: Groq | null = null
 function client(): Groq {
@@ -18,6 +18,7 @@ export const LOCALE_NAMES: Record<string, string> = {
   fr: 'French',
   de: 'German',
   es: 'Spanish',
+  cs: 'Czech',
   ar: 'Arabic',
   it: 'Italian',
   pt: 'Portuguese',

@@ -3,9 +3,7 @@ import config from '@payload-config'
 import { cache } from 'react'
 import { unstable_cache } from 'next/cache'
 import type { Activity, Category, Location, BlogPost } from '@/payload-types'
-
-// Type for locale parameter (matches Payload config localization)
-type Locale = 'en' | 'fr'
+import { locales, type Locale } from '@/i18n/config'
 
 /**
  * Get Payload client instance
@@ -305,7 +303,7 @@ export const createBooking = async (bookingData: {
     currency?: 'EUR' | 'USD' | 'MAD' | 'GBP'
   }
   source?: 'website' | 'whatsapp' | 'phone' | 'email' | 'walkin' | 'partner'
-  language?: 'en' | 'fr'
+  language?: Locale
 }) => {
   const payload = await getPayloadClient()
 
@@ -539,7 +537,6 @@ export const getDocumentSlugsInAllLocales = (
   unstable_cache(
     async () => {
       const payload = await getPayloadClient()
-      const locales: Locale[] = ['en', 'fr']
       const slugMap: Record<string, string> = {}
 
       for (const locale of locales) {
@@ -575,7 +572,6 @@ export const findDocumentIdBySlug = (
   unstable_cache(
     async () => {
       const payload = await getPayloadClient()
-      const locales: Locale[] = ['en', 'fr']
 
       for (const locale of locales) {
         try {

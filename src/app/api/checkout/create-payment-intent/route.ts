@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import type { Locale } from '@/i18n/config'
 
 function getStripe() {
   const secretKey = process.env.STRIPE_SECRET_KEY
@@ -146,7 +147,7 @@ export async function POST(request: NextRequest) {
           method: 'stripe',
         },
         source: 'website',
-        language: locale as 'en' | 'fr',
+        language: locale as Locale,
       },
     })
 

@@ -9,6 +9,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import type { BlogPost, Media, Activity } from '@/payload-types'
 import { extractPlainText } from '@/lib/utils'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 // Revalidate every hour as fallback (on-demand revalidation via tags is primary)
 export const revalidate = 3600
@@ -40,7 +41,7 @@ function getImageUrl(image: string | number | Media | null | undefined): string 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   const post = await getBlogPostBySlug(slug, typedLocale)
 
@@ -80,7 +81,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       languages: {
         en: `/en/blog/${slug}`,
         fr: `/fr/blog/${slug}`,
-        de: `/de/blog/${slug}`,
+        es: `/es/blog/${slug}`,
+        cs: `/cs/blog/${slug}`,
       },
     },
   }
@@ -88,7 +90,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   setRequestLocale(locale)
 

@@ -16,13 +16,13 @@ const ACCENT_GREEN = '#ff2828'
 
 // Category labels for display
 const categoryLabels: Record<string, Record<string, string>> = {
-  'travel-tips': { en: 'Travel Tips', fr: 'Conseils de Voyage', de: 'Reisetipps' },
-  'destinations': { en: 'Destinations', fr: 'Destinations', de: 'Reiseziele' },
-  'culture-history': { en: 'Culture & History', fr: 'Culture & Histoire', de: 'Kultur & Geschichte' },
-  'food-cuisine': { en: 'Food & Cuisine', fr: 'Gastronomie', de: 'Essen & Küche' },
-  'adventure': { en: 'Adventure', fr: 'Aventure', de: 'Abenteuer' },
-  'guides': { en: 'Guides', fr: 'Guides', de: 'Reiseführer' },
-  'news': { en: 'News & Updates', fr: 'Actualités', de: 'Neuigkeiten' },
+  'travel-tips': { en: 'Travel Tips', fr: 'Conseils de Voyage', es: 'Consejos de Viaje', cs: 'Cestovní Tipy' },
+  'destinations': { en: 'Destinations', fr: 'Destinations', es: 'Destinos', cs: 'Destinace' },
+  'culture-history': { en: 'Culture & History', fr: 'Culture & Histoire', es: 'Cultura e Historia', cs: 'Kultura a Historie' },
+  'food-cuisine': { en: 'Food & Cuisine', fr: 'Gastronomie', es: 'Gastronomía', cs: 'Jídlo a Kuchyně' },
+  'adventure': { en: 'Adventure', fr: 'Aventure', es: 'Aventura', cs: 'Dobrodružství' },
+  'guides': { en: 'Guides', fr: 'Guides', es: 'Guías', cs: 'Průvodci' },
+  'news': { en: 'News & Updates', fr: 'Actualités', es: 'Noticias y Novedades', cs: 'Novinky a Aktuality' },
 }
 
 // Get image URL helper

@@ -5,18 +5,28 @@ import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import type { Activity, Media } from '@/payload-types'
+import type { Media } from '@/payload-types'
+
+interface HeroSlide {
+  image?: string | Media | null
+  alt?: string | null
+  id?: string | null
+}
 
 interface HeroData {
-  backgroundImage?: string | Media | null
-  backgroundImages?: { image: string | Media; id?: string | null }[] | null
+  slides?: HeroSlide[] | null
+  scrollText?: string | null
 }
 
 interface Props {
-  featuredActivities?: Activity[]
-  activities?: Activity[]
   heroData?: HeroData | null
-  reviewStats?: unknown
+}
+
+function resolveImageSrc(image: HeroSlide['image']): string | null {
+  if (!image) return null
+  if (typeof image === 'string') return image
+  if (typeof image === 'object' && image.url) return image.url
+  return null
 }
 
 const HERO_IMAGES = [
@@ -31,14 +41,13 @@ const HERO_IMAGES = [
 ]
 
 interface HeroSlideshowProps {
-  slides: string[]
+  slides: { src: string; alt: string }[]
   currentSlide: number
   onFirstLoad: () => void
   firstLoaded: boolean
-  alt: string
 }
 
-function HeroSlideshow({ slides, currentSlide, onFirstLoad, firstLoaded, alt }: HeroSlideshowProps) {
+function HeroSlideshow({ slides, currentSlide, onFirstLoad, firstLoaded }: HeroSlideshowProps) {
   return (
     <LazyMotion features={domAnimation}>
       <AnimatePresence mode="sync">
@@ -51,8 +60,8 @@ function HeroSlideshow({ slides, currentSlide, onFirstLoad, firstLoaded, alt }: 
           transition={{ duration: 1.2, ease: 'easeInOut' }}
         >
           <Image
-            src={slides[currentSlide]}
-            alt={alt}
+            src={slides[currentSlide].src}
+            alt={slides[currentSlide].alt}
             fill
             sizes="100vw"
             className="object-cover"
@@ -65,7 +74,7 @@ function HeroSlideshow({ slides, currentSlide, onFirstLoad, firstLoaded, alt }: 
   )
 }
 
-export function ModernHero(_props: Props) {
+export function ModernHero({ heroData }: Props) {
   const [heroImageLoaded, setHeroImageLoaded] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
@@ -80,9 +89,20 @@ export function ModernHero(_props: Props) {
     }
   }, [])
 
+  const defaultAlt = t('heroImageAlt')
+  const scrollLabel = heroData?.scrollText?.trim() || t('heroScrollLabel')
+
   const heroSlides = useMemo(() => {
-    return HERO_IMAGES
-  }, [])
+    const cmsSlides = (heroData?.slides || [])
+      .map((slide) => ({
+        src: resolveImageSrc(slide.image),
+        alt: slide.alt?.trim() || defaultAlt,
+      }))
+      .filter((slide): slide is { src: string; alt: string } => Boolean(slide.src))
+
+    if (cmsSlides.length > 0) return cmsSlides
+    return HERO_IMAGES.map((src) => ({ src, alt: defaultAlt }))
+  }, [heroData, defaultAlt])
 
   useEffect(() => {
     if (heroSlides.length <= 1) return
@@ -111,7 +131,6 @@ export function ModernHero(_props: Props) {
           currentSlide={currentSlide}
           onFirstLoad={() => setHeroImageLoaded(true)}
           firstLoaded={heroImageLoaded}
-          alt={t('heroImageAlt')}
         />
       </div>
 
@@ -137,7 +156,7 @@ export function ModernHero(_props: Props) {
           <div className="absolute bottom-24 left-1/2 -translate-x-1/2 hidden lg:flex gap-2 z-20">
             {heroSlides.map((slide, i) => (
               <button
-                key={slide}
+                key={slide.src}
                 type="button"
                 onClick={() => {
                   setCurrentSlide(i)
@@ -164,7 +183,7 @@ export function ModernHero(_props: Props) {
           className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 text-white/90 hover:text-white transition-colors group"
         >
           <span className="text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase pl-[0.2em]">
-            {t('heroScrollLabel')}
+            {scrollLabel}
           </span>
           <m.span
             animate={{ y: [0, 6, 0] }}

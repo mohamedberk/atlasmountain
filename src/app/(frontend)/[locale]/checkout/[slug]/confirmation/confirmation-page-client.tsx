@@ -25,6 +25,8 @@ import { useTranslations, useLocale } from 'next-intl'
 
 const ACCENT_GREEN = '#ff2828'
 
+const DATE_LOCALE_MAP: Record<string, string> = { en: 'en-US', fr: 'fr-FR', es: 'es-ES', cs: 'cs-CZ' }
+
 interface ConfirmationBookingData {
   ref: string
   items: {
@@ -282,7 +284,7 @@ export function ConfirmationPageClient({ locale }: Props) {
                 <div>
                   <p className="text-xs text-neutral-500">{t('confirmation.date')}</p>
                   <p className="font-medium text-neutral-900">
-                    {bookingDate.toLocaleDateString(intlLocale === 'fr' ? 'fr-FR' : 'en-US', {
+                    {bookingDate.toLocaleDateString(DATE_LOCALE_MAP[intlLocale] ?? 'en-US', {
                       weekday: 'long',
                       month: 'long',
                       day: 'numeric',

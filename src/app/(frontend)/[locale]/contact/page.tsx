@@ -4,6 +4,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { ContactPageClient } from './contact-page-client'
 import { getContactPage } from '@/lib/payload'
+import { defaultLocale, type Locale } from '@/i18n/config'
 
 // Revalidate every hour as fallback (on-demand revalidation is primary)
 export const revalidate = 3600
@@ -24,16 +25,21 @@ const fallbackContent: Record<string, { title: string; subtitle: string; descrip
     subtitle: 'Prenez Contact',
     description: 'Des questions sur votre aventure au Maroc? Nous sommes là pour vous aider 24h/24.',
   },
-  de: {
-    title: 'Kontaktieren Sie Uns',
-    subtitle: 'Nehmen Sie Kontakt Auf',
-    description: 'Fragen zu Ihrem Marokko-Abenteuer? Wir sind rund um die Uhr für Sie da.',
+  es: {
+    title: 'Contáctanos',
+    subtitle: 'Ponte en Contacto',
+    description: '¿Tienes preguntas sobre tu aventura en Marruecos? Estamos aquí para ayudarte 24/7.',
+  },
+  cs: {
+    title: 'Kontaktujte Nás',
+    subtitle: 'Spojte se s Námi',
+    description: 'Máte otázky ohledně svého marockého dobrodružství? Jsme tu pro vás 24/7.',
   },
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
 
   // Try to get from CMS
   let metaTitle = fallbackContent[typedLocale]?.title || 'Contact Us'
@@ -63,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params
-  const typedLocale = (locale as 'en' | 'fr') || 'en'
+  const typedLocale = (locale as Locale) || defaultLocale
   setRequestLocale(locale)
 
   // Try to fetch from CMS

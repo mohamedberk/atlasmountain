@@ -291,6 +291,8 @@ export const Bookings: CollectionConfig = {
       options: [
         { label: 'English', value: 'en' },
         { label: 'French', value: 'fr' },
+        { label: 'Spanish', value: 'es' },
+        { label: 'Czech', value: 'cs' },
       ],
       defaultValue: 'en',
     },
