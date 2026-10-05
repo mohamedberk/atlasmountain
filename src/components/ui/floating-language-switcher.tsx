@@ -14,11 +14,6 @@ const localeLabels: Record<string, { flag: string; label: string }> = {
   cs: { flag: '🇨🇿', label: 'CS' },
 }
 
-// Hidden from the switcher for now (not launched yet) — the locale itself stays fully functional,
-// so a direct link to /cs still works and still shows the correct flag as the current locale.
-const HIDDEN_LOCALES = new Set(['cs'])
-const visibleLocaleEntries = Object.entries(localeLabels).filter(([code]) => !HIDDEN_LOCALES.has(code))
-
 export function FloatingLanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -61,7 +56,7 @@ export function FloatingLanguageSwitcher() {
             transition={{ duration: 0.15 }}
             className="absolute bottom-full left-0 mb-3 w-36 bg-white rounded-2xl shadow-md border border-neutral-100 overflow-hidden p-2"
           >
-            {visibleLocaleEntries.map(([code, { flag, label }]) => (
+            {Object.entries(localeLabels).map(([code, { flag, label }]) => (
               <button
                 type="button"
                 key={code}

@@ -87,9 +87,6 @@ export default buildConfig({
     ],
     defaultLocale: 'en',
     fallback: true,
-    // Czech isn't launched yet — hide it from the admin locale switcher without removing
-    // it from the config, so its content/fields stay fully functional underneath.
-    filterAvailableLocales: ({ locales }) => locales.filter((l) => l.code !== 'cs'),
   },
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
