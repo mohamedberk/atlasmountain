@@ -47,13 +47,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const bookDescription = t('bookDescription', { title: activity.title })
   const defaultKeywords = t('defaultKeywords', { title: activity.title })
 
+  const metaTitle = activity.seo?.metaTitle || `${activity.title} | Atlas Mountain Visit`
+  const metaDescription = activity.seo?.metaDescription || activity.shortDescription || bookDescription
+
   return {
-    title: `${activity.title} | Atlas Mountain Visit`,
-    description: activity.shortDescription || activity.seo?.metaDescription || bookDescription,
+    title: metaTitle,
+    description: metaDescription,
     keywords: activity.seo?.keywords || defaultKeywords,
     openGraph: {
       title: activity.seo?.metaTitle || activity.title,
-      description: activity.shortDescription || activity.seo?.metaDescription || bookDescription,
+      description: metaDescription,
       images: [imageUrl],
       locale: locale,
       type: 'website',
