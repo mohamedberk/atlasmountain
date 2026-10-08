@@ -4,7 +4,7 @@ import { createNavigation } from 'next-intl/navigation'
 export const routing = defineRouting({
   locales: ['en', 'fr', 'es', 'cs'],
   defaultLocale: 'en',
-  localePrefix: 'as-needed',
+  localePrefix: 'always',
 })
 
 // Lightweight wrappers around Next.js' navigation APIs

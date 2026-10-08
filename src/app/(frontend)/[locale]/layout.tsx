@@ -58,9 +58,9 @@ export async function generateMetadata({
     title: titles[locale] || titles.en,
     description: descriptions[locale] || descriptions.en,
     alternates: {
-      canonical: '/',
+      canonical: `/${locale}`,
       languages: {
-        en: '/',
+        en: '/en',
         fr: '/fr',
         es: '/es',
         cs: '/cs',
