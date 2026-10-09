@@ -10,6 +10,7 @@ import { Footer } from '@/components/footer'
 import type { BlogPost, Media, Activity } from '@/payload-types'
 import { extractPlainText } from '@/lib/utils'
 import { defaultLocale, type Locale } from '@/i18n/config'
+import { SITE_URL } from '@/lib/site-url'
 
 // Revalidate every hour as fallback (on-demand revalidation via tags is primary)
 export const revalidate = 3600
@@ -62,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: post.seo?.metaTitle || post.title,
       description: post.seo?.metaDescription || extractPlainText(post.excerpt),
-      url: `https://atlasmountainsvisit.com/${locale}/blog/${slug}`,
+      url: `${SITE_URL}/${locale}/blog/${slug}`,
       siteName: 'Atlas Mountain Visit',
       images: [{ url: imageUrl, width: 1200, height: 630, alt: post.title }],
       locale: locale,
@@ -77,7 +78,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [imageUrl],
     },
     alternates: {
-      canonical: post.seo?.canonicalUrl || `https://atlasmountainsvisit.com/${locale}/blog/${slug}`,
+      canonical: post.seo?.canonicalUrl || `${SITE_URL}/${locale}/blog/${slug}`,
       languages: {
         en: `/en/blog/${slug}`,
         fr: `/fr/blog/${slug}`,
@@ -127,12 +128,12 @@ export default async function BlogPostPage({ params }: Props) {
       name: 'Atlas Mountain Visit',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://atlasmountainsvisit.com/logo.png',
+        url: `${SITE_URL}/logo.png`,
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://atlasmountainsvisit.com/${locale}/blog/${slug}`,
+      '@id': `${SITE_URL}/${locale}/blog/${slug}`,
     },
     wordCount: post.readingTime ? post.readingTime * 200 : undefined,
   }

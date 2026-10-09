@@ -6,6 +6,7 @@ import { RichText } from '@/components/rich-text'
 import { getTermsPage } from '@/lib/payload'
 import { format } from 'date-fns'
 import { defaultLocale, type Locale } from '@/i18n/config'
+import { SITE_URL } from '@/lib/site-url'
 
 interface Props {
   params: Promise<{ locale: string }>
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      url: `https://atlasmountainsvisit.com/${locale}/terms`,
+      url: `${SITE_URL}/${locale}/terms`,
       siteName: 'Atlas Mountain Visit',
       locale: locale,
       type: 'website',

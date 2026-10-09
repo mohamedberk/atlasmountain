@@ -7,6 +7,7 @@ import { getActivities, getCategories } from '@/lib/payload'
 import type { Activity, Category } from '@/payload-types'
 import { ActivitiesPageClient } from './activities-page-client'
 import { defaultLocale, type Locale } from '@/i18n/config'
+import { SITE_URL } from '@/lib/site-url'
 
 // Revalidate every hour as fallback (on-demand revalidation is primary)
 export const revalidate = 3600
@@ -40,7 +41,7 @@ export async function generateMetadata({
     openGraph: {
       title: titles[locale] || titles.en,
       description: descriptions[locale] || descriptions.en,
-      url: `https://atlasmountainsvisit.com/${locale}/activities`,
+      url: `${SITE_URL}/${locale}/activities`,
       siteName: 'Atlas Mountain Visit',
       locale: locale,
       type: 'website',

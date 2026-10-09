@@ -1,9 +1,11 @@
 import type { MetadataRoute } from 'next'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { SITE_URL } from '@/lib/site-url'
+import { locales as allLocales } from '@/i18n/config'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://www.atlasmountainsvisit.com'
-const locales = ['en', 'fr'] as const
+const BASE_URL = SITE_URL
+const locales = allLocales
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const payload = await getPayload({ config })

@@ -7,6 +7,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import type { Category, Activity } from '@/payload-types'
 import { defaultLocale, type Locale } from '@/i18n/config'
+import { SITE_URL } from '@/lib/site-url'
 
 // Revalidate every hour as fallback (on-demand revalidation is primary)
 export const revalidate = 3600
@@ -54,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
     },
     alternates: {
-      canonical: `https://atlasmountainsvisit.com/${locale}/category/${slug}`,
+      canonical: `${SITE_URL}/${locale}/category/${slug}`,
       languages: {
         en: `/en/category/${slug}`,
         fr: `/fr/category/${slug}`,

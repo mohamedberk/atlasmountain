@@ -9,6 +9,7 @@ import { Footer } from '@/components/footer'
 import type { BlogPost } from '@/payload-types'
 import { extractPlainText } from '@/lib/utils'
 import { defaultLocale, type Locale } from '@/i18n/config'
+import { SITE_URL } from '@/lib/site-url'
 
 // Revalidate every hour as fallback (on-demand revalidation via tags is primary)
 export const revalidate = 3600
@@ -59,13 +60,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `${content.title} - ${content.subtitle}`,
       description: content.description,
-      url: `https://atlasmountainsvisit.com/${locale}/blog`,
+      url: `${SITE_URL}/${locale}/blog`,
       siteName: 'Atlas Mountain Visit',
       locale: locale,
       type: 'website',
     },
     alternates: {
-      canonical: `https://atlasmountainsvisit.com/${locale}/blog`,
+      canonical: `${SITE_URL}/${locale}/blog`,
       languages: {
         en: '/en/blog',
         fr: '/fr/blog',
@@ -99,11 +100,11 @@ export default async function BlogPage({ params }: Props) {
     '@type': 'Blog',
     name: `${content.title} - Atlas Mountain Visit`,
     description: content.description,
-    url: `https://atlasmountainsvisit.com/${locale}/blog`,
+    url: `${SITE_URL}/${locale}/blog`,
     publisher: {
       '@type': 'Organization',
       name: 'Atlas Mountain Visit',
-      logo: 'https://atlasmountainsvisit.com/logo.png',
+      logo: `${SITE_URL}/logo.png`,
     },
     blogPost: posts.slice(0, 10).map(post => ({
       '@type': 'BlogPosting',
@@ -114,7 +115,7 @@ export default async function BlogPage({ params }: Props) {
         '@type': 'Person',
         name: post.author,
       },
-      url: `https://atlasmountainsvisit.com/${locale}/blog/${post.slug}`,
+      url: `${SITE_URL}/${locale}/blog/${post.slug}`,
     })),
   }
 

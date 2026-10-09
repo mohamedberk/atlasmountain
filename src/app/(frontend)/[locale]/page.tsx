@@ -16,6 +16,7 @@ import {
 } from '@/lib/payload'
 import type { Activity, Category, BlogPost } from '@/payload-types'
 import { defaultLocale, type Locale } from '@/i18n/config'
+import { SITE_URL } from '@/lib/site-url'
 
 // Revalidate every hour as fallback (on-demand revalidation via tags is primary)
 export const revalidate = 3600
@@ -95,13 +96,13 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      url: `https://atlasmountainsvisit.com/${locale}`,
+      url: `${SITE_URL}/${locale}`,
       siteName: 'Atlas Mountain Visit',
       locale: locale,
       type: 'website',
     },
     alternates: {
-      canonical: `https://atlasmountainsvisit.com/${locale}`,
+      canonical: `${SITE_URL}/${locale}`,
       languages: {
         en: '/en',
         fr: '/fr',
@@ -173,8 +174,8 @@ export default async function Home({
     '@type': 'TravelAgency',
     name: siteSettings?.company?.name,
     description: 'Authentic Moroccan adventures in Marrakech. Desert tours, hot air balloons, quad biking, and luxury transport.',
-    url: 'https://atlasmountainsvisit.com',
-    logo: 'https://atlasmountainsvisit.com/logo.png',
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo.png`,
     address: {
       '@type': 'PostalAddress',
       addressLocality: siteSettings?.contact?.address?.line1,

@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer'
 import { AboutPageClient } from './about-page-client'
 import { getAboutPage } from '@/lib/payload'
 import { defaultLocale, type Locale } from '@/i18n/config'
+import { SITE_URL } from '@/lib/site-url'
 
 // Revalidate every hour as fallback (on-demand revalidation via tags is primary)
 export const revalidate = 3600
@@ -59,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      url: `https://atlasmountainsvisit.com/${locale}/about`,
+      url: `${SITE_URL}/${locale}/about`,
       siteName: 'Atlas Mountain Visit',
       locale: locale,
       type: 'website',
