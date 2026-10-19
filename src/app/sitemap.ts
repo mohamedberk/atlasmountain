@@ -22,6 +22,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       where: { status: { equals: 'published' } },
       limit: 0,
       depth: 0,
+      // slug is localized per language, so fetch every locale's value
+      // instead of only the default one
+      locale: 'all',
     }),
     payload.find({
       collection: 'categories',
@@ -115,20 +118,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // Add blog posts for each locale
+  // `slug` is localized per language (translated titles get translated slugs),
+  // so with `locale: 'all'` Payload returns it as a { [locale]: slug } map
+  // rather than a single string. Reusing one slug across every locale URL
+  // produced 404s for any language whose translated slug differs from the
+  // default locale's, which is what caused blog pages to be excluded from
+  // Google's index ("noindex" via the Next.js not-found fallback).
   for (const post of blogPostsResult.docs) {
-    if (!post.slug) continue
+    const slugByLocale = post.slug as unknown as Partial<Record<(typeof locales)[number], string>>
+    const availableLocales = locales.filter((l) => Boolean(slugByLocale?.[l]))
 
-    const safeSlug = encodeURIComponent(post.slug)
-    for (const locale of locales) {
-      const url = `${BASE_URL}/${locale}/blog/${safeSlug}`
+    if (availableLocales.length === 0) continue
 
-      const alternates: Record<string, string> = {}
-      for (const altLocale of locales) {
-        alternates[altLocale] = `${BASE_URL}/${altLocale}/blog/${safeSlug}`
-      }
+    const alternates: Record<string, string> = {}
+    for (const altLocale of availableLocales) {
+      alternates[altLocale] = `${BASE_URL}/${altLocale}/blog/${encodeURIComponent(slugByLocale[altLocale]!)}`
+    }
 
+    for (const locale of availableLocales) {
       sitemapEntries.push({
-        url,
+        url: alternates[locale],
         lastModified: new Date(post.updatedAt),
         changeFrequency: 'monthly',
         priority: 0.7,

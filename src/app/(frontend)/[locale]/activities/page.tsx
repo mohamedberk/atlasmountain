@@ -46,6 +46,15 @@ export async function generateMetadata({
       locale: locale,
       type: 'website',
     },
+    alternates: {
+      canonical: `${SITE_URL}/${locale}/activities`,
+      languages: {
+        en: '/en/activities',
+        fr: '/fr/activities',
+        es: '/es/activities',
+        cs: '/cs/activities',
+      },
+    },
   }
 }
 

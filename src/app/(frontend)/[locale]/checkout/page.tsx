@@ -18,6 +18,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${t('metaTitle')} | Atlas Mountain Visit`,
     description: t('metaDescription'),
+    // Part of the checkout flow, like checkout/[slug] and its confirmation
+    // page — keep it out of the index rather than letting it inherit the
+    // root layout's homepage canonical.
+    robots: {
+      index: false,
+      follow: false,
+    },
   }
 }
 

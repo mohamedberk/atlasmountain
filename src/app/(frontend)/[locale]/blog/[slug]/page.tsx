@@ -1,9 +1,9 @@
 import dynamicImport from 'next/dynamic'
 import { Suspense } from 'react'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
-import { getBlogPostBySlug, getRelatedBlogPosts, getAllBlogPostSlugs } from '@/lib/payload'
+import { getBlogPostBySlug, getRelatedBlogPosts, getAllBlogPostSlugs, getDocumentSlugsInAllLocales, findDocumentIdBySlug } from '@/lib/payload'
 import { ErrorBoundary } from '@/components/error-boundary'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
@@ -55,6 +55,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const imageUrl = getImageUrl(post.seo?.ogImage || post.featuredImage)
 
+  // The slug is localized per-locale in the CMS, so each language can have a
+  // different slug for the same post. Build hreflang alternates from the
+  // actual per-locale slugs instead of assuming they match the current one.
+  const slugMap = await getDocumentSlugsInAllLocales('blog-posts', post.id)
+  const languages: Record<string, string> = {}
+  for (const [altLocale, altSlug] of Object.entries(slugMap)) {
+    languages[altLocale] = `/${altLocale}/blog/${altSlug}`
+  }
+
   return {
     title: post.seo?.metaTitle || `${post.title} | Atlas Mountain Visit Blog`,
     description: post.seo?.metaDescription || extractPlainText(post.excerpt),
@@ -79,12 +88,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     alternates: {
       canonical: post.seo?.canonicalUrl || `${SITE_URL}/${locale}/blog/${slug}`,
-      languages: {
-        en: `/en/blog/${slug}`,
-        fr: `/fr/blog/${slug}`,
-        es: `/es/blog/${slug}`,
-        cs: `/cs/blog/${slug}`,
-      },
+      languages,
     },
   }
 }
@@ -98,6 +102,18 @@ export default async function BlogPostPage({ params }: Props) {
   const post = await getBlogPostBySlug(slug, typedLocale)
 
   if (!post) {
+    // The requested slug may be another locale's translated slug for a post
+    // that *does* exist in this locale (e.g. an old/mis-generated sitemap
+    // URL, or a link using the wrong locale's slug). Redirect to the
+    // correct localized URL instead of a dead-end 404 when possible.
+    const altId = await findDocumentIdBySlug('blog-posts', slug)
+    if (altId) {
+      const slugMap = await getDocumentSlugsInAllLocales('blog-posts', altId)
+      const correctSlug = slugMap[typedLocale]
+      if (correctSlug && correctSlug !== slug) {
+        permanentRedirect(`/${locale}/blog/${correctSlug}`)
+      }
+    }
     notFound()
   }
 

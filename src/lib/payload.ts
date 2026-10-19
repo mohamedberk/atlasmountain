@@ -529,6 +529,13 @@ export const getRelatedBlogPosts = (currentSlug: string, category: string, local
 /**
  * Get all localized slugs for a document
  * Used for alternate hreflang links and language switching
+ *
+ * Fetches with `locale: 'all'` to get the raw per-locale values. A
+ * per-locale `findByID` would apply Payload's locale fallback (the CMS has
+ * `fallback: true`) and report a translation that doesn't actually exist,
+ * which produced hreflang/sitemap URLs that 404 for untranslated locales
+ * (the slug lookup on the page itself queries the locale-scoped slug column
+ * directly and does not fall back).
  */
 export const getDocumentSlugsInAllLocales = (
   collection: 'blog-posts' | 'activities',
@@ -539,21 +546,31 @@ export const getDocumentSlugsInAllLocales = (
       const payload = await getPayloadClient()
       const slugMap: Record<string, string> = {}
 
-      for (const locale of locales) {
-        try {
-          const doc = await payload.findByID({
-            collection,
-            id,
-            locale,
-            depth: 0,
-            select: { slug: true },
-          })
-          if (doc?.slug) {
-            slugMap[locale] = doc.slug
+      try {
+        const doc = await payload.findByID({
+          collection,
+          id,
+          locale: 'all',
+          depth: 0,
+          select: { slug: true },
+        })
+        const rawSlug = doc?.slug as unknown
+        if (typeof rawSlug === 'string') {
+          // Not a localized field (e.g. activities): same slug for every locale
+          for (const locale of locales) {
+            slugMap[locale] = rawSlug
           }
-        } catch (e) {
-          console.error(`[getDocumentSlugsInAllLocales] Error fetching ${collection}/${id} in ${locale}:`, e)
+        } else {
+          const slugByLocale = rawSlug as Partial<Record<Locale, string>> | undefined
+          for (const locale of locales) {
+            const slug = slugByLocale?.[locale]
+            if (slug) {
+              slugMap[locale] = slug
+            }
+          }
         }
+      } catch (e) {
+        console.error(`[getDocumentSlugsInAllLocales] Error fetching ${collection}/${id}:`, e)
       }
 
       return slugMap
