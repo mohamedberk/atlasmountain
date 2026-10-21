@@ -67,8 +67,10 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { collection, global, slug, secret } = body
 
-    // Verify secret (optional but recommended)
-    if (secret && secret !== REVALIDATE_SECRET) {
+    // Verify secret (required: without this check, anyone who reads this
+    // route's source — e.g. on a public GitHub repo — could POST with no
+    // `secret` field at all and force unlimited site-wide revalidation)
+    if (secret !== REVALIDATE_SECRET) {
       return NextResponse.json({ error: 'Invalid secret' }, { status: 401 })
     }
 

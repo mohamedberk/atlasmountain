@@ -7,6 +7,12 @@ import { locales as allLocales } from '@/i18n/config'
 const BASE_URL = SITE_URL
 const locales = allLocales
 
+// Without this, Next.js 15 treats sitemap.xml as a fully dynamic route and
+// re-runs the Payload init + DB queries below on every single request
+// (including every search-engine crawl), burning Fluid Active CPU for no
+// reason since the sitemap content only changes when content is published.
+export const revalidate = 3600
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const payload = await getPayload({ config })
 
