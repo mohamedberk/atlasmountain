@@ -173,26 +173,28 @@ export function ModernHero({ heroData }: Props) {
 
       {/* Scroll indicator */}
       <LazyMotion features={domAnimation}>
-        <m.button
-          type="button"
-          onClick={scrollToNext}
-          aria-label={t('heroScrollToNext')}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 text-white/90 hover:text-white transition-colors group"
-        >
-          <span className="text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase pl-[0.2em]">
-            {scrollLabel}
-          </span>
-          <m.span
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-            className="flex items-center justify-center w-9 h-9 rounded-full bg-white/15 backdrop-blur-md ring-1 ring-white/30 group-hover:bg-white/25 transition-colors"
+        <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-20">
+          <m.button
+            type="button"
+            onClick={scrollToNext}
+            aria-label={t('heroScrollToNext')}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="flex flex-col items-center gap-1.5 text-white/90 hover:text-white transition-colors group"
           >
-            <ChevronDown className="w-5 h-5" />
-          </m.span>
-        </m.button>
+            <span className="text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase pl-[0.2em]">
+              {scrollLabel}
+            </span>
+            <m.span
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/15 backdrop-blur-md ring-1 ring-white/30 group-hover:bg-white/25 transition-colors"
+            >
+              <ChevronDown className="w-5 h-5" />
+            </m.span>
+          </m.button>
+        </div>
       </LazyMotion>
     </section>
   )

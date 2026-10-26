@@ -217,8 +217,9 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
                     style={{ top: '64px' }}
                   >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-                      {/* Categories Row */}
-                      <div className="flex items-stretch justify-center gap-6">
+                      {/* Categories Row - Horizontally Scrollable */}
+                      <div className="overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-transparent">
+                      <div className="flex items-stretch justify-center gap-6 min-w-max px-1">
                         {navbarData.categories.map((category) => (
                           <div
                             key={category.id}
@@ -258,6 +259,7 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
                             </NavLink>
                           </div>
                         ))}
+                      </div>
                       </div>
 
                       {/* Activities Row - Horizontally Scrollable */}
