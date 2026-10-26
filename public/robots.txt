@@ -9,3 +9,18 @@ Sitemap: https://www.atlasmountainsvisit.com/sitemap.xml
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
+
+# Block known aggressive crawlers that bring no SEO value and have been
+# driving disproportionate CPU usage by crawling the full site repeatedly
+# (see Vercel Fluid Active CPU investigation, Oct 2026)
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
