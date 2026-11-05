@@ -64,6 +64,7 @@ export const Categories: CollectionConfig = {
       options: [
         { label: 'Activity', value: 'activity' },
         { label: 'Transport', value: 'transport' },
+        { label: 'Guide Region', value: 'guide-region' },
       ],
       defaultValue: 'activity',
     },

@@ -460,6 +460,15 @@ export const Activities: CollectionConfig = {
               ],
             },
             {
+              name: 'guide',
+              type: 'relationship',
+              relationTo: 'guides',
+              hasMany: false,
+              admin: {
+                description: 'The local guide who leads this tour, if any',
+              },
+            },
+            {
               name: 'aboutSection',
               type: 'group',
               admin: {

@@ -49,7 +49,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-display)', 'Georgia', 'serif'],
+        display: ['var(--font-display)', 'Helvetica', 'Arial', 'sans-serif'],
+        helvetica: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
       },
       borderRadius: {
         '3xl': '1.5rem',

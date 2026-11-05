@@ -4,6 +4,8 @@ import { revalidateTag, revalidatePath } from 'next/cache'
 // Map collections/globals to cache tags for invalidation
 const COLLECTION_TAGS: Record<string, string[]> = {
   activities: ['activities', 'homepage'],
+  guides: ['guides'],
+  'guide-reviews': ['guides'],
   'blog-posts': ['blog-posts'],
   categories: ['categories', 'activities'],
   locations: ['locations'],
@@ -18,6 +20,7 @@ const COLLECTION_TAGS: Record<string, string[]> = {
 // Map collections to paths for path-based revalidation
 const COLLECTION_PATHS: Record<string, string[]> = {
   activities: ['/en', '/fr', '/es', '/cs', '/en/activities', '/fr/activities', '/es/activities', '/cs/activities'],
+  guides: ['/en/guides', '/fr/guides', '/es/guides', '/cs/guides'],
   'blog-posts': ['/en/blog', '/fr/blog', '/es/blog', '/cs/blog'],
   categories: ['/en', '/fr', '/es', '/cs', '/en/activities', '/fr/activities', '/es/activities', '/cs/activities'],
   locations: ['/en', '/fr', '/es', '/cs'],

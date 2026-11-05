@@ -5,6 +5,10 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
+import { GuidedByBadge } from '@/components/guides/guided-by-badge'
+import { GuideInquiryForm } from '@/components/guides/guide-inquiry-form'
+import { Badge } from '@/components/ui/badge'
+import type { Guide } from '@/payload-types'
 import {
   Star,
   Clock,
@@ -38,7 +42,9 @@ import {
   Ticket,
   Compass,
   Globe,
-  Lightbulb
+  Lightbulb,
+  ShieldCheck,
+  MessageCircle
 } from 'lucide-react'
 import { useTranslations, useLocale } from 'next-intl'
 import Lightbox from 'yet-another-react-lightbox'
@@ -305,6 +311,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
   const [children, setChildren] = useState(0)
   const [showParticipants, setShowParticipants] = useState(false)
   const [reviewCarouselIndex, setReviewCarouselIndex] = useState(0)
+  const [showGuideInquiryForm, setShowGuideInquiryForm] = useState(false)
 
   // Mobile collapsible sections state - default to expanded on mobile for better UX
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
@@ -1004,6 +1011,68 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                 </ul>
               </motion.div>
             )}
+
+            {/* Meet Your Guide */}
+            {typeof activity.guide === 'object' && activity.guide && (() => {
+              const guide = activity.guide as Guide
+              const guideAvatarUrl = getImageUrl(guide.avatar) || '/placeholder-activity.jpg'
+              return (
+                <div className="space-y-4">
+                  <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{tDetail('meetYourGuideHeading')}</h2>
+                  <div className="bg-[#fafaf9] rounded-2xl border border-neutral-100 p-5 sm:p-6">
+                    <div className="flex items-start gap-4 mb-5">
+                      <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                        <Image src={guideAvatarUrl} alt={guide.name} fill sizes="64px" className="object-cover" />
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="font-semibold text-lg text-neutral-900 truncate">{guide.name}</h3>
+                        {guide.tagline && <p className="text-sm text-neutral-600">{guide.tagline}</p>}
+                        <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                          {Boolean(guide.totalReviews) && <StarRating rating={guide.overallRating || 0} size="sm" />}
+                          {guide.isOfficiallyLicensed && (
+                            <Badge variant="solid" icon={<ShieldCheck className="w-3.5 h-3.5" />}>
+                              {tDetail('guideLicensedBadge')}
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-3">
+                      <NavLink
+                        href={`/guides/${guide.slug}`}
+                        className="flex-1 inline-flex items-center justify-center h-11 rounded-xl border-2 text-sm font-semibold transition-colors"
+                        style={{ borderColor: ACCENT_GREEN, color: ACCENT_GREEN }}
+                      >
+                        {tDetail('viewGuideProfileCta')}
+                      </NavLink>
+                      {!showGuideInquiryForm && (
+                        <button
+                          type="button"
+                          onClick={() => setShowGuideInquiryForm(true)}
+                          className="flex-1 inline-flex items-center justify-center gap-2 h-11 rounded-xl text-white text-sm font-semibold transition-opacity hover:opacity-90"
+                          style={{ backgroundColor: ACCENT_GREEN }}
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                          {tDetail('askGuideAboutTourCta')}
+                        </button>
+                      )}
+                    </div>
+
+                    {showGuideInquiryForm && (
+                      <div className="mt-4 pt-4 border-t border-neutral-200">
+                        <GuideInquiryForm
+                          guideName={guide.name}
+                          guideSlug={guide.slug}
+                          guideId={guide.id}
+                          initialMessage={tDetail('guideInquiryPrefill', { title: activity.title })}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )
+            })()}
 
             {/* Reviews Section - Mobile Carousel / Desktop Grid */}
             {hasReviews && (
@@ -1776,6 +1845,13 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                   )}
                 </div>
               </div>
+
+              {/* Guided By */}
+              {typeof activity.guide === 'object' && activity.guide && (
+                <div className="mt-4">
+                  <GuidedByBadge guide={activity.guide as Guide} />
+                </div>
+              )}
 
               {/* WhatsApp CTA */}
               <a

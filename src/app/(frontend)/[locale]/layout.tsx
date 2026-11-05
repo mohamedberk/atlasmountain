@@ -1,5 +1,5 @@
 import React from 'react'
-import { DM_Serif_Text, Outfit } from 'next/font/google'
+import { Outfit } from 'next/font/google'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { setRequestLocale, getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -19,14 +19,6 @@ const outfit = Outfit({
   display: 'swap',
   variable: '--font-body',
   weight: ['300', '400', '500', '600', '700', '800'],
-})
-
-// Display font for headlines - DM Serif Text (elegant serif)
-const dmSerifText = DM_Serif_Text({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-display',
 })
 
 export function generateStaticParams() {
@@ -100,7 +92,7 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale} className={`${outfit.variable} ${dmSerifText.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={outfit.variable} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
         <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />

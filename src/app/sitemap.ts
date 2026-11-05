@@ -16,7 +16,7 @@ export const revalidate = 3600
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const payload = await getPayload({ config })
 
-  const [activitiesResult, blogPostsResult, categoriesResult] = await Promise.all([
+  const [activitiesResult, blogPostsResult, categoriesResult, guidesResult] = await Promise.all([
     payload.find({
       collection: 'activities',
       where: { isActive: { equals: true } },
@@ -37,11 +37,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       limit: 0,
       depth: 0,
     }),
+    payload.find({
+      collection: 'guides',
+      where: { isActive: { equals: true } },
+      limit: 0,
+      depth: 0,
+    }),
   ])
 
   const staticPages = [
     { path: '', priority: 1.0, changeFrequency: 'weekly' as const },
     { path: '/activities', priority: 0.9, changeFrequency: 'weekly' as const },
+    { path: '/guides', priority: 0.8, changeFrequency: 'weekly' as const },
     { path: '/blog', priority: 0.8, changeFrequency: 'weekly' as const },
     { path: '/about', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/contact', priority: 0.7, changeFrequency: 'monthly' as const },
@@ -89,6 +96,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       sitemapEntries.push({
         url,
         lastModified: new Date(activity.updatedAt),
+        changeFrequency: 'weekly',
+        priority: 0.8,
+        alternates: {
+          languages: alternates,
+        },
+      })
+    }
+  }
+
+  // Add guides for each locale
+  for (const guide of guidesResult.docs) {
+    if (!guide.slug) continue
+
+    const safeSlug = encodeURIComponent(guide.slug)
+    for (const locale of locales) {
+      const url = `${BASE_URL}/${locale}/guides/${safeSlug}`
+
+      const alternates: Record<string, string> = {}
+      for (const altLocale of locales) {
+        alternates[altLocale] = `${BASE_URL}/${altLocale}/guides/${safeSlug}`
+      }
+
+      sitemapEntries.push({
+        url,
+        lastModified: new Date(guide.updatedAt),
         changeFrequency: 'weekly',
         priority: 0.8,
         alternates: {

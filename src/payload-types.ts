@@ -72,6 +72,8 @@ export interface Config {
     categories: Category;
     locations: Location;
     activities: Activity;
+    guides: Guide;
+    'guide-reviews': GuideReview;
     bookings: Booking;
     'blog-posts': BlogPost;
     'contact-submissions': ContactSubmission;
@@ -87,6 +89,8 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     locations: LocationsSelect<false> | LocationsSelect<true>;
     activities: ActivitiesSelect<false> | ActivitiesSelect<true>;
+    guides: GuidesSelect<false> | GuidesSelect<true>;
+    'guide-reviews': GuideReviewsSelect<false> | GuideReviewsSelect<true>;
     bookings: BookingsSelect<false> | BookingsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
@@ -244,7 +248,7 @@ export interface Category {
    * URL-friendly identifier (auto-generated from name)
    */
   slug: string;
-  type: 'activity' | 'transport';
+  type: 'activity' | 'transport' | 'guide-region';
   description?: string | null;
   /**
    * Select a Lucide icon for this category
@@ -571,6 +575,10 @@ export interface Activity {
       }[]
     | null;
   /**
+   * The local guide who leads this tour, if any
+   */
+  guide?: (string | null) | Guide;
+  /**
    * Optional: Override the auto-generated "About this activity" section. Leave empty to auto-generate from activity fields.
    */
   aboutSection?: {
@@ -658,6 +666,146 @@ export interface Activity {
    * Quick view of adult price
    */
   groupPrice?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage local tour guides
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides".
+ */
+export interface Guide {
+  id: string;
+  /**
+   * Overall rating from 0 to 5 (e.g., 4.9)
+   */
+  overallRating?: number | null;
+  /**
+   * Total number of reviews (e.g., 12)
+   */
+  totalReviews?: number | null;
+  name: string;
+  /**
+   * URL-friendly identifier
+   */
+  slug: string;
+  /**
+   * Short line under the name (e.g., "Marrakech local, mountain lover")
+   */
+  tagline?: string | null;
+  bio?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Languages this guide speaks
+   */
+  languagesSpoken?:
+    | {
+        language:
+          | 'English'
+          | 'Francais'
+          | 'Espanol'
+          | 'German'
+          | 'Arabic'
+          | 'Italian'
+          | 'Portuguese'
+          | 'Dutch'
+          | 'Russian'
+          | 'Chinese'
+          | 'Japanese';
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Year this guide started hosting (e.g., 2018)
+   */
+  hostingSince?: number | null;
+  /**
+   * Where this guide operates (e.g., Marrakech, Mount Toubkal) — used for the category filter on the guides page
+   */
+  regions?: (string | Category)[] | null;
+  /**
+   * Main profile photo
+   */
+  avatar: string | Media;
+  /**
+   * Extra photos shown in the profile carousel
+   */
+  gallery?:
+    | {
+        media: string | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Tours this guide leads
+   */
+  tours?: (string | Activity)[] | null;
+  /**
+   * "Verified Local" badge
+   */
+  isVerifiedLocal?: boolean | null;
+  /**
+   * "Responds Quickly" badge
+   */
+  respondsQuickly?: boolean | null;
+  /**
+   * Only check this if the guide holds an official Ministry of Tourism license. Shows the "Officially Licensed Guide" badge.
+   */
+  isOfficiallyLicensed?: boolean | null;
+  /**
+   * Official license number, shown next to the licensed badge
+   */
+  licenseNumber?: string | null;
+  cancellationNote?: string | null;
+  /**
+   * Show this guide on the website
+   */
+  isActive?: boolean | null;
+  isFeatured?: boolean | null;
+  displayOrder?: number | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    keywords?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Traveler reviews for individual guides
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guide-reviews".
+ */
+export interface GuideReview {
+  id: string;
+  guide: string | Guide;
+  reviewerName: string;
+  rating: number;
+  reviewerAvatar?: (string | null) | Media;
+  date: string;
+  title?: string | null;
+  text: string;
+  /**
+   * Which tour this review is about, shown as a tag under the review
+   */
+  relatedTour?: (string | null) | Activity;
+  isPublished?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -865,6 +1013,12 @@ export interface ContactSubmission {
   phone?: string | null;
   subject: string;
   message: string;
+  /**
+   * Set when this inquiry came from a guide profile page
+   */
+  guideName?: string | null;
+  guideSlug?: string | null;
+  guideId?: string | null;
   status?: ('new' | 'in-progress' | 'replied' | 'closed') | null;
   /**
    * Internal notes about this submission
@@ -922,6 +1076,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'activities';
         value: string | Activity;
+      } | null)
+    | ({
+        relationTo: 'guides';
+        value: string | Guide;
+      } | null)
+    | ({
+        relationTo: 'guide-reviews';
+        value: string | GuideReview;
       } | null)
     | ({
         relationTo: 'bookings';
@@ -1184,6 +1346,7 @@ export interface ActivitiesSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  guide?: T;
   aboutSection?:
     | T
     | {
@@ -1232,6 +1395,69 @@ export interface ActivitiesSelect<T extends boolean = true> {
             };
       };
   groupPrice?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides_select".
+ */
+export interface GuidesSelect<T extends boolean = true> {
+  overallRating?: T;
+  totalReviews?: T;
+  name?: T;
+  slug?: T;
+  tagline?: T;
+  bio?: T;
+  languagesSpoken?:
+    | T
+    | {
+        language?: T;
+        id?: T;
+      };
+  hostingSince?: T;
+  regions?: T;
+  avatar?: T;
+  gallery?:
+    | T
+    | {
+        media?: T;
+        caption?: T;
+        id?: T;
+      };
+  tours?: T;
+  isVerifiedLocal?: T;
+  respondsQuickly?: T;
+  isOfficiallyLicensed?: T;
+  licenseNumber?: T;
+  cancellationNote?: T;
+  isActive?: T;
+  isFeatured?: T;
+  displayOrder?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        keywords?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guide-reviews_select".
+ */
+export interface GuideReviewsSelect<T extends boolean = true> {
+  guide?: T;
+  reviewerName?: T;
+  rating?: T;
+  reviewerAvatar?: T;
+  date?: T;
+  title?: T;
+  text?: T;
+  relatedTour?: T;
+  isPublished?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1341,6 +1567,9 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
   phone?: T;
   subject?: T;
   message?: T;
+  guideName?: T;
+  guideSlug?: T;
+  guideId?: T;
   status?: T;
   notes?: T;
   source?: T;

@@ -42,6 +42,8 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
 
   const categoriesTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const activitiesTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const categoriesScrollRef = useRef<HTMLDivElement>(null)
+  const [categoriesScrollBar, setCategoriesScrollBar] = useState({ width: 100, left: 0, visible: false })
 
   const t = useTranslations('nav')
   const tChrome = useTranslations('chrome')
@@ -53,6 +55,7 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
 
   const mainNavLinks = [
     { name: t('home'), href: '/' },
+    { name: t('guides'), href: '/guides' },
     { name: t('about'), href: '/about' },
   ]
 
@@ -96,6 +99,32 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Track horizontal scroll position of the categories row to drive the always-visible scroll bar
+  const updateCategoriesScrollBar = () => {
+    const el = categoriesScrollRef.current
+    if (!el) return
+    const { scrollWidth, clientWidth, scrollLeft } = el
+    const isScrollable = scrollWidth > clientWidth + 1
+    const widthPercent = isScrollable ? (clientWidth / scrollWidth) * 100 : 100
+    const maxScrollLeft = scrollWidth - clientWidth
+    const leftPercent = isScrollable ? (scrollLeft / maxScrollLeft) * (100 - widthPercent) : 0
+    setCategoriesScrollBar({ width: widthPercent, left: leftPercent, visible: isScrollable })
+  }
+
+  useEffect(() => {
+    if (!isCategoriesOpen) return
+    const el = categoriesScrollRef.current
+    if (!el) return
+
+    updateCategoriesScrollBar()
+    el.addEventListener('scroll', updateCategoriesScrollBar, { passive: true })
+    window.addEventListener('resize', updateCategoriesScrollBar)
+    return () => {
+      el.removeEventListener('scroll', updateCategoriesScrollBar)
+      window.removeEventListener('resize', updateCategoriesScrollBar)
+    }
+  }, [isCategoriesOpen, navbarData])
 
   // Handle mouse enter on Tours & Categories
   const handleCategoriesMouseEnter = () => {
@@ -218,7 +247,10 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
                   >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                       {/* Categories Row - Horizontally Scrollable */}
-                      <div className="overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-transparent">
+                      <div
+                        ref={categoriesScrollRef}
+                        className="overflow-x-auto pb-2 scrollbar-hide"
+                      >
                       <div className="flex items-stretch justify-center gap-6 min-w-max px-1">
                         {navbarData.categories.map((category) => (
                           <div
@@ -261,6 +293,19 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
                         ))}
                       </div>
                       </div>
+
+                      {/* Always-visible scroll indicator for the categories row */}
+                      {categoriesScrollBar.visible && (
+                        <div className="relative h-1 mt-1 mb-1 mx-1 rounded-full bg-neutral-200 overflow-hidden">
+                          <div
+                            className="absolute top-0 h-full rounded-full bg-neutral-400"
+                            style={{
+                              width: `${categoriesScrollBar.width}%`,
+                              left: `${categoriesScrollBar.left}%`,
+                            }}
+                          />
+                        </div>
+                      )}
 
                       {/* Activities Row - Horizontally Scrollable */}
                       <AnimatePresence mode="wait">

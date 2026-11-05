@@ -2,7 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { cache } from 'react'
 import { unstable_cache } from 'next/cache'
-import type { Activity, Category, Location, BlogPost } from '@/payload-types'
+import type { Activity, Category, Location, BlogPost, Guide, GuideReview } from '@/payload-types'
 import { locales, type Locale } from '@/i18n/config'
 
 /**
@@ -108,6 +108,78 @@ export const getActivityById = (id: string | number, locale: Locale = 'en') =>
   )()
 
 // ============================================
+// GUIDES
+// ============================================
+
+/**
+ * Fetch all active guides, sorted by displayOrder
+ */
+export const getGuides = (locale: Locale = 'en') =>
+  unstable_cache(
+    async () => {
+      const payload = await getPayloadClient()
+      return payload.find({
+        collection: 'guides',
+        where: { isActive: { equals: true } },
+        sort: 'displayOrder',
+        locale,
+        depth: 1,
+        limit: 100,
+      })
+    },
+    ['guides', locale],
+    { tags: ['guides'], revalidate: 3600 }
+  )()
+
+/**
+ * Fetch a single guide by slug, with tours resolved deep enough
+ * to render each tour's featured image in one query
+ */
+export const getGuideBySlug = (slug: string, locale: Locale = 'en') =>
+  unstable_cache(
+    async () => {
+      const payload = await getPayloadClient()
+      const result = await payload.find({
+        collection: 'guides',
+        where: { slug: { equals: slug } },
+        locale,
+        depth: 2,
+        limit: 1,
+        pagination: false,
+      })
+      return result.docs[0] || null
+    },
+    ['guide', slug, locale],
+    { tags: ['guides'], revalidate: 3600 }
+  )()
+
+/**
+ * Fetch published reviews for a guide, newest first
+ * Kept separate from getGuideBySlug so reviews can be sorted/paginated independently
+ */
+export const getGuideReviews = (guideId: string | number, locale: Locale = 'en') =>
+  unstable_cache(
+    async () => {
+      const payload = await getPayloadClient()
+      return payload.find({
+        collection: 'guide-reviews',
+        where: {
+          and: [
+            { guide: { equals: guideId } },
+            { isPublished: { equals: true } },
+          ],
+        },
+        sort: '-date',
+        locale,
+        depth: 1,
+        limit: 50,
+      })
+    },
+    ['guide-reviews', String(guideId), locale],
+    { tags: ['guides'], revalidate: 3600 }
+  )()
+
+// ============================================
 // CATEGORIES
 // ============================================
 
@@ -115,7 +187,7 @@ export const getActivityById = (id: string | number, locale: Locale = 'en') =>
  * Fetch categories by type
  * @param type - 'activity' or 'transport'
  */
-export const getCategories = (type: 'activity' | 'transport', locale: Locale = 'en') =>
+export const getCategories = (type: 'activity' | 'transport' | 'guide-region', locale: Locale = 'en') =>
   unstable_cache(
     async () => {
       const payload = await getPayloadClient()
@@ -771,4 +843,4 @@ export const getSiteSettings = (locale: Locale = 'en') =>
   )()
 
 // Export types for convenience
-export type { Activity, Category, Location, BlogPost }
+export type { Activity, Category, Location, BlogPost, Guide, GuideReview }

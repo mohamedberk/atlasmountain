@@ -26,6 +26,7 @@ interface FAQData {
 
 interface Props {
   faqData?: FAQData | null
+  headingFontClassName?: string
 }
 
 // Animation variants
@@ -53,7 +54,7 @@ const staggerContainer = {
   },
 }
 
-export function FAQSection({ faqData }: Props) {
+export function FAQSection({ faqData, headingFontClassName = 'font-display' }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
   const tFaq = useTranslations('faqSection')
 
@@ -89,7 +90,7 @@ export function FAQSection({ faqData }: Props) {
           className="text-center mb-12"
         >
           <motion.div variants={fadeInUp} custom={0}>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-neutral-900 mb-4">
+            <h2 className={`${headingFontClassName} text-3xl md:text-4xl lg:text-5xl text-neutral-900 mb-4`}>
               {title} <span style={{ color: ACCENT_GREEN }}>{titleHighlight}</span>
             </h2>
             <p className="text-neutral-600 max-w-2xl mx-auto">
@@ -140,7 +141,7 @@ export function FAQSection({ faqData }: Props) {
                         {String(index + 1).padStart(2, '0')}
                       </span>
                     </div>
-                    <h3 className="font-display text-sm sm:text-base md:text-lg font-semibold text-neutral-900 pr-2 sm:pr-4">
+                    <h3 className={`${headingFontClassName} text-sm sm:text-base md:text-lg font-semibold text-neutral-900 pr-2 sm:pr-4`}>
                       {faq.question}
                     </h3>
                   </div>

@@ -18,6 +18,8 @@ import { Media } from './collections/Media'
 import { Categories } from './collections/Categories'
 import { Locations } from './collections/Locations'
 import { Activities } from './collections/Activities'
+import { Guides } from './collections/Guides'
+import { GuideReviews } from './collections/GuideReviews'
 import { Bookings } from './collections/Bookings'
 import { BlogPosts } from './collections/BlogPosts'
 import { ContactSubmissions } from './collections/ContactSubmissions'
@@ -60,6 +62,8 @@ export default buildConfig({
     Categories,
     Locations,
     Activities,
+    Guides,
+    GuideReviews,
     Bookings,
     BlogPosts,
     ContactSubmissions,

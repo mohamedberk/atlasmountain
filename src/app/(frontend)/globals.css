@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  /* Display font - DM Serif Text for headlines */
-  --font-display: 'DM Serif Text', Georgia, serif;
+  /* Display font - Helvetica Neue for headlines */
+  --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   /* Primary brand color - Brand Red */
   --primary: #ff2828;
@@ -63,12 +63,12 @@
   h1, h2, h3, h4, h5, h6,
   h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
     @apply tracking-tight;
-    font-family: var(--font-display), Georgia, serif;
+    font-family: var(--font-display), Helvetica, Arial, sans-serif;
   }
 
-  /* Display font class - DM Serif Text */
+  /* Display font class - Helvetica Neue */
   .font-display {
-    font-family: var(--font-display), Georgia, serif;
+    font-family: var(--font-display), Helvetica, Arial, sans-serif;
   }
 }
 

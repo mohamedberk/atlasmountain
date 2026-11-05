@@ -5,7 +5,7 @@ export const ContactSubmissions: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     group: 'Forms',
-    defaultColumns: ['name', 'email', 'subject', 'status', 'createdAt'],
+    defaultColumns: ['name', 'email', 'subject', 'guideName', 'status', 'createdAt'],
     description: 'Contact form submissions from the website',
   },
   access: {
@@ -56,6 +56,29 @@ export const ContactSubmissions: CollectionConfig = {
       name: 'message',
       type: 'textarea',
       required: true,
+    },
+    {
+      name: 'guideName',
+      type: 'text',
+      admin: {
+        readOnly: true,
+        description: 'Set when this inquiry came from a guide profile page',
+      },
+    },
+    {
+      name: 'guideSlug',
+      type: 'text',
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: 'guideId',
+      type: 'text',
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+      },
     },
     {
       name: 'status',

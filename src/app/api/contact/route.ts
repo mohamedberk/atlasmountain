@@ -34,7 +34,7 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, phone, subject, message, website, captchaToken } = body
+    const { name, email, phone, subject, message, website, captchaToken, guideName, guideSlug, guideId } = body
 
     // Honeypot — real users never fill this hidden field
     if (typeof website === 'string' && website.trim() !== '') {
@@ -91,6 +91,9 @@ export async function POST(request: NextRequest) {
         phone: phone || '',
         subject,
         message,
+        guideName: guideName || undefined,
+        guideSlug: guideSlug || undefined,
+        guideId: guideId ? String(guideId) : undefined,
         status: 'new',
         source: 'website',
         userAgent,
