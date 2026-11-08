@@ -5,9 +5,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
-import { GuidedByBadge } from '@/components/guides/guided-by-badge'
-import { GuideInquiryForm } from '@/components/guides/guide-inquiry-form'
-import { Badge } from '@/components/ui/badge'
+import { GuideOptionCard } from '@/components/guides/guide-option-card'
+import { GuideProfileModal } from '@/components/guides/guide-profile-modal'
 import type { Guide } from '@/payload-types'
 import {
   Star,
@@ -42,9 +41,7 @@ import {
   Ticket,
   Compass,
   Globe,
-  Lightbulb,
-  ShieldCheck,
-  MessageCircle
+  Lightbulb
 } from 'lucide-react'
 import { useTranslations, useLocale } from 'next-intl'
 import Lightbox from 'yet-another-react-lightbox'
@@ -311,7 +308,8 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
   const [children, setChildren] = useState(0)
   const [showParticipants, setShowParticipants] = useState(false)
   const [reviewCarouselIndex, setReviewCarouselIndex] = useState(0)
-  const [showGuideInquiryForm, setShowGuideInquiryForm] = useState(false)
+  const [showGuideModal, setShowGuideModal] = useState(false)
+  const [selectedGuide, setSelectedGuide] = useState<Guide | null>(null)
 
   // Mobile collapsible sections state - default to expanded on mobile for better UX
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
@@ -466,10 +464,14 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
       tieredPricingEnabled: tieredPricingEnabled || undefined,
       tierInfo: applicableTier || undefined,
       allTiers: tieredPricingEnabled ? tieredPricingTiers : undefined,
+      guideId: selectedGuide ? String(selectedGuide.id) : undefined,
+      guideName: selectedGuide?.name,
+      guideSlug: selectedGuide?.slug,
+      guideAvatar: selectedGuide ? getImageUrl(selectedGuide.avatar) || undefined : undefined,
     }
     addItem(cartItem)
     router.push(`/${locale}/checkout/${activity.slug}`)
-  }, [activity, isCustomNoteMode, customPricingNote, isPrivateMode, privateBasePrice, childPrice, adults, children, calculateTotal, privateMinGuests, privateMaxGuests, privateAdditionalGuestPrice, addItem, router, locale, applicableTier, tieredPricingEnabled, tieredPricingTiers])
+  }, [activity, isCustomNoteMode, customPricingNote, isPrivateMode, privateBasePrice, childPrice, adults, children, calculateTotal, privateMinGuests, privateMaxGuests, privateAdditionalGuestPrice, addItem, router, locale, applicableTier, tieredPricingEnabled, tieredPricingTiers, selectedGuide])
 
   const handleShare = useCallback(async () => {
     const url = window.location.href
@@ -551,17 +553,17 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
         transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
         className="fixed bottom-0 left-0 right-0 z-[60] bg-white border-t border-neutral-200 shadow-md lg:hidden"
       >
-        <div className="px-4 py-4">
+        <div className="px-4 py-2.5">
           <div className="flex items-center justify-between gap-4">
             {!isCustomNoteMode && (
               <div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
-                  <span className="text-sm text-neutral-500">{isPrivateMode ? tDetail('totalLabel') : tCommon('perPerson')}</span>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-lg font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
+                  <span className="text-xs text-neutral-500">{isPrivateMode ? tDetail('totalLabel') : tCommon('perPerson')}</span>
                 </div>
                 {activity.isFeatured && (
-                  <div className="mt-1">
-                    <span className="inline-block px-2.5 py-1 text-white text-xs font-semibold rounded" style={{ backgroundColor: ACCENT_GREEN }}>
+                  <div className="mt-0.5">
+                    <span className="inline-block px-2 py-0.5 text-white text-[10px] font-semibold rounded" style={{ backgroundColor: ACCENT_GREEN }}>
                       {tCommon('featured')}
                     </span>
                   </div>
@@ -572,7 +574,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
               onClick={handleAddToCart}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className={`${isCustomNoteMode ? 'w-full' : 'flex-1 max-w-[200px]'} px-6 py-3.5 text-white font-bold text-base rounded-xl transition-all shadow-sm hover:shadow-md`}
+              className={`${isCustomNoteMode ? 'w-full' : 'flex-1 max-w-[200px]'} px-6 py-2.5 text-white font-bold text-sm rounded-xl transition-all shadow-sm hover:shadow-md`}
               style={{ backgroundColor: ACCENT_GREEN }}
             >
               {tDetail('checkAvailabilityButton')}
@@ -628,27 +630,27 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
       {/* Breadcrumb spacer - maintains spacing without visible content */}
       <div className="bg-neutral-50 border-b border-neutral-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
-          {/* Empty spacer to maintain consistent layout */}
+          {/* Empty spacer to maintain consistent layout - also clears the fixed navbar */}
           <div className="h-5" />
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 lg:pt-8 pb-32 lg:pb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 sm:pt-6 lg:pt-8 pb-24 lg:pb-16">
         {/* Two Column Layout */}
         <div className="grid lg:grid-cols-[1fr_380px] gap-8 lg:gap-12">
           {/* Left Column - Content */}
-          <div className="space-y-8">
+          <div className="space-y-4 sm:space-y-8">
             {/* Image Gallery */}
             <motion.div
               variants={scaleIn}
               initial="hidden"
               animate="visible"
-              className="relative"
+              className="relative -mx-4 sm:mx-0"
             >
               {/* Main Image */}
               <div
-                className="relative aspect-[3/4] sm:aspect-[16/9] rounded-2xl overflow-hidden cursor-pointer group shadow-[0_1px_4px_rgba(0,0,0,0.02)]"
+                className="relative h-[415px] sm:h-auto sm:aspect-[16/9] rounded-none sm:rounded-2xl overflow-hidden cursor-pointer group shadow-[0_1px_4px_rgba(0,0,0,0.02)]"
                 onClick={() => setIsGalleryOpen(true)}
               >
                 <AnimatePresence mode="popLayout" initial={false}>
@@ -771,20 +773,20 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
               initial="hidden"
               animate="visible"
               custom={0.2}
-              className="space-y-4"
+              className="space-y-2 sm:space-y-4"
             >
               {/* Top Rated Badge */}
               {overallRating && overallRating >= 4.5 && (
-                <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold text-white" style={{ backgroundColor: ACCENT_GREEN }}>
-                    <Award className="w-4 h-4" />
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold text-white" style={{ backgroundColor: ACCENT_GREEN }}>
+                    <Award className="w-3 h-3 sm:w-4 sm:h-4" />
                     {tDetail('topRated')}
                   </span>
-                  <div className="flex items-center gap-1">
-                    <Star className="w-5 h-5 fill-[#FFB800] text-[#FFB800]" />
-                    <span className="font-bold text-neutral-900 text-lg">{overallRating}</span>
+                  <div className="flex items-center gap-0.5 sm:gap-1">
+                    <Star className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-[#FFB800] text-[#FFB800]" />
+                    <span className="font-bold text-neutral-900 text-sm sm:text-lg">{overallRating}</span>
                     {totalReviews && (
-                      <span className="text-neutral-500">({totalReviews})</span>
+                      <span className="text-neutral-500 text-xs sm:text-base">({totalReviews})</span>
                     )}
                   </div>
                 </div>
@@ -1012,65 +1014,39 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
               </motion.div>
             )}
 
-            {/* Meet Your Guide */}
+            {/* Choose a local guide — optional */}
             {typeof activity.guide === 'object' && activity.guide && (() => {
               const guide = activity.guide as Guide
-              const guideAvatarUrl = getImageUrl(guide.avatar) || '/placeholder-activity.jpg'
               return (
-                <div className="space-y-4">
-                  <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{tDetail('meetYourGuideHeading')}</h2>
-                  <div className="bg-[#fafaf9] rounded-2xl border border-neutral-100 p-5 sm:p-6">
-                    <div className="flex items-start gap-4 mb-5">
-                      <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
-                        <Image src={guideAvatarUrl} alt={guide.name} fill sizes="64px" className="object-cover" />
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="font-semibold text-lg text-neutral-900 truncate">{guide.name}</h3>
-                        {guide.tagline && <p className="text-sm text-neutral-600">{guide.tagline}</p>}
-                        <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-                          {Boolean(guide.totalReviews) && <StarRating rating={guide.overallRating || 0} size="sm" />}
-                          {guide.isOfficiallyLicensed && (
-                            <Badge variant="solid" icon={<ShieldCheck className="w-3.5 h-3.5" />}>
-                              {tDetail('guideLicensedBadge')}
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-3">
-                      <NavLink
-                        href={`/guides/${guide.slug}`}
-                        className="flex-1 inline-flex items-center justify-center h-11 rounded-xl border-2 text-sm font-semibold transition-colors"
-                        style={{ borderColor: ACCENT_GREEN, color: ACCENT_GREEN }}
-                      >
-                        {tDetail('viewGuideProfileCta')}
-                      </NavLink>
-                      {!showGuideInquiryForm && (
-                        <button
-                          type="button"
-                          onClick={() => setShowGuideInquiryForm(true)}
-                          className="flex-1 inline-flex items-center justify-center gap-2 h-11 rounded-xl text-white text-sm font-semibold transition-opacity hover:opacity-90"
-                          style={{ backgroundColor: ACCENT_GREEN }}
-                        >
-                          <MessageCircle className="w-4 h-4" />
-                          {tDetail('askGuideAboutTourCta')}
-                        </button>
-                      )}
-                    </div>
-
-                    {showGuideInquiryForm && (
-                      <div className="mt-4 pt-4 border-t border-neutral-200">
-                        <GuideInquiryForm
-                          guideName={guide.name}
-                          guideSlug={guide.slug}
-                          guideId={guide.id}
-                          initialMessage={tDetail('guideInquiryPrefill', { title: activity.title })}
-                        />
-                      </div>
-                    )}
+                <motion.div
+                  variants={staggerContainer}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-50px' }}
+                  className="space-y-5"
+                >
+                  <div>
+                    <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{tDetail('chooseGuideHeading')}</h2>
+                    <p className="text-sm text-neutral-500 mt-1">{tDetail('chooseGuideSubtitle')}</p>
                   </div>
-                </div>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <GuideOptionCard
+                      guide={guide}
+                      isSelected={selectedGuide?.id === guide.id}
+                      onOpenProfile={() => setShowGuideModal(true)}
+                    />
+                  </div>
+                  <GuideProfileModal
+                    guide={guide}
+                    isOpen={showGuideModal}
+                    isSelected={selectedGuide?.id === guide.id}
+                    onClose={() => setShowGuideModal(false)}
+                    onChoose={(guide) => {
+                      setSelectedGuide(guide)
+                      setShowGuideModal(false)
+                    }}
+                  />
+                </motion.div>
               )
             })()}
 
@@ -1846,10 +1822,23 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                 </div>
               </div>
 
-              {/* Guided By */}
-              {typeof activity.guide === 'object' && activity.guide && (
-                <div className="mt-4">
-                  <GuidedByBadge guide={activity.guide as Guide} />
+              {/* Guided By — only appears once the client actually picks a guide */}
+              {selectedGuide && (
+                <div className="mt-4 flex items-center gap-3 p-3 rounded-xl border" style={{ borderColor: `${ACCENT_GREEN}30`, backgroundColor: `${ACCENT_GREEN}08` }}>
+                  <div className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+                    <Image src={getImageUrl(selectedGuide.avatar) || '/placeholder-activity.jpg'} alt={selectedGuide.name} fill sizes="36px" className="object-cover" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs text-neutral-500">{tDetail('yourGuideLabel')}</p>
+                    <p className="text-sm font-semibold text-neutral-900 truncate">{selectedGuide.name}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedGuide(null)}
+                    className="text-xs text-neutral-500 hover:text-neutral-700 underline underline-offset-2 flex-shrink-0"
+                  >
+                    {tDetail('removeGuideCta')}
+                  </button>
                 </div>
               )}
 

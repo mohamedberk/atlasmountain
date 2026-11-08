@@ -2,7 +2,7 @@
 
 import { memo } from 'react'
 import Image from 'next/image'
-import { Calendar, Shield, Check, Clock } from 'lucide-react'
+import { Calendar, Shield, Check, Clock, User } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { format } from 'date-fns'
 import type { CartItem, ActivityCartItem } from '@/context/CartContext'
@@ -94,6 +94,12 @@ export const Sidebar = memo(function Sidebar({
                 </div>
                 {guestDisplay && (
                   <p className="text-xs text-neutral-500">{guestDisplay}</p>
+                )}
+                {item.type === 'activity' && (item as ActivityCartItem).guideName && (
+                  <p className="text-xs text-neutral-500 flex items-center gap-1 mt-0.5">
+                    <User className="w-3 h-3" />
+                    {tSidebar('guideLabel')} {(item as ActivityCartItem).guideName}
+                  </p>
                 )}
                 <p className="text-sm text-secondary font-medium">
                   €{getItemPrice(item)}

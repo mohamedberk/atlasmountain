@@ -39,6 +39,44 @@ export const getActivities = (locale: Locale = 'en') =>
   )()
 
 /**
+ * Build a search index mapping activity id -> lowercased title text across
+ * every locale. Lets the activities search box match a query typed in a
+ * different language than the one the page is currently rendering (title
+ * is a `localized` field, so a per-locale fetch only returns one language).
+ */
+export const getActivitiesSearchIndex = () =>
+  unstable_cache(
+    async () => {
+      const payload = await getPayloadClient()
+      const result = await payload.find({
+        collection: 'activities',
+        where: { isActive: { equals: true } },
+        locale: 'all',
+        depth: 0,
+        limit: 100,
+        select: { title: true },
+      })
+
+      const index: Record<string, string> = {}
+      for (const doc of result.docs) {
+        const rawTitle = doc.title as unknown
+        if (typeof rawTitle === 'string') {
+          index[String(doc.id)] = rawTitle.toLowerCase()
+        } else {
+          const titleByLocale = rawTitle as Partial<Record<Locale, string>> | undefined
+          index[String(doc.id)] = locales
+            .map((l) => titleByLocale?.[l] || '')
+            .join(' ')
+            .toLowerCase()
+        }
+      }
+      return index
+    },
+    ['activities-search-index'],
+    { tags: ['activities'], revalidate: 3600 }
+  )()
+
+/**
  * Fetch featured activities for homepage hero
  * Limited to 6, sorted by displayOrder
  */

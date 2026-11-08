@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { revalidateCollectionAfterChange, revalidateCollectionAfterDelete } from '@/hooks/revalidateOnChange'
+import { syncGuideToursAfterChange, syncGuideToursAfterDelete } from '@/hooks/syncGuideTours'
 
 export const Activities: CollectionConfig = {
   slug: 'activities',
@@ -42,8 +43,8 @@ export const Activities: CollectionConfig = {
     delete: ({ req: { user } }) => Boolean(user),
   },
   hooks: {
-    afterChange: [revalidateCollectionAfterChange],
-    afterDelete: [revalidateCollectionAfterDelete as any],
+    afterChange: [revalidateCollectionAfterChange, syncGuideToursAfterChange],
+    afterDelete: [revalidateCollectionAfterDelete as any, syncGuideToursAfterDelete],
   },
   fields: [
     {
@@ -88,8 +89,9 @@ export const Activities: CollectionConfig = {
               type: 'text',
               required: true,
               unique: true,
+              localized: true,
               admin: {
-                description: 'URL-friendly identifier',
+                description: 'URL-friendly identifier. Localized for SEO.',
               },
               hooks: {
                 beforeValidate: [
@@ -466,6 +468,9 @@ export const Activities: CollectionConfig = {
               hasMany: false,
               admin: {
                 description: 'The local guide who leads this tour, if any',
+                components: {
+                  Field: '@/components/admin/GuidePicker#GuidePickerField',
+                },
               },
             },
             {

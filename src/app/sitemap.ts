@@ -22,6 +22,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       where: { isActive: { equals: true } },
       limit: 0,
       depth: 0,
+      // slug is localized per language, so fetch every locale's value
+      // instead of only the default one
+      locale: 'all',
     }),
     payload.find({
       collection: 'blog-posts',
@@ -81,20 +84,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // Add activities for each locale
+  // `slug` is localized per language, so with `locale: 'all'` Payload
+  // returns it as a { [locale]: slug } map rather than a single string.
+  // Reusing one slug across every locale URL would 404 for any language
+  // whose translated slug differs from the default locale's.
   for (const activity of activitiesResult.docs) {
-    if (!activity.slug) continue
+    const slugByLocale = activity.slug as unknown as Partial<Record<(typeof locales)[number], string>>
+    const availableLocales = locales.filter((l) => Boolean(slugByLocale?.[l]))
 
-    const safeSlug = encodeURIComponent(activity.slug)
-    for (const locale of locales) {
-      const url = `${BASE_URL}/${locale}/activities/${safeSlug}`
+    if (availableLocales.length === 0) continue
 
-      const alternates: Record<string, string> = {}
-      for (const altLocale of locales) {
-        alternates[altLocale] = `${BASE_URL}/${altLocale}/activities/${safeSlug}`
-      }
+    const alternates: Record<string, string> = {}
+    for (const altLocale of availableLocales) {
+      alternates[altLocale] = `${BASE_URL}/${altLocale}/activities/${encodeURIComponent(slugByLocale[altLocale]!)}`
+    }
 
+    for (const locale of availableLocales) {
       sitemapEntries.push({
-        url,
+        url: alternates[locale],
         lastModified: new Date(activity.updatedAt),
         changeFrequency: 'weekly',
         priority: 0.8,

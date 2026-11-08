@@ -3,7 +3,7 @@ import { setRequestLocale } from 'next-intl/server'
 import { Metadata } from 'next'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
-import { getActivities, getCategories } from '@/lib/payload'
+import { getActivities, getCategories, getActivitiesSearchIndex } from '@/lib/payload'
 import type { Activity, Category } from '@/payload-types'
 import { ActivitiesPageClient } from './activities-page-client'
 import { defaultLocale, type Locale } from '@/i18n/config'
@@ -70,9 +70,10 @@ export default async function ActivitiesPage({
   setRequestLocale(locale)
 
   // Fetch all data from CMS in parallel
-  const [activitiesResult, categoriesResult] = await Promise.all([
+  const [activitiesResult, categoriesResult, searchIndex] = await Promise.all([
     getActivities(typedLocale),
     getCategories('activity', typedLocale),
+    getActivitiesSearchIndex(),
   ])
 
   // Extract docs from results
@@ -87,7 +88,7 @@ export default async function ActivitiesPage({
 
         {/* Activities Page Content */}
         <Suspense fallback={<div className="min-h-screen bg-[#f9f9fb] animate-pulse" />}>
-          <ActivitiesPageClient activities={activities} categories={categories} />
+          <ActivitiesPageClient activities={activities} categories={categories} searchIndex={searchIndex} />
         </Suspense>
 
         {/* Footer */}

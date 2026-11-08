@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { Menu, ChevronDown, ShoppingBag } from 'lucide-react'
+import { Menu, ChevronDown } from 'lucide-react'
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from '@/i18n/routing'
@@ -418,19 +418,6 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
 
           {/* Desktop Right Side */}
           <div className="hidden lg:flex items-center gap-3">
-            {/* Cart */}
-            <NavLink
-              href="/checkout"
-              className="relative flex items-center justify-center w-10 h-10 text-neutral-600 hover:text-neutral-900 rounded-xl hover:bg-neutral-100 transition-all"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              {cartItemCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[10px] font-semibold text-white bg-[#ff2828] rounded-full">
-                  {cartItemCount}
-                </span>
-              )}
-            </NavLink>
-
             {/* Book Now CTA */}
             <NavLink
               href={cartItemCount > 0 ? '/checkout' : '/activities'}
@@ -442,19 +429,6 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
 
           {/* Mobile Right Side */}
           <div className="flex lg:hidden items-center gap-2">
-            {/* Cart - Mobile */}
-            <NavLink
-              href="/checkout"
-              className="relative flex items-center justify-center w-10 h-10 text-neutral-600"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              {cartItemCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[10px] font-semibold text-white bg-[#ff2828] rounded-full">
-                  {cartItemCount}
-                </span>
-              )}
-            </NavLink>
-
             {/* Menu Button */}
             <button
               type="button"

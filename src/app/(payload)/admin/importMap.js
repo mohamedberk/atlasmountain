@@ -24,6 +24,7 @@ import { StrikethroughFeatureClient as StrikethroughFeatureClient_e70f5e05f09f93
 import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { GuidePickerField as GuidePickerField_3b74368c33e19ecfc2869391b2eb9a6f } from '@/components/admin/GuidePicker'
 import { WaypointMapPickerField as WaypointMapPickerField_b1ddfc876644f52122c328bea5fca4ce } from '@/components/admin/WaypointMapPicker'
 import { RouteCalculatorField as RouteCalculatorField_148239ffa402340e2a4bf1bf309bb73a } from '@/components/admin/RouteCalculator'
 import { BulkImageButton as BulkImageButton_9d479a78ff88524d985b84f8770a3353 } from '../../../components/BulkImageUploader/BulkImageButton'
@@ -62,6 +63,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#UnderlineFeatureClient": UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#BoldFeatureClient": BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "@/components/admin/GuidePicker#GuidePickerField": GuidePickerField_3b74368c33e19ecfc2869391b2eb9a6f,
   "@/components/admin/WaypointMapPicker#WaypointMapPickerField": WaypointMapPickerField_b1ddfc876644f52122c328bea5fca4ce,
   "@/components/admin/RouteCalculator#RouteCalculatorField": RouteCalculatorField_148239ffa402340e2a4bf1bf309bb73a,
   "/components/BulkImageUploader/BulkImageButton#BulkImageButton": BulkImageButton_9d479a78ff88524d985b84f8770a3353,

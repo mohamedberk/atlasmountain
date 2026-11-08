@@ -325,7 +325,7 @@ export interface Activity {
   totalReviews?: number | null;
   title: string;
   /**
-   * URL-friendly identifier
+   * URL-friendly identifier. Localized for SEO.
    */
   slug: string;
   description: {

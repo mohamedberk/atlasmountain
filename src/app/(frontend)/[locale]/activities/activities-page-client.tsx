@@ -2,9 +2,9 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
-  MapPin, Clock, Star, Search, ChevronDown, X,
+  MapPin, Clock, Star, Search, X,
   Grid3X3, LayoutList
 } from 'lucide-react'
 import { useTranslations, useLocale } from 'next-intl'
@@ -97,12 +97,13 @@ function getChildPrice(activity: Activity): number {
 interface Props {
   activities: Activity[]
   categories: Category[]
+  /** Maps activity id -> lowercased title text across every locale, so the search box can match a query typed in a different language than the page is currently showing. */
+  searchIndex: Record<string, string>
 }
 
-type SortOption = 'popular' | 'price-asc' | 'price-desc' | 'rating'
 type ViewMode = 'grid' | 'list'
 
-export function ActivitiesPageClient({ activities, categories }: Props) {
+export function ActivitiesPageClient({ activities, categories, searchIndex }: Props) {
   const t = useTranslations('activities')
   const tCommon = useTranslations('common')
   const tPage = useTranslations('activitiesPage')
@@ -119,8 +120,6 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
   // Filter states
   const [activeCategory, setActiveCategory] = useState(initialCategory)
   const [searchQuery, setSearchQuery] = useState('')
-  const [sortBy, setSortBy] = useState<SortOption>('popular')
-  const [showSortDropdown, setShowSortDropdown] = useState(false)
   const [viewMode, setViewMode] = useState<ViewMode>('grid')
 
   // Update active category when URL params change
@@ -141,35 +140,26 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
       })
     }
 
-    // Search filter
+    // Search filter (matches the title in every locale, not just the one being viewed)
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase()
       result = result.filter((activity) => {
         const title = activity.title?.toLowerCase() || ''
         const location = getLocationName(activity.location, tCommon('morocco'))?.toLowerCase() || ''
-        return title.includes(query) || location.includes(query)
+        const allLocaleTitles = searchIndex[String(activity.id)] || ''
+        return title.includes(query) || location.includes(query) || allLocaleTitles.includes(query)
       })
     }
 
-    // Sort
+    // Sort by featured first, then by displayOrder
     result.sort((a, b) => {
-      switch (sortBy) {
-        case 'price-asc':
-          return getPrice(a) - getPrice(b)
-        case 'price-desc':
-          return getPrice(b) - getPrice(a)
-        case 'rating':
-        case 'popular':
-        default:
-          // Sort by featured first, then by displayOrder
-          if (a.isFeatured && !b.isFeatured) return -1
-          if (!a.isFeatured && b.isFeatured) return 1
-          return (a.displayOrder || 99) - (b.displayOrder || 99)
-      }
+      if (a.isFeatured && !b.isFeatured) return -1
+      if (!a.isFeatured && b.isFeatured) return 1
+      return (a.displayOrder || 99) - (b.displayOrder || 99)
     })
 
     return result
-  }, [activities, activeCategory, searchQuery, sortBy])
+  }, [activities, activeCategory, searchQuery, searchIndex, tCommon])
 
   const handleAddToCart = (activity: Activity) => {
     const cartItem: ActivityCartItem = {
@@ -196,17 +186,10 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
     ...categories.slice(0, 5).map((cat) => ({ id: String(cat.id), name: cat.name, slug: cat.slug })),
   ]
 
-  const sortOptions = [
-    { value: 'popular', label: tPage('popular') },
-    { value: 'price-asc', label: tPage('priceLowToHigh') },
-    { value: 'price-desc', label: tPage('priceHighToLow') },
-    { value: 'rating', label: tPage('topRated') },
-  ]
-
   return (
     <div className="min-h-screen bg-[#fafaf9]">
       {/* Hero Header Section */}
-      <section className="relative pt-20 pb-6 md:pt-24 md:pb-8 bg-gradient-to-b from-white to-[#fafaf9]">
+      <section className="relative pt-20 pb-3 md:pt-24 md:pb-8 bg-gradient-to-b from-white to-[#fafaf9]">
         {/* Decorative gradient orbs */}
         <motion.div
           className="absolute top-10 -left-32 w-64 h-64 rounded-full blur-3xl pointer-events-none"
@@ -233,7 +216,7 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="flex items-center gap-2 text-sm mb-3"
+            className="flex items-center gap-2 text-xs md:text-sm mb-1.5 md:mb-3"
           >
             <NavLink href="/" className="text-neutral-500 hover:text-primary transition-colors">{tNav('home')}</NavLink>
             <span className="text-neutral-300">/</span>
@@ -245,26 +228,13 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="text-center mb-4"
+            className="text-center mb-2 md:mb-4"
           >
             <motion.div variants={fadeInUp} custom={0}>
-              <motion.div
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mb-2"
-                style={{ backgroundColor: `${ACCENT_GREEN}15` }}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <div className="w-1 h-4 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-                <span className="text-xs font-medium uppercase tracking-wider" style={{ color: ACCENT_GREEN }}>
-                  {tPage('discoverMorocco')}
-                </span>
-                <div className="w-1 h-4 rounded-full" style={{ backgroundColor: ACCENT_GREEN }} />
-              </motion.div>
-              <h1 className="font-display text-2xl md:text-3xl lg:text-4xl text-neutral-900 mb-2">
+              <h1 className="font-display text-xl md:text-3xl lg:text-4xl text-neutral-900 mb-1 md:mb-2">
                 {tPage('exploreOur')} <span style={{ color: ACCENT_GREEN }}>{tNav('activities')}</span>
               </h1>
-              <p className="text-neutral-600 text-base max-w-2xl mx-auto">
+              <p className="text-neutral-600 text-sm md:text-base max-w-2xl mx-auto">
                 {tPage('uniqueExperiences', { count: filteredActivities.length })}
               </p>
             </motion.div>
@@ -278,14 +248,14 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
             className="max-w-4xl mx-auto"
           >
             {/* Search Bar */}
-            <div className="relative mb-4">
+            <div className="relative mb-2.5 md:mb-4">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
               <input
                 type="text"
                 placeholder={tPage('searchActivities')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full h-11 pl-11 pr-11 rounded-xl border border-neutral-200 bg-white text-sm focus:outline-none focus:border-[#ff2828] focus:ring-2 focus:ring-[#ff2828]/20 transition-all shadow-sm"
+                className="w-full h-10 md:h-11 pl-11 pr-11 rounded-xl border border-neutral-200 bg-white text-sm focus:outline-none focus:border-[#ff2828] focus:ring-2 focus:ring-[#ff2828]/20 transition-all shadow-sm"
               />
               {searchQuery && (
                 <button
@@ -298,12 +268,12 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
             </div>
 
             {/* Category Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mb-3">
+            <div className="flex flex-wrap items-center justify-center gap-1.5 md:gap-2 mb-2 md:mb-3">
               {displayCategories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.slug)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  className={`px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 ${
                     activeCategory === category.slug
                       ? 'text-white shadow-sm'
                       : 'bg-white text-neutral-600 hover:bg-neutral-100 border border-neutral-200'
@@ -315,10 +285,9 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
               ))}
             </div>
 
-            {/* Sort Controls */}
-            <div className="flex items-center justify-center gap-3">
-              {/* View Toggle */}
-              <div className="hidden sm:flex items-center bg-white rounded-xl p-1 border border-neutral-200">
+            {/* View Toggle */}
+            <div className="hidden sm:flex items-center justify-center">
+              <div className="flex items-center bg-white rounded-xl p-1 border border-neutral-200">
                 <button
                   onClick={() => setViewMode('grid')}
                   className={`p-2 rounded-lg transition-all ${
@@ -336,59 +305,13 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
                   <LayoutList className="w-4 h-4" />
                 </button>
               </div>
-
-              {/* Sort Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() => setShowSortDropdown(!showSortDropdown)}
-                  className="flex items-center gap-2 h-10 px-4 rounded-xl bg-white border border-neutral-200 text-sm text-neutral-700 hover:border-neutral-300 transition-all"
-                >
-                  <span>{sortOptions.find(o => o.value === sortBy)?.label}</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${showSortDropdown ? 'rotate-180' : ''}`} />
-                </button>
-
-                <AnimatePresence>
-                  {showSortDropdown && (
-                    <>
-                      <div
-                        className="fixed inset-0 z-10"
-                        onClick={() => setShowSortDropdown(false)}
-                      />
-                      <motion.div
-                        initial={{ opacity: 0, y: -8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl border border-neutral-200 shadow-md z-20 overflow-hidden"
-                      >
-                        {sortOptions.map((option) => (
-                          <button
-                            key={option.value}
-                            onClick={() => {
-                              setSortBy(option.value as SortOption)
-                              setShowSortDropdown(false)
-                            }}
-                            className={`w-full px-4 py-3 text-left text-sm transition-colors ${
-                              sortBy === option.value
-                                ? 'bg-neutral-100 text-neutral-900 font-medium'
-                                : 'text-neutral-600 hover:bg-neutral-50'
-                            }`}
-                          >
-                            {option.label}
-                          </button>
-                        ))}
-                      </motion.div>
-                    </>
-                  )}
-                </AnimatePresence>
-              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Activities Grid Section */}
-      <section className="py-8 md:py-12 relative">
+      <section className="pt-4 pb-8 md:py-12 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {viewMode === 'grid' ? (
             <motion.div
@@ -663,7 +586,6 @@ export function ActivitiesPageClient({ activities, categories }: Props) {
                 onClick={() => {
                   setActiveCategory('all')
                   setSearchQuery('')
-                  setSortBy('popular')
                 }}
                 className="px-6 py-3 rounded-xl text-white font-semibold transition-colors"
                 style={{ backgroundColor: ACCENT_GREEN }}

@@ -452,11 +452,13 @@
     "whatsappCta": "Questions? WhatsApp us",
     "defaultDuration": "3-4 hours",
     "guidedBy": "Guided by",
-    "meetYourGuideHeading": "Meet Your Guide",
-    "guideLicensedBadge": "Licensed Guide",
     "viewGuideProfileCta": "View Profile",
-    "askGuideAboutTourCta": "Ask About This Tour",
-    "guideInquiryPrefill": "I'm interested in the \"{title}\" tour. Can you tell me more?"
+    "chooseGuideHeading": "Choose Your Guide",
+    "chooseGuideSubtitle": "Optional — pick a local guide for this tour, or skip this and book without one.",
+    "yourGuideLabel": "Your guide",
+    "removeGuideCta": "Remove",
+    "guideSelected": "Selected",
+    "chooseThisGuideCta": "Choose This Guide"
   },
   "guidesPage": {
     "breadcrumbLabel": "Guides",
@@ -625,7 +627,8 @@
     "transport": "Transport",
     "secureCheckout": "Secure checkout",
     "instantConfirmation": "Instant confirmation",
-    "freeCancellation": "Free cancellation 24h before"
+    "freeCancellation": "Free cancellation 24h before",
+    "guideLabel": "Guide:"
   },
   "bookingForm": {
     "adult": "Adult",

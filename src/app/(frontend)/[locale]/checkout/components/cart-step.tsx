@@ -3,7 +3,7 @@
 import { memo } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Trash2 } from 'lucide-react'
+import { Trash2, User } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import type { CartItem, ActivityCartItem } from '@/context/CartContext'
 import { getItemImage, getItemTitle, getItemPrice } from './checkout-types'
@@ -15,6 +15,7 @@ interface CartStepProps {
 
 export const CartStep = memo(function CartStep({ items, onRemoveItem }: CartStepProps) {
   const t = useTranslations('checkout')
+  const tSidebar = useTranslations('sidebarCheckout')
 
   return (
     <motion.div
@@ -52,6 +53,12 @@ export const CartStep = memo(function CartStep({ items, onRemoveItem }: CartStep
                   {item.type === 'activity' && (
                     <p className="text-xs text-neutral-500 mt-0.5">
                       {(item as ActivityCartItem).duration}
+                    </p>
+                  )}
+                  {item.type === 'activity' && (item as ActivityCartItem).guideName && (
+                    <p className="text-xs text-neutral-500 flex items-center gap-1 mt-0.5">
+                      <User className="w-3 h-3" />
+                      {tSidebar('guideLabel')} {(item as ActivityCartItem).guideName}
                     </p>
                   )}
                 </div>

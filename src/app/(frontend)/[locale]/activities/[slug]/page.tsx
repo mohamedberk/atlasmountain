@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
-import { getActivityBySlug, getActivities, getFeaturedActivities } from '@/lib/payload'
+import { getActivityBySlug, getActivities, getFeaturedActivities, getDocumentSlugsInAllLocales, findDocumentIdBySlug } from '@/lib/payload'
 import { ActivityDetailClient } from './activity-detail-client'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
@@ -51,6 +51,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const metaTitle = activity.seo?.metaTitle || `${activity.title} | Atlas Mountain Visit`
   const metaDescription = activity.seo?.metaDescription || activity.shortDescription || bookDescription
 
+  // The slug is localized per-locale in the CMS, so each language can have a
+  // different slug for the same activity. Build hreflang alternates from the
+  // actual per-locale slugs instead of assuming they match the current one.
+  const slugMap = await getDocumentSlugsInAllLocales('activities', activity.id)
+  const languages: Record<string, string> = {}
+  for (const [altLocale, altSlug] of Object.entries(slugMap)) {
+    languages[altLocale] = `/${altLocale}/activities/${altSlug}`
+  }
+
   return {
     title: metaTitle,
     description: metaDescription,
@@ -64,12 +73,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     alternates: {
       canonical: `${SITE_URL}/${locale}/activities/${slug}`,
-      languages: {
-        en: `/en/activities/${slug}`,
-        fr: `/fr/activities/${slug}`,
-        es: `/es/activities/${slug}`,
-        cs: `/cs/activities/${slug}`,
-      },
+      languages,
     },
   }
 }
@@ -87,6 +91,18 @@ export default async function ActivityPage({ params }: Props) {
   ])
 
   if (!activity) {
+    // The requested slug may be another locale's translated slug for an
+    // activity that *does* exist in this locale (e.g. an old/mis-generated
+    // link, or the language switcher carrying over the previous slug).
+    // Redirect to the correct localized URL instead of a dead-end 404.
+    const altId = await findDocumentIdBySlug('activities', slug)
+    if (altId) {
+      const slugMap = await getDocumentSlugsInAllLocales('activities', altId)
+      const correctSlug = slugMap[typedLocale]
+      if (correctSlug && correctSlug !== slug) {
+        permanentRedirect(`/${locale}/activities/${correctSlug}`)
+      }
+    }
     notFound()
   }
 

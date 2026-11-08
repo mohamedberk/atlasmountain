@@ -39,6 +39,11 @@ export interface ActivityCartItem {
     maxPeople: number
     pricePerPerson: number
   }>
+  // Optional guide the traveler picked for this tour — never required to book
+  guideId?: string
+  guideName?: string
+  guideSlug?: string
+  guideAvatar?: string
 }
 
 export interface TransportCartItem {
