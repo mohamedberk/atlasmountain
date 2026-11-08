@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Menu, ChevronDown } from 'lucide-react'
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 import { useTranslations } from 'next-intl'
-import { usePathname, useRouter } from '@/i18n/routing'
+import { usePathname } from '@/i18n/routing'
 import { NavLink } from '@/components/ui/nav-link'
 import { useCart } from '@/context/CartContext'
 
@@ -48,49 +48,20 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
   const t = useTranslations('nav')
   const tChrome = useTranslations('chrome')
   const pathname = usePathname()
-  const router = useRouter()
   const { items } = useCart()
 
   const cartItemCount = items.length
 
   const mainNavLinks = [
     { name: t('home'), href: '/' },
-    { name: t('guides'), href: '/guides' },
     { name: t('about'), href: '/about' },
+    { name: t('tours') || 'Tours', href: '/activities' },
   ]
 
-  const secondaryNavLinks: { name: string; href: string; isAnchor?: boolean }[] = [
-    { name: t('faq') || 'FAQ', href: '/#faq', isAnchor: true },
+  const secondaryNavLinks: { name: string; href: string }[] = [
+    { name: t('guides'), href: '/guides' },
     { name: t('contact') || 'Contact', href: '/contact' },
   ]
-
-  // Handle anchor link clicks (for FAQ)
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    const isHomePage = pathname === '/' || pathname === ''
-    const anchor = href.split('#')[1]
-
-    if (isHomePage && anchor) {
-      // If on homepage, smooth scroll to section
-      e.preventDefault()
-      const element = document.getElementById(anchor)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-      setIsMobileMenuOpen(false)
-    } else if (anchor) {
-      // If on another page, navigate to home then scroll
-      e.preventDefault()
-      router.push('/')
-      // Use setTimeout to wait for navigation before scrolling
-      setTimeout(() => {
-        const element = document.getElementById(anchor)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, 100)
-      setIsMobileMenuOpen(false)
-    }
-  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -169,7 +140,7 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
   }
 
   // Check if Tours & Categories should be highlighted
-  const isToursActive = pathname.startsWith('/category') || pathname.startsWith('/activities')
+  const isCategoriesActive = pathname.startsWith('/category')
   const isNavbarVisible = !hideUntilScrolled || scrolled || isMobileMenuOpen || isCategoriesOpen
 
   return (
@@ -216,7 +187,7 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
               </NavLink>
             ))}
 
-            {/* Tours & Categories with Mega Menu */}
+            {/* Categories with Mega Menu */}
             <div
               className="relative"
               onMouseEnter={handleCategoriesMouseEnter}
@@ -225,12 +196,12 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
               <button
                 type="button"
                 className={`relative flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full transition-all ${
-                  isCategoriesOpen || isToursActive
+                  isCategoriesOpen || isCategoriesActive
                     ? 'text-[#ff2828] font-semibold bg-[#ff2828]/10 ring-1 ring-[#ff2828]/20'
                     : 'text-neutral-700 hover:text-[#ff2828] hover:bg-[#ff2828]/5'
                 }`}
               >
-                {t('toursCategories') || 'Tours & Categories'}
+                {t('categories') || 'Categories'}
                 <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isCategoriesOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -391,28 +362,17 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
             </div>
 
             {secondaryNavLinks.map((link) => (
-              link.isAnchor ? (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleAnchorClick(e, link.href)}
-                  className="px-4 py-2 text-sm text-neutral-700 hover:text-[#ff2828] font-medium rounded-xl transition-all cursor-pointer"
-                >
-                  {link.name}
-                </a>
-              ) : (
-                <NavLink
-                  key={link.name}
-                  href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all ${
-                    isActive(link.href)
-                      ? 'text-[#ff2828] font-semibold bg-[#ff2828]/10 ring-1 ring-[#ff2828]/20'
-                      : 'text-neutral-700 hover:text-[#ff2828] hover:bg-[#ff2828]/5'
-                  }`}
-                >
-                  {link.name}
-                </NavLink>
-              )
+              <NavLink
+                key={link.name}
+                href={link.href}
+                className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all ${
+                  isActive(link.href)
+                    ? 'text-[#ff2828] font-semibold bg-[#ff2828]/10 ring-1 ring-[#ff2828]/20'
+                    : 'text-neutral-700 hover:text-[#ff2828] hover:bg-[#ff2828]/5'
+                }`}
+              >
+                {link.name}
+              </NavLink>
             ))}
           </div>
 
@@ -486,7 +446,7 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
                 {navbarData && navbarData.categories.length > 0 && (
                   <div className="pt-3 pb-2">
                     <div className="px-4 py-2 text-xs font-semibold text-neutral-400 uppercase tracking-wider">
-                      {t('toursCategories') || 'Tours & Categories'}
+                      {t('categories') || 'Categories'}
                     </div>
 
                     {/* Categories Grid - Mobile */}
@@ -532,32 +492,21 @@ export function NavbarClient({ initialData, hideUntilScrolled = false }: Props) 
                 )}
 
                 {secondaryNavLinks.map((link) => (
-                  link.isAnchor ? (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={(e) => handleAnchorClick(e, link.href)}
-                      className="block px-4 py-3 text-neutral-800 hover:text-[#ff2828] rounded-xl font-medium transition-colors cursor-pointer"
-                    >
-                      {link.name}
-                    </a>
-                  ) : (
-                    <NavLink
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors ${
-                        isActive(link.href)
-                          ? 'text-[#ff2828] font-semibold'
-                          : 'text-neutral-800 hover:text-[#ff2828]'
-                      }`}
-                    >
-                      {isActive(link.href) && (
-                        <span className="w-2 h-2 bg-[#ff2828] rounded-full flex-shrink-0" />
-                      )}
-                      {link.name}
-                    </NavLink>
-                  )
+                  <NavLink
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-colors ${
+                      isActive(link.href)
+                        ? 'text-[#ff2828] font-semibold'
+                        : 'text-neutral-800 hover:text-[#ff2828]'
+                    }`}
+                  >
+                    {isActive(link.href) && (
+                      <span className="w-2 h-2 bg-[#ff2828] rounded-full flex-shrink-0" />
+                    )}
+                    {link.name}
+                  </NavLink>
                 ))}
               </div>
 

@@ -61,8 +61,8 @@
     "reviews": "Avis",
     "blog": "Blog",
     "book": "Réserver",
-    "toursCategories": "Tours & Catégories",
-    "faq": "FAQ",
+    "categories": "Catégories",
+    "tours": "Tours",
     "viewAllActivities": "Voir toutes les activités"
   },
   "hero": {
