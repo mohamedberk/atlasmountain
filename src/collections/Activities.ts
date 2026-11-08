@@ -459,6 +459,26 @@ export const Activities: CollectionConfig = {
                   name: 'description',
                   type: 'richText',
                 },
+                {
+                  name: 'images',
+                  type: 'array',
+                  admin: {
+                    description: 'Add multiple images to show as a carousel for this step',
+                  },
+                  fields: [
+                    {
+                      name: 'image',
+                      type: 'upload',
+                      relationTo: 'media',
+                      required: true,
+                    },
+                    {
+                      name: 'caption',
+                      type: 'text',
+                      localized: true,
+                    },
+                  ],
+                },
               ],
             },
             {

@@ -571,6 +571,16 @@ export interface Activity {
           };
           [k: string]: unknown;
         } | null;
+        /**
+         * Add multiple images to show as a carousel for this step
+         */
+        images?:
+          | {
+              image: string | Media;
+              caption?: string | null;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -1344,6 +1354,13 @@ export interface ActivitiesSelect<T extends boolean = true> {
         time?: T;
         activity?: T;
         description?: T;
+        images?:
+          | T
+          | {
+              image?: T;
+              caption?: T;
+              id?: T;
+            };
         id?: T;
       };
   guide?: T;

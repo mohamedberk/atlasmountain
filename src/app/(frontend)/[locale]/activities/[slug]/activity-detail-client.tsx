@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { GuideOptionCard } from '@/components/guides/guide-option-card'
 import { GuideProfileModal } from '@/components/guides/guide-profile-modal'
+import { GuideImageCarousel } from '@/components/guides/guide-image-carousel'
 import type { Guide } from '@/payload-types'
 import {
   Star,
@@ -167,6 +168,7 @@ interface ItineraryStep {
   time?: string
   activity: string
   description?: any
+  images: string[]
 }
 
 function getItinerary(itinerary: Activity['itinerary']): ItineraryStep[] {
@@ -175,6 +177,9 @@ function getItinerary(itinerary: Activity['itinerary']): ItineraryStep[] {
     time: i.time || '',
     activity: i.activity || '',
     description: i.description || null,
+    images: ((i.images as any[]) || [])
+      .map((entry) => getImageUrl(entry?.image))
+      .filter((url): url is string => !!url),
   })).filter(i => i.activity)
 }
 
@@ -1402,6 +1407,11 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                                     )}
                                   </div>
                                 )}
+                                {step.images.length > 0 && (
+                                  <div className="relative mt-3 w-full aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100">
+                                    <GuideImageCarousel images={step.images} alt={step.activity} variant="detail" className="absolute inset-0" />
+                                  </div>
+                                )}
                               </div>
                             </div>
                           ))}
@@ -1442,6 +1452,11 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                               ) : (
                                 <RichText content={step.description} />
                               )}
+                            </div>
+                          )}
+                          {step.images.length > 0 && (
+                            <div className="relative mt-3 w-full max-w-md aspect-[16/10] rounded-xl overflow-hidden bg-neutral-100">
+                              <GuideImageCarousel images={step.images} alt={step.activity} variant="detail" className="absolute inset-0" />
                             </div>
                           )}
                         </div>
