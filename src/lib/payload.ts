@@ -120,7 +120,11 @@ export const getActivityBySlug = (slug: string, locale: Locale = 'en') =>
       return result.docs[0] || null
     },
     ['activity', slug, locale],
-    { tags: ['activities'], revalidate: 3600 }
+    // Short revalidate (not the usual 3600s) so a false "not found" — e.g.
+    // from visiting a brand-new slug a beat before a save has propagated —
+    // self-heals in seconds instead of sticking for up to an hour. A real
+    // edit's revalidateTag('activities') call still clears this instantly.
+    { tags: ['activities'], revalidate: 10 }
   )()
 
 /**
