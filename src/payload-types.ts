@@ -547,7 +547,7 @@ export interface Activity {
       }[]
     | null;
   /**
-   * Step-by-step itinerary
+   * Step-by-step itinerary. Text fields are translated per language; images are shared across all languages.
    */
   itinerary?:
     | {
@@ -572,7 +572,7 @@ export interface Activity {
           [k: string]: unknown;
         } | null;
         /**
-         * Add multiple images to show as a carousel for this step
+         * Add multiple images to show as a carousel for this step (shared across all languages)
          */
         images?:
           | {

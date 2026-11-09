@@ -440,30 +440,32 @@ export const Activities: CollectionConfig = {
             {
               name: 'itinerary',
               type: 'array',
-              localized: true,
               admin: {
-                description: 'Step-by-step itinerary',
+                description: 'Step-by-step itinerary. Text fields are translated per language; images are shared across all languages.',
               },
               fields: [
                 {
                   name: 'time',
                   type: 'text',
+                  localized: true,
                   admin: { description: 'e.g., "09:00", "Morning"' },
                 },
                 {
                   name: 'activity',
                   type: 'text',
+                  localized: true,
                   required: true,
                 },
                 {
                   name: 'description',
                   type: 'richText',
+                  localized: true,
                 },
                 {
                   name: 'images',
                   type: 'array',
                   admin: {
-                    description: 'Add multiple images to show as a carousel for this step',
+                    description: 'Add multiple images to show as a carousel for this step (shared across all languages)',
                   },
                   fields: [
                     {
