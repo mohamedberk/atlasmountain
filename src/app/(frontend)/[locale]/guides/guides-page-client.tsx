@@ -3,10 +3,8 @@
 import { useMemo, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Search, Calendar, ChevronDown, Users, MessageCircle, Wand2, ShieldCheck } from 'lucide-react'
-import { format } from 'date-fns'
+import { Search, Users, MessageCircle, Wand2, ShieldCheck } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { RealCalendar } from '@/components/ui/real-calendar'
 import { GuidesGrid } from '@/components/guides/guides-grid'
 import { FAQSection } from '@/components/sections/faq-section'
 import type { Guide, Category } from '@/payload-types'
@@ -32,8 +30,6 @@ export function GuidesPageClient({ guides, regions }: Props) {
 
   const [activeRegion, setActiveRegion] = useState('all')
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-  const [showCalendar, setShowCalendar] = useState(false)
 
   const languagesInUse = useMemo(() => {
     const set = new Set<string>()
@@ -154,33 +150,6 @@ export function GuidesPageClient({ guides, regions }: Props) {
           <aside className="lg:sticky lg:top-24 lg:self-start space-y-6 bg-[#fafaf9] rounded-2xl p-5 border border-neutral-100">
             <div>
               <h2 className="font-helvetica text-lg font-bold text-neutral-900 mb-3">{tPage('filtersHeading')}</h2>
-
-              <h3 className="font-helvetica font-semibold text-sm text-neutral-900 mb-2">{tPage('dateFilterHeading')}</h3>
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => setShowCalendar((v) => !v)}
-                  className="w-full h-11 pl-3 pr-3 rounded-xl border border-neutral-200 bg-white text-sm flex items-center justify-between text-neutral-600 hover:border-neutral-300 transition-all"
-                >
-                  <span className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-neutral-400" />
-                    {selectedDate ? format(selectedDate, 'MMM d, yyyy') : tPage('selectDate')}
-                  </span>
-                  <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform ${showCalendar ? 'rotate-180' : ''}`} />
-                </button>
-
-                {showCalendar && (
-                  <div className="absolute z-20 mt-2 w-[300px] shadow-lg">
-                    <RealCalendar
-                      selectedDate={selectedDate}
-                      onDateSelect={(date) => {
-                        setSelectedDate(date)
-                        setShowCalendar(false)
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
             </div>
 
             {languagesInUse.length > 0 && (
@@ -243,7 +212,6 @@ export function GuidesPageClient({ guides, regions }: Props) {
                   onClick={() => {
                     setActiveRegion('all')
                     setSelectedLanguages([])
-                    setSelectedDate(null)
                   }}
                   className="px-6 py-3 rounded-xl text-white font-semibold transition-colors"
                   style={{ backgroundColor: ACCENT_GREEN }}

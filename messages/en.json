@@ -518,6 +518,8 @@
     "toursHeading": "Tours Led by {name}",
     "reviewsHeading": "What Travelers Say About {name}",
     "hostingSince": "Hosting since {year}",
+    "hostingInSince": "Hosting in {location} since {year}",
+    "speaksLanguages": "Speaks {languages}",
     "privateTourCount": "{count} private tours",
     "askAboutTouring": "Ask About Touring with {name}",
     "bookToursCta": "Book This Guide's Tours",
@@ -544,7 +546,10 @@
     "miniFaqContactAnswer": "Use the \"Ask About Touring with {name}\" form above — our team will pass your message along.",
     "viewTourCta": "View Tour",
     "selectTourCta": "Ask About This Tour",
-    "selectTourPrefill": "I'm interested in the \"{tour}\" tour with {name}. Can you tell me more?"
+    "selectTourPrefill": "I'm interested in the \"{tour}\" tour with {name}. Can you tell me more?",
+    "aboutTab": "About",
+    "toursTab": "Tours",
+    "reviewsTab": "Reviews"
   },
   "blog": {
     "ourBlog": "Our Blog",

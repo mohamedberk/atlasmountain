@@ -316,6 +316,21 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
   const [showGuideModal, setShowGuideModal] = useState(false)
   const [selectedGuide, setSelectedGuide] = useState<Guide | null>(null)
 
+  // Pre-select this activity's guide when arriving via a guide's "View Tour" link
+  useEffect(() => {
+    const guideSlug = new URLSearchParams(window.location.search).get('guide')
+    if (
+      guideSlug &&
+      typeof activity.guide === 'object' &&
+      activity.guide &&
+      activity.guide.slug === guideSlug
+    ) {
+      setSelectedGuide(activity.guide)
+    }
+    // Only needs to run once, reading the URL as it was on arrival.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   // Mobile collapsible sections state - default to expanded on mobile for better UX
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     fullDescription: true,

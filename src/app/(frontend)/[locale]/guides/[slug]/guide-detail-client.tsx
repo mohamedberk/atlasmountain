@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Award, MessageCircle, ShieldCheck, Zap } from 'lucide-react'
+import { Award, Globe, MapPin, MessageCircle, ShieldCheck, Users, Zap } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { NavLink } from '@/components/ui/nav-link'
 import { StarRating } from '@/components/ui/star-rating'
@@ -13,10 +13,9 @@ import { ReviewsList } from '@/components/ui/reviews-list'
 import { FAQSection } from '@/components/sections/faq-section'
 import { GuideImageCarousel } from '@/components/guides/guide-image-carousel'
 import { GuideToursTabs } from '@/components/guides/guide-tours-tabs'
-import { GuideInquiryForm } from '@/components/guides/guide-inquiry-form'
 import { useSiteSettings } from '@/context/SiteSettingsContext'
 import { getOptimizedImageUrl } from '@/lib/image-utils'
-import type { Guide, GuideReview, Activity } from '@/payload-types'
+import type { Guide, GuideReview, Activity, Category } from '@/payload-types'
 
 const ACCENT_GREEN = '#ff2828'
 
@@ -29,6 +28,118 @@ function getGuideImages(guide: Guide): string[] {
   return images
 }
 
+type Translate = (key: string, values?: Record<string, string | number>) => string
+
+interface GuideCardHeaderProps {
+  guide: Guide
+  tours: Activity[]
+  languages: string[]
+  primaryRegion: Category | undefined
+  tDetail: Translate
+}
+
+function GuideCardHeader({ guide, tours, languages, primaryRegion, tDetail }: GuideCardHeaderProps) {
+  return (
+    <>
+      <div>
+        <div className="flex items-center gap-3">
+          <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
+            <Image src={getOptimizedImageUrl(guide.avatar, 'thumbnail')} alt={guide.name} fill sizes="56px" className="object-cover" />
+          </div>
+          <div className="font-semibold text-neutral-900">{guide.name}</div>
+        </div>
+
+        {guide.tagline && <p className="text-xs text-neutral-500 mt-2">{guide.tagline}</p>}
+
+        {Boolean(guide.totalReviews) && (
+          <div className="mt-2">
+            <StarRating rating={guide.overallRating || 0} reviewCount={guide.totalReviews || undefined} size="sm" />
+          </div>
+        )}
+      </div>
+
+      <div className="space-y-2">
+        {guide.hostingSince && (
+          <div className="flex items-center gap-2.5 text-sm text-neutral-600">
+            <MapPin className="w-4 h-4 text-neutral-400 flex-shrink-0" />
+            <span>
+              {primaryRegion
+                ? tDetail('hostingInSince', { location: primaryRegion.name, year: guide.hostingSince })
+                : tDetail('hostingSince', { year: guide.hostingSince })}
+            </span>
+          </div>
+        )}
+
+        {languages.length > 0 && (
+          <div className="flex items-center gap-2.5 text-sm text-neutral-600">
+            <Globe className="w-4 h-4 text-neutral-400 flex-shrink-0" />
+            <span>{tDetail('speaksLanguages', { languages: languages.join(', ') })}</span>
+          </div>
+        )}
+
+        {tours.length > 0 && (
+          <div className="flex items-center gap-2.5 text-sm text-neutral-600">
+            <Users className="w-4 h-4 text-neutral-400 flex-shrink-0" />
+            <span>{tDetail('privateTourCount', { count: tours.length })}</span>
+          </div>
+        )}
+      </div>
+    </>
+  )
+}
+
+const MOBILE_TAB_SECTIONS = ['about', 'guide-tours', 'reviews-section'] as const
+type MobileTabSection = (typeof MOBILE_TAB_SECTIONS)[number]
+
+function GuideSectionTabs({ tDetail }: { tDetail: Translate }) {
+  const [activeSection, setActiveSection] = useState<MobileTabSection>('about')
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id as MobileTabSection)
+          }
+        })
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    )
+    const elements = MOBILE_TAB_SECTIONS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => el !== null
+    )
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
+  const tabs: { id: MobileTabSection; label: string }[] = [
+    { id: 'about', label: tDetail('aboutTab') },
+    { id: 'guide-tours', label: tDetail('toursTab') },
+    { id: 'reviews-section', label: tDetail('reviewsTab') },
+  ]
+
+  return (
+    <div className="lg:hidden sticky top-16 z-20 -mx-4 sm:-mx-6 mb-6 bg-white border-b border-neutral-100">
+      <div className="flex items-center px-4 sm:px-6">
+        {tabs.map((tab) => (
+          <a
+            key={tab.id}
+            href={`#${tab.id}`}
+            className="flex-1 text-center py-3 text-sm font-semibold border-b-2 transition-colors"
+            style={
+              activeSection === tab.id
+                ? { color: ACCENT_GREEN, borderColor: ACCENT_GREEN }
+                : { color: 'rgb(115 115 115)', borderColor: 'transparent' }
+            }
+          >
+            {tab.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 interface Props {
   guide: Guide
   reviews: GuideReview[]
@@ -39,16 +150,16 @@ export function GuideDetailClient({ guide, reviews }: Props) {
   const tDetail = useTranslations('guideDetail')
   const { getWhatsAppLink } = useSiteSettings()
 
-  const [showInquiryForm, setShowInquiryForm] = useState(false)
-  const [prefilledMessage, setPrefilledMessage] = useState('')
-
   const tours = (guide.tours || []).filter((t): t is Activity => typeof t === 'object')
   const languages = (guide.languagesSpoken || []).map((l) => l.language)
+  const primaryRegion = (guide.regions || []).find((r): r is Category => typeof r === 'object')
 
   const handleSelectTour = (tour: Activity) => {
-    setPrefilledMessage(tDetail('selectTourPrefill', { tour: tour.title, name: guide.name }))
-    setShowInquiryForm(true)
-    document.getElementById('guide-contact-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    window.open(
+      getWhatsAppLink(tDetail('selectTourPrefill', { tour: tour.title, name: guide.name })),
+      '_blank',
+      'noopener,noreferrer'
+    )
   }
 
   const miniFaqItems = [
@@ -76,16 +187,26 @@ export function GuideDetailClient({ guide, reviews }: Props) {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 lg:pt-8 pb-16">
+        {/* Mobile: quick-glance guide summary + photo, both above the fold */}
+        <div className="lg:hidden space-y-4 mb-4">
+          <div className="bg-white border border-neutral-200 rounded-2xl p-4 space-y-3">
+            <GuideCardHeader guide={guide} tours={tours} languages={languages} primaryRegion={primaryRegion} tDetail={tDetail} />
+          </div>
+
+          <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.02)]">
+            <GuideImageCarousel images={getGuideImages(guide)} alt={guide.name} variant="detail" className="absolute inset-0" />
+          </div>
+        </div>
+
+        {/* Mobile: sticky About / Tours / Reviews section nav */}
+        <GuideSectionTabs tDetail={tDetail} />
+
         <div className="grid lg:grid-cols-[1fr_380px] gap-8 lg:gap-12">
           {/* Left Column - Content */}
           <div className="space-y-8">
-            <div>
-              <h1 className="font-display text-2xl md:text-3xl font-bold text-neutral-900 mb-2">{guide.name}</h1>
-              {guide.tagline && <p className="text-neutral-600 mb-3">{guide.tagline}</p>}
+            <div id="about" className="scroll-mt-28">
+              <h1 className="sr-only">{guide.name}</h1>
               <div className="flex items-center gap-4 flex-wrap">
-                {Boolean(guide.totalReviews) && (
-                  <StarRating rating={guide.overallRating || 0} reviewCount={guide.totalReviews || undefined} />
-                )}
                 {guide.isOfficiallyLicensed && (
                   <Badge variant="solid" icon={<ShieldCheck className="w-3.5 h-3.5" />}>{tDetail('licensedBadge')}</Badge>
                 )}
@@ -94,8 +215,8 @@ export function GuideDetailClient({ guide, reviews }: Props) {
               </div>
             </div>
 
-            {/* Image Carousel */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.02)]">
+            {/* Image Carousel (desktop — mobile shows its own copy above the fold, near the summary card) */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="hidden lg:block relative aspect-[16/9] rounded-2xl overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.02)]">
               <GuideImageCarousel images={getGuideImages(guide)} alt={guide.name} variant="detail" className="absolute inset-0" />
             </motion.div>
 
@@ -112,11 +233,11 @@ export function GuideDetailClient({ guide, reviews }: Props) {
             {/* Tours */}
             <div>
               <h2 className="font-display text-xl font-bold text-neutral-900 mb-3">{tDetail('toursHeading', { name: guide.name })}</h2>
-              <GuideToursTabs tours={tours} guideName={guide.name} onSelectTour={handleSelectTour} />
+              <GuideToursTabs tours={tours} guideName={guide.name} guideSlug={guide.slug} onSelectTour={handleSelectTour} />
             </div>
 
             {/* Reviews */}
-            <div>
+            <div id="reviews-section" className="scroll-mt-28">
               <h2 className="font-display text-xl font-bold text-neutral-900 mb-3">{tDetail('reviewsHeading', { name: guide.name })}</h2>
               <ReviewsList reviews={reviews} guideName={guide.name} />
             </div>
@@ -136,45 +257,23 @@ export function GuideDetailClient({ guide, reviews }: Props) {
           <div>
             <div id="guide-contact-card" className="lg:sticky lg:top-24 scroll-mt-24">
               <div className="bg-white border border-neutral-200 rounded-2xl shadow-[0_1px_4px_rgba(0,0,0,0.02)] overflow-hidden">
-                <div className="h-2" style={{ backgroundColor: ACCENT_GREEN }} />
+                <div className="hidden lg:block h-2" style={{ backgroundColor: ACCENT_GREEN }} />
                 <div className="p-5 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
-                      <Image src={getOptimizedImageUrl(guide.avatar, 'thumbnail')} alt={guide.name} fill sizes="56px" className="object-cover" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-neutral-900">{guide.name}</div>
-                      {guide.hostingSince && (
-                        <div className="text-xs text-neutral-500">{tDetail('hostingSince', { year: guide.hostingSince })}</div>
-                      )}
-                    </div>
+                  <div className="hidden lg:block space-y-4">
+                    <GuideCardHeader guide={guide} tours={tours} languages={languages} primaryRegion={primaryRegion} tDetail={tDetail} />
                   </div>
 
-                  {tours.length > 0 && (
-                    <div className="text-sm text-neutral-600">{tDetail('privateTourCount', { count: tours.length })}</div>
-                  )}
-
-                  {languages.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5">
-                      {languages.map((lang) => (
-                        <Badge key={lang} variant="soft" className="!px-2.5 !py-1">{lang}</Badge>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="border-t border-neutral-100 pt-4 space-y-2">
-                    {showInquiryForm ? (
-                      <GuideInquiryForm guideName={guide.name} guideSlug={guide.slug} guideId={guide.id} initialMessage={prefilledMessage} />
-                    ) : (
-                      <button
-                        onClick={() => setShowInquiryForm(true)}
-                        className="w-full inline-flex items-center justify-center gap-2 h-11 px-4 rounded-xl text-white font-semibold text-sm transition-all"
-                        style={{ backgroundColor: ACCENT_GREEN }}
-                      >
-                        <MessageCircle className="w-4 h-4" />
-                        {tDetail('askAboutTouring', { name: guide.name })}
-                      </button>
-                    )}
+                  <div className="lg:border-t lg:border-neutral-100 lg:pt-4 space-y-2">
+                    <a
+                      href={getWhatsAppLink(tDetail('whatsappMessage', { name: guide.name }))}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-2 h-11 px-4 rounded-xl text-white font-semibold text-sm transition-all"
+                      style={{ backgroundColor: ACCENT_GREEN }}
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      {tDetail('askAboutTouring', { name: guide.name })}
+                    </a>
 
                     <a
                       href="#guide-tours"
@@ -182,15 +281,6 @@ export function GuideDetailClient({ guide, reviews }: Props) {
                       style={{ borderColor: ACCENT_GREEN, color: ACCENT_GREEN }}
                     >
                       {tDetail('bookToursCta')}
-                    </a>
-
-                    <a
-                      href={getWhatsAppLink(tDetail('whatsappMessage', { name: guide.name }))}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full inline-flex items-center justify-center gap-2 h-11 px-4 rounded-xl text-sm font-medium text-[#25D366] border border-[#25D366]/30 hover:bg-[#25D366]/5 transition-all"
-                    >
-                      {tDetail('whatsappCta')}
                     </a>
                   </div>
 

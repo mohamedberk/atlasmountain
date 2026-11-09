@@ -22,23 +22,24 @@ function getStartingPrice(activity: Activity): number {
 interface GuideToursTabsProps {
   tours: Activity[]
   guideName: string
+  guideSlug: string
   onSelectTour: (tour: Activity) => void
 }
 
-export function GuideToursTabs({ tours, guideName, onSelectTour }: GuideToursTabsProps) {
+export function GuideToursTabs({ tours, guideName, guideSlug, onSelectTour }: GuideToursTabsProps) {
   const tDetail = useTranslations('guideDetail')
   const tCommon = useTranslations('common')
 
   if (tours.length === 0) {
     return (
-      <p id="guide-tours" className="text-sm text-neutral-500 italic">
+      <p id="guide-tours" className="scroll-mt-28 text-sm text-neutral-500 italic">
         {tDetail('noToursYet', { name: guideName })}
       </p>
     )
   }
 
   return (
-    <div id="guide-tours" className="grid sm:grid-cols-2 gap-4">
+    <div id="guide-tours" className="scroll-mt-28 grid sm:grid-cols-2 gap-4">
       {tours.map((activity) => (
         <div
           key={activity.id}
@@ -74,7 +75,7 @@ export function GuideToursTabs({ tours, guideName, onSelectTour }: GuideToursTab
 
             <div className="mt-auto pt-3 border-t border-neutral-100 flex gap-2">
               <NavLink
-                href={`/activities/${activity.slug}`}
+                href={`/activities/${activity.slug}?guide=${guideSlug}`}
                 className="flex-1 inline-flex items-center justify-center h-9 rounded-lg border-2 text-xs sm:text-sm font-semibold transition-colors"
                 style={{ borderColor: ACCENT_GREEN, color: ACCENT_GREEN }}
               >
