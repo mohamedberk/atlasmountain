@@ -22,7 +22,7 @@ export function FloatingLanguageSwitcher() {
   const router = useRouter()
   const rawPathname = useNextPathname()
 
-  const hasStickyBottomBar = /^\/(([a-z]{2})\/)?(activities|checkout)\/[^/]+$/.test(rawPathname)
+  const hasStickyBottomBar = /^\/(([a-z]{2})\/)?(activities|checkout|guides)\/[^/]+$/.test(rawPathname)
 
   useEffect(() => {
     if (!isOpen) return

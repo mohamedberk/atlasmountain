@@ -549,7 +549,9 @@
     "selectTourPrefill": "I'm interested in the \"{tour}\" tour with {name}. Can you tell me more?",
     "aboutTab": "About",
     "toursTab": "Tours",
-    "reviewsTab": "Reviews"
+    "reviewsTab": "Reviews",
+    "contactMeCta": "Contact me",
+    "bookMeCta": "Book me"
   },
   "blog": {
     "ourBlog": "Our Blog",

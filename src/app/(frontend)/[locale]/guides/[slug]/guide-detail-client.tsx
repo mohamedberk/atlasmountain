@@ -173,6 +173,33 @@ export function GuideDetailClient({ guide, reviews }: Props) {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Fixed Mobile Bottom Action Bar */}
+      <motion.div
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+        className="fixed bottom-0 left-0 right-0 z-[60] bg-white border-t border-neutral-200 shadow-md lg:hidden"
+      >
+        <div className="px-4 py-2.5 flex items-center gap-3">
+          <a
+            href={getWhatsAppLink(tDetail('whatsappMessage', { name: guide.name }))}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 inline-flex items-center justify-center px-4 py-2.5 rounded-xl border-2 font-semibold text-sm transition-all"
+            style={{ borderColor: ACCENT_GREEN, color: ACCENT_GREEN }}
+          >
+            {tDetail('contactMeCta')}
+          </a>
+          <a
+            href="#guide-tours"
+            className="flex-1 inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-white font-bold text-sm transition-all"
+            style={{ backgroundColor: ACCENT_GREEN }}
+          >
+            {tDetail('bookMeCta')}
+          </a>
+        </div>
+      </motion.div>
+
       {/* Breadcrumb */}
       <div className="bg-neutral-50 border-b border-neutral-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
@@ -186,7 +213,7 @@ export function GuideDetailClient({ guide, reviews }: Props) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 lg:pt-8 pb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 lg:pt-8 pb-24 lg:pb-16">
         {/* Mobile: quick-glance guide summary + photo, both above the fold */}
         <div className="lg:hidden space-y-4 mb-4">
           <div className="bg-white border border-neutral-200 rounded-2xl p-4 space-y-3">
@@ -253,8 +280,8 @@ export function GuideDetailClient({ guide, reviews }: Props) {
             />
           </div>
 
-          {/* Right Column - Sticky Guide Card */}
-          <div>
+          {/* Right Column - Sticky Guide Card (desktop only — mobile uses the summary card + fixed bottom bar) */}
+          <div className="hidden lg:block">
             <div id="guide-contact-card" className="lg:sticky lg:top-24 scroll-mt-24">
               <div className="bg-white border border-neutral-200 rounded-2xl shadow-[0_1px_4px_rgba(0,0,0,0.02)] overflow-hidden">
                 <div className="hidden lg:block h-2" style={{ backgroundColor: ACCENT_GREEN }} />

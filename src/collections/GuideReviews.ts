@@ -5,7 +5,10 @@ export const GuideReviews: CollectionConfig = {
   slug: 'guide-reviews',
   admin: {
     useAsTitle: 'reviewerName',
-    group: 'Products',
+    // No longer a separate top-level nav item — managed from the "Reviews" tab
+    // on each guide's own edit page instead. Routes stay enabled so that tab's
+    // join-field table can still link into an individual review to edit it.
+    group: false,
     defaultColumns: ['reviewerName', 'guide', 'rating', 'date', 'isPublished'],
     description: 'Traveler reviews for individual guides',
   },

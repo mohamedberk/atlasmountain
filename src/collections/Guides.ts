@@ -190,6 +190,24 @@ export const Guides: CollectionConfig = {
             },
           ],
         },
+        // Reviews Tab
+        {
+          label: 'Reviews',
+          fields: [
+            {
+              name: 'reviews',
+              type: 'join',
+              collection: 'guide-reviews',
+              on: 'guide',
+              defaultSort: '-date',
+              admin: {
+                allowCreate: true,
+                defaultColumns: ['reviewerName', 'rating', 'date', 'isPublished'],
+                description: 'Reviews submitted for this guide',
+              },
+            },
+          ],
+        },
         // Badges & Settings Tab
         {
           label: 'Badges & Settings',

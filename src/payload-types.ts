@@ -82,7 +82,11 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    guides: {
+      reviews: 'guide-reviews';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -766,6 +770,14 @@ export interface Guide {
    */
   tours?: (string | Activity)[] | null;
   /**
+   * Reviews submitted for this guide
+   */
+  reviews?: {
+    docs?: (string | GuideReview)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  /**
    * "Verified Local" badge
    */
   isVerifiedLocal?: boolean | null;
@@ -1443,6 +1455,7 @@ export interface GuidesSelect<T extends boolean = true> {
         id?: T;
       };
   tours?: T;
+  reviews?: T;
   isVerifiedLocal?: T;
   respondsQuickly?: T;
   isOfficiallyLicensed?: T;

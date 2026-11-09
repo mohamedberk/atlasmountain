@@ -15,9 +15,9 @@ export function FloatingWhatsApp() {
   const { settings, getWhatsAppLink } = useSiteSettings()
   const pathname = usePathname()
 
-  // Check if we're on a page with a sticky bottom bar (activity detail or checkout)
+  // Check if we're on a page with a sticky bottom bar (activity detail, checkout, or guide detail)
   // Locale prefix may or may not be in the pathname depending on routing config
-  const hasStickyBottomBar = /^\/(([a-z]{2})\/)?(activities|checkout)\/[^/]+$/.test(pathname)
+  const hasStickyBottomBar = /^\/(([a-z]{2})\/)?(activities|checkout|guides)\/[^/]+$/.test(pathname)
 
   const handleSend = () => {
     const whatsappUrl = getWhatsAppLink(message || tChrome('whatsAppDefaultMessage'))
