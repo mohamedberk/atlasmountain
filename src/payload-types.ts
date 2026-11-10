@@ -589,9 +589,9 @@ export interface Activity {
       }[]
     | null;
   /**
-   * The local guide who leads this tour, if any
+   * The local guide(s) who lead this tour, if any
    */
-  guide?: (string | null) | Guide;
+  guide?: (string | Guide)[] | null;
   /**
    * Optional: Override the auto-generated "About this activity" section. Leave empty to auto-generate from activity fields.
    */

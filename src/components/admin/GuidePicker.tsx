@@ -21,7 +21,8 @@ function getThumbnailUrl(avatar: unknown): string | null {
 }
 
 export const GuidePickerField: RelationshipFieldClientComponent = ({ path, field }) => {
-  const { value, setValue } = useField<string>({ path })
+  const { value, setValue } = useField<string[]>({ path })
+  const selectedIds = value || []
   const [isOpen, setIsOpen] = useState(false)
   const [search, setSearch] = useState('')
   const [guides, setGuides] = useState<GuideOption[]>([])
@@ -53,13 +54,23 @@ export const GuidePickerField: RelationshipFieldClientComponent = ({ path, field
     if (isOpen) loadGuides()
   }, [isOpen, loadGuides])
 
-  const selected = guides.find((g) => g.id === value)
+  const selected = selectedIds
+    .map((id) => guides.find((g) => g.id === id))
+    .filter((g): g is GuideOption => Boolean(g))
   const filtered = guides.filter((g) => g.name.toLowerCase().includes(search.toLowerCase()))
+
+  const toggleGuide = (guideId: string) => {
+    if (selectedIds.includes(guideId)) {
+      setValue(selectedIds.filter((id) => id !== guideId))
+    } else {
+      setValue([...selectedIds, guideId])
+    }
+  }
 
   return (
     <div className="field-type relationship">
       <label className="field-label">
-        {typeof field.label === 'string' ? field.label : 'Guide'}
+        {typeof field.label === 'string' ? field.label : 'Guides'}
       </label>
       {field.admin?.description && (
         <div
@@ -76,7 +87,8 @@ export const GuidePickerField: RelationshipFieldClientComponent = ({ path, field
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 12,
+            flexWrap: 'wrap',
+            gap: 8,
             padding: '10px 14px',
             border: '1px solid var(--theme-elevation-150)',
             borderRadius: 4,
@@ -85,44 +97,51 @@ export const GuidePickerField: RelationshipFieldClientComponent = ({ path, field
             minHeight: 56,
           }}
         >
-          {selected ? (
-            <>
-              {selected.avatarUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={selected.avatarUrl}
-                  alt={selected.name}
-                  style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
-                />
-              ) : (
-                <div style={{ width: 36, height: 36, borderRadius: '50%', backgroundColor: 'var(--theme-elevation-150)', flexShrink: 0 }} />
-              )}
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6 }}>
-                  {selected.name}
-                  {selected.isOfficiallyLicensed && <ShieldCheck size={14} color="var(--theme-success-500)" />}
-                </div>
-                {selected.tagline && (
-                  <div style={{ fontSize: 12, color: 'var(--theme-elevation-500)' }}>{selected.tagline}</div>
-                )}
-              </div>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setValue(null)
+          {selected.length > 0 ? (
+            selected.map((g) => (
+              <div
+                key={g.id}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  padding: '4px 8px 4px 4px',
+                  borderRadius: 999,
+                  backgroundColor: 'var(--theme-elevation-100)',
                 }}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: 'var(--theme-elevation-400)' }}
               >
-                <X size={16} />
-              </button>
-            </>
+                {g.avatarUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={g.avatarUrl}
+                    alt={g.name}
+                    style={{ width: 24, height: 24, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                  />
+                ) : (
+                  <div style={{ width: 24, height: 24, borderRadius: '50%', backgroundColor: 'var(--theme-elevation-150)', flexShrink: 0 }} />
+                )}
+                <span style={{ fontSize: 13, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
+                  {g.name}
+                  {g.isOfficiallyLicensed && <ShieldCheck size={12} color="var(--theme-success-500)" />}
+                </span>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleGuide(g.id)
+                  }}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', color: 'var(--theme-elevation-400)' }}
+                >
+                  <X size={14} />
+                </button>
+              </div>
+            ))
           ) : (
-            <span style={{ color: 'var(--theme-elevation-400)' }}>Click to select a guide...</span>
+            <span style={{ color: 'var(--theme-elevation-400)' }}>Click to select guides...</span>
           )}
           <ChevronDown
             size={16}
-            style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}
+            style={{ marginLeft: 'auto', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}
           />
         </div>
 
@@ -174,42 +193,14 @@ export const GuidePickerField: RelationshipFieldClientComponent = ({ path, field
                 <div style={{ textAlign: 'center', padding: 20, color: 'var(--theme-elevation-400)' }}>Loading guides...</div>
               )}
 
-              {!loading && value && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setValue(null)
-                    setIsOpen(false)
-                  }}
-                  style={{
-                    width: '100%',
-                    textAlign: 'left',
-                    padding: '8px 10px',
-                    marginBottom: 4,
-                    border: 'none',
-                    borderRadius: 6,
-                    backgroundColor: 'transparent',
-                    cursor: 'pointer',
-                    color: 'var(--theme-error-500)',
-                    fontSize: 13,
-                  }}
-                >
-                  ✕ Remove guide
-                </button>
-              )}
-
               {!loading &&
                 filtered.map((g) => {
-                  const isSelected = g.id === value
+                  const isSelected = selectedIds.includes(g.id)
                   return (
                     <button
                       key={g.id}
                       type="button"
-                      onClick={() => {
-                        setValue(g.id)
-                        setIsOpen(false)
-                        setSearch('')
-                      }}
+                      onClick={() => toggleGuide(g.id)}
                       style={{
                         width: '100%',
                         display: 'flex',
@@ -253,6 +244,7 @@ export const GuidePickerField: RelationshipFieldClientComponent = ({ path, field
                           <div style={{ fontSize: 11, color: 'var(--theme-elevation-400)', marginTop: 2 }}>{g.languages.join(', ')}</div>
                         )}
                       </div>
+                      {isSelected && <span style={{ fontSize: 11, color: 'var(--theme-success-500)', fontWeight: 600 }}>Selected</span>}
                     </button>
                   )
                 })}

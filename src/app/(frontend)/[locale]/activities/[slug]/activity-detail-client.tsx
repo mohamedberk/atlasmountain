@@ -314,18 +314,19 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
   const [showParticipants, setShowParticipants] = useState(false)
   const [reviewCarouselIndex, setReviewCarouselIndex] = useState(0)
   const [showGuideModal, setShowGuideModal] = useState(false)
+  const [modalGuide, setModalGuide] = useState<Guide | null>(null)
   const [selectedGuide, setSelectedGuide] = useState<Guide | null>(null)
+
+  const availableGuides = (Array.isArray(activity.guide) ? activity.guide : []).filter(
+    (g): g is Guide => typeof g === 'object' && g !== null
+  )
 
   // Pre-select this activity's guide when arriving via a guide's "View Tour" link
   useEffect(() => {
     const guideSlug = new URLSearchParams(window.location.search).get('guide')
-    if (
-      guideSlug &&
-      typeof activity.guide === 'object' &&
-      activity.guide &&
-      activity.guide.slug === guideSlug
-    ) {
-      setSelectedGuide(activity.guide)
+    if (guideSlug) {
+      const matched = availableGuides.find((g) => g.slug === guideSlug)
+      if (matched) setSelectedGuide(matched)
     }
     // Only needs to run once, reading the URL as it was on arrival.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -1035,41 +1036,46 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
             )}
 
             {/* Choose a local guide — optional */}
-            {typeof activity.guide === 'object' && activity.guide && (() => {
-              const guide = activity.guide as Guide
-              return (
-                <motion.div
-                  variants={staggerContainer}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-50px' }}
-                  className="space-y-5"
-                >
-                  <div>
-                    <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{tDetail('chooseGuideHeading')}</h2>
-                    <p className="text-sm text-neutral-500 mt-1">{tDetail('chooseGuideSubtitle')}</p>
-                  </div>
-                  <div className="grid sm:grid-cols-2 gap-4">
+            {availableGuides.length > 0 && (
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-50px' }}
+                className="space-y-5"
+              >
+                <div>
+                  <h2 className="text-xl lg:text-2xl font-bold text-neutral-900">{tDetail('chooseGuideHeading')}</h2>
+                  <p className="text-sm text-neutral-500 mt-1">{tDetail('chooseGuideSubtitle')}</p>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {availableGuides.map((guide) => (
                     <GuideOptionCard
+                      key={guide.id}
                       guide={guide}
                       isSelected={selectedGuide?.id === guide.id}
-                      onOpenProfile={() => setShowGuideModal(true)}
+                      onOpenProfile={() => {
+                        setModalGuide(guide)
+                        setShowGuideModal(true)
+                      }}
                       onRemove={() => setSelectedGuide(null)}
                     />
-                  </div>
+                  ))}
+                </div>
+                {modalGuide && (
                   <GuideProfileModal
-                    guide={guide}
+                    guide={modalGuide}
                     isOpen={showGuideModal}
-                    isSelected={selectedGuide?.id === guide.id}
+                    isSelected={selectedGuide?.id === modalGuide.id}
                     onClose={() => setShowGuideModal(false)}
                     onChoose={(guide) => {
                       setSelectedGuide(guide)
                       setShowGuideModal(false)
                     }}
                   />
-                </motion.div>
-              )
-            })()}
+                )}
+              </motion.div>
+            )}
 
             {/* Reviews Section - Mobile Carousel / Desktop Grid */}
             {hasReviews && (

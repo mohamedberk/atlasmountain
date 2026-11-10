@@ -487,9 +487,9 @@ export const Activities: CollectionConfig = {
               name: 'guide',
               type: 'relationship',
               relationTo: 'guides',
-              hasMany: false,
+              hasMany: true,
               admin: {
-                description: 'The local guide who leads this tour, if any',
+                description: 'The local guide(s) who lead this tour, if any',
                 components: {
                   Field: '@/components/admin/GuidePicker#GuidePickerField',
                 },

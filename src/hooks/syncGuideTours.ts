@@ -8,9 +8,23 @@ function toId(value: unknown): string | undefined {
   return String(value)
 }
 
+function toIds(value: unknown): string[] {
+  if (!Array.isArray(value)) return []
+  return value.map((v) => toId(v)).filter((id): id is string => Boolean(id))
+}
+
+function diffIds(newIds: string[], oldIds: string[]): { added: string[]; removed: string[] } {
+  const newSet = new Set(newIds)
+  const oldSet = new Set(oldIds)
+  return {
+    added: newIds.filter((id) => !oldSet.has(id)),
+    removed: oldIds.filter((id) => !newSet.has(id)),
+  }
+}
+
 async function addActivityToGuide(payload: Payload, guideId: string, activityId: string) {
   const guide = await payload.findByID({ collection: 'guides', id: guideId, depth: 0 })
-  const currentTours: string[] = (guide?.tours || []).map((t: unknown) => toId(t)).filter((id): id is string => Boolean(id))
+  const currentTours = toIds(guide?.tours)
   if (!currentTours.includes(activityId)) {
     await payload.update({
       collection: 'guides',
@@ -22,33 +36,55 @@ async function addActivityToGuide(payload: Payload, guideId: string, activityId:
 
 async function removeActivityFromGuide(payload: Payload, guideId: string, activityId: string) {
   const guide = await payload.findByID({ collection: 'guides', id: guideId, depth: 0 })
-  const currentTours: string[] = (guide?.tours || []).map((t: unknown) => toId(t)).filter((id): id is string => Boolean(id))
+  const currentTours = toIds(guide?.tours)
   const filtered = currentTours.filter((id) => id !== activityId)
   if (filtered.length !== currentTours.length) {
     await payload.update({ collection: 'guides', id: guideId, data: { tours: filtered } })
   }
 }
 
+async function addGuideToActivity(payload: Payload, activityId: string, guideId: string) {
+  const activity = await payload.findByID({ collection: 'activities', id: activityId, depth: 0 })
+  const currentGuides = toIds(activity?.guide)
+  if (!currentGuides.includes(guideId)) {
+    await payload.update({
+      collection: 'activities',
+      id: activityId,
+      data: { guide: [...currentGuides, guideId] },
+    })
+  }
+}
+
+async function removeGuideFromActivity(payload: Payload, activityId: string, guideId: string) {
+  const activity = await payload.findByID({ collection: 'activities', id: activityId, depth: 0 })
+  const currentGuides = toIds(activity?.guide)
+  const filtered = currentGuides.filter((id) => id !== guideId)
+  if (filtered.length !== currentGuides.length) {
+    await payload.update({ collection: 'activities', id: activityId, data: { guide: filtered } })
+  }
+}
+
 /**
- * Activities.guide (single) and Guides.tours (hasMany) are two separate fields
- * describing the same relationship. Setting one from the admin UI doesn't touch
- * the other, so they silently drift (e.g. "Tours Led by X" shows a tour, but
- * that tour's own "Meet Your Guide" section doesn't, because activity.guide
- * was never set). This hook keeps guide.tours in sync whenever activity.guide
- * changes, so the Activities-side guide picker is enough on its own.
+ * Activities.guide (hasMany) and Guides.tours (hasMany) are two separate fields
+ * describing the same many-to-many relationship. Setting one from the admin UI
+ * doesn't touch the other, so they silently drift (e.g. "Tours Led by X" shows a
+ * tour, but that tour's own "Choose Your Guide" section doesn't include X,
+ * because activity.guide was never updated). These hooks keep both sides in
+ * sync whenever either one changes. Each update is a no-op once the two sides
+ * already agree, so the two hooks can't loop into each other.
  */
 export const syncGuideToursAfterChange: CollectionAfterChangeHook = async ({ doc, previousDoc, req }) => {
-  const newGuideId = toId(doc.guide)
-  const oldGuideId = previousDoc ? toId(previousDoc.guide) : undefined
+  const { added, removed } = diffIds(toIds(doc.guide), toIds(previousDoc?.guide))
+  if (added.length === 0 && removed.length === 0) return doc
 
-  if (newGuideId === oldGuideId) return doc
+  const activityId = String(doc.id)
 
   try {
-    if (newGuideId) {
-      await addActivityToGuide(req.payload, newGuideId, String(doc.id))
+    for (const guideId of added) {
+      await addActivityToGuide(req.payload, guideId, activityId)
     }
-    if (oldGuideId && oldGuideId !== newGuideId) {
-      await removeActivityFromGuide(req.payload, oldGuideId, String(doc.id))
+    for (const guideId of removed) {
+      await removeActivityFromGuide(req.payload, guideId, activityId)
     }
   } catch (e) {
     console.error('[syncGuideTours] Failed to sync guide.tours on change:', e)
@@ -58,11 +94,13 @@ export const syncGuideToursAfterChange: CollectionAfterChangeHook = async ({ doc
 }
 
 export const syncGuideToursAfterDelete: CollectionAfterDeleteHook = async ({ doc, req }) => {
-  const guideId = toId(doc?.guide)
-  if (!guideId) return doc
+  const guideIds = toIds(doc?.guide)
+  if (guideIds.length === 0) return doc
 
   try {
-    await removeActivityFromGuide(req.payload, guideId, String(doc.id))
+    for (const guideId of guideIds) {
+      await removeActivityFromGuide(req.payload, guideId, String(doc.id))
+    }
   } catch (e) {
     console.error('[syncGuideTours] Failed to sync guide.tours on delete:', e)
   }
@@ -70,45 +108,36 @@ export const syncGuideToursAfterDelete: CollectionAfterDeleteHook = async ({ doc
   return doc
 }
 
-async function setActivityGuide(payload: Payload, activityId: string, guideId: string | null) {
-  const activity = await payload.findByID({ collection: 'activities', id: activityId, depth: 0 })
-  const currentGuideId = toId(activity?.guide) ?? null
-  if (currentGuideId === guideId) return
-  await payload.update({ collection: 'activities', id: activityId, data: { guide: guideId } })
-}
-
-/**
- * Mirror of syncGuideToursAfterChange: editing a guide's "Tours" list directly
- * (the Guides-side admin UI) should also set/clear activity.guide, since that's
- * the field the frontend actually reads. Each update is a no-op if the two
- * sides already agree, so this and syncGuideToursAfterChange don't loop forever.
- */
 export const syncActivityGuideAfterChange: CollectionAfterChangeHook = async ({ doc, previousDoc, req }) => {
-  const newTourIds: string[] = (doc.tours || []).map((t: unknown) => toId(t)).filter((id: unknown): id is string => Boolean(id))
-  const oldTourIds: string[] = (previousDoc?.tours || []).map((t: unknown) => toId(t)).filter((id: unknown): id is string => Boolean(id))
-
-  const newTourIdSet = new Set(newTourIds)
-  const oldTourIdSet = new Set(oldTourIds)
-
-  const added = newTourIds.filter((id) => !oldTourIdSet.has(id))
-  const removed = oldTourIds.filter((id) => !newTourIdSet.has(id))
-
+  const { added, removed } = diffIds(toIds(doc.tours), toIds(previousDoc?.tours))
   if (added.length === 0 && removed.length === 0) return doc
 
   const guideId = String(doc.id)
 
   try {
     for (const activityId of added) {
-      await setActivityGuide(req.payload, activityId, guideId)
+      await addGuideToActivity(req.payload, activityId, guideId)
     }
     for (const activityId of removed) {
-      const activity = await req.payload.findByID({ collection: 'activities', id: activityId, depth: 0 })
-      if (toId(activity?.guide) === guideId) {
-        await setActivityGuide(req.payload, activityId, null)
-      }
+      await removeGuideFromActivity(req.payload, activityId, guideId)
     }
   } catch (e) {
     console.error('[syncGuideTours] Failed to sync activity.guide on change:', e)
+  }
+
+  return doc
+}
+
+export const syncActivityGuideAfterDelete: CollectionAfterDeleteHook = async ({ doc, req }) => {
+  const activityIds = toIds(doc?.tours)
+  if (activityIds.length === 0) return doc
+
+  try {
+    for (const activityId of activityIds) {
+      await removeGuideFromActivity(req.payload, activityId, String(doc.id))
+    }
+  } catch (e) {
+    console.error('[syncGuideTours] Failed to sync activity.guide on delete:', e)
   }
 
   return doc

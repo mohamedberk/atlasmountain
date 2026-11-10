@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { revalidateCollectionAfterChange, revalidateCollectionAfterDelete } from '@/hooks/revalidateOnChange'
-import { syncActivityGuideAfterChange } from '@/hooks/syncGuideTours'
+import { syncActivityGuideAfterChange, syncActivityGuideAfterDelete } from '@/hooks/syncGuideTours'
 
 export const Guides: CollectionConfig = {
   slug: 'guides',
@@ -19,7 +19,7 @@ export const Guides: CollectionConfig = {
   },
   hooks: {
     afterChange: [revalidateCollectionAfterChange, syncActivityGuideAfterChange],
-    afterDelete: [revalidateCollectionAfterDelete as any],
+    afterDelete: [revalidateCollectionAfterDelete as any, syncActivityGuideAfterDelete],
   },
   fields: [
     {
