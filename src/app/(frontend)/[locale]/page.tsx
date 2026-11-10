@@ -12,9 +12,10 @@ import {
   getCategories,
   getHomePage,
   getBlogPosts,
+  getGuides,
   getSiteSettings,
 } from '@/lib/payload'
-import type { Activity, Category, BlogPost } from '@/payload-types'
+import type { Activity, Category, BlogPost, Guide } from '@/payload-types'
 import { defaultLocale, type Locale } from '@/i18n/config'
 import { SITE_URL } from '@/lib/site-url'
 
@@ -34,6 +35,11 @@ const AboutSection = dynamicImport(
 
 const DetailedActivitiesSection = dynamicImport(
   () => import('@/components/sections/detailed-activities-section').then(mod => mod.DetailedActivitiesSection),
+  { loading: () => <div className="h-96 bg-surface/5 animate-pulse" /> }
+)
+
+const GuidesSection = dynamicImport(
+  () => import('@/components/sections/guides-section').then(mod => mod.GuidesSection),
   { loading: () => <div className="h-96 bg-surface/5 animate-pulse" /> }
 )
 
@@ -134,12 +140,14 @@ export default async function Home({
     categoriesResult,
     homePageResult,
     blogPostsResult,
+    guidesResult,
     siteSettingsResult,
   ] = await Promise.all([
     getActivities(typedLocale),
     getCategories('activity', typedLocale),
     getHomePage(typedLocale),
     getBlogPosts(typedLocale, 3),
+    getGuides(typedLocale),
     getSiteSettings(typedLocale),
   ])
 
@@ -147,6 +155,7 @@ export default async function Home({
   const activities = activitiesResult.docs as Activity[]
   const categories = categoriesResult.docs as Category[]
   const blogPosts = blogPostsResult.docs as BlogPost[]
+  const guides = guidesResult.docs as Guide[]
 
   // Cast homePageData since types aren't regenerated yet
   const homePageData = homePageResult as any
@@ -223,6 +232,15 @@ export default async function Home({
             />
           </Suspense>
         </ErrorBoundary>
+
+        {/* Guides Section */}
+        {guides.length > 0 && (
+          <ErrorBoundary>
+            <Suspense fallback={<div className="h-96 bg-surface/5 animate-pulse" />}>
+              <GuidesSection guides={guides} />
+            </Suspense>
+          </ErrorBoundary>
+        )}
 
         {/* Detailed Activities Section (Our Best Trips) */}
         <ErrorBoundary>

@@ -828,6 +828,15 @@
     "viewAll": "Voir Tous les Articles",
     "readMore": "Lire Plus"
   },
+  "guidesSection": {
+    "badge": "Notre Équipe",
+    "title": "Rencontrez Nos Guides",
+    "titleHighlight": "Locaux",
+    "description": "De vraies personnes que vous pouvez contacter directement pour organiser une journée privée et personnalisée au Maroc.",
+    "seeAll": "Voir Tous les Guides",
+    "prev": "Guide précédent",
+    "next": "Guide suivant"
+  },
   "activityMetadata": {
     "bookDescription": "Réserver {title} à Marrakech avec Atlas Mountain Visit",
     "defaultKeywords": "{title}, circuits Maroc, activités Marrakech"

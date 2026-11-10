@@ -392,12 +392,12 @@ export function DetailedActivitiesSection({ activities, bestTripsData }: Props) 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12 md:mb-16 will-change-transform"
+          className="mb-12 md:mb-16 will-change-transform"
         >
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-neutral-900 mb-3">
             {title} <span style={{ color: ACCENT_GREEN }}>{titleHighlight}</span>
           </h2>
-          <p className="text-neutral-600 max-w-2xl mx-auto">
+          <p className="text-lg text-neutral-600 max-w-xl">
             {description}
           </p>
         </motion.div>

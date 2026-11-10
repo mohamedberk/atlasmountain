@@ -930,6 +930,15 @@
     "viewAll": "View All Articles",
     "readMore": "Read More"
   },
+  "guidesSection": {
+    "badge": "Meet Our Team",
+    "title": "Meet Our Local",
+    "titleHighlight": "Guides",
+    "description": "Real people you can message directly to build a private, personalized day in Morocco.",
+    "seeAll": "See All Guides",
+    "prev": "Previous guide",
+    "next": "Next guide"
+  },
   "activityMetadata": {
     "bookDescription": "Book {title} in Marrakech with Atlas Mountain Visit",
     "defaultKeywords": "{title}, Morocco tours, Marrakech activities"

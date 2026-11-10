@@ -828,6 +828,15 @@
     "viewAll": "Zobrazit všechny články",
     "readMore": "Číst více"
   },
+  "guidesSection": {
+    "badge": "Náš Tým",
+    "title": "Poznejte Naše Místní",
+    "titleHighlight": "Průvodce",
+    "description": "Skuteční lidé, které můžete kontaktovat přímo a naplánovat si soukromý, individuální den v Maroku.",
+    "seeAll": "Zobrazit Všechny Průvodce",
+    "prev": "Předchozí průvodce",
+    "next": "Další průvodce"
+  },
   "activityMetadata": {
     "bookDescription": "Rezervujte {title} v Marrákeši s Atlas Mountain Visit",
     "defaultKeywords": "{title}, zájezdy do Maroka, aktivity v Marrákeši"

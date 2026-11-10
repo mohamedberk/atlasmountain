@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ShieldCheck, Check } from 'lucide-react'
+import { ShieldCheck, Check, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { StarRating } from '@/components/ui/star-rating'
 import { GuideImageCarousel } from './guide-image-carousel'
@@ -23,9 +23,10 @@ interface GuideOptionCardProps {
   guide: Guide
   isSelected: boolean
   onOpenProfile: () => void
+  onRemove?: () => void
 }
 
-export function GuideOptionCard({ guide, isSelected, onOpenProfile }: GuideOptionCardProps) {
+export function GuideOptionCard({ guide, isSelected, onOpenProfile, onRemove }: GuideOptionCardProps) {
   const tPage = useTranslations('guidesPage')
   const tActivity = useTranslations('activityDetail')
 
@@ -58,11 +59,24 @@ export function GuideOptionCard({ guide, isSelected, onOpenProfile }: GuideOptio
 
         {isSelected && (
           <div
-            className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold text-white z-10"
+            className="absolute top-3 right-3 flex items-center gap-1.5 pl-2.5 pr-1.5 py-1 rounded-full text-[11px] font-semibold text-white z-10"
             style={{ backgroundColor: ACCENT_GREEN }}
           >
             <Check className="w-3 h-3" />
             {tActivity('guideSelected')}
+            {onRemove && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onRemove()
+                }}
+                aria-label={tActivity('removeGuideCta')}
+                className="ml-0.5 w-4 h-4 rounded-full flex items-center justify-center bg-white/20 hover:bg-white/35 transition-colors"
+              >
+                <X className="w-2.5 h-2.5" />
+              </button>
+            )}
           </div>
         )}
       </div>

@@ -46,14 +46,10 @@ export function GuideCard({ guide, index = 0 }: GuideCardProps) {
   const languages = (guide.languagesSpoken || []).map((l) => l.language)
 
   return (
-    <motion.div variants={cardVariants} custom={index} className="group">
-      <motion.div
-        className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-neutral-100 h-full flex flex-col shadow-[0_1px_4px_rgba(0,0,0,0.02)]"
-        whileHover={{ y: -6, boxShadow: '0 6px 14px -10px rgba(0, 0, 0, 0.04)' }}
-        transition={{ duration: 0.3 }}
-      >
+    <motion.div variants={cardVariants} custom={index}>
+      <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-neutral-100 h-full flex flex-col shadow-[0_1px_4px_rgba(0,0,0,0.02)]">
         {/* Image */}
-        <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
+        <div className="group relative h-48 sm:h-56 md:h-64 overflow-hidden">
           <GuideImageCarousel
             images={getGuideImages(guide)}
             alt={guide.name}
@@ -94,7 +90,7 @@ export function GuideCard({ guide, index = 0 }: GuideCardProps) {
 
           {/* Name */}
           <NavLink href={`/guides/${guide.slug}`}>
-            <h3 className="font-helvetica text-lg sm:text-xl font-bold text-neutral-900 mb-2 line-clamp-2 group-hover:text-[#ff2828] transition-colors duration-300">
+            <h3 className="font-helvetica text-lg sm:text-xl font-bold text-neutral-900 mb-2 line-clamp-2">
               {guide.name}
             </h3>
           </NavLink>
@@ -127,7 +123,7 @@ export function GuideCard({ guide, index = 0 }: GuideCardProps) {
             </NavLink>
           </div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   )
 }

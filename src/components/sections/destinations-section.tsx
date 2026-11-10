@@ -51,24 +51,44 @@ export function DestinationsSection() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={staggerContainer}
-          className="text-center mb-14"
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14"
         >
-          <motion.h2
-            variants={fadeInUp}
-            custom={0.1}
-            className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 mb-6"
-          >
-            {t('title')}{' '}
-            <span style={{ color: ACCENT_GREEN }}>{t('titleHighlight')}</span>
-          </motion.h2>
+          <div>
+            <motion.h2
+              variants={fadeInUp}
+              custom={0.1}
+              className="font-display text-3xl md:text-4xl lg:text-5xl text-neutral-900 mb-3"
+            >
+              {t('title')}{' '}
+              <span style={{ color: ACCENT_GREEN }}>{t('titleHighlight')}</span>
+            </motion.h2>
 
-          <motion.p
-            variants={fadeInUp}
-            custom={0.2}
-            className="text-neutral-600 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed"
-          >
-            {t('description')}
-          </motion.p>
+            <motion.p
+              variants={fadeInUp}
+              custom={0.2}
+              className="text-lg text-neutral-600 max-w-xl"
+            >
+              {t('description')}
+            </motion.p>
+          </div>
+
+          <motion.div variants={fadeInUp} custom={0.3}>
+            <NavLink
+              href="/activities"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium hover:opacity-90 transition-all group"
+              style={{ backgroundColor: ACCENT_GREEN }}
+            >
+              {t('cta')}
+              <svg
+                className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </NavLink>
+          </motion.div>
         </motion.div>
 
         {/* Destinations Grid */}
@@ -129,31 +149,6 @@ export function DestinationsSection() {
               </NavLink>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="text-center mt-12"
-        >
-          <NavLink
-            href="/activities"
-            className="inline-flex items-center gap-2 h-12 px-8 text-white rounded-xl font-medium transition-all group hover:shadow-md hover:-translate-y-0.5"
-            style={{ backgroundColor: ACCENT_GREEN }}
-          >
-            {t('cta')}
-            <svg
-              className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </NavLink>
         </motion.div>
       </div>
     </section>

@@ -1054,6 +1054,7 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                       guide={guide}
                       isSelected={selectedGuide?.id === guide.id}
                       onOpenProfile={() => setShowGuideModal(true)}
+                      onRemove={() => setSelectedGuide(null)}
                     />
                   </div>
                   <GuideProfileModal

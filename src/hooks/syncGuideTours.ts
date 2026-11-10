@@ -69,3 +69,47 @@ export const syncGuideToursAfterDelete: CollectionAfterDeleteHook = async ({ doc
 
   return doc
 }
+
+async function setActivityGuide(payload: Payload, activityId: string, guideId: string | null) {
+  const activity = await payload.findByID({ collection: 'activities', id: activityId, depth: 0 })
+  const currentGuideId = toId(activity?.guide) ?? null
+  if (currentGuideId === guideId) return
+  await payload.update({ collection: 'activities', id: activityId, data: { guide: guideId } })
+}
+
+/**
+ * Mirror of syncGuideToursAfterChange: editing a guide's "Tours" list directly
+ * (the Guides-side admin UI) should also set/clear activity.guide, since that's
+ * the field the frontend actually reads. Each update is a no-op if the two
+ * sides already agree, so this and syncGuideToursAfterChange don't loop forever.
+ */
+export const syncActivityGuideAfterChange: CollectionAfterChangeHook = async ({ doc, previousDoc, req }) => {
+  const newTourIds: string[] = (doc.tours || []).map((t: unknown) => toId(t)).filter((id: unknown): id is string => Boolean(id))
+  const oldTourIds: string[] = (previousDoc?.tours || []).map((t: unknown) => toId(t)).filter((id: unknown): id is string => Boolean(id))
+
+  const newTourIdSet = new Set(newTourIds)
+  const oldTourIdSet = new Set(oldTourIds)
+
+  const added = newTourIds.filter((id) => !oldTourIdSet.has(id))
+  const removed = oldTourIds.filter((id) => !newTourIdSet.has(id))
+
+  if (added.length === 0 && removed.length === 0) return doc
+
+  const guideId = String(doc.id)
+
+  try {
+    for (const activityId of added) {
+      await setActivityGuide(req.payload, activityId, guideId)
+    }
+    for (const activityId of removed) {
+      const activity = await req.payload.findByID({ collection: 'activities', id: activityId, depth: 0 })
+      if (toId(activity?.guide) === guideId) {
+        await setActivityGuide(req.payload, activityId, null)
+      }
+    }
+  } catch (e) {
+    console.error('[syncGuideTours] Failed to sync activity.guide on change:', e)
+  }
+
+  return doc
+}
