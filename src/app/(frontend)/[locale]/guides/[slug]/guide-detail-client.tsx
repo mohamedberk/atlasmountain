@@ -10,7 +10,6 @@ import { StarRating } from '@/components/ui/star-rating'
 import { Badge } from '@/components/ui/badge'
 import { RichText } from '@/components/rich-text'
 import { ReviewsList } from '@/components/ui/reviews-list'
-import { FAQSection } from '@/components/sections/faq-section'
 import { GuideImageCarousel } from '@/components/guides/guide-image-carousel'
 import { GuideToursTabs } from '@/components/guides/guide-tours-tabs'
 import { useSiteSettings } from '@/context/SiteSettingsContext'
@@ -162,15 +161,6 @@ export function GuideDetailClient({ guide, reviews }: Props) {
     )
   }
 
-  const miniFaqItems = [
-    { question: tDetail('miniFaqLanguagesQuestion', { name: guide.name }), answer: tDetail('miniFaqLanguagesAnswer', { name: guide.name, languages: languages.join(', ') }) },
-    ...(guide.isOfficiallyLicensed
-      ? [{ question: tDetail('miniFaqLicensedQuestion', { name: guide.name }), answer: tDetail('miniFaqLicensedAnswer', { name: guide.name, license: guide.licenseNumber || '' }) }]
-      : []),
-    { question: tDetail('miniFaqBookingQuestion', { name: guide.name }), answer: tDetail('miniFaqBookingAnswer', { name: guide.name }) },
-    { question: tDetail('miniFaqContactQuestion', { name: guide.name }), answer: tDetail('miniFaqContactAnswer', { name: guide.name }) },
-  ]
-
   return (
     <div className="min-h-screen bg-white">
       {/* Fixed Mobile Bottom Action Bar */}
@@ -269,15 +259,6 @@ export function GuideDetailClient({ guide, reviews }: Props) {
               <ReviewsList reviews={reviews} guideName={guide.name} />
             </div>
 
-            {/* Mini FAQ */}
-            <FAQSection
-              faqData={{
-                title: tDetail('faqTitle'),
-                titleHighlight: guide.name,
-                description: tDetail('faqDescription', { name: guide.name }),
-                items: miniFaqItems,
-              }}
-            />
           </div>
 
           {/* Right Column - Sticky Guide Card (desktop only — mobile uses the summary card + fixed bottom bar) */}

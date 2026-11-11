@@ -49,6 +49,7 @@ export function GuidesSection({ guides }: Props) {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="hidden md:block"
           >
             <NavLink
               href="/guides"
@@ -97,6 +98,17 @@ export function GuidesSection({ guides }: Props) {
             </div>
           </div>
         </motion.div>
+
+        <div className="mt-8 flex justify-center md:hidden">
+          <NavLink
+            href="/guides"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium hover:opacity-90 transition-all group"
+            style={{ backgroundColor: ACCENT_GREEN }}
+          >
+            {t('seeAll')}
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </NavLink>
+        </div>
       </div>
     </section>
   )
