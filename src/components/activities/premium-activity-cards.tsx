@@ -88,6 +88,17 @@ export function PremiumActivityCards({ activities, categories, categoriesSection
     return [...categories].sort((a, b) => (a.displayOrder || 99) - (b.displayOrder || 99))
   }, [categories])
 
+  // Count activities per category so the card can show "N tours" instead of a static location
+  const tourCountByCategory = useMemo(() => {
+    const counts = new Map<string, number>()
+    for (const activity of activities) {
+      const categoryId =
+        typeof activity.category === 'object' ? activity.category?.id : activity.category
+      if (categoryId) counts.set(categoryId, (counts.get(categoryId) || 0) + 1)
+    }
+    return counts
+  }, [activities])
+
   // If no categories, don't render the section
   if (!sortedCategories.length) return null
 
@@ -201,7 +212,12 @@ export function PremiumActivityCards({ activities, categories, categoriesSection
                     </div>
                     <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-neutral-100 border border-neutral-200">
                       <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-neutral-500" />
-                      <span className="text-[10px] sm:text-xs font-medium text-neutral-600">{tCommon('morocco')}</span>
+                      <span className="text-[10px] sm:text-xs font-medium text-neutral-600">
+                        {tourCountByCategory.get(category.id) || 0}{' '}
+                        {(tourCountByCategory.get(category.id) || 0) !== 1
+                          ? tCommon('tours')
+                          : tCommon('tour')}
+                      </span>
                     </div>
                   </div>
 

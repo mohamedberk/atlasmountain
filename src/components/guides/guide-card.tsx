@@ -101,16 +101,14 @@ export function GuideCard({ guide, index = 0 }: GuideCardProps) {
           )}
 
           {/* Languages and CTA */}
-          <div className="pt-4 border-t border-neutral-100 flex items-center justify-between gap-3">
-            {languages.length > 0 ? (
-              <div className="min-w-0">
-                <span className="text-xs text-neutral-500 truncate block">{tPage('speaksLabel')} {languages.slice(0, 3).join(', ')}</span>
-              </div>
-            ) : <div />}
+          <div className="pt-4 border-t border-neutral-100 flex flex-col gap-3">
+            {languages.length > 0 && (
+              <span className="text-xs text-neutral-500">{tPage('speaksLabel')} {languages.slice(0, 3).join(', ')}</span>
+            )}
 
             <NavLink
               href={`/guides/${guide.slug}`}
-              className="inline-flex items-center justify-center h-11 px-6 rounded-xl border-2 text-sm font-semibold transition-all duration-300 flex-shrink-0 hover:bg-opacity-10"
+              className="inline-flex items-center justify-center h-11 px-6 rounded-xl border-2 text-sm font-semibold transition-all duration-300 self-start hover:bg-opacity-10"
               style={{ borderColor: ACCENT_GREEN, color: ACCENT_GREEN }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = `${ACCENT_GREEN}10`

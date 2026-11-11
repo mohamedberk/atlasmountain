@@ -89,7 +89,7 @@ export function GuidesSection({ guides }: Props) {
               {guides.map((guide, index) => (
                 <div
                   key={guide.id}
-                  className="flex-[0_0_85%] sm:flex-[0_0_55%] md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] min-w-0 px-3"
+                  className="flex-[0_0_100%] sm:flex-[0_0_55%] md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] min-w-0 px-3"
                 >
                   <GuideCard guide={guide} index={index} />
                 </div>
