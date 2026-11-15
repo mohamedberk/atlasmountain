@@ -1,9 +1,10 @@
 'use client'
 
+import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { MapPin, Clock, Users, ChevronRight, Check, Star } from 'lucide-react'
+import { MapPin, Clock, Users, ChevronRight, Check, Star, Search, X } from 'lucide-react'
 import { NavLink } from '@/components/ui/nav-link'
-import type { Category, Activity, Media } from '@/payload-types'
+import type { Category, Activity, Media, Location } from '@/payload-types'
 import { getResponsiveSizes } from '@/lib/image-utils'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
@@ -90,6 +91,13 @@ function getImageUrl(image: string | number | Media | null | undefined): string 
   return image.externalUrl || image.url || '/placeholder-activity.jpg'
 }
 
+function getLocationName(location: string | number | Location | null | undefined, defaultLocation: string): string {
+  if (!location) return defaultLocation
+  if (typeof location === 'string') return location
+  if (typeof location === 'number') return defaultLocation
+  return location.name || defaultLocation
+}
+
 // Helper to get price from activity
 function getActivityPrice(activity: Activity): number | null {
   if (activity.pricingType === 'tiered' && activity.tieredPricing?.tiers && activity.tieredPricing.tiers.length > 0) {
@@ -110,18 +118,34 @@ interface Props {
   category: Category
   activities: Activity[]
   locale?: string
+  /** Maps activity id -> lowercased title text across every locale, so the search box can match a query typed in a different language than the page is currently showing. */
+  searchIndex?: Record<string, string>
 }
 
-export function CategoryPageClient({ category, activities, locale }: Props) {
+export function CategoryPageClient({ category, activities, locale, searchIndex = {} }: Props) {
   const categoryImage = getImageUrl(category.image)
   const tCommon = useTranslations('common')
   const tNav = useTranslations('nav')
   const tCategory = useTranslations('categoryPage')
+  const tActivitiesPage = useTranslations('activitiesPage')
+
+  const [searchQuery, setSearchQuery] = useState('')
+
+  const filteredActivities = useMemo(() => {
+    if (!searchQuery.trim()) return activities
+    const query = searchQuery.toLowerCase()
+    return activities.filter((activity) => {
+      const title = activity.title?.toLowerCase() || ''
+      const location = getLocationName(activity.location, tCommon('morocco')).toLowerCase()
+      const allLocaleTitles = searchIndex[String(activity.id)] || ''
+      return title.includes(query) || location.includes(query) || allLocaleTitles.includes(query)
+    })
+  }, [activities, searchQuery, searchIndex, tCommon])
 
   return (
     <div className="relative">
       {/* Hero Section */}
-      <section className="relative h-[60vh] sm:h-[50vh] min-h-[350px] sm:min-h-[400px] overflow-hidden">
+      <section className="relative min-h-[460px] sm:min-h-[480px] overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -146,16 +170,13 @@ export function CategoryPageClient({ category, activities, locale }: Props) {
         />
 
         {/* Content */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="relative flex items-center justify-center pt-28 pb-10 sm:pt-32 sm:pb-14">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <motion.div
               initial="hidden"
               animate="visible"
               variants={staggerContainer}
             >
-              {/* Spacer to preserve hero layout */}
-              <div className="h-10 mb-6" aria-hidden="true" />
-
               {/* Title */}
               <motion.h1
                 variants={fadeInUp}
@@ -176,11 +197,37 @@ export function CategoryPageClient({ category, activities, locale }: Props) {
                 </motion.p>
               )}
 
-              {/* Stats */}
+              {/* Search Bar */}
               <motion.div
                 variants={fadeInUp}
                 custom={0.4}
-                className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mt-5 sm:mt-8 px-4"
+                className="max-w-xl mx-auto mt-5 sm:mt-8 px-4"
+              >
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+                  <input
+                    type="text"
+                    placeholder={tActivitiesPage('searchActivities')}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full h-11 md:h-12 pl-11 pr-11 rounded-xl border border-white/20 bg-white/95 backdrop-blur-sm text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#ff2828] focus:ring-2 focus:ring-[#ff2828]/20 transition-all shadow-lg"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+
+              {/* Stats */}
+              <motion.div
+                variants={fadeInUp}
+                custom={0.5}
+                className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mt-4 sm:mt-6 px-4"
               >
                 <div className="flex items-center gap-1.5 sm:gap-2 text-white">
                   <div className="flex items-center gap-0.5">
@@ -203,7 +250,7 @@ export function CategoryPageClient({ category, activities, locale }: Props) {
                 <div className="hidden sm:block w-px h-5 bg-white/30" />
                 <div className="flex items-center gap-1 sm:gap-2 text-white">
                   <Users className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span className="text-xs sm:text-sm font-medium">{activities.length} {tCommon('experiences')}</span>
+                  <span className="text-xs sm:text-sm font-medium">{filteredActivities.length} {tCommon('experiences')}</span>
                 </div>
               </motion.div>
             </motion.div>
@@ -226,14 +273,14 @@ export function CategoryPageClient({ category, activities, locale }: Props) {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Activities Grid */}
-          {activities.length > 0 ? (
+          {filteredActivities.length > 0 ? (
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-50px' }}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
             >
-              {activities.map((activity, index) => (
+              {filteredActivities.map((activity, index) => (
                 <motion.div
                   key={activity.id}
                   variants={cardVariants}
@@ -389,21 +436,35 @@ export function CategoryPageClient({ category, activities, locale }: Props) {
               className="text-center py-16"
             >
               <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-neutral-100 flex items-center justify-center">
-                <MapPin className="w-10 h-10 text-neutral-400" />
+                {searchQuery ? (
+                  <Search className="w-10 h-10 text-neutral-400" />
+                ) : (
+                  <MapPin className="w-10 h-10 text-neutral-400" />
+                )}
               </div>
               <h3 className="font-display text-2xl text-neutral-900 mb-3">
-                {tCategory('noActivitiesYet')}
+                {searchQuery ? tActivitiesPage('noActivitiesFound') : tCategory('noActivitiesYet')}
               </h3>
               <p className="text-neutral-600 mb-8 max-w-md mx-auto">
-                {tCategory('noActivitiesMessage')}
+                {searchQuery ? tActivitiesPage('tryAdjustingFilters') : tCategory('noActivitiesMessage')}
               </p>
-              <NavLink
-                href="/"
-                className="inline-flex items-center justify-center h-12 px-8 rounded-lg text-white font-semibold transition-all duration-300 hover:opacity-90"
-                style={{ backgroundColor: ACCENT_GREEN }}
-              >
-                {tCategory('exploreOtherCategories')}
-              </NavLink>
+              {searchQuery ? (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="inline-flex items-center justify-center h-12 px-8 rounded-lg text-white font-semibold transition-all duration-300 hover:opacity-90"
+                  style={{ backgroundColor: ACCENT_GREEN }}
+                >
+                  {tCommon('clearFilters')}
+                </button>
+              ) : (
+                <NavLink
+                  href="/"
+                  className="inline-flex items-center justify-center h-12 px-8 rounded-lg text-white font-semibold transition-all duration-300 hover:opacity-90"
+                  style={{ backgroundColor: ACCENT_GREEN }}
+                >
+                  {tCategory('exploreOtherCategories')}
+                </NavLink>
+              )}
             </motion.div>
           )}
         </div>

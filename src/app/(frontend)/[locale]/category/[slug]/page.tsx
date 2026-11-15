@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
-import { getCategoryBySlug, getActivitiesByCategory, getCategories } from '@/lib/payload'
+import { getCategoryBySlug, getActivitiesByCategory, getCategories, getActivitiesSearchIndex } from '@/lib/payload'
 import { CategoryPageClient } from './category-page-client'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
@@ -73,9 +73,10 @@ export default async function CategoryPage({ params }: Props) {
   setRequestLocale(locale)
 
   // Fetch category and its activities in parallel
-  const [category, activitiesResult] = await Promise.all([
+  const [category, activitiesResult, searchIndex] = await Promise.all([
     getCategoryBySlug(slug, typedLocale),
     getActivitiesByCategory(slug, typedLocale),
+    getActivitiesSearchIndex(),
   ])
 
   if (!category) {
@@ -124,6 +125,7 @@ export default async function CategoryPage({ params }: Props) {
           category={category as Category}
           activities={activities}
           locale={typedLocale}
+          searchIndex={searchIndex}
         />
         <Footer />
       </main>
