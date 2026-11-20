@@ -598,7 +598,10 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
               className={`${isCustomNoteMode ? 'w-full' : 'flex-1 max-w-[200px]'} px-6 py-2.5 text-white font-bold text-sm rounded-xl transition-all shadow-sm hover:shadow-md`}
               style={{ backgroundColor: ACCENT_GREEN }}
             >
-              {tDetail('checkAvailabilityButton')}
+              <span className="flex items-baseline justify-center gap-1">
+                <span>{tDetail('checkAvailabilityButton')}</span>
+                <span className="text-xs font-normal opacity-80">{tDetail('payLaterSuffix')}</span>
+              </span>
             </motion.button>
           </div>
         </div>
@@ -639,7 +642,10 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                     className="px-6 py-3 text-white font-bold text-base rounded-xl transition-all shadow-md"
                     style={{ backgroundColor: ACCENT_GREEN }}
                   >
-                    {tDetail('checkAvailabilityButton')}
+                    <span className="flex items-baseline gap-1.5">
+                      <span>{tDetail('checkAvailabilityButton')}</span>
+                      <span className="text-xs font-normal opacity-80">{tDetail('payLaterSuffix')}</span>
+                    </span>
                   </motion.button>
                 </div>
               </div>
@@ -853,90 +859,6 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                 </div>
               ) : null}
             </motion.div>
-
-            {/* Mobile Pricing Section - Show pricing options on mobile */}
-            <div className="lg:hidden">
-              <div className="bg-white border border-neutral-200 rounded-2xl shadow-sm">
-                {/* Green top accent bar */}
-                <div className="h-2 rounded-t-2xl" style={{ backgroundColor: ACCENT_GREEN }} />
-
-                <div className="p-5 space-y-4">
-                  {/* Pricing Display Section */}
-                  {isCustomNoteMode && customPricingNote ? (
-                    /* Custom Note Display */
-                    <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-6">
-                      <div className="text-center">
-                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-red-100 mb-4">
-                          <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                          </svg>
-                        </div>
-                        <p className="text-lg text-neutral-900 font-medium whitespace-pre-wrap">
-                          {customPricingNote}
-                        </p>
-                      </div>
-                    </div>
-                  ) : tieredPricingEnabled && tieredPricingTiers.length > 0 ? (
-                    /* Tiered Pricing Card */
-                    <>
-                      {/* Header with "Group Pricing" and "per person" */}
-                      <div className="flex justify-between items-baseline">
-                        <h3 className="text-lg font-semibold text-neutral-900">{tDetail('groupPricingLabel')}</h3>
-                        <span className="text-sm text-neutral-600">{tCommon('perPerson')}</span>
-                      </div>
-
-                      {/* Tiered pricing list */}
-                      <div className="space-y-2">
-                        {tieredPricingTiers.map((tier: any, index: number) => {
-                          const numPeople = tier.numberOfPeople || tier.minPeople
-                          const maxPeople = tier.maxPeople || numPeople
-                          const isSinglePerson = !tier.maxPeople || maxPeople === numPeople
-                          const isSelected = adults >= numPeople && adults <= maxPeople
-
-                          return (
-                            <button
-                              key={index}
-                              onClick={() => {
-                                setAdults(numPeople)
-                                setChildren(0)
-                              }}
-                              className={`w-full flex justify-between items-center p-3 rounded-lg transition-all ${
-                                isSelected
-                                  ? 'bg-red-50 border-2 border-red-500'
-                                  : 'bg-neutral-50 border border-transparent hover:bg-neutral-100'
-                              }`}
-                            >
-                              <span className={`text-sm ${isSelected ? 'font-semibold' : ''}`}>
-                                {isSinglePerson
-                                  ? `${numPeople} ${numPeople === 1 ? tDetail('personLabel') : tDetail('peopleLabel')}`
-                                  : `${numPeople}-${maxPeople} ${tDetail('peopleLabel')}`
-                                }
-                              </span>
-                              <span className={`text-sm font-semibold text-red-600 ${isSelected ? 'font-bold' : ''}`}>
-                                €{tier.pricePerPerson}
-                              </span>
-                            </button>
-                          )
-                        })}
-                      </div>
-                    </>
-                  ) : !isCustomNoteMode && (
-                    /* Standard Price Display */
-                    <div>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
-                        <span className="text-base text-neutral-500">{isPrivateMode ? tDetail('totalLabel') : tCommon('perPerson')}</span>
-                      </div>
-                      {isPrivateMode && privateAdditionalGuestPrice > 0 && (
-                        <p className="text-sm text-neutral-500 mt-1">
-                          {tDetail('additionalGuestNote', { price: privateAdditionalGuestPrice, min: privateMinGuests })}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
 
             {/* Short Description */}
             {activity.shortDescription && (
@@ -1489,6 +1411,90 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
               </div>
             )}
 
+            {/* Mobile Pricing Section - Show pricing options on mobile, below itinerary */}
+            <div className="lg:hidden">
+              <div className="bg-white border border-neutral-200 rounded-2xl shadow-sm">
+                {/* Green top accent bar */}
+                <div className="h-2 rounded-t-2xl" style={{ backgroundColor: ACCENT_GREEN }} />
+
+                <div className="p-5 space-y-4">
+                  {/* Pricing Display Section */}
+                  {isCustomNoteMode && customPricingNote ? (
+                    /* Custom Note Display */
+                    <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-6">
+                      <div className="text-center">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-red-100 mb-4">
+                          <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                          </svg>
+                        </div>
+                        <p className="text-lg text-neutral-900 font-medium whitespace-pre-wrap">
+                          {customPricingNote}
+                        </p>
+                      </div>
+                    </div>
+                  ) : tieredPricingEnabled && tieredPricingTiers.length > 0 ? (
+                    /* Tiered Pricing Card */
+                    <>
+                      {/* Header with "Group Pricing" and "per person" */}
+                      <div className="flex justify-between items-baseline">
+                        <h3 className="text-lg font-semibold text-neutral-900">{tDetail('groupPricingLabel')}</h3>
+                        <span className="text-sm text-neutral-600">{tCommon('perPerson')}</span>
+                      </div>
+
+                      {/* Tiered pricing list */}
+                      <div className="space-y-2">
+                        {tieredPricingTiers.map((tier: any, index: number) => {
+                          const numPeople = tier.numberOfPeople || tier.minPeople
+                          const maxPeople = tier.maxPeople || numPeople
+                          const isSinglePerson = !tier.maxPeople || maxPeople === numPeople
+                          const isSelected = adults >= numPeople && adults <= maxPeople
+
+                          return (
+                            <button
+                              key={index}
+                              onClick={() => {
+                                setAdults(numPeople)
+                                setChildren(0)
+                              }}
+                              className={`w-full flex justify-between items-center p-3 rounded-lg transition-all ${
+                                isSelected
+                                  ? 'bg-red-50 border-2 border-red-500'
+                                  : 'bg-neutral-50 border border-transparent hover:bg-neutral-100'
+                              }`}
+                            >
+                              <span className={`text-sm ${isSelected ? 'font-semibold' : ''}`}>
+                                {isSinglePerson
+                                  ? `${numPeople} ${numPeople === 1 ? tDetail('personLabel') : tDetail('peopleLabel')}`
+                                  : `${numPeople}-${maxPeople} ${tDetail('peopleLabel')}`
+                                }
+                              </span>
+                              <span className={`text-sm font-semibold text-red-600 ${isSelected ? 'font-bold' : ''}`}>
+                                €{tier.pricePerPerson}
+                              </span>
+                            </button>
+                          )
+                        })}
+                      </div>
+                    </>
+                  ) : !isCustomNoteMode && (
+                    /* Standard Price Display */
+                    <div>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-bold" style={{ color: ACCENT_GREEN }}>€{displayPrice}</span>
+                        <span className="text-base text-neutral-500">{isPrivateMode ? tDetail('totalLabel') : tCommon('perPerson')}</span>
+                      </div>
+                      {isPrivateMode && privateAdditionalGuestPrice > 0 && (
+                        <p className="text-sm text-neutral-500 mt-1">
+                          {tDetail('additionalGuestNote', { price: privateAdditionalGuestPrice, min: privateMinGuests })}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
             {/* What to Bring / Recommendations */}
             {recommendations.length > 0 && (
               <div className="space-y-4">
@@ -1697,7 +1703,10 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                         }`}
                         style={{ backgroundColor: applicableTier ? ACCENT_GREEN : undefined }}
                       >
-                        {tCommon('bookNow')}
+                        <span className="flex items-baseline justify-center gap-1.5">
+                          <span>{tCommon('bookNow')}</span>
+                          <span className="text-xs font-normal opacity-80">{tDetail('payLaterSuffix')}</span>
+                        </span>
                       </motion.button>
 
                       {/* Trust signals */}
@@ -1840,7 +1849,10 @@ export function ActivityDetailClient({ activity, relatedActivities }: Props) {
                         className="w-full py-4 text-white font-bold text-lg rounded-xl transition-all shadow-sm hover:shadow-md"
                         style={{ backgroundColor: ACCENT_GREEN }}
                       >
-                        {tDetail('checkAvailabilityButton')}
+                        <span className="flex items-baseline justify-center gap-1.5">
+                          <span>{tDetail('checkAvailabilityButton')}</span>
+                          <span className="text-xs font-normal opacity-80">{tDetail('payLaterSuffix')}</span>
+                        </span>
                       </motion.button>
 
                       {/* Trust Signals */}
