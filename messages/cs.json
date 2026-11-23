@@ -530,6 +530,10 @@
     "whatsappMessage": "Dobrý den! Rád/a bych se zeptal/a na zájezd s {name}.",
     "noReviewsYet": "Pro {name} zatím nejsou žádné recenze.",
     "noToursYet": "{name} zatím nemá žádné veřejné zájezdy.",
+    "customOfferHeading": "Nenašli jste ten pravý výlet? Připravím vám ho na míru.",
+    "customOfferSubtext": "Napište mi své zájmy, tempo a termíny a ozvu se vám.",
+    "customOfferCta": "Požádat o výlet na míru",
+    "customOfferWhatsapp": "Ahoj {name}! Nenašel jsem přesně to, co hledám — mohl byste mi pomoct sestavit výlet na míru?",
     "readMore": "Číst více",
     "showLess": "Zobrazit méně",
     "inquirySubject": "Dotaz ohledně zájezdu s {name}",
@@ -554,7 +558,14 @@
     "toursTab": "Zájezdy",
     "reviewsTab": "Recenze",
     "contactMeCta": "Kontaktovat mě",
-    "bookMeCta": "Rezervovat mě"
+    "bookMeCta": "Rezervovat mě",
+    "yourLocalIn": "Váš místní průvodce: {location}",
+    "yourLocalGeneric": "Váš místní průvodce",
+    "desktopGreeting": "Ahoj! Rád vás poznávám",
+    "greeting": "Ahoj, jsem {name}.",
+    "reviewsCount": "{count} recenzí",
+    "repliesQuickly": "Odpovídá rychle",
+    "languagesCount": "{count} jazyky"
   },
   "blog": {
     "ourBlog": "Náš blog",

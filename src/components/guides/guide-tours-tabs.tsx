@@ -39,29 +39,29 @@ export function GuideToursTabs({ tours, guideName, guideSlug, onSelectTour }: Gu
   }
 
   return (
-    <div id="guide-tours" className="scroll-mt-28 grid sm:grid-cols-2 gap-4">
+    <div id="guide-tours" className="scroll-mt-28 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
       {tours.map((activity) => (
         <div
           key={activity.id}
           className="bg-white rounded-2xl overflow-hidden border border-neutral-100 shadow-[0_1px_4px_rgba(0,0,0,0.02)] flex flex-col"
         >
-          <div className="relative h-40 overflow-hidden">
+          <div className="relative h-28 sm:h-40 overflow-hidden">
             <Image
               src={getOptimizedImageUrl(activity.featuredImage, 'card')}
               alt={activity.title}
               fill
-              sizes="(max-width: 640px) 100vw, 50vw"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover"
             />
           </div>
-          <div className="p-4 flex flex-col flex-grow">
+          <div className="p-3 sm:p-4 flex flex-col flex-grow">
             {activity.duration && (
               <div className="flex items-center gap-1.5 text-xs text-neutral-500 mb-1.5">
                 <Clock className="w-3.5 h-3.5" />
                 {activity.duration}
               </div>
             )}
-            <h4 className="font-semibold text-sm text-neutral-900 line-clamp-2 mb-2">
+            <h4 className="font-semibold text-xs sm:text-sm text-neutral-900 line-clamp-2 mb-2">
               {activity.title}
             </h4>
             {activity.pricingType !== 'custom_note' && getStartingPrice(activity) > 0 && (
@@ -73,22 +73,14 @@ export function GuideToursTabs({ tours, guideName, guideSlug, onSelectTour }: Gu
               </div>
             )}
 
-            <div className="mt-auto pt-3 border-t border-neutral-100 flex gap-2">
+            <div className="mt-auto pt-3 border-t border-neutral-100">
               <NavLink
                 href={`/activities/${activity.slug}?guide=${guideSlug}`}
-                className="flex-1 inline-flex items-center justify-center h-9 rounded-lg border-2 text-xs sm:text-sm font-semibold transition-colors"
-                style={{ borderColor: ACCENT_GREEN, color: ACCENT_GREEN }}
+                className="w-full inline-flex items-center justify-center h-8 sm:h-9 rounded-lg text-white text-[11px] sm:text-sm font-semibold transition-opacity hover:opacity-90 px-1"
+                style={{ backgroundColor: ACCENT_GREEN }}
               >
                 {tDetail('viewTourCta')}
               </NavLink>
-              <button
-                type="button"
-                onClick={() => onSelectTour(activity)}
-                className="flex-1 inline-flex items-center justify-center h-9 rounded-lg text-white text-xs sm:text-sm font-semibold transition-opacity hover:opacity-90"
-                style={{ backgroundColor: ACCENT_GREEN }}
-              >
-                {tDetail('selectTourCta')}
-              </button>
             </div>
           </div>
         </div>

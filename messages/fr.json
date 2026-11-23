@@ -530,6 +530,10 @@
     "whatsappMessage": "Bonjour ! J'aimerais poser une question sur une excursion avec {name}.",
     "noReviewsYet": "Pas encore d'avis pour {name}.",
     "noToursYet": "{name} n'a pas encore de tours publics répertoriés.",
+    "customOfferHeading": "Vous ne trouvez pas le bon circuit ? Je vous en prépare un sur mesure.",
+    "customOfferSubtext": "Partagez vos envies, votre rythme et vos dates, et je reviens vers vous.",
+    "customOfferCta": "Demander un circuit sur mesure",
+    "customOfferWhatsapp": "Bonjour {name} ! Je n'ai pas trouvé exactement ce que je cherchais — pourriez-vous m'aider à créer un circuit sur mesure ?",
     "readMore": "Lire plus",
     "showLess": "Afficher moins",
     "inquirySubject": "Question à propos d'une excursion avec {name}",
@@ -554,7 +558,14 @@
     "toursTab": "Tours",
     "reviewsTab": "Avis",
     "contactMeCta": "Me contacter",
-    "bookMeCta": "Me réserver"
+    "bookMeCta": "Me réserver",
+    "yourLocalIn": "Votre local à {location}",
+    "yourLocalGeneric": "Votre guide local",
+    "desktopGreeting": "Bonjour ! Ravi de vous rencontrer",
+    "greeting": "Salut, je suis {name}.",
+    "reviewsCount": "{count} avis",
+    "repliesQuickly": "Répond rapidement",
+    "languagesCount": "{count} langues"
   },
   "blog": {
     "ourBlog": "Notre Blog",

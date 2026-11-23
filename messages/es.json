@@ -530,6 +530,10 @@
     "whatsappMessage": "¡Hola! Me gustaría preguntar sobre hacer un tour con {name}.",
     "noReviewsYet": "Aún no hay reseñas para {name}.",
     "noToursYet": "{name} todavía no tiene tours públicos listados.",
+    "customOfferHeading": "¿No encuentras el tour perfecto? Te preparo uno a medida.",
+    "customOfferSubtext": "Cuéntame tus intereses, ritmo y fechas y te responderé.",
+    "customOfferCta": "Solicitar un tour personalizado",
+    "customOfferWhatsapp": "¡Hola {name}! No encontré exactamente el tour que buscaba — ¿podrías ayudarme a crear uno a medida?",
     "readMore": "Leer más",
     "showLess": "Mostrar menos",
     "inquirySubject": "Consulta sobre un tour con {name}",
@@ -554,7 +558,14 @@
     "toursTab": "Tours",
     "reviewsTab": "Reseñas",
     "contactMeCta": "Contáctame",
-    "bookMeCta": "Resérvame"
+    "bookMeCta": "Resérvame",
+    "yourLocalIn": "Tu local en {location}",
+    "yourLocalGeneric": "Tu guía local",
+    "desktopGreeting": "¡Hola! Encantado de conocerte",
+    "greeting": "Hola, soy {name}.",
+    "reviewsCount": "{count} reseñas",
+    "repliesQuickly": "Responde rápido",
+    "languagesCount": "{count} idiomas"
   },
   "blog": {
     "ourBlog": "Nuestro Blog",
