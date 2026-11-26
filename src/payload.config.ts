@@ -25,6 +25,7 @@ import { BlogPosts } from './collections/BlogPosts'
 import { ContactSubmissions } from './collections/ContactSubmissions'
 import { AboutPage } from './globals/AboutPage'
 import { ContactPage } from './globals/ContactPage'
+import { GuidesPage } from './globals/GuidesPage'
 import { HomePage } from './globals/HomePage'
 import { PrivacyPage } from './globals/PrivacyPage'
 import { SiteSettings } from './globals/SiteSettings'
@@ -73,6 +74,7 @@ export default buildConfig({
     HomePage,
     AboutPage,
     ContactPage,
+    GuidesPage,
     TermsPage,
     PrivacyPage,
   ],

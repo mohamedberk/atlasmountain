@@ -807,6 +807,23 @@ export const getAboutPage = (locale: Locale = 'en') =>
   )()
 
 /**
+ * Fetch Guides page global content
+ */
+export const getGuidesPage = (locale: Locale = 'en') =>
+  unstable_cache(
+    async () => {
+      const payload = await getPayloadClient()
+      return payload.findGlobal({
+        slug: 'guides-page',
+        locale,
+        depth: 2,
+      })
+    },
+    ['guides-page', locale],
+    { tags: ['guides-page'], revalidate: 3600 }
+  )()
+
+/**
  * Fetch Contact page global content
  */
 export const getContactPage = (locale: Locale = 'en') =>

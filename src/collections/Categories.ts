@@ -57,6 +57,15 @@ export const Categories: CollectionConfig = {
       },
     },
     {
+      name: 'showTypeSelector',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description: 'Check this to create a Transport or Guide Region category instead of a regular Activity category.',
+        condition: (data) => !data?.type || data.type === 'activity',
+      },
+    },
+    {
       name: 'type',
       type: 'select',
       required: true,
@@ -67,6 +76,12 @@ export const Categories: CollectionConfig = {
         { label: 'Guide Region', value: 'guide-region' },
       ],
       defaultValue: 'activity',
+      admin: {
+        // Hidden by default since almost every category here is an Activity —
+        // only shown when the admin opts in via the checkbox above, or when
+        // editing a category that's already Transport/Guide Region.
+        condition: (data) => Boolean(data?.showTypeSelector) || (data?.type && data.type !== 'activity'),
+      },
     },
     {
       name: 'description',

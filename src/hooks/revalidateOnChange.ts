@@ -14,6 +14,7 @@ const COLLECTION_TAGS: Record<string, string[]> = {
   'home-page': ['homepage', 'home-page'],
   'about-page': ['about-page'],
   'contact-page': ['contact-page'],
+  'guides-page': ['guides-page', 'guides'],
   'site-settings': ['site-settings'],
   'terms-page': ['terms-page'],
   'privacy-page': ['privacy-page'],
@@ -29,6 +30,7 @@ const COLLECTION_PATHS: Record<string, string[]> = {
   'home-page': ['/en', '/fr', '/es', '/cs'],
   'about-page': ['/en/about', '/fr/about', '/es/about', '/cs/about'],
   'contact-page': ['/en/contact', '/fr/contact', '/es/contact', '/cs/contact'],
+  'guides-page': ['/en/guides', '/fr/guides', '/es/guides', '/cs/guides'],
 }
 
 /**
@@ -97,7 +99,11 @@ function revalidateForSlug(slug: string, slugsByLocale: Partial<Record<string, s
 
   // Revalidate each locale's own document path, using that locale's own slug
   if (collection) {
-    const prefix = collection === 'blog-posts' ? 'blog' : collection
+    const COLLECTION_PREFIX: Record<string, string> = {
+      'blog-posts': 'blog',
+      categories: 'category',
+    }
+    const prefix = COLLECTION_PREFIX[collection] || collection
     for (const [locale, docSlug] of Object.entries(slugsByLocale)) {
       if (!docSlug) continue
       try {

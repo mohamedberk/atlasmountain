@@ -3,11 +3,11 @@
 import { useMemo, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Search, Users, MessageCircle, Wand2, ShieldCheck } from 'lucide-react'
+import { Search, Users, MessageCircle, Wand2, ShieldCheck, Heart, Star, Award } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { GuidesGrid } from '@/components/guides/guides-grid'
 import { FAQSection } from '@/components/sections/faq-section'
-import type { Guide, Category } from '@/payload-types'
+import type { Guide, Category, Media } from '@/payload-types'
 
 const ACCENT_GREEN = '#ff2828'
 const HERO_IMAGE = 'https://images.unsplash.com/photo-1548018560-4cb48a8837c1?q=80&w=2400&auto=format&fit=crop'
@@ -19,14 +19,41 @@ const LANGUAGES = [
 
 const CTA_IMAGE = 'https://images.unsplash.com/photo-1560789590-ee4cc7125967?q=80&w=1600&auto=format&fit=crop'
 
+// Icon mapping for CMS-selected trust-point icons
+const iconMap: Record<string, typeof Users> = {
+  users: Users,
+  messageCircle: MessageCircle,
+  wand: Wand2,
+  shieldCheck: ShieldCheck,
+  heart: Heart,
+  star: Star,
+  award: Award,
+}
+
+function getImageUrl(image: Media | string | number | null | undefined, fallback: string): string {
+  if (!image) return fallback
+  if (typeof image === 'string') return image
+  if (typeof image === 'number') return fallback
+  return image.externalUrl || image.url || fallback
+}
+
 interface Props {
   guides: Guide[]
   regions: Category[]
+  cmsData?: any
 }
 
-export function GuidesPageClient({ guides, regions }: Props) {
+export function GuidesPageClient({ guides, regions, cmsData }: Props) {
   const tCommon = useTranslations('common')
   const tPage = useTranslations('guidesPage')
+
+  const hero = cmsData?.hero || {}
+  const trust = cmsData?.trust || {}
+  const cta = cmsData?.cta || {}
+  const faq = cmsData?.faq || {}
+
+  const heroImageUrl = getImageUrl(hero.heroImage, HERO_IMAGE)
+  const ctaImageUrl = getImageUrl(cta.image, CTA_IMAGE)
 
   const [activeRegion, setActiveRegion] = useState('all')
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
@@ -72,14 +99,21 @@ export function GuidesPageClient({ guides, regions }: Props) {
     return result
   }, [guides, activeRegion, selectedLanguages])
 
-  const trustPoints = [
-    { icon: Users, title: tPage('trustPoint1Title'), text: tPage('trustPoint1Text') },
-    { icon: MessageCircle, title: tPage('trustPoint2Title'), text: tPage('trustPoint2Text') },
-    { icon: Wand2, title: tPage('trustPoint3Title'), text: tPage('trustPoint3Text') },
-    { icon: ShieldCheck, title: tPage('trustPoint4Title'), text: tPage('trustPoint4Text') },
+  const defaultTrustPoints = [
+    { icon: 'users', title: tPage('trustPoint1Title'), description: tPage('trustPoint1Text') },
+    { icon: 'messageCircle', title: tPage('trustPoint2Title'), description: tPage('trustPoint2Text') },
+    { icon: 'wand', title: tPage('trustPoint3Title'), description: tPage('trustPoint3Text') },
+    { icon: 'shieldCheck', title: tPage('trustPoint4Title'), description: tPage('trustPoint4Text') },
   ]
+  const trustPoints = (trust.points?.length > 0 ? trust.points : defaultTrustPoints).map(
+    (p: { icon?: string | null; title: string; description: string }) => ({
+      icon: iconMap[p.icon || ''] || Users,
+      title: p.title,
+      text: p.description,
+    })
+  )
 
-  const faqItems = [
+  const defaultFaqItems = [
     { question: tPage('faq1Question'), answer: tPage('faq1Answer') },
     { question: tPage('faq2Question'), answer: tPage('faq2Answer') },
     { question: tPage('faq3Question'), answer: tPage('faq3Answer') },
@@ -88,6 +122,7 @@ export function GuidesPageClient({ guides, regions }: Props) {
     { question: tPage('faq6Question'), answer: tPage('faq6Answer') },
     { question: tPage('faq7Question'), answer: tPage('faq7Answer') },
   ]
+  const faqItems = faq.items?.length > 0 ? faq.items : defaultFaqItems
 
   return (
     <div className="min-h-screen bg-white">
@@ -100,7 +135,7 @@ export function GuidesPageClient({ guides, regions }: Props) {
             style={{ clipPath: 'polygon(12% 0, 100% 0, 100% 100%, 0 100%)' }}
           >
             <Image
-              src={HERO_IMAGE}
+              src={heroImageUrl}
               alt="Marrakech medina architecture"
               fill
               priority
@@ -117,23 +152,23 @@ export function GuidesPageClient({ guides, regions }: Props) {
             className="relative z-10 lg:w-1/2 flex flex-col justify-center px-6 sm:px-10 lg:px-12 pt-24 sm:pt-28 lg:pt-28 pb-10 lg:pb-14 lg:min-h-[460px]"
           >
             <h1 className="font-helvetica text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 max-w-md">
-              {tPage('heroTitle')}
+              {hero.title || tPage('heroTitle')}
             </h1>
             <p className="text-white/90 text-base sm:text-lg max-w-sm mb-8">
-              {tPage('heroDescription')}
+              {hero.description || tPage('heroDescription')}
             </p>
             <a
               href="#guides-grid"
               className="inline-flex w-fit items-center justify-center px-8 py-3 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-[#ff2828] transition-colors duration-300"
             >
-              {tPage('heroCta')}
+              {hero.ctaText || tPage('heroCta')}
             </a>
           </motion.div>
 
           {/* Photo — mobile, no clip, in normal flow below text */}
           <div className="relative h-56 sm:h-64 lg:hidden">
             <Image
-              src={HERO_IMAGE}
+              src={heroImageUrl}
               alt="Marrakech medina architecture"
               fill
               sizes="100vw"
@@ -230,10 +265,10 @@ export function GuidesPageClient({ guides, regions }: Props) {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 md:mb-14">
             <div className="max-w-2xl">
               <h2 className="font-helvetica text-2xl sm:text-3xl text-neutral-900 mb-3">
-                {tPage('trustHeading')}
+                {trust.heading || tPage('trustHeading')}
               </h2>
               <p className="text-neutral-600 text-sm sm:text-base leading-relaxed">
-                {tPage('trustIntro')}
+                {trust.intro || tPage('trustIntro')}
               </p>
             </div>
             <a
@@ -241,12 +276,12 @@ export function GuidesPageClient({ guides, regions }: Props) {
               className="shrink-0 inline-flex w-fit items-center justify-center px-6 py-3 rounded-full text-white font-semibold transition-opacity hover:opacity-90"
               style={{ backgroundColor: ACCENT_GREEN }}
             >
-              {tPage('trustCta')}
+              {trust.ctaText || tPage('trustCta')}
             </a>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {trustPoints.map((point) => (
+            {trustPoints.map((point: { icon: typeof Users; title: string; text: string }) => (
               <div key={point.title} className="rounded-2xl p-6" style={{ backgroundColor: `${ACCENT_GREEN}0A` }}>
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center mb-6"
@@ -268,22 +303,22 @@ export function GuidesPageClient({ guides, regions }: Props) {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-0 items-center p-8 sm:p-12 lg:p-14">
             <div>
               <h2 className="font-helvetica text-2xl sm:text-3xl font-bold text-white mb-4 max-w-md">
-                {tPage('ctaHeading')}
+                {cta.heading || tPage('ctaHeading')}
               </h2>
               <p className="text-neutral-300 text-sm sm:text-base leading-relaxed max-w-sm mb-8">
-                {tPage('ctaDescription')}
+                {cta.description || tPage('ctaDescription')}
               </p>
               <a
                 href="#guides-grid"
                 className="inline-flex w-fit items-center justify-center px-8 py-3 rounded-full text-white font-semibold transition-opacity hover:opacity-90"
                 style={{ backgroundColor: ACCENT_GREEN }}
               >
-                {tPage('ctaButton')}
+                {cta.buttonText || tPage('ctaButton')}
               </a>
             </div>
             <div className="relative h-56 sm:h-72 lg:h-80 rounded-2xl overflow-hidden">
               <Image
-                src={CTA_IMAGE}
+                src={ctaImageUrl}
                 alt="A mule trail through the Atlas Mountains near Imlil"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -297,9 +332,9 @@ export function GuidesPageClient({ guides, regions }: Props) {
       {/* FAQ */}
       <FAQSection
         faqData={{
-          title: tPage('faqTitle'),
-          titleHighlight: tPage('faqTitleHighlight'),
-          description: tPage('faqDescription'),
+          title: faq.title || tPage('faqTitle'),
+          titleHighlight: faq.titleHighlight || tPage('faqTitleHighlight'),
+          description: faq.description || tPage('faqDescription'),
           items: faqItems,
         }}
         headingFontClassName="font-helvetica"

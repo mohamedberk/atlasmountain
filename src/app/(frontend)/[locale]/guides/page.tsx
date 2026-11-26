@@ -3,7 +3,7 @@ import { setRequestLocale } from 'next-intl/server'
 import { Metadata } from 'next'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
-import { getGuides, getCategories } from '@/lib/payload'
+import { getGuides, getCategories, getGuidesPage } from '@/lib/payload'
 import { getOptimizedImageUrl } from '@/lib/image-utils'
 import type { Guide, Category } from '@/payload-types'
 import { GuidesPageClient } from './guides-page-client'
@@ -33,13 +33,25 @@ export async function generateMetadata({
     cs: 'Poznejte naše místní průvodce po Maroku. Kontaktujte je přímo pro soukromý a individuální výlet.',
   }
 
+  const typedLocale = (locale as Locale) || defaultLocale
+  let metaTitle = titles[locale] || titles.en
+  let metaDescription = descriptions[locale] || descriptions.en
+
+  try {
+    const pageData = await getGuidesPage(typedLocale)
+    if (pageData?.seo?.metaTitle) metaTitle = `${pageData.seo.metaTitle} | Atlas Mountain Visit`
+    if (pageData?.seo?.metaDescription) metaDescription = pageData.seo.metaDescription
+  } catch (e) {
+    // Use fallback titles/descriptions above
+  }
+
   return {
-    title: titles[locale] || titles.en,
-    description: descriptions[locale] || descriptions.en,
+    title: metaTitle,
+    description: metaDescription,
     keywords: 'local tour guide morocco, private guide marrakech, licensed tour guide morocco, mount toubkal guide, sahara desert guide, english speaking guide morocco',
     openGraph: {
-      title: titles[locale] || titles.en,
-      description: descriptions[locale] || descriptions.en,
+      title: metaTitle,
+      description: metaDescription,
       url: `${SITE_URL}/${locale}/guides`,
       siteName: 'Atlas Mountain Visit',
       locale: locale,
@@ -67,9 +79,10 @@ export default async function GuidesPage({
 
   setRequestLocale(locale)
 
-  const [guidesResult, regionsResult] = await Promise.all([
+  const [guidesResult, regionsResult, cmsData] = await Promise.all([
     getGuides(typedLocale),
     getCategories('guide-region', typedLocale),
+    getGuidesPage(typedLocale).catch(() => null),
   ])
   const guides = guidesResult.docs as Guide[]
   const regions = regionsResult.docs as Category[]
@@ -105,7 +118,7 @@ export default async function GuidesPage({
       <main className="relative z-10 w-full bg-white">
         <Navbar />
         <Suspense fallback={<div className="min-h-screen bg-[#fafaf9] animate-pulse" />}>
-          <GuidesPageClient guides={guides} regions={regions} />
+          <GuidesPageClient guides={guides} regions={regions} cmsData={cmsData} />
         </Suspense>
         <Footer />
       </main>

@@ -117,6 +117,7 @@ export interface Config {
     'home-page': HomePage;
     'about-page': AboutPage;
     'contact-page': ContactPage;
+    'guides-page': GuidesPage;
     'terms-page': TermsPage;
     'privacy-page': PrivacyPage;
   };
@@ -125,6 +126,7 @@ export interface Config {
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
     'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
     'contact-page': ContactPageSelect<false> | ContactPageSelect<true>;
+    'guides-page': GuidesPageSelect<false> | GuidesPageSelect<true>;
     'terms-page': TermsPageSelect<false> | TermsPageSelect<true>;
     'privacy-page': PrivacyPageSelect<false> | PrivacyPageSelect<true>;
   };
@@ -252,7 +254,11 @@ export interface Category {
    * URL-friendly identifier (auto-generated from name)
    */
   slug: string;
-  type: 'activity' | 'transport' | 'guide-region';
+  /**
+   * Check this to create a Transport or Guide Region category instead of a regular Activity category.
+   */
+  showTypeSelector?: boolean | null;
+  type?: ('activity' | 'transport' | 'guide-region') | null;
   description?: string | null;
   /**
    * Select a Lucide icon for this category
@@ -1249,6 +1255,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface CategoriesSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  showTypeSelector?: T;
   type?: T;
   description?: T;
   icon?: T;
@@ -2101,6 +2108,62 @@ export interface ContactPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides-page".
+ */
+export interface GuidesPage {
+  id: string;
+  hero?: {
+    title?: string | null;
+    description?: string | null;
+    ctaText?: string | null;
+    heroImage?: (string | null) | Media;
+  };
+  trust?: {
+    heading?: string | null;
+    intro?: string | null;
+    ctaText?: string | null;
+    /**
+     * The 4 trust points shown as cards (real people, direct contact, personalized, licensed)
+     */
+    points?:
+      | {
+          icon?: ('users' | 'messageCircle' | 'wand' | 'shieldCheck' | 'heart' | 'star' | 'award') | null;
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  cta?: {
+    heading?: string | null;
+    description?: string | null;
+    buttonText?: string | null;
+    image?: (string | null) | Media;
+  };
+  faq?: {
+    title?: string | null;
+    /**
+     * Shown in green
+     */
+    titleHighlight?: string | null;
+    description?: string | null;
+    items?:
+      | {
+          question: string;
+          answer: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "terms-page".
  */
 export interface TermsPage {
@@ -2521,6 +2584,66 @@ export interface ContactPageSelect<T extends boolean = true> {
     | T
     | {
         embedUrl?: T;
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides-page_select".
+ */
+export interface GuidesPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ctaText?: T;
+        heroImage?: T;
+      };
+  trust?:
+    | T
+    | {
+        heading?: T;
+        intro?: T;
+        ctaText?: T;
+        points?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  cta?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        buttonText?: T;
+        image?: T;
+      };
+  faq?:
+    | T
+    | {
+        title?: T;
+        titleHighlight?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
       };
   seo?:
     | T
